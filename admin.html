@@ -5,13 +5,17 @@
 <meta charset="UTF-8">
 
 <meta name="viewport"
-      content="width=device-width,initial-scale=1.0">
+      content="width=device-width, initial-scale=1.0">
 
-<title>CIRDRIO | Admin Control</title>
+<title>CIRDRIO — Admin Control</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
+
+/* ================================
+   CIRDRIO ADMIN — CORE
+================================ */
 
 *{
   margin:0;
@@ -20,314 +24,634 @@
 }
 
 :root{
-  --black:#111;
-  --white:#fff;
-  --bg:#f6f6f3;
-  --line:#e6e4df;
+  --black:#111111;
+  --white:#ffffff;
+  --cream:#f7f7f4;
+  --soft:#f1f1ed;
+  --line:#e3e3de;
   --muted:#777;
-  --gold:#b79052;
+  --light:#999;
+  --gold:#b48a52;
+  --green:#16833d;
+  --orange:#b56d00;
+  --red:#c62828;
+}
+
+html{
+  scroll-behavior:smooth;
 }
 
 body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:var(--bg);
+  min-height:100vh;
+  background:var(--cream);
   color:var(--black);
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Arial,
+    sans-serif;
+  -webkit-font-smoothing:antialiased;
 }
 
 
-/* HEADER */
+/* ================================
+   HEADER
+================================ */
 
 .header{
   height:74px;
+  padding:0 5%;
   background:#111;
   color:#fff;
-  padding:0 5%;
+
   display:flex;
   align-items:center;
   justify-content:space-between;
+
+  border-bottom:1px solid #292929;
 }
 
-.logo{
-  font-size:23px;
-  font-weight:900;
+.brand{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.brand-name{
+  font-size:21px;
+  font-weight:800;
   letter-spacing:5px;
 }
 
-.admin-label{
-  font-size:10px;
-  letter-spacing:2px;
+.brand-divider{
+  width:1px;
+  height:25px;
+  background:#444;
+}
+
+.brand-section{
+  font-size:9px;
+  letter-spacing:2.5px;
   color:#aaa;
   text-transform:uppercase;
 }
 
-
-/* MAIN */
-
-.container{
-  max-width:1250px;
-  margin:auto;
-  padding:45px 5%;
-}
-
-.topbar{
+.header-right{
   display:flex;
-  justify-content:space-between;
-  align-items:end;
-  margin-bottom:30px;
-  gap:20px;
+  align-items:center;
+  gap:14px;
 }
 
-.eyebrow{
-  color:#999;
-  font-size:10px;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  margin-bottom:9px;
-}
+.admin-status{
+  display:flex;
+  align-items:center;
+  gap:7px;
 
-h1{
-  font-size:40px;
-  letter-spacing:-2px;
-}
+  padding:8px 12px;
 
-.subtitle{
-  margin-top:8px;
-  color:#777;
-  font-size:13px;
-}
+  border:1px solid #333;
+  border-radius:30px;
 
-
-/* BUTTON */
-
-.primary{
-  background:#111;
-  color:#fff;
-  border:0;
-  padding:14px 22px;
-  border-radius:8px;
-  font-size:11px;
-  font-weight:700;
-  letter-spacing:1.3px;
-  cursor:pointer;
-}
-
-.primary:hover{
-  background:#292929;
-}
-
-
-/* STATS */
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-  margin-bottom:28px;
-}
-
-.stat{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:13px;
-  padding:23px;
-}
-
-.stat-label{
-  color:#888;
-  font-size:10px;
+  color:#bbb;
+  font-size:9px;
   letter-spacing:1.5px;
   text-transform:uppercase;
 }
 
-.stat-number{
-  display:block;
-  font-size:30px;
-  font-weight:800;
-  margin-top:10px;
+.status-dot{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:#52c878;
 }
 
+.logout-btn{
+  border:1px solid #444;
+  background:transparent;
+  color:#fff;
 
-/* TOOLBAR */
+  padding:9px 15px;
+  border-radius:7px;
 
-.toolbar{
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:1px;
+
+  cursor:pointer;
+  transition:.2s;
+}
+
+.logout-btn:hover{
   background:#fff;
-  border:1px solid var(--line);
-  padding:15px;
-  border-radius:13px 13px 0 0;
+  color:#111;
 }
 
-.search{
+
+/* ================================
+   MAIN
+================================ */
+
+.admin-container{
+  width:min(1250px,90%);
+  margin:0 auto;
+  padding:48px 0 70px;
+}
+
+.page-heading{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:25px;
+
+  margin-bottom:32px;
+}
+
+.heading-eyebrow{
+  margin-bottom:9px;
+
+  color:#999;
+
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:3px;
+  text-transform:uppercase;
+}
+
+.page-heading h1{
+  font-size:40px;
+  line-height:1;
+  font-weight:750;
+  letter-spacing:-2px;
+}
+
+.page-description{
+  margin-top:11px;
+
+  color:#777;
+
+  font-size:13px;
+  line-height:1.5;
+}
+
+.add-product-btn{
+  flex-shrink:0;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+
+  min-width:165px;
+  height:47px;
+
+  border:0;
+  border-radius:8px;
+
+  background:#111;
+  color:#fff;
+
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:1.3px;
+
+  cursor:pointer;
+  transition:
+    transform .2s,
+    background .2s;
+}
+
+.add-product-btn:hover{
+  background:#292929;
+  transform:translateY(-1px);
+}
+
+.plus{
+  font-size:18px;
+  line-height:1;
+  font-weight:300;
+}
+
+
+/* ================================
+   STAT CARDS
+================================ */
+
+.stats{
+  display:grid;
+  grid-template-columns:
+    repeat(3,minmax(0,1fr));
+
+  gap:15px;
+
+  margin-bottom:25px;
+}
+
+.stat-card{
+  position:relative;
+
+  min-height:132px;
+
+  padding:23px;
+
+  background:#fff;
+
+  border:1px solid var(--line);
+  border-radius:13px;
+
+  overflow:hidden;
+}
+
+.stat-card::after{
+  content:"";
+
+  position:absolute;
+  right:-28px;
+  bottom:-28px;
+
+  width:90px;
+  height:90px;
+
+  border:1px solid #eee;
+  border-radius:50%;
+}
+
+.stat-label{
+  color:#999;
+
+  font-size:9px;
+  font-weight:650;
+  letter-spacing:1.8px;
+  text-transform:uppercase;
+}
+
+.stat-value{
+  display:block;
+
+  margin-top:11px;
+
+  font-size:31px;
+  line-height:1;
+  font-weight:750;
+  letter-spacing:-1px;
+}
+
+
+/* ================================
+   CATALOG PANEL
+================================ */
+
+.catalog-panel{
+  background:#fff;
+
+  border:1px solid var(--line);
+  border-radius:13px;
+
+  overflow:hidden;
+}
+
+.catalog-toolbar{
+  padding:15px;
+
+  border-bottom:1px solid var(--line);
+}
+
+.search-wrapper{
+  position:relative;
+}
+
+.search-icon{
+  position:absolute;
+  left:14px;
+  top:50%;
+
+  width:15px;
+  height:15px;
+
+  transform:translateY(-50%);
+
+  color:#999;
+  pointer-events:none;
+}
+
+.search-input{
   width:100%;
-  height:44px;
+  height:45px;
+
+  padding:0 15px 0 42px;
+
   border:1px solid #ddd;
   border-radius:8px;
-  padding:0 14px;
+
   outline:none;
+
+  background:#fff;
+  color:#111;
+
+  font-family:inherit;
   font-size:13px;
+
+  transition:border .2s;
 }
 
-.search:focus{
+.search-input::placeholder{
+  color:#aaa;
+}
+
+.search-input:focus{
   border-color:#111;
 }
 
 
-/* TABLE */
+/* ================================
+   TABLE
+================================ */
 
-.table-wrap{
-  background:#fff;
-  border:1px solid var(--line);
-  border-top:0;
-  border-radius:0 0 13px 13px;
-  overflow:auto;
+.table-container{
+  width:100%;
+  overflow-x:auto;
 }
 
-table{
+.product-table{
   width:100%;
   min-width:850px;
+
   border-collapse:collapse;
 }
 
-th{
-  background:#fafafa;
-  padding:15px;
+.product-table th{
+  padding:14px 16px;
+
+  background:#fafaf8;
+
+  color:#999;
+
+  border-bottom:1px solid #eee;
+
   text-align:left;
-  color:#888;
-  font-size:9px;
+
+  font-size:8px;
+  font-weight:700;
   letter-spacing:1.5px;
   text-transform:uppercase;
-  border-bottom:1px solid #eee;
 }
 
-td{
-  padding:15px;
+.product-table td{
+  padding:15px 16px;
+
+  border-bottom:1px solid #f0f0ed;
+
   font-size:12px;
-  border-bottom:1px solid #eee;
+  vertical-align:middle;
 }
 
-.product-cell{
+.product-table tbody tr{
+  transition:background .15s;
+}
+
+.product-table tbody tr:hover{
+  background:#fcfcfa;
+}
+
+.product-table tbody tr:last-child td{
+  border-bottom:0;
+}
+
+
+/* PRODUCT */
+
+.product-info{
   display:flex;
   align-items:center;
   gap:12px;
 }
 
 .product-image{
-  width:58px;
-  height:58px;
+  width:55px;
+  height:55px;
+
+  flex-shrink:0;
+
   object-fit:cover;
-  background:#f0efeb;
+
   border-radius:8px;
+
+  background:#f1f0ec;
+
+  border:1px solid #eee;
 }
 
-.product-name{
-  font-size:13px;
+.product-details{
+  min-width:0;
+}
+
+.product-title{
+  max-width:280px;
+
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+
+  color:#111;
+
+  font-size:12px;
   font-weight:700;
 }
 
 .product-category{
-  color:#999;
-  font-size:10px;
   margin-top:4px;
+
+  color:#999;
+
+  font-size:9px;
+  letter-spacing:.3px;
+}
+
+
+/* STOCK */
+
+.stock-number{
+  font-weight:700;
 }
 
 .stock-good{
-  color:#14833b;
-  font-weight:700;
+  color:var(--green);
 }
 
 .stock-low{
-  color:#b36d00;
-  font-weight:700;
+  color:var(--orange);
 }
 
 .stock-out{
-  color:#c62828;
-  font-weight:700;
+  color:var(--red);
 }
 
-.actions{
+
+/* ACTIONS */
+
+.action-group{
   display:flex;
+  align-items:center;
   gap:7px;
 }
 
 .action-btn{
-  background:#fff;
+  height:32px;
+
+  padding:0 11px;
+
   border:1px solid #ddd;
-  padding:8px 11px;
   border-radius:7px;
-  font-size:10px;
+
+  background:#fff;
+
+  color:#333;
+
+  font-family:inherit;
+
+  font-size:9px;
   font-weight:700;
+  letter-spacing:.5px;
+
   cursor:pointer;
+
+  transition:
+    background .15s,
+    border .15s;
 }
 
 .action-btn:hover{
-  background:#f5f5f5;
+  background:#f5f5f2;
+  border-color:#ccc;
 }
 
-.delete-btn{
-  color:#c62828;
+.action-delete{
+  color:var(--red);
+}
+
+.action-delete:hover{
+  background:#fff5f5;
+  border-color:#efcaca;
 }
 
 
-/* STATES */
+/* ================================
+   LOADING / EMPTY
+================================ */
 
-.loading{
-  padding:55px;
+.loading-state,
+.empty-state{
+  padding:60px 20px;
+
   text-align:center;
-  color:#888;
+
+  color:#999;
+
   font-size:12px;
 }
 
-.empty{
-  padding:55px;
-  text-align:center;
-  color:#888;
-  font-size:12px;
+.loading-spinner{
+  width:22px;
+  height:22px;
+
+  margin:0 auto 13px;
+
+  border:2px solid #e5e5e0;
+  border-top-color:#111;
+
+  border-radius:50%;
+
+  animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
+  to{
+    transform:rotate(360deg);
+  }
 }
 
 
-/* ACCESS */
+/* ================================
+   ACCESS DENIED
+================================ */
 
 #accessDenied{
   min-height:calc(100vh - 74px);
+
   display:none;
+
   align-items:center;
   justify-content:center;
+
   padding:25px;
 }
 
 .denied-card{
+  width:min(430px,100%);
+
+  padding:42px 30px;
+
   background:#fff;
+
   border:1px solid var(--line);
   border-radius:15px;
-  padding:40px;
+
   text-align:center;
-  max-width:430px;
+}
+
+.denied-icon{
+  width:48px;
+  height:48px;
+
+  margin:0 auto 18px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:50%;
+
+  background:#f3f3f0;
+
+  font-size:20px;
 }
 
 .denied-card h2{
-  font-size:28px;
-  margin-bottom:10px;
+  font-size:26px;
+  letter-spacing:-1px;
 }
 
 .denied-card p{
+  margin:10px 0 22px;
+
   color:#777;
-  font-size:13px;
+
+  font-size:12px;
   line-height:1.6;
-  margin-bottom:22px;
 }
 
 
-/* MODAL */
+/* ================================
+   OVERLAYS
+================================ */
 
 .overlay{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.52);
-  z-index:2000;
+
+  z-index:5000;
+
   display:none;
+
   align-items:center;
   justify-content:center;
+
   padding:20px;
+
+  background:rgba(0,0,0,.58);
+
+  backdrop-filter:blur(3px);
 }
 
 .overlay.show{
@@ -336,41 +660,73 @@ td{
 
 .modal{
   position:relative;
+
   width:min(650px,100%);
-  max-height:90vh;
+  max-height:91vh;
+
   overflow:auto;
+
+  padding:30px;
+
   background:#fff;
+
   border-radius:15px;
-  padding:32px;
+
+  box-shadow:
+    0 25px 80px rgba(0,0,0,.18);
 }
 
-.close{
+.close-btn{
   position:absolute;
-  top:18px;
-  right:18px;
+
+  top:17px;
+  right:17px;
+
   width:32px;
   height:32px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
   border:0;
   border-radius:50%;
-  background:#eee;
-  font-size:18px;
+
+  background:#f0f0ed;
+
+  color:#333;
+
+  font-size:19px;
+  line-height:1;
+
   cursor:pointer;
 }
 
-.modal h2{
-  font-size:27px;
+.modal-heading{
+  padding-right:40px;
+}
+
+.modal-heading h2{
+  font-size:26px;
   letter-spacing:-1px;
-  margin-bottom:7px;
 }
 
-.modal-sub{
+.modal-heading p{
+  margin-top:6px;
+
   color:#888;
+
   font-size:12px;
-  margin-bottom:25px;
 }
 
 
-/* FORM */
+/* ================================
+   FORM
+================================ */
+
+.product-form{
+  margin-top:25px;
+}
 
 .form-grid{
   display:grid;
@@ -378,130 +734,265 @@ td{
   gap:15px;
 }
 
-.field{
-  margin-bottom:2px;
+.form-field{
+  min-width:0;
 }
 
-.field.full{
+.form-full{
   grid-column:1/-1;
 }
 
-.field label{
+.form-field label{
   display:block;
-  font-size:10px;
-  font-weight:700;
-  text-transform:uppercase;
-  letter-spacing:1px;
+
   margin-bottom:7px;
+
+  color:#555;
+
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:1.2px;
+  text-transform:uppercase;
 }
 
-.field input,
-.field textarea,
-.field select{
+.form-field input,
+.form-field textarea{
   width:100%;
+
   border:1px solid #ddd;
   border-radius:8px;
+
   padding:12px;
+
   outline:none;
-  font-size:13px;
+
   background:#fff;
+
+  color:#111;
+
+  font-family:inherit;
+  font-size:13px;
+
+  transition:border .2s;
 }
 
-.field input:focus,
-.field textarea:focus,
-.field select:focus{
+.form-field input{
+  height:44px;
+}
+
+.form-field textarea{
+  min-height:125px;
+  resize:vertical;
+  line-height:1.5;
+}
+
+.form-field input:focus,
+.form-field textarea:focus{
   border-color:#111;
 }
 
-.field textarea{
-  min-height:125px;
-  resize:vertical;
-}
 
-.preview{
+/* IMAGE PREVIEW */
+
+.preview-box{
   width:100%;
   height:190px;
-  margin-top:6px;
-  border-radius:9px;
-  background:#f4f3ef;
-  overflow:hidden;
+
   display:flex;
   align-items:center;
   justify-content:center;
+
+  overflow:hidden;
+
+  margin-top:5px;
+
+  border-radius:9px;
+
+  background:#f5f4f0;
+
   color:#aaa;
+
   font-size:11px;
 }
 
-.preview img{
+.preview-box img{
   width:100%;
   height:100%;
+
   object-fit:contain;
 }
+
+
+/* MODAL ACTIONS */
 
 .modal-actions{
   display:flex;
   justify-content:flex-end;
-  gap:10px;
-  margin-top:22px;
+  gap:9px;
+
+  margin-top:23px;
 }
 
-.secondary{
-  background:#fff;
+.cancel-btn{
+  height:43px;
+
+  padding:0 18px;
+
   border:1px solid #ddd;
-  padding:12px 18px;
   border-radius:8px;
-  font-size:11px;
+
+  background:#fff;
+
+  color:#333;
+
+  font-family:inherit;
+
+  font-size:10px;
+  font-weight:700;
+
+  cursor:pointer;
+}
+
+.save-btn{
+  height:43px;
+
+  padding:0 21px;
+
+  border:0;
+  border-radius:8px;
+
+  background:#111;
+
+  color:#fff;
+
+  font-family:inherit;
+
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.7px;
+
+  cursor:pointer;
+}
+
+.save-btn:disabled,
+.confirm-delete:disabled{
+  opacity:.55;
+  cursor:not-allowed;
+}
+
+
+/* DELETE MODAL */
+
+.delete-modal{
+  width:min(430px,100%);
+}
+
+.delete-message{
+  margin-top:14px;
+
+  color:#777;
+
+  font-size:12px;
+  line-height:1.7;
+}
+
+.confirm-delete{
+  height:43px;
+
+  padding:0 19px;
+
+  border:0;
+  border-radius:8px;
+
+  background:#c62828;
+
+  color:#fff;
+
+  font-family:inherit;
+
+  font-size:10px;
+  font-weight:700;
+
   cursor:pointer;
 }
 
 
-/* RESPONSIVE */
+/* ================================
+   RESPONSIVE
+================================ */
 
 @media(max-width:800px){
 
+  .header{
+    padding:0 20px;
+  }
+
+  .brand-divider,
+  .brand-section,
+  .admin-status{
+    display:none;
+  }
+
+  .admin-container{
+    width:calc(100% - 30px);
+    padding-top:32px;
+  }
+
+  .page-heading{
+    align-items:stretch;
+    flex-direction:column;
+  }
+
+  .page-heading h1{
+    font-size:34px;
+  }
+
+  .add-product-btn{
+    width:100%;
+  }
+
   .stats{
     grid-template-columns:1fr;
-  }
-
-  .topbar{
-    flex-direction:column;
-    align-items:flex-start;
-  }
-
-  .primary{
-    width:100%;
   }
 
   .form-grid{
     grid-template-columns:1fr;
   }
 
-  .field.full{
+  .form-full{
     grid-column:auto;
-  }
-
-}
-
-@media(max-width:500px){
-
-  .header{
-    padding:0 18px;
-  }
-
-  .logo{
-    font-size:19px;
-  }
-
-  .container{
-    padding:30px 15px;
-  }
-
-  h1{
-    font-size:32px;
   }
 
   .modal{
     padding:25px 20px;
+  }
+
+}
+
+
+@media(max-width:500px){
+
+  .brand-name{
+    font-size:18px;
+    letter-spacing:4px;
+  }
+
+  .page-heading h1{
+    font-size:30px;
+  }
+
+  .stat-card{
+    min-height:120px;
+  }
+
+  .modal-actions{
+    flex-direction:column-reverse;
+  }
+
+  .cancel-btn,
+  .save-btn,
+  .confirm-delete{
+    width:100%;
   }
 
 }
@@ -513,188 +1004,268 @@ td{
 <body>
 
 
+<!-- HEADER -->
+
 <header class="header">
 
-  <div>
+  <div class="brand">
 
-    <div class="logo">
+    <div class="brand-name">
       CIRDRIO
+    </div>
+
+    <div class="brand-divider"></div>
+
+    <div class="brand-section">
+      Admin Control
     </div>
 
   </div>
 
-  <div class="admin-label">
-    Admin Control
-  </div>
 
-</header>
+  <div class="header-right">
 
+    <div class="admin-status">
 
-<div id="adminApp">
+      <span class="status-dot"></span>
 
-<main class="container">
-
-
-  <div class="topbar">
-
-    <div>
-
-      <div class="eyebrow">
-        CIRDRIO / CONTROL CENTER
-      </div>
-
-      <h1>
-        Product Management
-      </h1>
-
-      <p class="subtitle">
-        Manage your live product catalogue.
-      </p>
+      Authorized Admin
 
     </div>
 
 
     <button
-      class="primary"
-      id="addProductBtn"
+      class="logout-btn"
+      id="logoutBtn"
+      type="button"
     >
-      + ADD PRODUCT
+      LOGOUT
     </button>
 
   </div>
 
-
-  <section class="stats">
-
-    <div class="stat">
-
-      <div class="stat-label">
-        Total Products
-      </div>
-
-      <strong
-        class="stat-number"
-        id="totalProducts"
-      >
-        0
-      </strong>
-
-    </div>
+</header>
 
 
-    <div class="stat">
+<!-- ADMIN APPLICATION -->
 
-      <div class="stat-label">
-        Total Stock
-      </div>
+<div id="adminApp">
 
-      <strong
-        class="stat-number"
-        id="totalStock"
-      >
-        0
-      </strong>
-
-    </div>
+  <main class="admin-container">
 
 
-    <div class="stat">
+    <!-- PAGE HEADING -->
 
-      <div class="stat-label">
-        Low Stock
-      </div>
+    <section class="page-heading">
 
-      <strong
-        class="stat-number"
-        id="lowStock"
-      >
-        0
-      </strong>
+      <div>
 
-    </div>
+        <div class="heading-eyebrow">
+          CIRDRIO / CONTROL CENTER
+        </div>
 
-  </section>
+        <h1>
+          Product Management
+        </h1>
 
+        <p class="page-description">
+          Manage your live product catalogue.
+        </p>
 
-  <section>
-
-    <div class="toolbar">
-
-      <input
-        class="search"
-        id="searchInput"
-        type="search"
-        placeholder="Search products by name or category..."
-      >
-
-    </div>
-
-
-    <div class="table-wrap">
-
-      <div
-        class="loading"
-        id="loading"
-      >
-        Loading CIRDRIO catalogue...
       </div>
 
 
-      <table
-        id="productTable"
-        style="display:none"
+      <button
+        class="add-product-btn"
+        id="addProductBtn"
+        type="button"
       >
 
-        <thead>
+        <span class="plus">+</span>
 
-          <tr>
+        ADD PRODUCT
 
-            <th>
-              Product
-            </th>
+      </button>
 
-            <th>
-              Price
-            </th>
-
-            <th>
-              Stock
-            </th>
-
-            <th>
-              Created
-            </th>
-
-            <th>
-              Actions
-            </th>
-
-          </tr>
-
-        </thead>
+    </section>
 
 
-        <tbody
-          id="productsBody"
-        ></tbody>
+    <!-- STATISTICS -->
 
-      </table>
+    <section class="stats">
 
 
-      <div
-        class="empty"
-        id="emptyState"
-        style="display:none"
-      >
-        No products found.
+      <div class="stat-card">
+
+        <div class="stat-label">
+          Total Products
+        </div>
+
+        <strong
+          class="stat-value"
+          id="totalProducts"
+        >
+          0
+        </strong>
+
       </div>
 
-    </div>
 
-  </section>
+      <div class="stat-card">
+
+        <div class="stat-label">
+          Total Stock
+        </div>
+
+        <strong
+          class="stat-value"
+          id="totalStock"
+        >
+          0
+        </strong>
+
+      </div>
 
 
-</main>
+      <div class="stat-card">
+
+        <div class="stat-label">
+          Low Stock
+        </div>
+
+        <strong
+          class="stat-value"
+          id="lowStock"
+        >
+          0
+        </strong>
+
+      </div>
+
+
+    </section>
+
+
+    <!-- CATALOG -->
+
+    <section class="catalog-panel">
+
+
+      <div class="catalog-toolbar">
+
+        <div class="search-wrapper">
+
+          <svg
+            class="search-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle
+              cx="11"
+              cy="11"
+              r="7"
+            ></circle>
+
+            <path
+              d="m20 20-4-4"
+            ></path>
+
+          </svg>
+
+
+          <input
+            class="search-input"
+            id="searchInput"
+            type="search"
+            placeholder="Search products by name or category..."
+            autocomplete="off"
+          >
+
+        </div>
+
+      </div>
+
+
+      <div class="table-container">
+
+
+        <!-- LOADING -->
+
+        <div
+          class="loading-state"
+          id="loadingState"
+        >
+
+          <div class="loading-spinner"></div>
+
+          Loading CIRDRIO catalogue...
+
+        </div>
+
+
+        <!-- TABLE -->
+
+        <table
+          class="product-table"
+          id="productTable"
+          style="display:none"
+        >
+
+          <thead>
+
+            <tr>
+
+              <th>
+                Product
+              </th>
+
+              <th>
+                Price
+              </th>
+
+              <th>
+                Stock
+              </th>
+
+              <th>
+                Created
+              </th>
+
+              <th>
+                Actions
+              </th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody
+            id="productsBody"
+          ></tbody>
+
+        </table>
+
+
+        <!-- EMPTY -->
+
+        <div
+          class="empty-state"
+          id="emptyState"
+          style="display:none"
+        >
+          No products found.
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+  </main>
 
 </div>
 
@@ -705,6 +1276,10 @@ td{
 
   <div class="denied-card">
 
+    <div class="denied-icon">
+      ×
+    </div>
+
     <h2>
       Access Denied
     </h2>
@@ -714,8 +1289,9 @@ td{
     </p>
 
     <button
-      class="primary"
-      onclick="location.href='index.html'"
+      class="add-product-btn"
+      type="button"
+      onclick="window.location.href='index.html'"
     >
       BACK TO STORE
     </button>
@@ -725,7 +1301,7 @@ td{
 </div>
 
 
-<!-- PRODUCT MODAL -->
+<!-- ADD / EDIT PRODUCT MODAL -->
 
 <div
   class="overlay"
@@ -734,23 +1310,34 @@ td{
 
   <div class="modal">
 
+
     <button
-      class="close"
-      id="closeProduct"
+      class="close-btn"
+      id="closeProductModal"
+      type="button"
+      aria-label="Close"
     >
       ×
     </button>
 
-    <h2 id="modalTitle">
-      Add Product
-    </h2>
 
-    <p class="modal-sub">
-      Add or update a CIRDRIO product.
-    </p>
+    <div class="modal-heading">
+
+      <h2 id="modalTitle">
+        Add Product
+      </h2>
+
+      <p>
+        Add or update product information.
+      </p>
+
+    </div>
 
 
-    <form id="productForm">
+    <form
+      class="product-form"
+      id="productForm"
+    >
 
       <input
         type="hidden"
@@ -761,7 +1348,7 @@ td{
       <div class="form-grid">
 
 
-        <div class="field full">
+        <div class="form-field form-full">
 
           <label>
             Product Name
@@ -777,10 +1364,10 @@ td{
         </div>
 
 
-        <div class="field">
+        <div class="form-field">
 
           <label>
-            Price
+            Price (₹)
           </label>
 
           <input
@@ -795,7 +1382,7 @@ td{
         </div>
 
 
-        <div class="field">
+        <div class="form-field">
 
           <label>
             Stock
@@ -813,7 +1400,7 @@ td{
         </div>
 
 
-        <div class="field">
+        <div class="form-field">
 
           <label>
             Category
@@ -828,7 +1415,7 @@ td{
         </div>
 
 
-        <div class="field">
+        <div class="form-field">
 
           <label>
             Image URL
@@ -843,7 +1430,7 @@ td{
         </div>
 
 
-        <div class="field full">
+        <div class="form-field form-full">
 
           <label>
             Description
@@ -851,20 +1438,20 @@ td{
 
           <textarea
             id="productDescription"
-            placeholder="Product description..."
+            placeholder="Write a clear product description..."
           ></textarea>
 
         </div>
 
 
-        <div class="field full">
+        <div class="form-field form-full">
 
           <label>
             Image Preview
           </label>
 
           <div
-            class="preview"
+            class="preview-box"
             id="imagePreview"
           >
             Image preview
@@ -879,19 +1466,20 @@ td{
       <div class="modal-actions">
 
         <button
-          type="button"
-          class="secondary"
+          class="cancel-btn"
           id="cancelProduct"
+          type="button"
         >
-          Cancel
+          CANCEL
         </button>
 
+
         <button
-          type="submit"
-          class="primary"
+          class="save-btn"
           id="saveProduct"
+          type="submit"
         >
-          Save Product
+          SAVE PRODUCT
         </button>
 
       </div>
@@ -903,53 +1491,58 @@ td{
 </div>
 
 
-<!-- DELETE MODAL -->
+<!-- DELETE CONFIRMATION -->
 
 <div
   class="overlay"
   id="deleteOverlay"
 >
 
-  <div class="modal"
-       style="max-width:420px">
+  <div class="modal delete-modal">
+
 
     <button
-      class="close"
-      id="closeDelete"
+      class="close-btn"
+      id="closeDeleteModal"
+      type="button"
+      aria-label="Close"
     >
       ×
     </button>
 
-    <h2>
-      Delete Product?
-    </h2>
 
-    <p
-      style="
-      color:#777;
-      font-size:13px;
-      line-height:1.7;
-      margin-top:12px;
-      "
-    >
-      This product will be permanently removed from the CIRDRIO catalogue.
+    <div class="modal-heading">
+
+      <h2>
+        Delete Product?
+      </h2>
+
+    </div>
+
+
+    <p class="delete-message">
+      This product will be permanently removed from
+      the CIRDRIO catalogue. This action cannot be undone.
     </p>
+
 
     <div class="modal-actions">
 
       <button
-        class="secondary"
+        class="cancel-btn"
         id="cancelDelete"
+        type="button"
       >
-        Cancel
+        CANCEL
       </button>
 
+
       <button
-        class="primary"
+        class="confirm-delete"
         id="confirmDelete"
-        style="background:#c62828"
+        type="button"
       >
-        Delete
+        DELETE PRODUCT
       </button>
 
     </div>
@@ -958,191 +1551,178 @@ td{
 
 </div>
 
-<!-- SUPABASE + ADMIN LOGIC -->
-
 <script>
 
 const SUPABASE_URL =
-"https://jbnatqugmajorwolsfin.supabase.co";
+  "https://jbnatqugmajorwolsfin.supabase.co";
 
 const SUPABASE_KEY =
-"sb_publishable_l7tBbN22fFYgPv5bmkEPtw_Di-XHpsY";
+  "sb_publishable_l7tBbN22fFYgPv5bmkEPtw_Di-XHpsY";
 
 const supabaseClient =
-supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
 
 let products = [];
 let deleteId = null;
 
 
-/* TOAST */
-
-function showToast(message){
-
-  alert(message);
-
-}
-
-
-/* ESCAPE HTML */
-
-function escapeHTML(value){
-
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-
-}
-
-
-/* CHECK ADMIN */
+/* ================================
+   ADMIN AUTHENTICATION
+================================ */
 
 async function checkAdmin(){
 
   const {
-    data:{session},
-    error:sessionError
-  } =
-    await supabaseClient.auth.getSession();
+    data: { session },
+    error: sessionError
+  } = await supabaseClient.auth.getSession();
 
 
   if(sessionError || !session){
 
-    showDenied();
+    showAccessDenied();
 
     return false;
-
   }
 
 
   const {
-    data:isAdmin,
-    error:adminError
-  } =
-    await supabaseClient.rpc(
-      "is_cirdrio_admin"
-    );
+    data: isAdmin,
+    error: adminError
+  } = await supabaseClient.rpc(
+    "is_cirdrio_admin"
+  );
 
 
   if(adminError){
 
-    console.error(adminError);
+    console.error(
+      "Admin check error:",
+      adminError
+    );
 
-    showDenied();
+    showAccessDenied();
 
     return false;
-
   }
 
 
   if(isAdmin !== true){
 
-    showDenied();
+    showAccessDenied();
 
     return false;
-
   }
 
 
   document.getElementById(
     "adminApp"
-  ).style.display="block";
+  ).style.display = "block";
 
 
   return true;
-
 }
 
 
-/* ACCESS DENIED */
-
-function showDenied(){
+function showAccessDenied(){
 
   document.getElementById(
     "adminApp"
-  ).style.display="none";
+  ).style.display = "none";
 
 
   document.getElementById(
     "accessDenied"
-  ).style.display="flex";
-
+  ).style.display = "flex";
 }
 
 
-/* LOAD PRODUCTS */
+/* ================================
+   LOAD PRODUCTS
+================================ */
 
 async function loadProducts(){
 
   const loading =
-    document.getElementById("loading");
+    document.getElementById(
+      "loadingState"
+    );
 
   const table =
-    document.getElementById("productTable");
+    document.getElementById(
+      "productTable"
+    );
 
   const empty =
-    document.getElementById("emptyState");
+    document.getElementById(
+      "emptyState"
+    );
 
 
-  loading.style.display="block";
+  loading.style.display = "block";
 
-  table.style.display="none";
+  table.style.display = "none";
 
-  empty.style.display="none";
+  empty.style.display = "none";
 
 
   const {
     data,
     error
-  } =
-    await supabaseClient
-      .from("products")
-      .select(
-        '"Id","Name","Discription","Price","Cattogry","Image url","Stock","created_at"'
-      )
-      .order(
-        "created_at",
-        {ascending:false}
-      );
+  } = await supabaseClient
+    .from("products")
+    .select(
+      '"Id","Name","Discription","Price","Cattogry","Image url","Stock","created_at"'
+    )
+    .order(
+      "created_at",
+      {
+        ascending: false
+      }
+    );
 
 
-  loading.style.display="none";
+  loading.style.display = "none";
 
 
   if(error){
 
-    console.error(error);
+    console.error(
+      "Product load error:",
+      error
+    );
+
 
     empty.textContent =
       "Unable to load products.";
 
-    empty.style.display="block";
 
-    showToast(
-      "Unable to load products."
-    );
+    empty.style.display =
+      "block";
+
 
     return;
-
   }
 
 
-  products = data || [];
+  products =
+    Array.isArray(data)
+      ? data
+      : [];
+
 
   updateStats();
 
   renderProducts(products);
-
 }
 
 
-/* UPDATE STATS */
+/* ================================
+   STATISTICS
+================================ */
 
 function updateStats(){
 
@@ -1152,7 +1732,7 @@ function updateStats(){
 
   const totalStock =
     products.reduce(
-      function(total,product){
+      function(total, product){
 
         return total +
           Number(
@@ -1173,8 +1753,10 @@ function updateStats(){
             product["Stock"] || 0
           );
 
-        return stock > 0 &&
-               stock <= 10;
+        return (
+          stock > 0 &&
+          stock <= 10
+        );
 
       }
     ).length;
@@ -1196,11 +1778,12 @@ function updateStats(){
     "lowStock"
   ).textContent =
     lowStock;
-
 }
 
 
-/* RENDER PRODUCTS */
+/* ================================
+   RENDER PRODUCTS
+================================ */
 
 function renderProducts(list){
 
@@ -1209,12 +1792,10 @@ function renderProducts(list){
       "productsBody"
     );
 
-
   const table =
     document.getElementById(
       "productTable"
     );
-
 
   const empty =
     document.getElementById(
@@ -1222,23 +1803,26 @@ function renderProducts(list){
     );
 
 
-  body.innerHTML="";
+  body.innerHTML = "";
 
 
   if(!list.length){
 
-    table.style.display="none";
+    table.style.display =
+      "none";
 
-    empty.style.display="block";
+    empty.style.display =
+      "block";
 
     return;
-
   }
 
 
-  table.style.display="table";
+  table.style.display =
+    "table";
 
-  empty.style.display="none";
+  empty.style.display =
+    "none";
 
 
   list.forEach(
@@ -1289,42 +1873,44 @@ function renderProducts(list){
 
         stockClass =
           "stock-low";
-
       }
 
 
       const created =
         product["created_at"]
-        ? new Date(
-            product["created_at"]
-          ).toLocaleDateString(
-            "en-IN"
-          )
-        : "—";
+          ? new Date(
+              product["created_at"]
+            ).toLocaleDateString(
+              "en-IN"
+            )
+          : "—";
 
 
       const row =
-        document.createElement("tr");
+        document.createElement(
+          "tr"
+        );
 
 
       row.innerHTML = `
 
         <td>
 
-          <div class="product-cell">
+          <div class="product-info">
 
             <img
               class="product-image"
               src="${escapeHTML(image)}"
               alt=""
+              loading="lazy"
               onerror="
                 this.style.opacity='0';
               "
             >
 
-            <div>
+            <div class="product-details">
 
-              <div class="product-name">
+              <div class="product-title">
                 ${escapeHTML(name)}
               </div>
 
@@ -1346,7 +1932,9 @@ function renderProducts(list){
 
         <td>
 
-          <span class="${stockClass}">
+          <span
+            class="stock-number ${stockClass}"
+          >
             ${stock}
           </span>
 
@@ -1360,21 +1948,23 @@ function renderProducts(list){
 
         <td>
 
-          <div class="actions">
+          <div class="action-group">
 
             <button
               class="action-btn"
+              type="button"
               onclick="openEdit('${id}')"
             >
-              Edit
+              EDIT
             </button>
 
 
             <button
-              class="action-btn delete-btn"
+              class="action-btn action-delete"
+              type="button"
               onclick="openDelete('${id}')"
             >
-              Delete
+              DELETE
             </button>
 
           </div>
@@ -1388,11 +1978,12 @@ function renderProducts(list){
 
     }
   );
-
 }
 
 
-/* ADD PRODUCT */
+/* ================================
+   ADD PRODUCT
+================================ */
 
 function openAdd(){
 
@@ -1404,37 +1995,44 @@ function openAdd(){
 
   document.getElementById(
     "productId"
-  ).value="";
+  ).value =
+    "";
 
 
   document.getElementById(
     "productName"
-  ).value="";
+  ).value =
+    "";
 
 
   document.getElementById(
     "productPrice"
-  ).value="";
+  ).value =
+    "";
 
 
   document.getElementById(
     "productStock"
-  ).value="0";
+  ).value =
+    "0";
 
 
   document.getElementById(
     "productCategory"
-  ).value="";
+  ).value =
+    "";
 
 
   document.getElementById(
     "productImage"
-  ).value="";
+  ).value =
+    "";
 
 
   document.getElementById(
     "productDescription"
-  ).value="";
+  ).value =
+    "";
 
 
   document.getElementById(
@@ -1445,12 +2043,15 @@ function openAdd(){
 
   document.getElementById(
     "productOverlay"
-  ).classList.add("show");
-
+  ).classList.add(
+    "show"
+  );
 }
 
 
-/* EDIT PRODUCT */
+/* ================================
+   EDIT PRODUCT
+================================ */
 
 function openEdit(id){
 
@@ -1458,7 +2059,10 @@ function openEdit(id){
     products.find(
       function(item){
 
-        return item["Id"] === id;
+        return (
+          String(item["Id"]) ===
+          String(id)
+        );
 
       }
     );
@@ -1467,7 +2071,6 @@ function openEdit(id){
   if(!product){
 
     return;
-
   }
 
 
@@ -1492,13 +2095,13 @@ function openEdit(id){
   document.getElementById(
     "productPrice"
   ).value =
-    product["Price"] || "";
+    product["Price"] ?? "";
 
 
   document.getElementById(
     "productStock"
   ).value =
-    product["Stock"] || 0;
+    product["Stock"] ?? 0;
 
 
   document.getElementById(
@@ -1524,23 +2127,29 @@ function openEdit(id){
 
   document.getElementById(
     "productOverlay"
-  ).classList.add("show");
-
+  ).classList.add(
+    "show"
+  );
 }
 
 
-/* CLOSE PRODUCT */
+/* ================================
+   CLOSE PRODUCT MODAL
+================================ */
 
 function closeProduct(){
 
   document.getElementById(
     "productOverlay"
-  ).classList.remove("show");
-
+  ).classList.remove(
+    "show"
+  );
 }
 
 
-/* IMAGE PREVIEW */
+/* ================================
+   IMAGE PREVIEW
+================================ */
 
 function updateImagePreview(){
 
@@ -1562,7 +2171,6 @@ function updateImagePreview(){
       "Image preview";
 
     return;
-
   }
 
 
@@ -1572,16 +2180,18 @@ function updateImagePreview(){
       src="${escapeHTML(url)}"
       alt="Product Preview"
       onerror="
-        this.parentElement.innerHTML='Image could not be loaded';
+        this.parentElement.innerHTML=
+        'Image could not be loaded';
       "
     >
 
   `;
-
 }
 
 
-/* SAVE PRODUCT */
+/* ================================
+   SAVE PRODUCT
+================================ */
 
 async function saveProduct(event){
 
@@ -1636,25 +2246,44 @@ async function saveProduct(event){
 
   if(!name){
 
-    showToast(
+    alert(
       "Product name is required."
     );
 
     return;
-
   }
 
 
-  const saveButton =
+  if(!Number.isFinite(price) || price < 0){
+
+    alert(
+      "Please enter a valid price."
+    );
+
+    return;
+  }
+
+
+  if(!Number.isInteger(stock) || stock < 0){
+
+    alert(
+      "Please enter a valid stock quantity."
+    );
+
+    return;
+  }
+
+
+  const button =
     document.getElementById(
       "saveProduct"
     );
 
 
-  saveButton.disabled=true;
+  button.disabled = true;
 
-  saveButton.textContent=
-    "Saving...";
+  button.textContent =
+    "SAVING...";
 
 
   const productData = {
@@ -1704,33 +2333,33 @@ async function saveProduct(event){
   }
 
 
-  saveButton.disabled=false;
+  button.disabled = false;
 
-  saveButton.textContent=
-    "Save Product";
+  button.textContent =
+    "SAVE PRODUCT";
 
 
   if(result.error){
 
     console.error(
+      "Save error:",
       result.error
     );
 
 
-    showToast(
-      "Save failed: " +
+    alert(
+      "Save failed:\n" +
       result.error.message
     );
 
     return;
-
   }
 
 
   closeProduct();
 
 
-  showToast(
+  alert(
     id
       ? "Product updated successfully."
       : "Product added successfully."
@@ -1738,46 +2367,44 @@ async function saveProduct(event){
 
 
   await loadProducts();
-
 }
 
 
-/* OPEN DELETE */
+/* ================================
+   DELETE
+================================ */
 
 function openDelete(id){
 
-  deleteId=id;
+  deleteId = id;
 
 
   document.getElementById(
     "deleteOverlay"
-  ).classList.add("show");
-
+  ).classList.add(
+    "show"
+  );
 }
 
-
-/* CLOSE DELETE */
 
 function closeDelete(){
 
-  deleteId=null;
+  deleteId = null;
 
 
   document.getElementById(
     "deleteOverlay"
-  ).classList.remove("show");
-
+  ).classList.remove(
+    "show"
+  );
 }
 
-
-/* DELETE PRODUCT */
 
 async function deleteProduct(){
 
   if(!deleteId){
 
     return;
-
   }
 
 
@@ -1791,10 +2418,10 @@ async function deleteProduct(){
     );
 
 
-  button.disabled=true;
+  button.disabled = true;
 
-  button.textContent=
-    "Deleting...";
+  button.textContent =
+    "DELETING...";
 
 
   const {
@@ -1806,40 +2433,44 @@ async function deleteProduct(){
       .eq("Id",id);
 
 
-  button.disabled=false;
+  button.disabled = false;
 
-  button.textContent=
-    "Delete";
+  button.textContent =
+    "DELETE PRODUCT";
 
 
   if(error){
 
-    console.error(error);
+    console.error(
+      "Delete error:",
+      error
+    );
 
-    showToast(
-      "Delete failed: " +
+
+    alert(
+      "Delete failed:\n" +
       error.message
     );
 
     return;
-
   }
 
 
   closeDelete();
 
 
-  showToast(
+  alert(
     "Product deleted successfully."
   );
 
 
   await loadProducts();
-
 }
 
 
-/* SEARCH */
+/* ================================
+   SEARCH
+================================ */
 
 function searchProducts(){
 
@@ -1858,7 +2489,6 @@ function searchProducts(){
     );
 
     return;
-
   }
 
 
@@ -1897,31 +2527,42 @@ function searchProducts(){
   renderProducts(
     filtered
   );
-
 }
-
-
-/* LOGOUT */
+/* ================================
+   LOGOUT
+================================ */
 
 async function logout(){
 
-  await supabaseClient
+  const {
+    error
+  } = await supabaseClient
     .auth
     .signOut();
 
 
+  if(error){
+
+    console.error(
+      "Logout error:",
+      error
+    );
+
+    return;
+  }
+
+
   window.location.href =
     "index.html";
-
 }
 
 
-/* EVENTS */
+/* ================================
+   EVENT LISTENERS
+================================ */
 
 document
-  .getElementById(
-    "addProductBtn"
-  )
+  .getElementById("addProductBtn")
   .addEventListener(
     "click",
     openAdd
@@ -1929,9 +2570,7 @@ document
 
 
 document
-  .getElementById(
-    "closeProduct"
-  )
+  .getElementById("closeProductModal")
   .addEventListener(
     "click",
     closeProduct
@@ -1939,9 +2578,7 @@ document
 
 
 document
-  .getElementById(
-    "cancelProduct"
-  )
+  .getElementById("cancelProduct")
   .addEventListener(
     "click",
     closeProduct
@@ -1949,9 +2586,7 @@ document
 
 
 document
-  .getElementById(
-    "productForm"
-  )
+  .getElementById("productForm")
   .addEventListener(
     "submit",
     saveProduct
@@ -1959,9 +2594,7 @@ document
 
 
 document
-  .getElementById(
-    "productImage"
-  )
+  .getElementById("productImage")
   .addEventListener(
     "input",
     updateImagePreview
@@ -1969,9 +2602,7 @@ document
 
 
 document
-  .getElementById(
-    "closeDelete"
-  )
+  .getElementById("closeDeleteModal")
   .addEventListener(
     "click",
     closeDelete
@@ -1979,9 +2610,7 @@ document
 
 
 document
-  .getElementById(
-    "cancelDelete"
-  )
+  .getElementById("cancelDelete")
   .addEventListener(
     "click",
     closeDelete
@@ -1989,9 +2618,7 @@ document
 
 
 document
-  .getElementById(
-    "confirmDelete"
-  )
+  .getElementById("confirmDelete")
   .addEventListener(
     "click",
     deleteProduct
@@ -1999,29 +2626,28 @@ document
 
 
 document
-  .getElementById(
-    "searchInput"
-  )
+  .getElementById("searchInput")
   .addEventListener(
     "input",
     searchProducts
   );
+
+
 document
-  .getElementById(
-    "logoutBtn"
-  )
+  .getElementById("logoutBtn")
   .addEventListener(
     "click",
     logout
-  );
+);
 
 
-/* CLOSE MODAL ON BACKDROP */
+/* ================================
+   CLOSE MODALS
+   BY BACKDROP
+================================ */
 
 document
-  .getElementById(
-    "productOverlay"
-  )
+  .getElementById("productOverlay")
   .addEventListener(
     "click",
     function(event){
@@ -2039,9 +2665,7 @@ document
 
 
 document
-  .getElementById(
-    "deleteOverlay"
-  )
+  .getElementById("deleteOverlay")
   .addEventListener(
     "click",
     function(event){
@@ -2058,7 +2682,9 @@ document
   );
 
 
-/* ESC KEY */
+/* ================================
+   ESCAPE KEY
+================================ */
 
 document.addEventListener(
   "keydown",
@@ -2078,19 +2704,9 @@ document.addEventListener(
 );
 
 
-/* IMAGE PREVIEW ERROR */
-
-document
-  .getElementById(
-    "productImage"
-  )
-  .addEventListener(
-    "change",
-    updateImagePreview
-  );
-
-
-/* START */
+/* ================================
+   INITIALIZE
+================================ */
 
 document.addEventListener(
   "DOMContentLoaded",
