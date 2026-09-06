@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CIRDRIO — Diagnostic</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CIRDRIO — System Diagnostic</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -11,81 +11,90 @@
 *{box-sizing:border-box}
 
 body{
-margin:0;
-padding:40px 20px;
-font-family:Arial,Helvetica,sans-serif;
-background:#faf9f7;
-color:#151515;
+  margin:0;
+  min-height:100vh;
+  background:#f7f5f1;
+  color:#171717;
+  font-family:Arial,Helvetica,sans-serif;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
 }
 
-.container{
-max-width:900px;
-margin:auto;
+.card{
+  width:100%;
+  max-width:650px;
+  background:#fff;
+  border:1px solid #e5e2dc;
+  border-radius:20px;
+  padding:32px;
+  box-shadow:0 15px 45px rgba(0,0,0,.08);
 }
 
-h1{
-letter-spacing:5px;
-margin-bottom:5px;
+.logo{
+  font-size:28px;
+  font-weight:800;
+  letter-spacing:3px;
+}
+
+.subtitle{
+  margin-top:6px;
+  color:#777;
+  font-size:14px;
 }
 
 .status{
-padding:18px;
-margin:15px 0;
-border:1px solid #ddd;
-background:#fff;
-border-radius:12px;
-line-height:1.6;
+  margin-top:25px;
+  padding:16px;
+  border-radius:12px;
+  background:#f5f5f5;
+  font-weight:600;
 }
 
-.ok{
-border-left:5px solid #16803c;
-}
+.ok{color:#16803c}
+.error{color:#c62828}
+.wait{color:#996c00}
 
-.error{
-border-left:5px solid #c62828;
+.result{
+  margin-top:15px;
+  padding:18px;
+  border:1px solid #e7e4de;
+  border-radius:14px;
+  background:#fafafa;
+  line-height:1.7;
+  word-break:break-word;
 }
 
 img{
-width:300px;
-height:350px;
-object-fit:cover;
-display:block;
-margin:20px 0;
-background:#eee;
-border-radius:10px;
-}
-
-code{
-display:block;
-word-break:break-all;
-background:#eee;
-padding:12px;
-margin-top:10px;
-border-radius:6px;
+  display:block;
+  width:220px;
+  max-width:100%;
+  margin:20px auto 5px;
+  border-radius:14px;
+  border:1px solid #ddd;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="card">
 
-<h1>CIRDRIO</h1>
-<p>Website Diagnostic</p>
+  <div class="logo">CIRDRIO</div>
+  <div class="subtitle">Supabase Connection Diagnostic</div>
 
-<div id="connection" class="status">
-Checking Supabase connection...
-</div>
+  <div id="connection" class="status wait">
+    ⏳ Checking Supabase connection...
+  </div>
 
-<div id="product" class="status">
-Checking products table...
-</div>
+  <div id="product" class="result">
+    ⏳ Checking product...
+  </div>
 
-<div id="imageStatus" class="status">
-Checking image...
-</div>
-
-<div id="result"></div>
+  <div id="imageBox" class="result">
+    ⏳ Checking product image...
+  </div>
 
 </div>
 
@@ -95,175 +104,137 @@ const SUPABASE_URL =
 "https://jbnatqugmajorwolsfin.supabase.co";
 
 const SUPABASE_KEY =
-"sb_publishable_NvC4LPhAESFhQJAVFFI_Q_Zam_C3-a";
+"sb_publishable_l7tBbN22fFYgPv5bmkEPtw_Di-XHpsY";
 
 const db = supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
+  SUPABASE_URL,
+  SUPABASE_KEY
 );
 
-async function diagnostic(){
 
-const connectionBox =
-document.getElementById("connection");
+// 1. CHECK SUPABASE
+async function checkConnection(){
 
-const productBox =
-document.getElementById("product");
+  const box = document.getElementById("connection");
 
-const imageBox =
-document.getElementById("imageStatus");
+  const { data, error } = await db
+    .from("products")
+    .select("id")
+    .limit(1);
 
-const result =
-document.getElementById("result");
+  if(error){
 
+    box.className = "status error";
 
-// SUPABASE CHECK
+    box.innerHTML =
+      "❌ SUPABASE ERROR<br><small>" +
+      error.message +
+      "</small>";
 
-try{
+    return false;
+  }
 
-const {data,error} = await db
-.from("products")
-.select("id")
-.limit(1);
+  box.className = "status ok";
+  box.innerHTML = "✅ SUPABASE CONNECTED";
 
-if(error){
-
-connectionBox.className="status error";
-
-connectionBox.innerHTML =
-"❌ SUPABASE ERROR<br><code>"
-+ error.message +
-"</code>";
-
-return;
-
-}
-
-connectionBox.className="status ok";
-
-connectionBox.innerHTML =
-"✅ SUPABASE CONNECTION WORKING";
-
-}catch(error){
-
-connectionBox.className="status error";
-
-connectionBox.innerHTML =
-"❌ CONNECTION FAILED<br><code>"
-+ error.message +
-"</code>";
-
-return;
-
+  return true;
 }
 
 
-// PRODUCT CHECK
+// 2. CHECK PRODUCT
+async function checkProduct(){
 
-try{
+  const box = document.getElementById("product");
 
-const {data,error} = await db
-.from("products")
-.select("*")
-.eq("name","CIRDRIO Glow Serum")
-.limit(1);
+  const { data, error } = await db
+    .from("products")
+    .select("*")
+    .eq("name","CIRDRIO Glow Serum")
+    .limit(1);
 
-if(error){
+  if(error){
 
-productBox.className="status error";
+    box.innerHTML =
+      "❌ PRODUCT ERROR<br>" +
+      error.message;
 
-productBox.innerHTML =
-"❌ PRODUCT QUERY ERROR<br><code>"
-+ error.message +
-"</code>";
+    return;
+  }
 
-return;
+  if(!data || data.length === 0){
 
+    box.innerHTML =
+      "❌ PRODUCT NOT FOUND<br>" +
+      "CIRDRIO Glow Serum database me nahi mila.";
+
+    return;
+  }
+
+  const product = data[0];
+
+  box.innerHTML =
+    "<strong>✅ PRODUCT FOUND</strong><br><br>" +
+    "<b>Name:</b> " + product.name + "<br>" +
+    "<b>Price:</b> ₹" + product.price + "<br>" +
+    "<b>Category:</b> " + product.category + "<br>" +
+    "<b>Stock:</b> " + product.stock + "<br><br>" +
+    "<b>Image URL:</b><br>" +
+    product.image_url;
+
+  checkImage(product.image_url);
 }
 
-if(!data || data.length===0){
 
-productBox.className="status error";
+// 3. CHECK IMAGE
+function checkImage(url){
 
-productBox.innerHTML =
-"❌ CIRDRIO Glow Serum NOT FOUND";
+  const box = document.getElementById("imageBox");
 
-return;
+  if(!url){
 
+    box.innerHTML =
+      "❌ IMAGE URL EMPTY";
+
+    return;
+  }
+
+  const image = document.createElement("img");
+
+  image.src = url;
+
+  image.onload = function(){
+
+    box.innerHTML =
+      "✅ IMAGE LOADED SUCCESSFULLY";
+
+    box.appendChild(image);
+  };
+
+  image.onerror = function(){
+
+    box.innerHTML =
+      "❌ IMAGE FAILED TO LOAD<br><br>" +
+      "<small>" + url + "</small>";
+  };
 }
 
-const product=data[0];
 
-productBox.className="status ok";
+// START
+(async function(){
 
-productBox.innerHTML =
-"✅ PRODUCT FOUND<br><br>" +
+  const connected = await checkConnection();
 
-"<b>Name:</b> " +
-(product.name || "EMPTY") +
+  if(connected){
+    await checkProduct();
+  }else{
+    document.getElementById("product").innerHTML =
+      "⏸ Product check stopped because Supabase connection failed.";
 
-"<br><b>Category:</b> " +
-(product.category || "EMPTY") +
+    document.getElementById("imageBox").innerHTML =
+      "⏸ Image check stopped.";
+  }
 
-"<br><b>Price:</b> ₹" +
-(product.price || "EMPTY") +
-
-"<br><b>Image URL:</b>";
-
-const url=document.createElement("code");
-
-url.textContent =
-product.image_url || "EMPTY";
-
-productBox.appendChild(url);
-
-
-// IMAGE CHECK
-
-const image=document.createElement("img");
-
-image.src =
-product.image_url;
-
-image.alt =
-product.name || "CIRDRIO Product";
-
-image.onload=function(){
-
-imageBox.className="status ok";
-
-imageBox.innerHTML =
-"✅ IMAGE LOADED SUCCESSFULLY";
-
-result.appendChild(image);
-
-};
-
-image.onerror=function(){
-
-imageBox.className="status error";
-
-imageBox.innerHTML =
-"❌ IMAGE FAILED TO LOAD";
-
-result.appendChild(image);
-
-};
-
-}catch(error){
-
-productBox.className="status error";
-
-productBox.innerHTML =
-"❌ PRODUCT CHECK FAILED<br><code>"
-+ error.message +
-"</code>";
-
-}
-
-}
-
-diagnostic();
+})();
 
 </script>
 
