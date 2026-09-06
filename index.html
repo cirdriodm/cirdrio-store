@@ -1,35 +1,26 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>CIRDRIO — Beauty, Refined.</title>
 
-<meta name="description"
-content="CIRDRIO — Premium beauty and skincare, thoughtfully selected for modern routines.">
+<meta name="description" content="CIRDRIO — Premium beauty and skincare for modern routines.">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box}
 
 :root{
-  --black:#111111;
+  --black:#111;
+  --white:#fff;
   --soft:#f7f6f3;
-  --white:#ffffff;
-  --muted:#777;
   --line:#e7e5e1;
+  --muted:#777;
 }
 
-html{
-  scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth}
 
 body{
   font-family:Arial,Helvetica,sans-serif;
@@ -37,14 +28,8 @@ body{
   color:var(--black);
 }
 
-button,
-input{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
+button,input{font:inherit}
+button{cursor:pointer}
 
 /* HEADER */
 
@@ -53,7 +38,7 @@ header{
   top:0;
   z-index:1000;
   height:76px;
-  background:rgba(255,255,255,.94);
+  background:rgba(255,255,255,.95);
   backdrop-filter:blur(18px);
   border-bottom:1px solid var(--line);
 }
@@ -91,15 +76,32 @@ nav a{
 }
 
 .icon{
+  position:relative;
   width:42px;
   height:42px;
   border:1px solid var(--line);
   border-radius:50%;
-  background:white;
+  background:#fff;
   display:flex;
   align-items:center;
   justify-content:center;
   font-size:18px;
+}
+
+.cart-count{
+  position:absolute;
+  top:-3px;
+  right:-3px;
+  min-width:17px;
+  height:17px;
+  padding:0 4px;
+  border-radius:20px;
+  background:#111;
+  color:#fff;
+  font-size:9px;
+  display:none;
+  align-items:center;
+  justify-content:center;
 }
 
 /* HERO */
@@ -120,9 +122,7 @@ nav a{
   overflow:hidden;
 }
 
-.hero-text{
-  max-width:620px;
-}
+.hero-text{max-width:620px}
 
 .eyebrow{
   font-size:12px;
@@ -165,9 +165,6 @@ nav a{
 }
 
 .section-head{
-  display:flex;
-  align-items:end;
-  justify-content:space-between;
   margin-bottom:30px;
 }
 
@@ -260,13 +257,9 @@ nav a{
   font-size:19px;
 }
 
-.heart.active{
-  color:#111;
-}
+.heart.active{color:#111}
 
-.product-info{
-  padding:19px;
-}
+.product-info{padding:19px}
 
 .product-category{
   color:#888;
@@ -310,8 +303,6 @@ nav a{
   font-size:12px;
 }
 
-/* LOADING */
-
 .loading{
   grid-column:1/-1;
   padding:80px 20px;
@@ -342,9 +333,7 @@ nav a{
   margin-bottom:12px;
 }
 
-.banner p{
-  color:#bbb;
-}
+.banner p{color:#bbb}
 
 /* FOOTER */
 
@@ -397,9 +386,7 @@ footer{
   padding:80px 20px;
 }
 
-.search-overlay.show{
-  display:flex;
-}
+.search-overlay.show{display:flex}
 
 .search-box{
   width:100%;
@@ -417,13 +404,174 @@ footer{
   outline:none;
 }
 
+/* CART DRAWER */
+
+.cart-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  z-index:3000;
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
+}
+
+.cart-overlay.show{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.cart-drawer{
+  position:absolute;
+  right:0;
+  top:0;
+  height:100%;
+  width:min(440px,100%);
+  background:#fff;
+  display:flex;
+  flex-direction:column;
+  transform:translateX(100%);
+  transition:.3s;
+}
+
+.cart-overlay.show .cart-drawer{
+  transform:translateX(0);
+}
+
+.cart-header{
+  padding:24px;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.cart-title{
+  font-family:Georgia,serif;
+  font-size:28px;
+}
+
+.close-cart{
+  border:0;
+  background:#f3f2ef;
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  font-size:20px;
+}
+
+.cart-items{
+  flex:1;
+  overflow:auto;
+  padding:20px;
+}
+
+.empty-cart{
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:#777;
+}
+
+.cart-item{
+  display:grid;
+  grid-template-columns:75px 1fr auto;
+  gap:13px;
+  padding:15px 0;
+  border-bottom:1px solid var(--line);
+}
+
+.cart-item-image{
+  width:75px;
+  height:85px;
+  border-radius:10px;
+  background:#f1efeb;
+  overflow:hidden;
+}
+
+.cart-item-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.cart-item-name{
+  font-size:14px;
+  font-weight:600;
+  margin-bottom:7px;
+}
+
+.cart-item-price{
+  font-size:13px;
+  color:#666;
+}
+
+.qty{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  margin-top:12px;
+}
+
+.qty button{
+  width:26px;
+  height:26px;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:50%;
+}
+
+.remove{
+  margin-top:8px;
+  border:0;
+  background:none;
+  color:#888;
+  font-size:11px;
+  text-decoration:underline;
+}
+
+.item-total{
+  font-weight:700;
+  font-size:13px;
+}
+
+.cart-footer{
+  padding:20px;
+  border-top:1px solid var(--line);
+  background:#fff;
+}
+
+.subtotal{
+  display:flex;
+  justify-content:space-between;
+  font-size:16px;
+  font-weight:700;
+  margin-bottom:15px;
+}
+
+.checkout{
+  width:100%;
+  border:0;
+  background:#111;
+  color:#fff;
+  padding:16px;
+  border-radius:28px;
+}
+
+.cart-note{
+  text-align:center;
+  color:#888;
+  font-size:11px;
+  margin-top:10px;
+}
+
 /* MOBILE */
 
 @media(max-width:900px){
 
-  nav{
-    display:none;
-  }
+  nav{display:none}
 
   .hero{
     padding:25px 15px 35px;
@@ -435,9 +583,7 @@ footer{
     align-items:flex-end;
   }
 
-  .hero h1{
-    font-size:58px;
-  }
+  .hero h1{font-size:58px}
 
   .section{
     padding:35px 15px 60px;
@@ -448,33 +594,21 @@ footer{
     gap:12px;
   }
 
-  .product-image{
-    height:230px;
-  }
+  .product-image{height:230px}
 
-  .product-info{
-    padding:14px;
-  }
+  .product-info{padding:14px}
 
-  .product-description{
-    font-size:12px;
-  }
+  .product-description{font-size:12px}
 
   .add{
     padding:9px 11px;
   }
 
-  .banner{
-    padding:0 15px;
-  }
+  .banner{padding:0 15px}
 
-  .banner-inner{
-    padding:40px 20px;
-  }
+  .banner-inner{padding:40px 20px}
 
-  .footer-inner{
-    flex-direction:column;
-  }
+  .footer-inner{flex-direction:column}
 }
 
 @media(max-width:500px){
@@ -484,214 +618,249 @@ footer{
     letter-spacing:4px;
   }
 
-  .nav{
-    padding:0 15px;
-  }
+  .nav{padding:0 15px}
 
-  .hero h1{
-    font-size:51px;
-  }
+  .hero h1{font-size:51px}
 
-  .hero p{
-    font-size:15px;
-  }
+  .hero p{font-size:15px}
 
-  .section-title{
-    font-size:34px;
-  }
+  .section-title{font-size:34px}
 
-  .product-image{
-    height:205px;
-  }
+  .product-image{height:205px}
 
-  .product-name{
-    font-size:14px;
-  }
+  .product-name{font-size:14px}
 
-  .price{
-    font-size:14px;
-  }
+  .price{font-size:14px}
 }
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
-
 <header>
-  <div class="nav">
+<div class="nav">
 
-    <div class="logo">CIRDRIO</div>
+<div class="logo">CIRDRIO</div>
 
-    <nav>
-      <a href="#shop">Shop</a>
-      <a href="#shop">Skincare</a>
-      <a href="#shop">Beauty</a>
-      <a href="#about">About</a>
-    </nav>
+<nav>
+<a href="#shop">Shop</a>
+<a href="#shop">Skincare</a>
+<a href="#shop">Beauty</a>
+<a href="#about">About</a>
+</nav>
 
-    <div class="actions">
-      <button class="icon" onclick="openSearch()">⌕</button>
-      <button class="icon" onclick="showWishlist()">♡</button>
-      <button class="icon" onclick="showCart()">🛒</button>
-    </div>
+<div class="actions">
 
-  </div>
+<button class="icon" onclick="openSearch()">⌕</button>
+
+<button class="icon" onclick="showWishlist()">♡</button>
+
+<button class="icon" onclick="openCart()">
+🛒
+<span id="cartCount" class="cart-count">0</span>
+</button>
+
+</div>
+</div>
 </header>
 
 
-<!-- HERO -->
-
 <section class="hero">
 
-  <div class="hero-inner">
+<div class="hero-inner">
 
-    <div class="hero-text">
+<div class="hero-text">
 
-      <div class="eyebrow">
-        CIRDRIO BEAUTY
-      </div>
+<div class="eyebrow">
+CIRDRIO BEAUTY
+</div>
 
-      <h1>
-        Beauty,<br>
-        refined.
-      </h1>
+<h1>
+Beauty,<br>
+refined.
+</h1>
 
-      <p>
-        Thoughtfully selected beauty and skincare
-        designed for modern routines.
-      </p>
+<p>
+Thoughtfully selected beauty and skincare
+designed for modern routines.
+</p>
 
-      <button class="shop-btn"
-              onclick="document.getElementById('shop').scrollIntoView()">
-        Explore Collection
-      </button>
+<button
+class="shop-btn"
+onclick="document.getElementById('shop').scrollIntoView()">
+Explore Collection
+</button>
 
-    </div>
-
-  </div>
-
+</div>
+</div>
 </section>
 
-
-<!-- SHOP -->
 
 <section class="section" id="shop">
 
-  <div class="section-head">
+<div class="section-head">
 
-    <div>
-      <div class="section-title">
-        The Collection
-      </div>
+<div class="section-title">
+The Collection
+</div>
 
-      <div class="section-sub">
-        Discover your everyday essentials.
-      </div>
-    </div>
+<div class="section-sub">
+Discover your everyday essentials.
+</div>
 
-  </div>
+</div>
 
 
-  <div class="filters">
+<div class="filters">
 
-    <button class="filter active"
-            onclick="filterProducts('All',this)">
-      All
-    </button>
+<button class="filter active"
+onclick="filterProducts('All',this)">
+All
+</button>
 
-    <button class="filter"
-            onclick="filterProducts('Skincare',this)">
-      Skincare
-    </button>
+<button class="filter"
+onclick="filterProducts('Skincare',this)">
+Skincare
+</button>
 
-    <button class="filter"
-            onclick="filterProducts('Beauty',this)">
-      Beauty
-    </button>
+<button class="filter"
+onclick="filterProducts('Beauty',this)">
+Beauty
+</button>
 
-    <button class="filter"
-            onclick="filterProducts('Haircare',this)">
-      Haircare
-    </button>
+<button class="filter"
+onclick="filterProducts('Haircare',this)">
+Haircare
+</button>
 
-  </div>
+</div>
 
 
-  <div id="products" class="products">
+<div id="products" class="products">
 
-    <div class="loading">
-      Loading CIRDRIO collection...
-    </div>
+<div class="loading">
+Loading CIRDRIO collection...
+</div>
 
-  </div>
+</div>
 
 </section>
 
-
-<!-- BANNER -->
 
 <section class="banner" id="about">
 
-  <div class="banner-inner">
+<div class="banner-inner">
 
-    <h2>
-      Your routine.<br>
-      Elevated.
-    </h2>
+<h2>
+Your routine.<br>
+Elevated.
+</h2>
 
-    <p>
-      CIRDRIO — Build What’s Next.
-    </p>
+<p>
+CIRDRIO — Build What’s Next.
+</p>
 
-  </div>
+</div>
 
 </section>
 
 
-<!-- FOOTER -->
-
 <footer>
 
-  <div class="footer-inner">
+<div class="footer-inner">
 
-    <div>
-      <div class="footer-logo">CIRDRIO</div>
-    </div>
+<div class="footer-logo">
+CIRDRIO
+</div>
 
-    <div class="footer-text">
-      CIRDRIO is building intelligent products,
-      digital systems and ambitious technology
-      for the future.
-    </div>
+<div class="footer-text">
+CIRDRIO is building intelligent products,
+digital systems and ambitious technology
+for the future.
+</div>
 
-  </div>
+</div>
 
-  <div class="copyright">
-    © 2026 CIRDRIO. All rights reserved.
-  </div>
+<div class="copyright">
+© 2026 CIRDRIO. All rights reserved.
+</div>
 
 </footer>
 
 
 <!-- SEARCH -->
 
-<div id="searchOverlay" class="search-overlay"
-     onclick="closeSearch(event)">
+<div id="searchOverlay"
+class="search-overlay"
+onclick="closeSearch(event)">
 
-  <div class="search-box"
-       onclick="event.stopPropagation()">
+<div class="search-box"
+onclick="event.stopPropagation()">
 
-    <input
-      id="searchInput"
-      type="text"
-      placeholder="Search products..."
-      oninput="searchProducts(this.value)"
-    >
+<input
+id="searchInput"
+type="text"
+placeholder="Search products..."
+oninput="searchProducts(this.value)">
 
-  </div>
+</div>
+</div>
 
+
+<!-- CART -->
+
+<div id="cartOverlay"
+class="cart-overlay"
+onclick="closeCart(event)">
+
+<div class="cart-drawer"
+onclick="event.stopPropagation()">
+
+<div class="cart-header">
+
+<div class="cart-title">
+Your Bag
+</div>
+
+<button
+class="close-cart"
+onclick="closeCart()">
+×
+</button>
+
+</div>
+
+
+<div id="cartItems"
+class="cart-items">
+</div>
+
+
+<div class="cart-footer">
+
+<div class="subtotal">
+
+<span>Subtotal</span>
+
+<span id="cartSubtotal">
+₹0
+</span>
+
+</div>
+
+<button
+class="checkout"
+onclick="checkout()">
+Continue to Checkout
+</button>
+
+<div class="cart-note">
+Taxes and shipping calculated at checkout.
+</div>
+
+</div>
+
+</div>
 </div>
 
 
@@ -709,17 +878,56 @@ const SUPABASE_KEY =
 
 const db =
 supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
+SUPABASE_URL,
+SUPABASE_KEY
 );
 
 
 /* =========================
-   DATA
+   GLOBAL DATA
 ========================= */
 
 let allProducts = [];
 let currentCategory = "All";
+
+
+/* =========================
+   CART
+========================= */
+
+let cart =
+JSON.parse(
+localStorage.getItem("cirdrio_cart") || "[]"
+);
+
+
+function saveCart(){
+
+localStorage.setItem(
+"cirdrio_cart",
+JSON.stringify(cart)
+);
+
+updateCartCount();
+}
+
+
+function updateCartCount(){
+
+const count =
+cart.reduce(
+(total,item) => total + item.qty,
+0
+);
+
+const badge =
+document.getElementById("cartCount");
+
+badge.textContent = count;
+
+badge.style.display =
+count > 0 ? "flex" : "none";
+}
 
 
 /* =========================
@@ -728,141 +936,415 @@ let currentCategory = "All";
 
 async function loadProducts(){
 
-  const container =
-    document.getElementById("products");
+const container =
+document.getElementById("products");
 
-  container.innerHTML =
-    '<div class="loading">Loading CIRDRIO collection...</div>';
+const {data,error} =
+await db
+.from("products")
+.select(
+'"Id","Name","Discription","Price","Cattogry","Image url","Stock","created_at"'
+)
+.order(
+"created_at",
+{ascending:false}
+);
 
-  const { data, error } =
-    await db
-      .from("products")
-      .select(
-        '"Id","Name","Discription","Price","Cattogry","Image url","Stock","created_at"'
-      )
-      .order("created_at", {
-        ascending:false
-      });
+if(error){
 
+console.error(error);
 
-  if(error){
+container.innerHTML =
+'<div class="loading">' +
+'Unable to load products right now.' +
+'</div>';
 
-    console.error(error);
+return;
+}
 
-    container.innerHTML =
-      '<div class="loading">' +
-      'Unable to load products right now.' +
-      '</div>';
+allProducts = data || [];
 
-    return;
-  }
+renderProducts(allProducts);
 
-
-  allProducts = data || [];
-
-  renderProducts(allProducts);
 }
 
 
 /* =========================
-   RENDER
+   RENDER PRODUCTS
 ========================= */
 
 function renderProducts(products){
 
-  const container =
-    document.getElementById("products");
+const container =
+document.getElementById("products");
 
-  if(!products.length){
+if(!products.length){
 
-    container.innerHTML =
-      '<div class="loading">' +
-      'No products found.' +
-      '</div>';
+container.innerHTML =
+'<div class="loading">' +
+'No products found.' +
+'</div>';
 
-    return;
-  }
+return;
+}
 
+container.innerHTML = "";
 
-  container.innerHTML = "";
+products.forEach(product => {
 
+const card =
+document.createElement("article");
 
-  products.forEach(product => {
+card.className = "product";
 
-    const card =
-      document.createElement("article");
+const image =
+product["Image url"];
 
-    card.className = "product";
+card.innerHTML = `
 
+<div class="product-image">
 
-    const image =
-      product["Image url"];
+${
+image
+?
+`<img
+src="${escapeHTML(image)}"
+alt="${escapeHTML(product["Name"] || "CIRDRIO product")}"
+loading="lazy">`
+:
+`<div class="no-image">CIRDRIO</div>`
+}
 
+<button
+class="heart"
+onclick="toggleWishlist(this,'${escapeHTML(product["Name"] || "")}')">
+♡
+</button>
 
-    card.innerHTML = `
-
-      <div class="product-image">
-
-        ${
-          image
-          ?
-          `<img
-             src="${escapeHTML(image)}"
-             alt="${escapeHTML(product["Name"] || "CIRDRIO product")}"
-             loading="lazy"
-           >`
-          :
-          `<div class="no-image">
-             CIRDRIO
-           </div>`
-        }
-
-        <button
-          class="heart"
-          onclick="toggleWishlist(this,'${escapeHTML(product["Name"] || "")}')"
-        >
-          ♡
-        </button>
-
-      </div>
+</div>
 
 
-      <div class="product-info">
+<div class="product-info">
 
-        <div class="product-category">
-          ${escapeHTML(product["Cattogry"] || "Beauty")}
-        </div>
+<div class="product-category">
+${escapeHTML(product["Cattogry"] || "Beauty")}
+</div>
 
-        <div class="product-name">
-          ${escapeHTML(product["Name"] || "CIRDRIO Product")}
-        </div>
+<div class="product-name">
+${escapeHTML(product["Name"] || "CIRDRIO Product")}
+</div>
 
-        <div class="product-description">
-          ${escapeHTML(product["Discription"] || "")}
-        </div>
+<div class="product-description">
+${escapeHTML(product["Discription"] || "")}
+</div>
 
-        <div class="product-bottom">
+<div class="product-bottom">
 
-          <div class="price">
-            ₹${Number(product["Price"] || 0).toLocaleString("en-IN")}
-          </div>
+<div class="price">
+₹${Number(product["Price"] || 0).toLocaleString("en-IN")}
+</div>
 
-          <button
-            class="add"
-            onclick="addToCart('${escapeHTML(product["Name"] || "")}')"
-          >
-            Add to Bag
-          </button>
+<button
+class="add"
+onclick="addToCart('${escapeHTML(product["Name"] || "")}')">
+Add to Bag
+</button>
 
-        </div>
+</div>
 
-      </div>
-    `;
+</div>
+`;
+
+container.appendChild(card);
+
+});
+
+}
 
 
-    container.appendChild(card);
+/* =========================
+   ADD TO CART
+========================= */
 
-  });
+function addToCart(name){
+
+const product =
+allProducts.find(
+p => p["Name"] === name
+);
+
+if(!product) return;
+
+const stock =
+Number(product["Stock"] || 0);
+
+if(stock <= 0){
+
+alert("This product is currently out of stock.");
+
+return;
+}
+
+const existing =
+cart.find(
+item => item.name === name
+);
+
+if(existing){
+
+if(existing.qty >= stock){
+
+alert("Maximum available stock reached.");
+
+return;
+}
+
+existing.qty += 1;
+
+}else{
+
+cart.push({
+
+name:product["Name"],
+
+price:Number(
+product["Price"] || 0
+),
+
+image:
+product["Image url"] || "",
+
+qty:1,
+
+stock:stock
+
+});
+
+}
+
+saveCart();
+
+renderCart();
+
+openCart();
+
+}
+
+
+/* =========================
+   CART UI
+========================= */
+
+function openCart(){
+
+document
+.getElementById("cartOverlay")
+.classList.add("show");
+
+renderCart();
+
+}
+
+
+function closeCart(event){
+
+if(
+event &&
+event.target.id !== "cartOverlay"
+){
+return;
+}
+
+document
+.getElementById("cartOverlay")
+.classList.remove("show");
+
+}
+
+
+function renderCart(){
+
+const box =
+document.getElementById("cartItems");
+
+const subtotalBox =
+document.getElementById("cartSubtotal");
+
+if(!cart.length){
+
+box.innerHTML = `
+<div class="empty-cart">
+<div>
+<strong>Your bag is empty.</strong>
+<br><br>
+Add something beautiful.
+</div>
+</div>
+`;
+
+subtotalBox.textContent = "₹0";
+
+return;
+}
+
+
+let subtotal = 0;
+
+box.innerHTML = "";
+
+
+cart.forEach((item,index) => {
+
+const total =
+item.price * item.qty;
+
+subtotal += total;
+
+
+const row =
+document.createElement("div");
+
+row.className = "cart-item";
+
+
+row.innerHTML = `
+
+<div class="cart-item-image">
+
+${
+item.image
+?
+`<img src="${escapeHTML(item.image)}" alt="">`
+:
+""
+}
+
+</div>
+
+
+<div>
+
+<div class="cart-item-name">
+${escapeHTML(item.name)}
+</div>
+
+<div class="cart-item-price">
+₹${item.price.toLocaleString("en-IN")}
+</div>
+
+<div class="qty">
+
+<button onclick="changeQty(${index},-1)">
+−
+</button>
+
+<span>${item.qty}</span>
+
+<button onclick="changeQty(${index},1)">
++
+</button>
+
+</div>
+
+<button
+class="remove"
+onclick="removeFromCart(${index})">
+Remove
+</button>
+
+</div>
+
+
+<div class="item-total">
+₹${total.toLocaleString("en-IN")}
+</div>
+
+`;
+
+box.appendChild(row);
+
+});
+
+
+subtotalBox.textContent =
+"₹" + subtotal.toLocaleString("en-IN");
+
+}
+
+
+/* =========================
+   CHANGE QUANTITY
+========================= */
+
+function changeQty(index,change){
+
+const item = cart[index];
+
+if(!item) return;
+
+const newQty =
+item.qty + change;
+
+
+if(newQty <= 0){
+
+cart.splice(index,1);
+
+}else{
+
+if(
+item.stock &&
+newQty > item.stock
+){
+
+alert("Maximum available stock reached.");
+
+return;
+}
+
+item.qty = newQty;
+
+}
+
+saveCart();
+
+renderCart();
+
+}
+
+
+/* =========================
+   REMOVE
+========================= */
+
+function removeFromCart(index){
+
+cart.splice(index,1);
+
+saveCart();
+
+renderCart();
+
+}
+
+
+/* =========================
+   CHECKOUT
+========================= */
+
+function checkout(){
+
+if(!cart.length){
+
+alert("Your bag is empty.");
+
+return;
+}
+
+alert(
+"Checkout system is the next step."
+);
+
 }
 
 
@@ -872,35 +1354,39 @@ function renderProducts(products){
 
 function filterProducts(category,button){
 
-  currentCategory = category;
+currentCategory = category;
 
-  document
-    .querySelectorAll(".filter")
-    .forEach(btn =>
-      btn.classList.remove("active")
-    );
+document
+.querySelectorAll(".filter")
+.forEach(btn =>
+btn.classList.remove("active")
+);
 
-  button.classList.add("active");
-
-
-  if(category === "All"){
-
-    renderProducts(allProducts);
-
-    return;
-  }
+button.classList.add("active");
 
 
-  const filtered =
-    allProducts.filter(product =>
-      String(product["Cattogry"] || "")
-      .toLowerCase()
-      ===
-      category.toLowerCase()
-    );
+if(category === "All"){
+
+renderProducts(allProducts);
+
+return;
+}
 
 
-  renderProducts(filtered);
+const filtered =
+allProducts.filter(product =>
+
+String(
+product["Cattogry"] || ""
+)
+.toLowerCase()
+===
+category.toLowerCase()
+
+);
+
+renderProducts(filtered);
+
 }
 
 
@@ -910,49 +1396,48 @@ function filterProducts(category,button){
 
 function searchProducts(value){
 
-  const term =
-    value.toLowerCase().trim();
+const term =
+value.toLowerCase().trim();
 
 
-  let products =
-    allProducts.filter(product => {
+let products =
+allProducts.filter(product => {
 
-      const name =
-        String(product["Name"] || "")
-        .toLowerCase();
+const name =
+String(product["Name"] || "")
+.toLowerCase();
 
-      const description =
-        String(product["Discription"] || "")
-        .toLowerCase();
+const description =
+String(product["Discription"] || "")
+.toLowerCase();
 
-      const category =
-        String(product["Cattogry"] || "")
-        .toLowerCase();
+const category =
+String(product["Cattogry"] || "")
+.toLowerCase();
 
+return (
+name.includes(term) ||
+description.includes(term) ||
+category.includes(term)
+);
 
-      return (
-        name.includes(term) ||
-        description.includes(term) ||
-        category.includes(term)
-      );
-
-    });
-
-
-  if(currentCategory !== "All"){
-
-    products =
-      products.filter(product =>
-        String(product["Cattogry"] || "")
-        .toLowerCase()
-        ===
-        currentCategory.toLowerCase()
-      );
-
-  }
+});
 
 
-  renderProducts(products);
+if(currentCategory !== "All"){
+
+products =
+products.filter(product =>
+String(product["Cattogry"] || "")
+.toLowerCase()
+===
+currentCategory.toLowerCase()
+);
+
+}
+
+renderProducts(products);
+
 }
 
 
@@ -962,31 +1447,33 @@ function searchProducts(value){
 
 function openSearch(){
 
-  document
-    .getElementById("searchOverlay")
-    .classList.add("show");
+document
+.getElementById("searchOverlay")
+.classList.add("show");
 
-  setTimeout(() => {
+setTimeout(() => {
 
-    document
-      .getElementById("searchInput")
-      .focus();
+document
+.getElementById("searchInput")
+.focus();
 
-  },100);
+},100);
 
 }
 
 
 function closeSearch(event){
 
-  if(
-    event &&
-    event.target.id !== "searchOverlay"
-  ) return;
+if(
+event &&
+event.target.id !== "searchOverlay"
+){
+return;
+}
 
-  document
-    .getElementById("searchOverlay")
-    .classList.remove("show");
+document
+.getElementById("searchOverlay")
+.classList.remove("show");
 
 }
 
@@ -997,60 +1484,37 @@ function closeSearch(event){
 
 function toggleWishlist(button,name){
 
-  button.classList.toggle("active");
+button.classList.toggle("active");
 
-  button.textContent =
-    button.classList.contains("active")
-    ? "♥"
-    : "♡";
-
-}
-
-
-/* =========================
-   CART
-========================= */
-
-function addToCart(name){
-
-  alert(
-    name +
-    " added to your bag."
-  );
-
-}
-
-
-function showCart(){
-
-  alert(
-    "Your CIRDRIO bag is currently empty."
-  );
+button.textContent =
+button.classList.contains("active")
+? "♥"
+: "♡";
 
 }
 
 
 function showWishlist(){
 
-  alert(
-    "Your wishlist is currently empty."
-  );
+alert(
+"Wishlist system will be upgraded next."
+);
 
 }
 
 
 /* =========================
-   SECURITY / TEXT
+   ESCAPE HTML
 ========================= */
 
 function escapeHTML(value){
 
-  return String(value)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+return String(value)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
 
 }
 
@@ -1058,6 +1522,8 @@ function escapeHTML(value){
 /* =========================
    START
 ========================= */
+
+updateCartCount();
 
 loadProducts();
 
