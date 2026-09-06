@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>CIRDRIO | Admin</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f6f5f2;
+  color:#111;
+}
+
+.header{
+  height:75px;
+  background:#111;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 5%;
+}
+
+.logo{
+  font-size:22px;
+  font-weight:800;
+  letter-spacing:5px;
+}
+
+.admin-label{
+  font-size:10px;
+  letter-spacing:3px;
+  color:#aaa;
+  text-transform:uppercase;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:50px 5%;
+}
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  margin-bottom:35px;
+}
+
+.eyebrow{
+  color:#888;
+  font-size:10px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+
+h1{
+  font-size:42px;
+  letter-spacing:-2px;
+}
+
+.add-btn{
+  background:#111;
+  color:#fff;
+  border:0;
+  padding:15px 24px;
+  font-size:11px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  cursor:pointer;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+  margin-bottom:40px;
+}
+
+.stat{
+  background:#fff;
+  border:1px solid #e5e3df;
+  padding:25px;
+}
+
+.stat span{
+  display:block;
+  color:#888;
+  font-size:10px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  margin-bottom:12px;
+}
+
+.stat strong{
+  font-size:28px;
+}
+
+.panel{
+  background:#fff;
+  border:1px solid #e5e3df;
+  padding:25px;
+}
+
+.panel-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.panel-head h2{
+  font-size:20px;
+}
+
+.search{
+  border:1px solid #ddd;
+  padding:12px 14px;
+  outline:none;
+  width:230px;
+}
+
+.table-wrap{
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:700px;
+}
+
+th{
+  text-align:left;
+  font-size:10px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:#888;
+  padding:15px 10px;
+  border-bottom:1px solid #ddd;
+}
+
+td{
+  padding:15px 10px;
+  border-bottom:1px solid #eee;
+  font-size:13px;
+}
+
+.product-img{
+  width:55px;
+  height:55px;
+  object-fit:cover;
+  background:#eee;
+}
+
+.actions{
+  display:flex;
+  gap:7px;
+}
+
+.action-btn{
+  border:1px solid #ddd;
+  background:#fff;
+  padding:8px 10px;
+  cursor:pointer;
+  font-size:10px;
+}
+
+.delete{
+  color:#a44;
+}
+
+.loading{
+  text-align:center;
+  padding:40px;
+  color:#888;
+}
+
+@media(max-width:650px){
+
+  .top{
+    align-items:flex-start;
+    flex-direction:column;
+    gap:20px;
+  }
+
+  h1{
+    font-size:34px;
+  }
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .panel-head{
+    align-items:flex-start;
+    flex-direction:column;
+    gap:15px;
+  }
+
+  .search{
+    width:100%;
+  }
+
+  .add-btn{
+    width:100%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <div class="logo">CIRDRIO</div>
+  <div class="admin-label">Admin Dashboard</div>
+</header>
+
+<main class="container">
+
+  <div class="top">
+    <div>
+      <div class="eyebrow">Control Center</div>
+      <h1>Products</h1>
+    </div>
+
+    <button class="add-btn" id="addProductBtn">
+      + Add Product
+    </button>
+  </div>
+
+  <section class="stats">
+
+    <div class="stat">
+      <span>Total Products</span>
+      <strong id="totalProducts">—</strong>
+    </div>
+
+    <div class="stat">
+      <span>Total Stock</span>
+      <strong id="totalStock">—</strong>
+    </div>
+
+    <div class="stat">
+      <span>Categories</span>
+      <strong id="totalCategories">—</strong>
+    </div>
+
+  </section>
+
+  <section class="panel">
+
+    <div class="panel-head">
+      <h2>Product Inventory</h2>
+
+      <input
+        class="search"
+        id="productSearch"
+        type="search"
+        placeholder="Search products..."
+      >
+    </div>
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Product</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody id="productTable">
+
+          <tr>
+            <td colspan="6" class="loading">
+              Loading products...
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+</main>
+
+<script>
+/*
+  SUPABASE CONNECTION
+  PART 2/3 me complete functionality add hogi.
+*/
+
+const SUPABASE_URL =
+"https://jbnatqugmajorwolsfin.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_l7tBbN22fFYgPv5bmkEPtw_Di-XHpsY";
+
+document
+.getElementById("addProductBtn")
+.addEventListener("click",()=>{
+
+  alert("Product creation will be activated in Part 2.");
+
+});
+</script>
+
+</body>
+</html>
+<style>
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  z-index:1000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.modal.active{
+  display:flex;
+}
+
+.modal-box{
+  position:relative;
+  width:min(650px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:#fff;
+  padding:35px;
+}
+
+.modal-close{
+  position:absolute;
+  right:18px;
+  top:15px;
+  background:none;
+  font-size:28px;
+  cursor:pointer;
+}
+
+.modal-title{
+  font-size:28px;
+  letter-spacing:-1px;
+  margin-bottom:25px;
+}
+
+.form-group{
+  margin-bottom:17px;
+}
+
+.form-group label{
+  display:block;
+  font-size:10px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:#777;
+  margin-bottom:7px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select{
+  width:100%;
+  border:1px solid #ddd;
+  padding:13px;
+  outline:none;
+  background:#fff;
+}
+
+.form-group textarea{
+  min-height:120px;
+  resize:vertical;
+}
+
+.form-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+.save-btn{
+  width:100%;
+  background:#111;
+  color:#fff;
+  border:0;
+  padding:16px;
+  font-size:11px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  cursor:pointer;
+}
+
+.form-message{
+  text-align:center;
+  font-size:11px;
+  margin-top:12px;
+  min-height:18px;
+}
+
+.preview{
+  display:none;
+  width:100px;
+  height:100px;
+  object-fit:cover;
+  margin-top:10px;
+  background:#eee;
+}
+
+.confirm-box{
+  width:min(400px,100%);
+  background:#fff;
+  padding:35px;
+  text-align:center;
+}
+
+.confirm-box h3{
+  margin-bottom:10px;
+}
+
+.confirm-box p{
+  color:#777;
+  font-size:13px;
+  line-height:1.6;
+  margin-bottom:25px;
+}
+
+.confirm-actions{
+  display:flex;
+  gap:10px;
+}
+
+.confirm-actions button{
+  flex:1;
+  padding:13px;
+  border:1px solid #ddd;
+  background:#fff;
+  cursor:pointer;
+}
+
+.confirm-actions .danger{
+  background:#111;
+  color:#fff;
+}
+</style>
+
+
+<!-- ================= PRODUCT MODAL ================= -->
+
+<div class="modal" id="productModal">
+
+  <div class="modal-box">
+
+    <button
+      class="modal-close"
+      id="closeProductModal"
+    >
+      ×
+    </button>
+
+    <div class="modal-title" id="modalTitle">
+      Add Product
+    </div>
+
+    <form id="productForm">
+
+      <input
+        type="hidden"
+        id="editId"
+      >
+
+      <div class="form-group">
+
+        <label>Product Name</label>
+
+        <input
+          id="productName"
+          type="text"
+          placeholder="CIRDRIO Glow Serum"
+          required
+        >
+
+      </div>
+
+      <div class="form-row">
+
+        <div class="form-group">
+
+          <label>Price</label>
+
+          <input
+            id="productPrice"
+            type="number"
+            min="0"
+            placeholder="499"
+            required
+          >
+
+        </div>
+
+        <div class="form-group">
+
+          <label>Stock</label>
+
+          <input
+            id="productStock"
+            type="number"
+            min="0"
+            placeholder="50"
+            required
+          >
+
+        </div>
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Category</label>
+
+        <select id="productCategory" required>
+
+          <option value="">
+            Select category
+          </option>
+
+          <option value="Skincare">
+            Skincare
+          </option>
+
+          <option value="Makeup">
+            Makeup
+          </option>
+
+          <option value="Haircare">
+            Haircare
+          </option>
+
+          <option value="Wellness">
+            Wellness
+          </option>
+
+        </select>
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Description</label>
+
+        <textarea
+          id="productDescription"
+          placeholder="Product description..."
+          required
+        ></textarea>
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Image URL</label>
+
+        <input
+          id="productImage"
+          type="url"
+          placeholder="https://..."
+          required
+        >
+
+        <img
+          id="imagePreview"
+          class="preview"
+          alt="Preview"
+        >
+
+      </div>
+
+      <button
+        class="save-btn"
+        type="submit"
+        id="saveProductBtn"
+      >
+        Save Product
+      </button>
+
+      <div
+        class="form-message"
+        id="formMessage"
+      ></div>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<!-- ================= DELETE CONFIRM ================= -->
+
+<div class="modal" id="deleteModal">
+
+  <div class="confirm-box">
+
+    <h3>Delete product?</h3>
+
+    <p>
+      This action cannot be undone.
+      The product will be permanently removed.
+    </p>
+
+    <div class="confirm-actions">
+
+      <button id="cancelDelete">
+        Cancel
+      </button>
+
+      <button
+        class="danger"
+        id="confirmDelete"
+      >
+        Delete
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* ================= SUPABASE ================= */
+
+const supabaseClient =
+supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+let adminProducts = [];
+let deleteProductId = null;
+
+
+/* ================= LOAD PRODUCTS ================= */
+
+async function loadAdminProducts(){
+
+  const table =
+    document.getElementById("productTable");
+
+  table.innerHTML = `
+    <tr>
+      <td colspan="6" class="loading">
+        Loading products...
+      </td>
+    </tr>
+  `;
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+    .from("products")
+    .select(
+      '"Id","Name","Discription","Price","Cattogry","Image url","Stock","created_at"'
+    )
+    .order(
+      "created_at",
+      {ascending:false}
+    );
+
+  if(error){
+
+    console.error(error);
+
+    table.innerHTML = `
+      <tr>
+        <td colspan="6" class="loading">
+          ${escapeAdmin(error.message)}
+        </td>
+      </tr>
+    `;
+
+    return;
+
+  }
+
+  adminProducts = data || [];
+
+  updateStats();
+
+  renderAdminProducts(adminProducts);
+
+}
+
+
+/* ================= STATS ================= */
+
+function updateStats(){
+
+  document.getElementById(
+    "totalProducts"
+  ).textContent =
+    adminProducts.length;
+
+  const stock =
+    adminProducts.reduce(
+      (sum,p)=>
+        sum + Number(p["Stock"] || 0),
+      0
+    );
+
+  document.getElementById(
+    "totalStock"
+  ).textContent =
+    stock;
+
+  const categories =
+    new Set(
+      adminProducts.map(
+        p=>p["Cattogry"]
+      )
+    );
+
+  document.getElementById(
+    "totalCategories"
+  ).textContent =
+    categories.size;
+
+}
+
+
+/* ================= RENDER ================= */
+
+function renderAdminProducts(list){
+
+  const table =
+    document.getElementById(
+      "productTable"
+    );
+
+  if(!list.length){
+
+    table.innerHTML = `
+      <tr>
+        <td colspan="6" class="loading">
+          No products found.
+        </td>
+      </tr>
+    `;
+
+    return;
+
+  }
+
+  table.innerHTML =
+    list.map(product=>{
+
+      const stock =
+        Number(product["Stock"] || 0);
+
+      return `
+
+        <tr>
+
+          <td>
+
+            <img
+              class="product-img"
+              src="${escapeAdmin(product["Image url"] || "")}"
+              alt=""
+            >
+
+          </td>
+
+          <td>
+            <strong>
+              ${escapeAdmin(product["Name"])}
+            </strong>
+          </td>
+
+          <td>
+            ${escapeAdmin(product["Cattogry"] || "-")}
+          </td>
+
+          <td>
+            ₹${Number(
+              product["Price"] || 0
+            ).toLocaleString("en-IN")}
+          </td>
+
+          <td>
+            ${stock}
+          </td>
+
+          <td>
+
+            <div class="actions">
+
+              <button
+                class="action-btn"
+                onclick="editProduct('${product["Id"]}')"
+              >
+                Edit
+              </button>
+
+              <button
+                class="action-btn delete"
+                onclick="askDelete('${product["Id"]}')"
+              >
+                Delete
+              </button>
+
+            </div>
+
+          </td>
+
+        </tr>
+
+      `;
+
+    }).join("");
+
+}
+
+
+/* ================= ESCAPE ================= */
+
+function escapeAdmin(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* ================= ADD ================= */
+
+document
+.getElementById("addProductBtn")
+.addEventListener("click",()=>{
+
+  document.getElementById(
+    "productForm"
+  ).reset();
+
+  document.getElementById(
+    "editId"
+  ).value = "";
+
+  document.getElementById(
+    "modalTitle"
+  ).textContent =
+    "Add Product";
+
+  document.getElementById(
+    "saveProductBtn"
+  ).textContent =
+    "Save Product";
+
+  document.getElementById(
+    "formMessage"
+  ).textContent = "";
+
+  document.getElementById(
+    "imagePreview"
+  ).style.display = "none";
+
+  document.getElementById(
+    "productModal"
+  ).classList.add("active");
+
+});
+
+
+/* ================= EDIT ================= */
+
+function editProduct(id){
+
+  const product =
+    adminProducts.find(
+      p=>p["Id"]===id
+    );
+
+  if(!product) return;
+
+  document.getElementById(
+    "editId"
+  ).value =
+    product["Id"];
+
+  document.getElementById(
+    "productName"
+  ).value =
+    product["Name"] || "";
+
+  document.getElementById(
+    "productPrice"
+  ).value =
+    product["Price"] || "";
+
+  document.getElementById(
+    "productStock"
+  ).value =
+    product["Stock"] || "";
+
+  document.getElementById(
+    "productCategory"
+  ).value =
+    product["Cattogry"] || "";
+
+  document.getElementById(
+    "productDescription"
+  ).value =
+    product["Discription"] || "";
+
+  document.getElementById(
+    "productImage"
+  ).value =
+    product["Image url"] || "";
+
+  updatePreview();
+
+  document.getElementById(
+    "modalTitle"
+  ).textContent =
+    "Edit Product";
+
+  document.getElementById(
+    "saveProductBtn"
+  ).textContent =
+    "Update Product";
+
+  document.getElementById(
+    "formMessage"
+  ).textContent = "";
+
+  document.getElementById(
+    "productModal"
+  ).classList.add("active");
+
+}
+
+
+/* ================= IMAGE PREVIEW ================= */
+
+document
+.getElementById("productImage")
+.addEventListener(
+  "input",
+  updatePreview
+);
+
+function updatePreview(){
+
+  const url =
+    document.getElementById(
+      "productImage"
+    ).value.trim();
+
+  const preview =
+    document.getElementById(
+      "imagePreview"
+    );
+
+  if(url){
+
+    preview.src = url;
+    preview.style.display = "block";
+
+  }else{
+
+    preview.style.display = "none";
+
+  }
+
+}
+
+
+/* ================= SAVE ================= */
+
+document
+.getElementById("productForm")
+.addEventListener(
+  "submit",
+  async e=>{
+
+    e.preventDefault();
+
+    const id =
+      document.getElementById(
+        "editId"
+      ).value;
+
+    const product = {
+
+      "Name":
+        document.getElementById(
+          "productName"
+        ).value.trim(),
+
+      "Discription":
+        document.getElementById(
+          "productDescription"
+        ).value.trim(),
+
+      "Price":
+        Number(
+          document.getElementById(
+            "productPrice"
+          ).value
+        ),
+
+      "Cattogry":
+        document.getElementById(
+          "productCategory"
+        ).value,
+
+      "Image url":
+        document.getElementById(
+          "productImage"
+        ).value.trim(),
+
+      "Stock":
+        Number(
+          document.getElementById(
+            "productStock"
+          ).value
+        )
+
+    };
+
+    const message =
+      document.getElementById(
+        "formMessage"
+      );
+
+    const saveButton =
+      document.getElementById(
+        "saveProductBtn"
+      );
+
+    saveButton.disabled = true;
+
+    message.textContent =
+      "Saving...";
+
+    try{
+
+      if(id){
+
+        const {
+          error
+        } =
+          await supabaseClient
+          .from("products")
+          .update(product)
+          .eq("Id",id);
+
+        if(error) throw error;
+
+        message.textContent =
+          "Product updated successfully.";
+
+      }else{
+
+        const {
+          error
+        } =
+          await supabaseClient
+          .from("products")
+          .insert(product);
+
+        if(error) throw error;
+
+        message.textContent =
+          "Product added successfully.";
+
+      }
+
+      await loadAdminProducts();
+
+      setTimeout(()=>{
+
+        document.getElementById(
+          "productModal"
+        ).classList.remove("active");
+
+      },700);
+
+    }catch(error){
+
+      console.error(error);
+
+      message.textContent =
+        error.message ||
+        "Unable to save product.";
+
+    }finally{
+
+      saveButton.disabled = false;
+
+    }
+
+  }
+);
+
+
+/* ================= CLOSE PRODUCT ================= */
+
+document
+.getElementById("closeProductModal")
+.addEventListener(
+  "click",
+  ()=>{
+    document.getElementById(
+      "productModal"
+    ).classList.remove("active");
+  }
+);
+
+
+/* ================= DELETE ================= */
+
+function askDelete(id){
+
+  deleteProductId = id;
+
+  document.getElementById(
+    "deleteModal"
+  ).classList.add("active");
+
+}
+
+
+document
+.getElementById("cancelDelete")
+.addEventListener(
+  "click",
+  ()=>{
+    deleteProductId = null;
+
+    document.getElementById(
+      "deleteModal"
+    ).classList.remove("active");
+
+  }
+);
+
+
+document
+.getElementById("confirmDelete")
+.addEventListener(
+  "click",
+  async ()=>{
+
+    if(!deleteProductId) return;
+
+    const button =
+      document.getElementById(
+        "confirmDelete"
+      );
+
+    button.disabled = true;
+
+    const {
+      error
+    } =
+      await supabaseClient
+      .from("products")
+      .delete()
+      .eq("Id",deleteProductId);
+
+    if(error){
+
+      alert(error.message);
+
+    }else{
+
+      await loadAdminProducts();
+
+    }
+
+    deleteProductId = null;
+
+    button.disabled = false;
+
+    document.getElementById(
+      "deleteModal"
+    ).classList.remove("active");
+
+  }
+);
+
+
+/* ================= SEARCH ================= */
+
+document
+.getElementById("productSearch")
+.addEventListener(
+  "input",
+  e=>{
+
+    const query =
+      e.target.value
+      .trim()
+      .toLowerCase();
+
+    if(!query){
+
+      renderAdminProducts(
+        adminProducts
+      );
+
+      return;
+
+    }
+
+    const filtered =
+      adminProducts.filter(
+        product=>
+          String(
+            product["Name"] || ""
+          )
+          .toLowerCase()
+          .includes(query)
+
+          ||
+
+          String(
+            product["Cattogry"] || ""
+          )
+          .toLowerCase()
+          .includes(query)
+      );
+
+    renderAdminProducts(
+      filtered
+    );
+
+  }
+);
+
+
+/* ================= START ================= */
+
+loadAdminProducts();
+
+</script>
+<script>
+
+/* ================= SECURITY NOTE =================
+   This panel is currently a basic admin UI.
+   Proper admin authorization/RLS should be added
+   before allowing real production writes.
+=================================================== */
+
+
+/* ================= INITIAL LOAD ================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  async ()=>{
+
+    await loadAdminProducts();
+
+  }
+);
+
+
+/* ================= MODAL OUTSIDE CLICK ================= */
+
+document
+.getElementById("productModal")
+.addEventListener(
+  "click",
+  e=>{
+
+    if(e.target.id === "productModal"){
+
+      e.currentTarget
+        .classList.remove("active");
+
+    }
+
+  }
+);
+
+
+document
+.getElementById("deleteModal")
+.addEventListener(
+  "click",
+  e=>{
+
+    if(e.target.id === "deleteModal"){
+
+      e.currentTarget
+        .classList.remove("active");
+
+      deleteProductId = null;
+
+    }
+
+  }
+);
+
+
+/* ================= IMAGE ERROR ================= */
+
+document
+.getElementById("imagePreview")
+.addEventListener(
+  "error",
+  ()=>{
+
+    document.getElementById(
+      "imagePreview"
+    ).style.display = "none";
+
+  }
+);
+
+
+/* ================= KEYBOARD ================= */
+
+document.addEventListener(
+  "keydown",
+  e=>{
+
+    if(e.key !== "Escape") return;
+
+    document
+      .querySelectorAll(".modal.active")
+      .forEach(modal=>{
+
+        modal.classList.remove("active");
+
+      });
+
+    deleteProductId = null;
+
+  }
+);
+
+</script>
+
+</body>
+</html>
