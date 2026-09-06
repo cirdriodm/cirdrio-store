@@ -59,7 +59,13 @@ border-radius:30px;font-size:12px;white-space:nowrap}
 .pic{height:390px;background:#eeeae5;display:flex;align-items:center;
 justify-content:center;overflow:hidden}
 
-.pic img{width:100%;height:100%;object-fit:cover}
+.pic img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+}
+
 .placeholder{width:105px;height:205px;border-radius:20px;
 background:linear-gradient(90deg,#c9c4bd,#fff,#c8c2bb);
 box-shadow:18px 25px 35px #0002}
@@ -207,7 +213,10 @@ const SUPABASE_URL = "https://jbnatqugmajorwolsfin.supabase.co";
 
 const SUPABASE_KEY = "sb_publishable_NvC4LPhAESFhQJqAVFFI_Q_Zam_C3-a";
 
-const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const db = supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
 
 let allProducts = [];
 
@@ -215,20 +224,30 @@ async function loadProducts(){
 
 const box = document.getElementById("products");
 
+try{
+
 const { data, error } = await db
 .from("products")
 .select("*")
 .order("created_at",{ascending:false});
 
 if(error){
-console.error(error);
+console.error("Supabase error:",error);
 box.innerHTML='<div class="empty">Unable to load products.</div>';
 return;
 }
 
-allProducts=data || [];
+allProducts = data || [];
 
 renderProducts(allProducts);
+
+}catch(error){
+
+console.error("Connection error:",error);
+box.innerHTML='<div class="empty">Unable to connect to CIRDRIO.</div>';
+
+}
+
 }
 
 function renderProducts(products){
@@ -242,8 +261,19 @@ return;
 
 box.innerHTML=products.map(product=>{
 
-const image=product.image_url
-? `<img src="${product.image_url}" alt="${product.name}">`
+const imageUrl = product.image_url
+? String(product.image_url).trim()
+: "";
+
+const image = imageUrl
+? `
+<img
+src="${imageUrl}"
+alt="${product.name || "CIRDRIO Product"}"
+loading="lazy"
+onerror="this.onerror=null;this.src='https://placehold.co/600x700?text=CIRDRIO';"
+>
+`
 : `<div class="placeholder"></div>`;
 
 return `
@@ -266,6 +296,7 @@ ${image}
 `;
 
 }).join("");
+
 }
 
 function filterProducts(category,button){
@@ -285,20 +316,30 @@ const filtered=allProducts.filter(product=>
 );
 
 renderProducts(filtered);
+
 }
 
 function openSearch(){
+
 document.getElementById("search").classList.add("open");
+
 document.getElementById("searchInput").focus();
+
 }
 
 function closeSearch(){
+
 document.getElementById("search").classList.remove("open");
+
 }
 
 function searchProducts(){
 
-const q=document.getElementById("searchInput").value.toLowerCase().trim();
+const q=document
+.getElementById("searchInput")
+.value
+.toLowerCase()
+.trim();
 
 const filtered=allProducts.filter(product=>
 (product.name||"").toLowerCase().includes(q) ||
@@ -307,10 +348,14 @@ const filtered=allProducts.filter(product=>
 );
 
 renderProducts(filtered);
+
 }
 
 function toggleHeart(button){
-button.innerHTML=button.innerHTML==="♡"?"♥":"♡";
+
+button.innerHTML =
+button.innerHTML==="♡" ? "♥" : "♡";
+
 }
 
 loadProducts();
