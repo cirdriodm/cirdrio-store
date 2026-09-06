@@ -779,3 +779,272 @@ mode==="login"?"SIGN IN":"CREATE ACCOUNT";
 
 document.getElementById("authSwitch").textContent=
 mode==="login
+==="login"?"Create an account":"Sign in";
+
+document.getElementById("authMessage").textContent="";
+document.getElementById("authEmail").value="";
+document.getElementById("authPassword").value="";
+}
+
+
+/* SWITCH LOGIN / SIGNUP */
+
+function switchAuth(){
+
+setAuthMode(
+authMode==="login" ? "signup" : "login"
+);
+
+}
+
+
+/* SUBMIT AUTH */
+
+async function submitAuth(){
+
+const email=document
+.getElementById("authEmail")
+.value
+.trim();
+
+const password=document
+.getElementById("authPassword")
+.value;
+
+const message=document
+.getElementById("authMessage");
+
+message.textContent="";
+
+if(!email || !password){
+
+message.textContent="Please enter your email and password.";
+return;
+
+}
+
+if(password.length<6){
+
+message.textContent="Password must be at least 6 characters.";
+return;
+
+}
+
+const submit=document.getElementById("authSubmit");
+
+submit.disabled=true;
+submit.textContent="PLEASE WAIT...";
+
+
+if(authMode==="login"){
+
+const {error}=await db.auth.signInWithPassword({
+email,
+password
+});
+
+if(error){
+
+message.textContent=error.message;
+submit.disabled=false;
+submit.textContent="SIGN IN";
+return;
+
+}
+
+message.textContent="Signed in successfully.";
+
+setTimeout(()=>{
+closeAuth();
+updateAuthUI();
+},500);
+
+}else{
+
+const {data,error}=await db.auth.signUp({
+
+email,
+password,
+
+options:{
+emailRedirectTo:
+"https://cirdriodm.github.io/cirdrio-store/"
+}
+
+});
+
+if(error){
+
+message.textContent=error.message;
+submit.disabled=false;
+submit.textContent="CREATE ACCOUNT";
+return;
+
+}
+
+if(data.session){
+
+message.textContent="Account created successfully.";
+
+setTimeout(()=>{
+closeAuth();
+updateAuthUI();
+},700);
+
+}else{
+
+message.textContent=
+"Account created. Check your email to confirm your account.";
+
+submit.disabled=false;
+submit.textContent="CREATE ACCOUNT";
+
+}
+
+}
+
+}
+
+
+/* CLOSE AUTH */
+
+function closeAuth(){
+
+document
+.getElementById("authOverlay")
+.classList.remove("show");
+
+document
+.getElementById("authMessage")
+.textContent="";
+
+}
+
+
+/* CLOSE AUTH OUTSIDE */
+
+function closeAuthOutside(e){
+
+if(
+e.target===
+document.getElementById("authOverlay")
+){
+
+closeAuth();
+
+}
+
+}
+
+
+/* LOGOUT */
+
+async function logout(){
+
+await db.auth.signOut();
+
+document
+.getElementById("accountMenu")
+.classList.remove("show");
+
+updateAuthUI();
+
+}
+
+
+/* AUTH UI */
+
+async function updateAuthUI(){
+
+const {data}=await db.auth.getSession();
+
+const button=
+document.getElementById("accountButton");
+
+if(data.session){
+
+button.textContent="●";
+
+}else{
+
+button.textContent="♙";
+
+}
+
+}
+
+
+/* AUTH STATE */
+
+db.auth.onAuthStateChange(
+(event,session)=>{
+
+const button=
+document.getElementById("accountButton");
+
+if(session){
+
+button.textContent="●";
+
+}else{
+
+button.textContent="♙";
+
+}
+
+}
+);
+
+
+/* ESCAPE HTML */
+
+function escapeHTML(value){
+
+return String(value)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+
+/* ESCAPE ATTRIBUTE */
+
+function escapeAttr(value){
+
+return escapeHTML(value);
+
+}
+
+
+/* SCROLL */
+
+function scrollToProducts(){
+
+document
+.getElementById("categories")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+/* INITIALIZE */
+
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
+
+loadProducts();
+updateAuthUI();
+
+}
+);
+
+</script>
+
+</body>
+</html>
