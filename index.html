@@ -1,88 +1,705 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>CIRDRIO — Diagnostic</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CIRDRIO — Beauty, Refined.</title>
+
+<meta name="description"
+content="CIRDRIO — Premium beauty and skincare, thoughtfully selected for modern routines.">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{box-sizing:border-box}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+:root{
+  --black:#111111;
+  --soft:#f7f6f3;
+  --white:#ffffff;
+  --muted:#777;
+  --line:#e7e5e1;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
 body{
-margin:0;
-padding:24px;
-min-height:100vh;
-background:#f7f5f1;
-font-family:Arial,sans-serif;
-color:#171717;
-display:flex;
-align-items:center;
-justify-content:center
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--soft);
+  color:var(--black);
 }
-.card{
-width:100%;
-max-width:650px;
-background:#fff;
-border:1px solid #e5e2dc;
-border-radius:20px;
-padding:32px;
-box-shadow:0 15px 45px rgba(0,0,0,.08)
+
+button,
+input{
+  font:inherit;
 }
+
+button{
+  cursor:pointer;
+}
+
+/* HEADER */
+
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  height:76px;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line);
+}
+
+.nav{
+  max-width:1400px;
+  height:100%;
+  margin:auto;
+  padding:0 28px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
 .logo{
-font-size:30px;
-font-weight:800;
-letter-spacing:4px
+  font-size:25px;
+  font-weight:800;
+  letter-spacing:6px;
 }
-.sub{
-margin-top:7px;
-color:#777;
-font-size:15px
+
+nav{
+  display:flex;
+  gap:32px;
 }
-.box{
-margin-top:22px;
-padding:18px;
-border:1px solid #e5e2dc;
-border-radius:14px;
-background:#fafafa;
-line-height:1.7;
-word-break:break-word
+
+nav a{
+  text-decoration:none;
+  color:#222;
+  font-size:14px;
 }
-.ok{border-left:5px solid #16803c}
-.err{border-left:5px solid #c62828}
-.wait{border-left:5px solid #996c00}
-img{
-display:block;
-width:220px;
-max-width:100%;
-margin:18px auto 0;
-border-radius:14px
+
+.actions{
+  display:flex;
+  gap:10px;
+}
+
+.icon{
+  width:42px;
+  height:42px;
+  border:1px solid var(--line);
+  border-radius:50%;
+  background:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+}
+
+/* HERO */
+
+.hero{
+  max-width:1400px;
+  margin:auto;
+  padding:80px 28px 55px;
+}
+
+.hero-inner{
+  min-height:480px;
+  border-radius:28px;
+  background:#ebe7df;
+  display:flex;
+  align-items:center;
+  padding:70px;
+  overflow:hidden;
+}
+
+.hero-text{
+  max-width:620px;
+}
+
+.eyebrow{
+  font-size:12px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  margin-bottom:20px;
+}
+
+.hero h1{
+  font-family:Georgia,serif;
+  font-size:clamp(55px,7vw,100px);
+  line-height:.92;
+  font-weight:500;
+  margin-bottom:28px;
+}
+
+.hero p{
+  color:#555;
+  max-width:470px;
+  font-size:17px;
+  line-height:1.7;
+  margin-bottom:30px;
+}
+
+.shop-btn{
+  border:0;
+  background:#111;
+  color:#fff;
+  padding:16px 27px;
+  border-radius:30px;
+  font-size:14px;
+}
+
+/* SECTION */
+
+.section{
+  max-width:1400px;
+  margin:auto;
+  padding:45px 28px 80px;
+}
+
+.section-head{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  margin-bottom:30px;
+}
+
+.section-title{
+  font-family:Georgia,serif;
+  font-size:42px;
+  font-weight:500;
+}
+
+.section-sub{
+  color:#777;
+  margin-top:8px;
+}
+
+/* FILTERS */
+
+.filters{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:32px;
+}
+
+.filter{
+  border:1px solid #d9d6d0;
+  background:#fff;
+  padding:11px 18px;
+  border-radius:25px;
+  font-size:13px;
+}
+
+.filter.active{
+  background:#111;
+  color:#fff;
+  border-color:#111;
+}
+
+/* PRODUCTS */
+
+.products{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+}
+
+.product{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:18px;
+  overflow:hidden;
+  transition:.25s;
+}
+
+.product:hover{
+  transform:translateY(-4px);
+  box-shadow:0 15px 35px rgba(0,0,0,.07);
+}
+
+.product-image{
+  height:330px;
+  background:#f1efeb;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.product-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.no-image{
+  color:#999;
+  font-size:13px;
+}
+
+.heart{
+  position:absolute;
+  top:14px;
+  right:14px;
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  border:0;
+  background:rgba(255,255,255,.92);
+  font-size:19px;
+}
+
+.heart.active{
+  color:#111;
+}
+
+.product-info{
+  padding:19px;
+}
+
+.product-category{
+  color:#888;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:1.5px;
+  margin-bottom:8px;
+}
+
+.product-name{
+  font-size:17px;
+  font-weight:600;
+  margin-bottom:8px;
+}
+
+.product-description{
+  color:#777;
+  font-size:13px;
+  line-height:1.5;
+  min-height:39px;
+}
+
+.product-bottom{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-top:17px;
+}
+
+.price{
+  font-size:17px;
+  font-weight:700;
+}
+
+.add{
+  border:0;
+  background:#111;
+  color:white;
+  padding:10px 15px;
+  border-radius:20px;
+  font-size:12px;
+}
+
+/* LOADING */
+
+.loading{
+  grid-column:1/-1;
+  padding:80px 20px;
+  text-align:center;
+  color:#777;
+}
+
+/* BANNER */
+
+.banner{
+  max-width:1400px;
+  margin:0 auto 80px;
+  padding:0 28px;
+}
+
+.banner-inner{
+  background:#111;
+  color:#fff;
+  border-radius:25px;
+  padding:55px;
+  text-align:center;
+}
+
+.banner h2{
+  font-family:Georgia,serif;
+  font-size:42px;
+  font-weight:500;
+  margin-bottom:12px;
+}
+
+.banner p{
+  color:#bbb;
+}
+
+/* FOOTER */
+
+footer{
+  background:#111;
+  color:white;
+  padding:55px 28px;
+}
+
+.footer-inner{
+  max-width:1400px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  gap:30px;
+}
+
+.footer-logo{
+  font-size:24px;
+  letter-spacing:5px;
+  font-weight:800;
+}
+
+.footer-text{
+  color:#888;
+  max-width:400px;
+  line-height:1.6;
+  font-size:13px;
+}
+
+.copyright{
+  max-width:1400px;
+  margin:40px auto 0;
+  padding-top:20px;
+  border-top:1px solid #292929;
+  color:#777;
+  font-size:12px;
+}
+
+/* SEARCH */
+
+.search-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  z-index:2000;
+  display:none;
+  align-items:flex-start;
+  justify-content:center;
+  padding:80px 20px;
+}
+
+.search-overlay.show{
+  display:flex;
+}
+
+.search-box{
+  width:100%;
+  max-width:700px;
+  background:#fff;
+  border-radius:20px;
+  padding:25px;
+}
+
+.search-box input{
+  width:100%;
+  border:1px solid var(--line);
+  padding:17px;
+  border-radius:12px;
+  outline:none;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+  nav{
+    display:none;
+  }
+
+  .hero{
+    padding:25px 15px 35px;
+  }
+
+  .hero-inner{
+    min-height:520px;
+    padding:38px 25px;
+    align-items:flex-end;
+  }
+
+  .hero h1{
+    font-size:58px;
+  }
+
+  .section{
+    padding:35px 15px 60px;
+  }
+
+  .products{
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+  }
+
+  .product-image{
+    height:230px;
+  }
+
+  .product-info{
+    padding:14px;
+  }
+
+  .product-description{
+    font-size:12px;
+  }
+
+  .add{
+    padding:9px 11px;
+  }
+
+  .banner{
+    padding:0 15px;
+  }
+
+  .banner-inner{
+    padding:40px 20px;
+  }
+
+  .footer-inner{
+    flex-direction:column;
+  }
+}
+
+@media(max-width:500px){
+
+  .logo{
+    font-size:20px;
+    letter-spacing:4px;
+  }
+
+  .nav{
+    padding:0 15px;
+  }
+
+  .hero h1{
+    font-size:51px;
+  }
+
+  .hero p{
+    font-size:15px;
+  }
+
+  .section-title{
+    font-size:34px;
+  }
+
+  .product-image{
+    height:205px;
+  }
+
+  .product-name{
+    font-size:14px;
+  }
+
+  .price{
+    font-size:14px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="card">
+<!-- HEADER -->
 
-<div class="logo">CIRDRIO</div>
-<div class="sub">Supabase Connection Diagnostic</div>
+<header>
+  <div class="nav">
 
-<div id="connection" class="box wait">
-⏳ Checking Supabase connection...
+    <div class="logo">CIRDRIO</div>
+
+    <nav>
+      <a href="#shop">Shop</a>
+      <a href="#shop">Skincare</a>
+      <a href="#shop">Beauty</a>
+      <a href="#about">About</a>
+    </nav>
+
+    <div class="actions">
+      <button class="icon" onclick="openSearch()">⌕</button>
+      <button class="icon" onclick="showWishlist()">♡</button>
+      <button class="icon" onclick="showCart()">🛒</button>
+    </div>
+
+  </div>
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+  <div class="hero-inner">
+
+    <div class="hero-text">
+
+      <div class="eyebrow">
+        CIRDRIO BEAUTY
+      </div>
+
+      <h1>
+        Beauty,<br>
+        refined.
+      </h1>
+
+      <p>
+        Thoughtfully selected beauty and skincare
+        designed for modern routines.
+      </p>
+
+      <button class="shop-btn"
+              onclick="document.getElementById('shop').scrollIntoView()">
+        Explore Collection
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- SHOP -->
+
+<section class="section" id="shop">
+
+  <div class="section-head">
+
+    <div>
+      <div class="section-title">
+        The Collection
+      </div>
+
+      <div class="section-sub">
+        Discover your everyday essentials.
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="filters">
+
+    <button class="filter active"
+            onclick="filterProducts('All',this)">
+      All
+    </button>
+
+    <button class="filter"
+            onclick="filterProducts('Skincare',this)">
+      Skincare
+    </button>
+
+    <button class="filter"
+            onclick="filterProducts('Beauty',this)">
+      Beauty
+    </button>
+
+    <button class="filter"
+            onclick="filterProducts('Haircare',this)">
+      Haircare
+    </button>
+
+  </div>
+
+
+  <div id="products" class="products">
+
+    <div class="loading">
+      Loading CIRDRIO collection...
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- BANNER -->
+
+<section class="banner" id="about">
+
+  <div class="banner-inner">
+
+    <h2>
+      Your routine.<br>
+      Elevated.
+    </h2>
+
+    <p>
+      CIRDRIO — Build What’s Next.
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+  <div class="footer-inner">
+
+    <div>
+      <div class="footer-logo">CIRDRIO</div>
+    </div>
+
+    <div class="footer-text">
+      CIRDRIO is building intelligent products,
+      digital systems and ambitious technology
+      for the future.
+    </div>
+
+  </div>
+
+  <div class="copyright">
+    © 2026 CIRDRIO. All rights reserved.
+  </div>
+
+</footer>
+
+
+<!-- SEARCH -->
+
+<div id="searchOverlay" class="search-overlay"
+     onclick="closeSearch(event)">
+
+  <div class="search-box"
+       onclick="event.stopPropagation()">
+
+    <input
+      id="searchInput"
+      type="text"
+      placeholder="Search products..."
+      oninput="searchProducts(this.value)"
+    >
+
+  </div>
+
 </div>
 
-<div id="product" class="box wait">
-⏳ Checking product...
-</div>
-
-<div id="image" class="box wait">
-⏳ Checking image...
-</div>
-
-</div>
 
 <script>
+
+/* =========================
+   SUPABASE
+========================= */
 
 const SUPABASE_URL =
 "https://jbnatqugmajorwolsfin.supabase.co";
@@ -90,139 +707,359 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "sb_publishable_l7tBbN22fFYgPv5bmkEPtw_Di-XHpsY";
 
-const db = supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
+const db =
+supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
 );
 
 
-// SUPABASE + PRODUCTS TEST
-async function test(){
+/* =========================
+   DATA
+========================= */
 
-const connection =
-document.getElementById("connection");
-
-const productBox =
-document.getElementById("product");
-
-const imageBox =
-document.getElementById("image");
+let allProducts = [];
+let currentCategory = "All";
 
 
-// DIRECT PRODUCTS QUERY
-const {data,error} = await db
-.from("products")
-.select("name,description,price,category,image_url,stock")
-.limit(10);
+/* =========================
+   LOAD PRODUCTS
+========================= */
+
+async function loadProducts(){
+
+  const container =
+    document.getElementById("products");
+
+  container.innerHTML =
+    '<div class="loading">Loading CIRDRIO collection...</div>';
+
+  const { data, error } =
+    await db
+      .from("products")
+      .select(
+        '"Id","Name","Discription","Price","Cattogry","Image url","Stock","created_at"'
+      )
+      .order("created_at", {
+        ascending:false
+      });
 
 
-if(error){
+  if(error){
 
-connection.className="box err";
+    console.error(error);
 
-connection.innerHTML=
-"❌ SUPABASE ERROR<br><br>"+
-error.message;
+    container.innerHTML =
+      '<div class="loading">' +
+      'Unable to load products right now.' +
+      '</div>';
 
-productBox.className="box err";
+    return;
+  }
 
-productBox.innerHTML=
-"⏸ Product test stopped.";
 
-imageBox.className="box err";
+  allProducts = data || [];
 
-imageBox.innerHTML=
-"⏸ Image test stopped.";
-
-return;
+  renderProducts(allProducts);
 }
 
 
-// CONNECTION SUCCESS
-connection.className="box ok";
+/* =========================
+   RENDER
+========================= */
 
-connection.innerHTML=
-"✅ SUPABASE CONNECTED<br>"+
-"✅ PRODUCTS TABLE ACCESSIBLE";
+function renderProducts(products){
+
+  const container =
+    document.getElementById("products");
+
+  if(!products.length){
+
+    container.innerHTML =
+      '<div class="loading">' +
+      'No products found.' +
+      '</div>';
+
+    return;
+  }
 
 
-// NO PRODUCTS
-if(!data || data.length===0){
+  container.innerHTML = "";
 
-productBox.className="box err";
 
-productBox.innerHTML=
-"❌ PRODUCTS TABLE EMPTY<br><br>"+
-"No product found.";
+  products.forEach(product => {
 
-imageBox.className="box wait";
+    const card =
+      document.createElement("article");
 
-imageBox.innerHTML=
-"⏸ Image test stopped.";
+    card.className = "product";
 
-return;
+
+    const image =
+      product["Image url"];
+
+
+    card.innerHTML = `
+
+      <div class="product-image">
+
+        ${
+          image
+          ?
+          `<img
+             src="${escapeHTML(image)}"
+             alt="${escapeHTML(product["Name"] || "CIRDRIO product")}"
+             loading="lazy"
+           >`
+          :
+          `<div class="no-image">
+             CIRDRIO
+           </div>`
+        }
+
+        <button
+          class="heart"
+          onclick="toggleWishlist(this,'${escapeHTML(product["Name"] || "")}')"
+        >
+          ♡
+        </button>
+
+      </div>
+
+
+      <div class="product-info">
+
+        <div class="product-category">
+          ${escapeHTML(product["Cattogry"] || "Beauty")}
+        </div>
+
+        <div class="product-name">
+          ${escapeHTML(product["Name"] || "CIRDRIO Product")}
+        </div>
+
+        <div class="product-description">
+          ${escapeHTML(product["Discription"] || "")}
+        </div>
+
+        <div class="product-bottom">
+
+          <div class="price">
+            ₹${Number(product["Price"] || 0).toLocaleString("en-IN")}
+          </div>
+
+          <button
+            class="add"
+            onclick="addToCart('${escapeHTML(product["Name"] || "")}')"
+          >
+            Add to Bag
+          </button>
+
+        </div>
+
+      </div>
+    `;
+
+
+    container.appendChild(card);
+
+  });
 }
 
 
-// FIND GLOW SERUM
-const product =
-data.find(p =>
-p.name === "CIRDRIO Glow Serum"
-) || data[0];
+/* =========================
+   FILTER
+========================= */
+
+function filterProducts(category,button){
+
+  currentCategory = category;
+
+  document
+    .querySelectorAll(".filter")
+    .forEach(btn =>
+      btn.classList.remove("active")
+    );
+
+  button.classList.add("active");
 
 
-productBox.className="box ok";
+  if(category === "All"){
 
-productBox.innerHTML=
-"<strong>✅ PRODUCT FOUND</strong><br><br>"+
-"<b>Name:</b> "+(product.name||"—")+"<br>"+
-"<b>Price:</b> ₹"+(product.price||"—")+"<br>"+
-"<b>Category:</b> "+(product.category||"—")+"<br>"+
-"<b>Stock:</b> "+(product.stock??"—")+"<br>"+
-"<b>Image URL:</b><br>"+
-(product.image_url||"EMPTY");
+    renderProducts(allProducts);
+
+    return;
+  }
 
 
-// IMAGE TEST
-if(!product.image_url){
+  const filtered =
+    allProducts.filter(product =>
+      String(product["Cattogry"] || "")
+      .toLowerCase()
+      ===
+      category.toLowerCase()
+    );
 
-imageBox.className="box err";
 
-imageBox.innerHTML=
-"❌ IMAGE URL EMPTY";
-
-return;
+  renderProducts(filtered);
 }
 
-const img =
-document.createElement("img");
 
-img.src=product.image_url;
+/* =========================
+   SEARCH
+========================= */
 
-img.onload=function(){
+function searchProducts(value){
 
-imageBox.className="box ok";
+  const term =
+    value.toLowerCase().trim();
 
-imageBox.innerHTML=
-"✅ IMAGE LOADED SUCCESSFULLY";
 
-imageBox.appendChild(img);
+  let products =
+    allProducts.filter(product => {
 
-};
+      const name =
+        String(product["Name"] || "")
+        .toLowerCase();
 
-img.onerror=function(){
+      const description =
+        String(product["Discription"] || "")
+        .toLowerCase();
 
-imageBox.className="box err";
+      const category =
+        String(product["Cattogry"] || "")
+        .toLowerCase();
 
-imageBox.innerHTML=
-"❌ IMAGE FAILED TO LOAD<br><br>"+
-product.image_url;
 
-};
+      return (
+        name.includes(term) ||
+        description.includes(term) ||
+        category.includes(term)
+      );
+
+    });
+
+
+  if(currentCategory !== "All"){
+
+    products =
+      products.filter(product =>
+        String(product["Cattogry"] || "")
+        .toLowerCase()
+        ===
+        currentCategory.toLowerCase()
+      );
+
+  }
+
+
+  renderProducts(products);
+}
+
+
+/* =========================
+   SEARCH UI
+========================= */
+
+function openSearch(){
+
+  document
+    .getElementById("searchOverlay")
+    .classList.add("show");
+
+  setTimeout(() => {
+
+    document
+      .getElementById("searchInput")
+      .focus();
+
+  },100);
 
 }
 
-test();
+
+function closeSearch(event){
+
+  if(
+    event &&
+    event.target.id !== "searchOverlay"
+  ) return;
+
+  document
+    .getElementById("searchOverlay")
+    .classList.remove("show");
+
+}
+
+
+/* =========================
+   WISHLIST
+========================= */
+
+function toggleWishlist(button,name){
+
+  button.classList.toggle("active");
+
+  button.textContent =
+    button.classList.contains("active")
+    ? "♥"
+    : "♡";
+
+}
+
+
+/* =========================
+   CART
+========================= */
+
+function addToCart(name){
+
+  alert(
+    name +
+    " added to your bag."
+  );
+
+}
+
+
+function showCart(){
+
+  alert(
+    "Your CIRDRIO bag is currently empty."
+  );
+
+}
+
+
+function showWishlist(){
+
+  alert(
+    "Your wishlist is currently empty."
+  );
+
+}
+
+
+/* =========================
+   SECURITY / TEXT
+========================= */
+
+function escapeHTML(value){
+
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+loadProducts();
 
 </script>
 
