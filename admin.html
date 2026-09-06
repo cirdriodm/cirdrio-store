@@ -1,657 +1,357 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
-<title>CIRDRIO — Admin Control</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CIRDRIO — Admin</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-
-/* ================================
-   CIRDRIO ADMIN — CORE
-================================ */
-
 *{
+  box-sizing:border-box;
   margin:0;
   padding:0;
-  box-sizing:border-box;
-}
-
-:root{
-  --black:#111111;
-  --white:#ffffff;
-  --cream:#f7f7f4;
-  --soft:#f1f1ed;
-  --line:#e3e3de;
-  --muted:#777;
-  --light:#999;
-  --gold:#b48a52;
-  --green:#16833d;
-  --orange:#b56d00;
-  --red:#c62828;
-}
-
-html{
-  scroll-behavior:smooth;
 }
 
 body{
-  min-height:100vh;
-  background:var(--cream);
-  color:var(--black);
-  font-family:
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Arial,
-    sans-serif;
-  -webkit-font-smoothing:antialiased;
+  font-family:Inter,Arial,sans-serif;
+  background:#f7f7f4;
+  color:#111;
 }
 
+button,input,textarea,select{
+  font:inherit;
+}
 
-/* ================================
-   HEADER
-================================ */
+button{
+  cursor:pointer;
+}
+
+.hidden{
+  display:none!important;
+}
 
 .header{
-  height:74px;
-  padding:0 5%;
   background:#111;
   color:#fff;
-
+  padding:22px 5%;
   display:flex;
-  align-items:center;
   justify-content:space-between;
-
-  border-bottom:1px solid #292929;
+  align-items:center;
 }
 
 .brand{
-  display:flex;
-  align-items:center;
-  gap:14px;
-}
-
-.brand-name{
-  font-size:21px;
+  font-size:22px;
   font-weight:800;
-  letter-spacing:5px;
+  letter-spacing:4px;
 }
 
-.brand-divider{
-  width:1px;
-  height:25px;
-  background:#444;
+.admin-label{
+  font-size:11px;
+  letter-spacing:2px;
+  opacity:.65;
 }
 
-.brand-section{
-  font-size:9px;
-  letter-spacing:2.5px;
-  color:#aaa;
-  text-transform:uppercase;
+.container{
+  width:min(1400px,90%);
+  margin:45px auto 80px;
 }
 
-.header-right{
+.top{
   display:flex;
-  align-items:center;
-  gap:14px;
-}
-
-.admin-status{
-  display:flex;
-  align-items:center;
-  gap:7px;
-
-  padding:8px 12px;
-
-  border:1px solid #333;
-  border-radius:30px;
-
-  color:#bbb;
-  font-size:9px;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
-}
-
-.status-dot{
-  width:6px;
-  height:6px;
-  border-radius:50%;
-  background:#52c878;
-}
-
-.logout-btn{
-  border:1px solid #444;
-  background:transparent;
-  color:#fff;
-
-  padding:9px 15px;
-  border-radius:7px;
-
-  font-size:10px;
-  font-weight:700;
-  letter-spacing:1px;
-
-  cursor:pointer;
-  transition:.2s;
-}
-
-.logout-btn:hover{
-  background:#fff;
-  color:#111;
-}
-
-
-/* ================================
-   MAIN
-================================ */
-
-.admin-container{
-  width:min(1250px,90%);
-  margin:0 auto;
-  padding:48px 0 70px;
-}
-
-.page-heading{
-  display:flex;
-  align-items:flex-end;
   justify-content:space-between;
-  gap:25px;
-
-  margin-bottom:32px;
+  align-items:end;
+  gap:20px;
+  margin-bottom:35px;
 }
 
-.heading-eyebrow{
-  margin-bottom:9px;
-
-  color:#999;
-
-  font-size:9px;
-  font-weight:600;
+.eyebrow{
+  font-size:11px;
   letter-spacing:3px;
-  text-transform:uppercase;
+  color:#999;
+  margin-bottom:12px;
 }
 
-.page-heading h1{
-  font-size:40px;
-  line-height:1;
-  font-weight:750;
-  letter-spacing:-2px;
+h1{
+  font-size:clamp(38px,6vw,70px);
+  line-height:.95;
+  letter-spacing:-3px;
 }
 
-.page-description{
-  margin-top:11px;
-
+.subtitle{
+  margin-top:15px;
   color:#777;
-
-  font-size:13px;
-  line-height:1.5;
 }
 
-.add-product-btn{
-  flex-shrink:0;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:9px;
-
-  min-width:165px;
-  height:47px;
-
-  border:0;
-  border-radius:8px;
-
+.primary{
   background:#111;
   color:#fff;
-
-  font-size:10px;
+  border:0;
+  border-radius:12px;
+  padding:16px 25px;
   font-weight:700;
-  letter-spacing:1.3px;
-
-  cursor:pointer;
-  transition:
-    transform .2s,
-    background .2s;
+  letter-spacing:1.5px;
 }
 
-.add-product-btn:hover{
-  background:#292929;
-  transform:translateY(-1px);
+.primary:hover{
+  opacity:.85;
 }
-
-.plus{
-  font-size:18px;
-  line-height:1;
-  font-weight:300;
-}
-
-
-/* ================================
-   STAT CARDS
-================================ */
 
 .stats{
   display:grid;
-  grid-template-columns:
-    repeat(3,minmax(0,1fr));
-
-  gap:15px;
-
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
   margin-bottom:25px;
 }
 
-.stat-card{
-  position:relative;
-
-  min-height:132px;
-
-  padding:23px;
-
+.stat{
   background:#fff;
-
-  border:1px solid var(--line);
-  border-radius:13px;
-
-  overflow:hidden;
-}
-
-.stat-card::after{
-  content:"";
-
-  position:absolute;
-  right:-28px;
-  bottom:-28px;
-
-  width:90px;
-  height:90px;
-
-  border:1px solid #eee;
-  border-radius:50%;
+  border:1px solid #e2e2df;
+  border-radius:22px;
+  padding:30px;
+  min-height:150px;
 }
 
 .stat-label{
+  font-size:11px;
+  letter-spacing:3px;
   color:#999;
-
-  font-size:9px;
-  font-weight:650;
-  letter-spacing:1.8px;
-  text-transform:uppercase;
+  font-weight:700;
 }
 
 .stat-value{
-  display:block;
-
-  margin-top:11px;
-
-  font-size:31px;
-  line-height:1;
-  font-weight:750;
-  letter-spacing:-1px;
+  font-size:52px;
+  margin-top:18px;
+  letter-spacing:-2px;
 }
 
-
-/* ================================
-   CATALOG PANEL
-================================ */
-
-.catalog-panel{
+.catalog{
   background:#fff;
-
-  border:1px solid var(--line);
-  border-radius:13px;
-
+  border:1px solid #e2e2df;
+  border-radius:22px;
   overflow:hidden;
 }
 
-.catalog-toolbar{
-  padding:15px;
-
-  border-bottom:1px solid var(--line);
+.catalog-head{
+  padding:22px;
+  border-bottom:1px solid #eee;
 }
 
-.search-wrapper{
-  position:relative;
-}
-
-.search-icon{
-  position:absolute;
-  left:14px;
-  top:50%;
-
-  width:15px;
-  height:15px;
-
-  transform:translateY(-50%);
-
-  color:#999;
-  pointer-events:none;
-}
-
-.search-input{
+.search{
   width:100%;
-  height:45px;
-
-  padding:0 15px 0 42px;
-
   border:1px solid #ddd;
-  border-radius:8px;
-
+  border-radius:14px;
+  padding:16px 18px;
   outline:none;
-
-  background:#fff;
-  color:#111;
-
-  font-family:inherit;
-  font-size:13px;
-
-  transition:border .2s;
+  background:#fafafa;
 }
 
-.search-input::placeholder{
-  color:#aaa;
-}
-
-.search-input:focus{
+.search:focus{
   border-color:#111;
+  background:#fff;
 }
 
-
-/* ================================
-   TABLE
-================================ */
-
-.table-container{
-  width:100%;
+.table-wrap{
   overflow-x:auto;
 }
 
-.product-table{
+table{
   width:100%;
-  min-width:850px;
-
   border-collapse:collapse;
+  min-width:760px;
 }
 
-.product-table th{
-  padding:14px 16px;
-
-  background:#fafaf8;
-
-  color:#999;
-
-  border-bottom:1px solid #eee;
-
+th{
   text-align:left;
-
-  font-size:8px;
-  font-weight:700;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
+  padding:18px 22px;
+  font-size:10px;
+  letter-spacing:2px;
+  color:#999;
+  border-bottom:1px solid #eee;
 }
 
-.product-table td{
-  padding:15px 16px;
-
-  border-bottom:1px solid #f0f0ed;
-
-  font-size:12px;
+td{
+  padding:20px 22px;
+  border-bottom:1px solid #eee;
   vertical-align:middle;
 }
 
-.product-table tbody tr{
-  transition:background .15s;
-}
-
-.product-table tbody tr:hover{
-  background:#fcfcfa;
-}
-
-.product-table tbody tr:last-child td{
-  border-bottom:0;
-}
-
-
-/* PRODUCT */
-
-.product-info{
+.product-cell{
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:15px;
 }
 
-.product-image{
-  width:55px;
-  height:55px;
-
-  flex-shrink:0;
-
+.product-img{
+  width:58px;
+  height:58px;
+  border-radius:12px;
+  background:#f1f1ef;
   object-fit:cover;
-
-  border-radius:8px;
-
-  background:#f1f0ec;
-
   border:1px solid #eee;
 }
 
-.product-details{
-  min-width:0;
-}
-
-.product-title{
-  max-width:280px;
-
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-
-  color:#111;
-
-  font-size:12px;
+.product-name{
   font-weight:700;
 }
 
 .product-category{
-  margin-top:4px;
-
   color:#999;
-
-  font-size:9px;
-  letter-spacing:.3px;
-}
-
-
-/* STOCK */
-
-.stock-number{
-  font-weight:700;
-}
-
-.stock-good{
-  color:var(--green);
-}
-
-.stock-low{
-  color:var(--orange);
-}
-
-.stock-out{
-  color:var(--red);
-}
-
-
-/* ACTIONS */
-
-.action-group{
-  display:flex;
-  align-items:center;
-  gap:7px;
-}
-
-.action-btn{
-  height:32px;
-
-  padding:0 11px;
-
-  border:1px solid #ddd;
-  border-radius:7px;
-
-  background:#fff;
-
-  color:#333;
-
-  font-family:inherit;
-
-  font-size:9px;
-  font-weight:700;
-  letter-spacing:.5px;
-
-  cursor:pointer;
-
-  transition:
-    background .15s,
-    border .15s;
-}
-
-.action-btn:hover{
-  background:#f5f5f2;
-  border-color:#ccc;
-}
-
-.action-delete{
-  color:var(--red);
-}
-
-.action-delete:hover{
-  background:#fff5f5;
-  border-color:#efcaca;
-}
-
-
-/* ================================
-   LOADING / EMPTY
-================================ */
-
-.loading-state,
-.empty-state{
-  padding:60px 20px;
-
-  text-align:center;
-
-  color:#999;
-
   font-size:12px;
+  margin-top:5px;
 }
 
-.loading-spinner{
-  width:22px;
-  height:22px;
+.price{
+  font-weight:700;
+}
 
-  margin:0 auto 13px;
+.stock{
+  font-weight:700;
+}
 
-  border:2px solid #e5e5e0;
+.low{
+  color:#c33;
+}
+
+.actions{
+  display:flex;
+  gap:8px;
+}
+
+.action{
+  border:1px solid #ddd;
+  background:#fff;
+  border-radius:9px;
+  padding:9px 13px;
+  font-size:11px;
+  font-weight:700;
+}
+
+.action:hover{
+  background:#111;
+  color:#fff;
+}
+
+.delete-btn:hover{
+  background:#b00020;
+  color:#fff;
+}
+.mobile-products{
+  display:none;
+}
+
+.mobile-card{
+  padding:18px;
+  border-bottom:1px solid #eee;
+}
+
+.mobile-product-top{
+  display:flex;
+  gap:14px;
+  align-items:center;
+}
+
+.mobile-img{
+  width:72px;
+  height:72px;
+  border-radius:14px;
+  object-fit:cover;
+  background:#f1f1ef;
+  border:1px solid #eee;
+  flex-shrink:0;
+}
+
+.mobile-name{
+  font-size:17px;
+  font-weight:800;
+}
+
+.mobile-category{
+  color:#999;
+  font-size:12px;
+  margin-top:5px;
+}
+
+.mobile-info{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:17px;
+}
+
+.info-box{
+  background:#f7f7f4;
+  border-radius:12px;
+  padding:12px;
+}
+
+.info-label{
+  font-size:9px;
+  letter-spacing:2px;
+  color:#999;
+}
+
+.info-value{
+  margin-top:5px;
+  font-weight:800;
+}
+
+.mobile-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+  margin-top:14px;
+}
+
+.mobile-actions button{
+  padding:13px;
+  border-radius:10px;
+  border:1px solid #ddd;
+  background:#fff;
+  font-weight:700;
+}
+
+.mobile-actions .edit{
+  background:#111;
+  color:#fff;
+  border-color:#111;
+}
+
+.mobile-actions .delete{
+  color:#b00020;
+}
+
+.state{
+  padding:50px 20px;
+  text-align:center;
+  color:#999;
+}
+
+.spinner{
+  width:25px;
+  height:25px;
+  border:3px solid #ddd;
   border-top-color:#111;
-
   border-radius:50%;
-
-  animation:spin .8s linear infinite;
+  animation:spin .7s linear infinite;
+  margin:0 auto 15px;
 }
 
 @keyframes spin{
-  to{
-    transform:rotate(360deg);
-  }
+  to{transform:rotate(360deg)}
 }
-
-
-/* ================================
-   ACCESS DENIED
-================================ */
-
-#accessDenied{
-  min-height:calc(100vh - 74px);
-
-  display:none;
-
-  align-items:center;
-  justify-content:center;
-
-  padding:25px;
-}
-
-.denied-card{
-  width:min(430px,100%);
-
-  padding:42px 30px;
-
-  background:#fff;
-
-  border:1px solid var(--line);
-  border-radius:15px;
-
-  text-align:center;
-}
-
-.denied-icon{
-  width:48px;
-  height:48px;
-
-  margin:0 auto 18px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  border-radius:50%;
-
-  background:#f3f3f0;
-
-  font-size:20px;
-}
-
-.denied-card h2{
-  font-size:26px;
-  letter-spacing:-1px;
-}
-
-.denied-card p{
-  margin:10px 0 22px;
-
-  color:#777;
-
-  font-size:12px;
-  line-height:1.6;
-}
-
-
-/* ================================
-   OVERLAYS
-================================ */
 
 .overlay{
   position:fixed;
   inset:0;
-
-  z-index:5000;
-
+  background:rgba(0,0,0,.55);
+  backdrop-filter:blur(8px);
   display:none;
-
   align-items:center;
   justify-content:center;
-
   padding:20px;
-
-  background:rgba(0,0,0,.58);
-
-  backdrop-filter:blur(3px);
+  z-index:1000;
 }
 
 .overlay.show{
@@ -659,73 +359,65 @@ body{
 }
 
 .modal{
-  position:relative;
-
-  width:min(650px,100%);
-  max-height:91vh;
-
+  width:min(600px,100%);
+  max-height:90vh;
   overflow:auto;
-
-  padding:30px;
-
   background:#fff;
-
-  border-radius:15px;
-
-  box-shadow:
-    0 25px 80px rgba(0,0,0,.18);
+  border-radius:22px;
+  padding:28px;
 }
 
-.close-btn{
-  position:absolute;
-
-  top:17px;
-  right:17px;
-
-  width:32px;
-  height:32px;
-
+.modal-head{
   display:flex;
+  justify-content:space-between;
   align-items:center;
-  justify-content:center;
+  margin-bottom:25px;
+}
 
+.modal-title{
+  font-size:27px;
+  font-weight:800;
+}
+
+.close{
+  width:40px;
+  height:40px;
   border:0;
   border-radius:50%;
-
-  background:#f0f0ed;
-
-  color:#333;
-
-  font-size:19px;
-  line-height:1;
-
-  cursor:pointer;
+  background:#f2f2f0;
+  font-size:20px;
 }
 
-.modal-heading{
-  padding-right:40px;
+.form-group{
+  margin-bottom:17px;
 }
 
-.modal-heading h2{
-  font-size:26px;
-  letter-spacing:-1px;
-}
-
-.modal-heading p{
-  margin-top:6px;
-
+label{
+  display:block;
+  font-size:10px;
+  letter-spacing:2px;
   color:#888;
-
-  font-size:12px;
+  font-weight:700;
+  margin-bottom:8px;
 }
 
+input,textarea,select{
+  width:100%;
+  border:1px solid #ddd;
+  border-radius:11px;
+  padding:13px 14px;
+  outline:none;
+  background:#fafafa;
+}
 
-/* ================================
-   FORM
-================================ */
+input:focus,textarea:focus,select:focus{
+  border-color:#111;
+  background:#fff;
+}
 
-.product-form{
-  margin-top:25px;
+textarea{
+  min-height:110px;
+  resize:vertical;
 }
 
 .form-grid{
@@ -734,751 +426,279 @@ body{
   gap:15px;
 }
 
-.form-field{
-  min-width:0;
-}
-
-.form-full{
-  grid-column:1/-1;
-}
-
-.form-field label{
-  display:block;
-
-  margin-bottom:7px;
-
-  color:#555;
-
-  font-size:9px;
-  font-weight:700;
-  letter-spacing:1.2px;
-  text-transform:uppercase;
-}
-
-.form-field input,
-.form-field textarea{
+.preview{
   width:100%;
-
-  border:1px solid #ddd;
-  border-radius:8px;
-
-  padding:12px;
-
-  outline:none;
-
-  background:#fff;
-
-  color:#111;
-
-  font-family:inherit;
-  font-size:13px;
-
-  transition:border .2s;
+  height:180px;
+  border-radius:14px;
+  object-fit:cover;
+  background:#f2f2f0;
+  border:1px solid #eee;
+  margin-top:10px;
+  display:none;
 }
-
-.form-field input{
-  height:44px;
-}
-
-.form-field textarea{
-  min-height:125px;
-  resize:vertical;
-  line-height:1.5;
-}
-
-.form-field input:focus,
-.form-field textarea:focus{
-  border-color:#111;
-}
-
-
-/* IMAGE PREVIEW */
-
-.preview-box{
-  width:100%;
-  height:190px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  overflow:hidden;
-
-  margin-top:5px;
-
-  border-radius:9px;
-
-  background:#f5f4f0;
-
-  color:#aaa;
-
-  font-size:11px;
-}
-
-.preview-box img{
-  width:100%;
-  height:100%;
-
-  object-fit:contain;
-}
-
-
-/* MODAL ACTIONS */
 
 .modal-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:25px;
+}
+
+.secondary{
+  background:#f1f1ef;
+  border:0;
+  border-radius:11px;
+  padding:14px;
+  font-weight:700;
+}
+
+.danger{
+  background:#b00020;
+  color:#fff;
+  border:0;
+  border-radius:11px;
+  padding:14px;
+  font-weight:700;
+}
+
+.access{
+  min-height:100vh;
   display:flex;
-  justify-content:flex-end;
-  gap:9px;
-
-  margin-top:23px;
+  justify-content:center;
+  align-items:center;
+  padding:30px;
 }
 
-.cancel-btn{
-  height:43px;
-
-  padding:0 18px;
-
-  border:1px solid #ddd;
-  border-radius:8px;
-
+.access-box{
+  text-align:center;
   background:#fff;
-
-  color:#333;
-
-  font-family:inherit;
-
-  font-size:10px;
-  font-weight:700;
-
-  cursor:pointer;
+  border:1px solid #ddd;
+  border-radius:22px;
+  padding:45px;
+  max-width:430px;
 }
 
-.save-btn{
-  height:43px;
-
-  padding:0 21px;
-
-  border:0;
-  border-radius:8px;
-
-  background:#111;
-
-  color:#fff;
-
-  font-family:inherit;
-
-  font-size:10px;
-  font-weight:700;
-  letter-spacing:.7px;
-
-  cursor:pointer;
+.access-box h2{
+  margin-bottom:12px;
 }
 
-.save-btn:disabled,
-.confirm-delete:disabled{
-  opacity:.55;
-  cursor:not-allowed;
-}
-
-
-/* DELETE MODAL */
-
-.delete-modal{
-  width:min(430px,100%);
-}
-
-.delete-message{
-  margin-top:14px;
-
+.access-box p{
   color:#777;
-
-  font-size:12px;
-  line-height:1.7;
 }
 
-.confirm-delete{
-  height:43px;
-
-  padding:0 19px;
-
-  border:0;
-  border-radius:8px;
-
-  background:#c62828;
-
-  color:#fff;
-
-  font-family:inherit;
-
-  font-size:10px;
-  font-weight:700;
-
-  cursor:pointer;
-}
-
-
-/* ================================
-   RESPONSIVE
-================================ */
-
-@media(max-width:800px){
+@media(max-width:700px){
 
   .header{
-    padding:0 20px;
+    padding:18px 20px;
   }
 
-  .brand-divider,
-  .brand-section,
-  .admin-status{
-    display:none;
+  .container{
+    width:calc(100% - 32px);
+    margin:30px auto 60px;
   }
 
-  .admin-container{
-    width:calc(100% - 30px);
-    padding-top:32px;
+  .top{
+    display:block;
+    margin-bottom:25px;
   }
 
-  .page-heading{
-    align-items:stretch;
-    flex-direction:column;
+  h1{
+    font-size:43px;
   }
 
-  .page-heading h1{
-    font-size:34px;
-  }
-
-  .add-product-btn{
+  .primary{
     width:100%;
+    margin-top:25px;
   }
 
   .stats{
     grid-template-columns:1fr;
+    gap:12px;
+  }
+
+  .stat{
+    min-height:125px;
+    padding:24px;
+  }
+
+  .stat-value{
+    font-size:45px;
+  }
+
+  .table-wrap{
+    display:none;
+  }
+
+  .mobile-products{
+    display:block;
+  }
+
+  .catalog{
+    border-radius:18px;
+  }
+
+  .catalog-head{
+    padding:16px;
+  }
+
+  .modal{
+    padding:22px;
+    border-radius:18px;
   }
 
   .form-grid{
     grid-template-columns:1fr;
+    gap:0;
   }
-
-  .form-full{
-    grid-column:auto;
-  }
-
-  .modal{
-    padding:25px 20px;
-  }
-
 }
-
-
-@media(max-width:500px){
-
-  .brand-name{
-    font-size:18px;
-    letter-spacing:4px;
-  }
-
-  .page-heading h1{
-    font-size:30px;
-  }
-
-  .stat-card{
-    min-height:120px;
-  }
-
-  .modal-actions{
-    flex-direction:column-reverse;
-  }
-
-  .cancel-btn,
-  .save-btn,
-  .confirm-delete{
-    width:100%;
-  }
-
-}
-
 </style>
-
 </head>
 
 <body>
 
+<div id="accessDenied" class="access hidden">
+  <div class="access-box">
+    <h2>Access Restricted</h2>
+    <p>Your CIRDRIO account does not have administrator access.</p>
+  </div>
+</div>
 
-<!-- HEADER -->
+<div id="adminApp" class="hidden">
 
 <header class="header">
-
-  <div class="brand">
-
-    <div class="brand-name">
-      CIRDRIO
-    </div>
-
-    <div class="brand-divider"></div>
-
-    <div class="brand-section">
-      Admin Control
-    </div>
-
-  </div>
-
-
-  <div class="header-right">
-
-    <div class="admin-status">
-
-      <span class="status-dot"></span>
-
-      Authorized Admin
-
-    </div>
-
-
-    <button
-      class="logout-btn"
-      id="logoutBtn"
-      type="button"
-    >
-      LOGOUT
-    </button>
-
-  </div>
-
+  <div class="brand">CIRDRIO</div>
+  <div class="admin-label">ADMIN CONSOLE</div>
 </header>
 
-
-<!-- ADMIN APPLICATION -->
-
-<div id="adminApp">
-
-  <main class="admin-container">
-
-
-    <!-- PAGE HEADING -->
-
-    <section class="page-heading">
-
-      <div>
-
-        <div class="heading-eyebrow">
-          CIRDRIO / CONTROL CENTER
-        </div>
-
-        <h1>
-          Product Management
-        </h1>
-
-        <p class="page-description">
-          Manage your live product catalogue.
-        </p>
-
-      </div>
-
-
-      <button
-        class="add-product-btn"
-        id="addProductBtn"
-        type="button"
-      >
-
-        <span class="plus">+</span>
-
-        ADD PRODUCT
-
-      </button>
-
-    </section>
-
-
-    <!-- STATISTICS -->
-
-    <section class="stats">
-
-
-      <div class="stat-card">
-
-        <div class="stat-label">
-          Total Products
-        </div>
-
-        <strong
-          class="stat-value"
-          id="totalProducts"
-        >
-          0
-        </strong>
-
-      </div>
-
-
-      <div class="stat-card">
-
-        <div class="stat-label">
-          Total Stock
-        </div>
-
-        <strong
-          class="stat-value"
-          id="totalStock"
-        >
-          0
-        </strong>
-
-      </div>
-
-
-      <div class="stat-card">
-
-        <div class="stat-label">
-          Low Stock
-        </div>
-
-        <strong
-          class="stat-value"
-          id="lowStock"
-        >
-          0
-        </strong>
-
-      </div>
-
-
-    </section>
-
-
-    <!-- CATALOG -->
-
-    <section class="catalog-panel">
-
-
-      <div class="catalog-toolbar">
-
-        <div class="search-wrapper">
-
-          <svg
-            class="search-icon"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <circle
-              cx="11"
-              cy="11"
-              r="7"
-            ></circle>
-
-            <path
-              d="m20 20-4-4"
-            ></path>
-
-          </svg>
-
-
-          <input
-            class="search-input"
-            id="searchInput"
-            type="search"
-            placeholder="Search products by name or category..."
-            autocomplete="off"
-          >
-
-        </div>
-
-      </div>
-
-
-      <div class="table-container">
-
-
-        <!-- LOADING -->
-
-        <div
-          class="loading-state"
-          id="loadingState"
-        >
-
-          <div class="loading-spinner"></div>
-
-          Loading CIRDRIO catalogue...
-
-        </div>
-
-
-        <!-- TABLE -->
-
-        <table
-          class="product-table"
-          id="productTable"
-          style="display:none"
-        >
-
-          <thead>
-
-            <tr>
-
-              <th>
-                Product
-              </th>
-
-              <th>
-                Price
-              </th>
-
-              <th>
-                Stock
-              </th>
-
-              <th>
-                Created
-              </th>
-
-              <th>
-                Actions
-              </th>
-
-            </tr>
-
-          </thead>
-
-
-          <tbody
-            id="productsBody"
-          ></tbody>
-
-        </table>
-
-
-        <!-- EMPTY -->
-
-        <div
-          class="empty-state"
-          id="emptyState"
-          style="display:none"
-        >
-          No products found.
-        </div>
-
-
-      </div>
-
-    </section>
-
-
-  </main>
-
-</div>
-
-
-<!-- ACCESS DENIED -->
-
-<div id="accessDenied">
-
-  <div class="denied-card">
-
-    <div class="denied-icon">
-      ×
-    </div>
-
-    <h2>
-      Access Denied
-    </h2>
-
-    <p>
-      This area is restricted to authorized CIRDRIO administrators.
-    </p>
-
-    <button
-      class="add-product-btn"
-      type="button"
-      onclick="window.location.href='index.html'"
-    >
-      BACK TO STORE
-    </button>
-
+<main class="container">
+
+<section class="top">
+  <div>
+    <div class="eyebrow">CIRDRIO / COMMERCE</div>
+    <h1>Product<br>Management</h1>
+    <p class="subtitle">Manage your live product catalogue.</p>
   </div>
 
+  <button id="addProductBtn" class="primary">
+    ＋ &nbsp; ADD PRODUCT
+  </button>
+</section>
+
+<section class="stats">
+
+  <div class="stat">
+    <div class="stat-label">TOTAL PRODUCTS</div>
+    <div id="totalProducts" class="stat-value">0</div>
+  </div>
+
+  <div class="stat">
+    <div class="stat-label">TOTAL STOCK</div>
+    <div id="totalStock" class="stat-value">0</div>
+  </div>
+
+  <div class="stat">
+    <div class="stat-label">LOW STOCK</div>
+    <div id="lowStock" class="stat-value">0</div>
+  </div>
+
+</section>
+
+<section class="catalog">
+
+  <div class="catalog-head">
+    <input
+      id="searchInput"
+      class="search"
+      type="search"
+      placeholder="Search products by name or category..."
+    >
+  </div>
+
+  <div id="loadingState" class="state">
+    <div class="spinner"></div>
+    Loading products...
+  </div>
+
+  <div id="tableWrap" class="table-wrap hidden">
+    <table>
+      <thead>
+        <tr>
+          <th>PRODUCT</th>
+          <th>PRICE</th>
+          <th>STOCK</th>
+          <th>ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody id="productsBody"></tbody>
+    </table>
+  </div>
+
+  <div id="mobileProducts" class="mobile-products"></div>
+
+  <div id="emptyState" class="state hidden">
+    No products found.
+  </div>
+
+</section>
+
+</main>
 </div>
 
-
-<!-- ADD / EDIT PRODUCT MODAL -->
-
-<div
-  class="overlay"
-  id="productOverlay"
->
+<div id="productOverlay" class="overlay">
 
   <div class="modal">
 
-
-    <button
-      class="close-btn"
-      id="closeProductModal"
-      type="button"
-      aria-label="Close"
-    >
-      ×
-    </button>
-
-
-    <div class="modal-heading">
-
-      <h2 id="modalTitle">
-        Add Product
-      </h2>
-
-      <p>
-        Add or update product information.
-      </p>
-
+    <div class="modal-head">
+      <div id="modalTitle" class="modal-title">Add Product</div>
+      <button id="closeProductModal" class="close">×</button>
     </div>
 
+    <form id="productForm">
 
-    <form
-      class="product-form"
-      id="productForm"
-    >
+      <input id="productId" type="hidden">
 
-      <input
-        type="hidden"
-        id="productId"
-      >
-
+      <div class="form-group">
+        <label>PRODUCT NAME</label>
+        <input id="productName" type="text" required>
+      </div>
 
       <div class="form-grid">
 
-
-        <div class="form-field form-full">
-
-          <label>
-            Product Name
-          </label>
-
-          <input
-            id="productName"
-            type="text"
-            placeholder="CIRDRIO Glow Serum"
-            required
-          >
-
+        <div class="form-group">
+          <label>PRICE (₹)</label>
+          <input id="productPrice" type="number" min="0" required>
         </div>
 
-
-        <div class="form-field">
-
-          <label>
-            Price (₹)
-          </label>
-
-          <input
-            id="productPrice"
-            type="number"
-            min="0"
-            step="0.01"
-            placeholder="499"
-            required
-          >
-
+        <div class="form-group">
+          <label>STOCK</label>
+          <input id="productStock" type="number" min="0" required>
         </div>
-
-
-        <div class="form-field">
-
-          <label>
-            Stock
-          </label>
-
-          <input
-            id="productStock"
-            type="number"
-            min="0"
-            step="1"
-            placeholder="50"
-            required
-          >
-
-        </div>
-
-
-        <div class="form-field">
-
-          <label>
-            Category
-          </label>
-
-          <input
-            id="productCategory"
-            type="text"
-            placeholder="Skincare"
-          >
-
-        </div>
-
-
-        <div class="form-field">
-
-          <label>
-            Image URL
-          </label>
-
-          <input
-            id="productImage"
-            type="url"
-            placeholder="https://..."
-          >
-
-        </div>
-
-
-        <div class="form-field form-full">
-
-          <label>
-            Description
-          </label>
-
-          <textarea
-            id="productDescription"
-            placeholder="Write a clear product description..."
-          ></textarea>
-
-        </div>
-
-
-        <div class="form-field form-full">
-
-          <label>
-            Image Preview
-          </label>
-
-          <div
-            class="preview-box"
-            id="imagePreview"
-          >
-            Image preview
-          </div>
-
-        </div>
-
 
       </div>
 
+      <div class="form-group">
+        <label>CATEGORY</label>
+        <input id="productCategory" type="text" placeholder="Skincare" required>
+      </div>
+
+      <div class="form-group">
+        <label>IMAGE URL</label>
+        <input id="productImage" type="url" placeholder="https://...">
+        <img id="imagePreview" class="preview" alt="Preview">
+      </div>
+
+      <div class="form-group">
+        <label>DESCRIPTION</label>
+        <textarea id="productDescription"></textarea>
+      </div>
 
       <div class="modal-actions">
 
-        <button
-          class="cancel-btn"
-          id="cancelProduct"
-          type="button"
-        >
+        <button type="button" id="cancelProduct" class="secondary">
           CANCEL
         </button>
 
-
-        <button
-          class="save-btn"
-          id="saveProduct"
-          type="submit"
-        >
+        <button type="submit" id="saveProduct" class="primary">
           SAVE PRODUCT
         </button>
 
@@ -1487,68 +707,33 @@ body{
     </form>
 
   </div>
-
 </div>
+<div id="deleteOverlay" class="overlay">
 
+  <div class="modal" style="max-width:430px">
 
-<!-- DELETE CONFIRMATION -->
-
-<div
-  class="overlay"
-  id="deleteOverlay"
->
-
-  <div class="modal delete-modal">
-
-
-    <button
-      class="close-btn"
-      id="closeDeleteModal"
-      type="button"
-      aria-label="Close"
-    >
-      ×
-    </button>
-
-
-    <div class="modal-heading">
-
-      <h2>
-        Delete Product?
-      </h2>
-
+    <div class="modal-head">
+      <div class="modal-title">Delete Product?</div>
+      <button id="closeDeleteModal" class="close">×</button>
     </div>
 
-
-    <p class="delete-message">
-      This product will be permanently removed from
-      the CIRDRIO catalogue. This action cannot be undone.
+    <p style="color:#777;line-height:1.6">
+      This product will be permanently removed from the CIRDRIO catalogue.
     </p>
-
 
     <div class="modal-actions">
 
-      <button
-        class="cancel-btn"
-        id="cancelDelete"
-        type="button"
-      >
+      <button id="cancelDelete" class="secondary">
         CANCEL
       </button>
 
-
-      <button
-        class="confirm-delete"
-        id="confirmDelete"
-        type="button"
-      >
-        DELETE PRODUCT
+      <button id="confirmDelete" class="danger">
+        DELETE
       </button>
 
     </div>
 
   </div>
-
 </div>
 
 <script>
@@ -1565,1137 +750,876 @@ const supabaseClient =
     SUPABASE_KEY
   );
 
+
 let products = [];
-let deleteId = null;
+let filteredProducts = [];
+let deleteProductId = null;
 
 
-/* ================================
-   ADMIN AUTHENTICATION
-================================ */
+const adminApp =
+  document.getElementById("adminApp");
+
+const accessDenied =
+  document.getElementById("accessDenied");
+
+const addProductBtn =
+  document.getElementById("addProductBtn");
+
+const totalProducts =
+  document.getElementById("totalProducts");
+
+const totalStock =
+  document.getElementById("totalStock");
+
+const lowStock =
+  document.getElementById("lowStock");
+
+const searchInput =
+  document.getElementById("searchInput");
+
+const loadingState =
+  document.getElementById("loadingState");
+
+const tableWrap =
+  document.getElementById("tableWrap");
+
+const productsBody =
+  document.getElementById("productsBody");
+
+const mobileProducts =
+  document.getElementById("mobileProducts");
+
+const emptyState =
+  document.getElementById("emptyState");
+
+const productOverlay =
+  document.getElementById("productOverlay");
+
+const closeProductModal =
+  document.getElementById("closeProductModal");
+
+const modalTitle =
+  document.getElementById("modalTitle");
+
+const productForm =
+  document.getElementById("productForm");
+
+const productId =
+  document.getElementById("productId");
+
+const productName =
+  document.getElementById("productName");
+
+const productPrice =
+  document.getElementById("productPrice");
+
+const productStock =
+  document.getElementById("productStock");
+
+const productCategory =
+  document.getElementById("productCategory");
+
+const productImage =
+  document.getElementById("productImage");
+
+const productDescription =
+  document.getElementById("productDescription");
+
+const imagePreview =
+  document.getElementById("imagePreview");
+
+const cancelProduct =
+  document.getElementById("cancelProduct");
+
+const saveProduct =
+  document.getElementById("saveProduct");
+
+const deleteOverlay =
+  document.getElementById("deleteOverlay");
+
+const closeDeleteModal =
+  document.getElementById("closeDeleteModal");
+
+const cancelDelete =
+  document.getElementById("cancelDelete");
+
+const confirmDelete =
+  document.getElementById("confirmDelete");
+
 
 async function checkAdmin(){
 
-  const {
-    data: { session },
-    error: sessionError
-  } = await supabaseClient.auth.getSession();
+  try{
+
+    const {
+      data: sessionData
+    } =
+      await supabaseClient.auth.getSession();
+
+    if(!sessionData.session){
+
+      accessDenied.classList.remove("hidden");
+
+      return;
+    }
 
 
-  if(sessionError || !session){
+    const {
+      data,
+      error
+    } =
+      await supabaseClient.rpc(
+        "is_cirdrio_admin"
+      );
 
-    showAccessDenied();
 
-    return false;
+    if(error || data !== true){
+
+      accessDenied.classList.remove("hidden");
+
+      return;
+    }
+
+
+    adminApp.classList.remove("hidden");
+
+    await loadProducts();
+
+
+  }catch(error){
+
+    console.error(error);
+
+    accessDenied.classList.remove("hidden");
+
   }
 
-
-  const {
-    data: isAdmin,
-    error: adminError
-  } = await supabaseClient.rpc(
-    "is_cirdrio_admin"
-  );
-
-
-  if(adminError){
-
-    console.error(
-      "Admin check error:",
-      adminError
-    );
-
-    showAccessDenied();
-
-    return false;
-  }
-
-
-  if(isAdmin !== true){
-
-    showAccessDenied();
-
-    return false;
-  }
-
-
-  document.getElementById(
-    "adminApp"
-  ).style.display = "block";
-
-
-  return true;
 }
 
-
-function showAccessDenied(){
-
-  document.getElementById(
-    "adminApp"
-  ).style.display = "none";
-
-
-  document.getElementById(
-    "accessDenied"
-  ).style.display = "flex";
-}
-
-
-/* ================================
-   LOAD PRODUCTS
-================================ */
 
 async function loadProducts(){
 
-  const loading =
-    document.getElementById(
-      "loadingState"
-    );
+  loadingState.classList.remove("hidden");
 
-  const table =
-    document.getElementById(
-      "productTable"
-    );
+  tableWrap.classList.add("hidden");
 
-  const empty =
-    document.getElementById(
-      "emptyState"
-    );
+  mobileProducts.innerHTML = "";
 
-
-  loading.style.display = "block";
-
-  table.style.display = "none";
-
-  empty.style.display = "none";
+  emptyState.classList.add("hidden");
 
 
   const {
     data,
     error
-  } = await supabaseClient
-    .from("products")
-    .select(
-      '"Id","Name","Discription","Price","Cattogry","Image url","Stock","created_at"'
-    )
-    .order(
-      "created_at",
-      {
-        ascending: false
-      }
-    );
+  } =
+    await supabaseClient
+      .from("products")
+      .select(
+        '"Id","Name","Discription","Price","Cattogry","Image url","Stock","created_at"'
+      )
+      .order(
+        "created_at",
+        {
+          ascending:false
+        }
+      );
 
 
-  loading.style.display = "none";
+  loadingState.classList.add("hidden");
 
 
   if(error){
 
-    console.error(
-      "Product load error:",
-      error
-    );
+    console.error(error);
 
+    emptyState.textContent =
+      "Could not load products.";
 
-    empty.textContent =
-      "Unable to load products.";
-
-
-    empty.style.display =
-      "block";
-
+    emptyState.classList.remove("hidden");
 
     return;
   }
 
 
-  products =
-    Array.isArray(data)
-      ? data
-      : [];
-
+  products = data || [];
 
   updateStats();
 
-  renderProducts(products);
+  applySearch();
+
 }
 
 
-/* ================================
-   STATISTICS
-================================ */
-
 function updateStats(){
 
-  const totalProducts =
+  const total =
     products.length;
 
 
-  const totalStock =
+  const stock =
     products.reduce(
-      function(total, product){
-
-        return total +
-          Number(
-            product["Stock"] || 0
-          );
-
-      },
+      (sum,p) =>
+        sum + Number(p.Stock || 0),
       0
     );
 
 
-  const lowStock =
+  const low =
     products.filter(
-      function(product){
-
-        const stock =
-          Number(
-            product["Stock"] || 0
-          );
-
-        return (
-          stock > 0 &&
-          stock <= 10
-        );
-
-      }
+      p =>
+        Number(p.Stock || 0) > 0 &&
+        Number(p.Stock || 0) <= 10
     ).length;
 
 
-  document.getElementById(
-    "totalProducts"
-  ).textContent =
-    totalProducts;
+  totalProducts.textContent =
+    total;
 
+  totalStock.textContent =
+    stock;
 
-  document.getElementById(
-    "totalStock"
-  ).textContent =
-    totalStock;
+  lowStock.textContent =
+    low;
 
-
-  document.getElementById(
-    "lowStock"
-  ).textContent =
-    lowStock;
 }
 
 
-/* ================================
-   RENDER PRODUCTS
-================================ */
+function applySearch(){
 
-function renderProducts(list){
-
-  const body =
-    document.getElementById(
-      "productsBody"
-    );
-
-  const table =
-    document.getElementById(
-      "productTable"
-    );
-
-  const empty =
-    document.getElementById(
-      "emptyState"
-    );
+  const query =
+    searchInput.value
+      .trim()
+      .toLowerCase();
 
 
-  body.innerHTML = "";
+  filteredProducts =
+    products.filter(p => {
+
+      const name =
+        String(
+          p.Name || ""
+        ).toLowerCase();
 
 
-  if(!list.length){
+      const category =
+        String(
+          p.Cattogry || ""
+        ).toLowerCase();
 
-    table.style.display =
-      "none";
 
-    empty.style.display =
-      "block";
+      return (
+        name.includes(query) ||
+        category.includes(query)
+      );
+
+    });
+
+
+  renderProducts();
+
+}
+
+
+function renderProducts(){
+
+  productsBody.innerHTML = "";
+
+  mobileProducts.innerHTML = "";
+
+
+  if(filteredProducts.length === 0){
+
+    tableWrap.classList.add("hidden");
+
+    emptyState.classList.remove("hidden");
 
     return;
   }
 
 
-  table.style.display =
-    "table";
+  emptyState.classList.add("hidden");
 
-  empty.style.display =
-    "none";
+  tableWrap.classList.remove("hidden");
 
 
-  list.forEach(
-    function(product){
+  filteredProducts.forEach(product => {
 
-      const id =
-        product["Id"];
+    const image =
+      product["Image url"] || "";
 
-
-      const name =
-        product["Name"] ||
-        "Unnamed Product";
+    const stock =
+      Number(product.Stock || 0);
 
 
-      const category =
-        product["Cattogry"] ||
-        "Uncategorized";
+    /* DESKTOP */
+
+    const tr =
+      document.createElement("tr");
 
 
-      const image =
-        product["Image url"] ||
-        "";
+    tr.innerHTML = `
+
+      <td>
+
+        <div class="product-cell">
+
+          ${
+            image
+
+            ? `
+              <img
+                class="product-img"
+                src="${escapeAttr(image)}"
+                onerror="this.style.display='none'"
+              >
+            `
+
+            : `
+              <div class="product-img"></div>
+            `
+          }
 
 
-      const price =
-        Number(
-          product["Price"] || 0
-        );
+          <div>
 
+            <div class="product-name">
+              ${escapeHtml(
+                product.Name ||
+                "Untitled"
+              )}
+            </div>
 
-      const stock =
-        Number(
-          product["Stock"] || 0
-        );
-
-
-      let stockClass =
-        "stock-good";
-
-
-      if(stock === 0){
-
-        stockClass =
-          "stock-out";
-
-      }
-      else if(stock <= 10){
-
-        stockClass =
-          "stock-low";
-      }
-
-
-      const created =
-        product["created_at"]
-          ? new Date(
-              product["created_at"]
-            ).toLocaleDateString(
-              "en-IN"
-            )
-          : "—";
-
-
-      const row =
-        document.createElement(
-          "tr"
-        );
-
-
-      row.innerHTML = `
-
-        <td>
-
-          <div class="product-info">
-
-            <img
-              class="product-image"
-              src="${escapeHTML(image)}"
-              alt=""
-              loading="lazy"
-              onerror="
-                this.style.opacity='0';
-              "
-            >
-
-            <div class="product-details">
-
-              <div class="product-title">
-                ${escapeHTML(name)}
-              </div>
-
-              <div class="product-category">
-                ${escapeHTML(category)}
-              </div>
-
+            <div class="product-category">
+              ${escapeHtml(
+                product.Cattogry ||
+                "Uncategorized"
+              )}
             </div>
 
           </div>
 
-        </td>
+        </div>
+
+      </td>
 
 
-        <td>
-          ₹${price.toLocaleString("en-IN")}
-        </td>
+      <td class="price">
+        ₹${Number(
+          product.Price || 0
+        ).toLocaleString("en-IN")}
+      </td>
 
 
-        <td>
-
-          <span
-            class="stock-number ${stockClass}"
-          >
-            ${stock}
-          </span>
-
-        </td>
+      <td class="stock ${
+        stock <= 10 ? "low" : ""
+      }">
+        ${stock}
+      </td>
 
 
-        <td>
-          ${created}
-        </td>
+      <td>
+
+        <div class="actions">
+
+          <button
+            class="action"
+            onclick="openEdit('${product.Id}')">
+            EDIT
+          </button>
+
+          <button
+            class="action delete-btn"
+            onclick="openDelete('${product.Id}')">
+            DELETE
+          </button>
+
+        </div>
+
+      </td>
+
+    `;
 
 
-        <td>
+    productsBody.appendChild(tr);
 
-          <div class="action-group">
 
-            <button
-              class="action-btn"
-              type="button"
-              onclick="openEdit('${id}')"
+    /* MOBILE */
+
+    const card =
+      document.createElement("div");
+
+    card.className =
+      "mobile-card";
+
+
+    card.innerHTML = `
+
+      <div class="mobile-product-top">
+
+        ${
+          image
+
+          ? `
+            <img
+              class="mobile-img"
+              src="${escapeAttr(image)}"
+              onerror="this.style.display='none'"
             >
-              EDIT
-            </button>
+          `
+
+          : `
+            <div class="mobile-img"></div>
+          `
+        }
 
 
-            <button
-              class="action-btn action-delete"
-              type="button"
-              onclick="openDelete('${id}')"
-            >
-              DELETE
-            </button>
+        <div>
 
+          <div class="mobile-name">
+            ${escapeHtml(
+              product.Name ||
+              "Untitled"
+            )}
           </div>
 
-        </td>
+          <div class="mobile-category">
+            ${escapeHtml(
+              product.Cattogry ||
+              "Uncategorized"
+            )}
+          </div>
 
-      `;
+        </div>
+
+      </div>
 
 
-      body.appendChild(row);
+      <div class="mobile-info">
 
-    }
-  );
+        <div class="info-box">
+
+          <div class="info-label">
+            PRICE
+          </div>
+
+          <div class="info-value">
+            ₹${Number(
+              product.Price || 0
+            ).toLocaleString("en-IN")}
+          </div>
+
+        </div>
+
+
+        <div class="info-box">
+
+          <div class="info-label">
+            STOCK
+          </div>
+
+          <div class="info-value ${
+            stock <= 10 ? "low" : ""
+          }">
+            ${stock}
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="mobile-actions">
+
+        <button
+          class="edit"
+          onclick="openEdit('${product.Id}')">
+          EDIT PRODUCT
+        </button>
+
+        <button
+          class="delete"
+          onclick="openDelete('${product.Id}')">
+          DELETE
+        </button>
+
+      </div>
+
+    `;
+
+
+    mobileProducts.appendChild(card);
+
+  });
+
 }
-
-
-/* ================================
-   ADD PRODUCT
-================================ */
-
 function openAdd(){
 
-  document.getElementById(
-    "modalTitle"
-  ).textContent =
+  modalTitle.textContent =
     "Add Product";
 
+  productId.value = "";
+  productName.value = "";
+  productPrice.value = "";
+  productStock.value = "";
+  productCategory.value = "";
+  productImage.value = "";
+  productDescription.value = "";
 
-  document.getElementById(
-    "productId"
-  ).value =
-    "";
+  imagePreview.style.display = "none";
+  imagePreview.src = "";
 
-
-  document.getElementById(
-    "productName"
-  ).value =
-    "";
-
-
-  document.getElementById(
-    "productPrice"
-  ).value =
-    "";
-
-
-  document.getElementById(
-    "productStock"
-  ).value =
-    "0";
-
-
-  document.getElementById(
-    "productCategory"
-  ).value =
-    "";
-
-
-  document.getElementById(
-    "productImage"
-  ).value =
-    "";
-
-
-  document.getElementById(
-    "productDescription"
-  ).value =
-    "";
-
-
-  document.getElementById(
-    "imagePreview"
-  ).innerHTML =
-    "Image preview";
-
-
-  document.getElementById(
-    "productOverlay"
-  ).classList.add(
-    "show"
-  );
+  productOverlay.classList.add("show");
 }
 
-
-/* ================================
-   EDIT PRODUCT
-================================ */
 
 function openEdit(id){
 
   const product =
     products.find(
-      function(item){
-
-        return (
-          String(item["Id"]) ===
-          String(id)
-        );
-
-      }
+      p => p.Id === id
     );
 
+  if(!product) return;
 
-  if(!product){
-
-    return;
-  }
-
-
-  document.getElementById(
-    "modalTitle"
-  ).textContent =
+  modalTitle.textContent =
     "Edit Product";
 
+  productId.value =
+    product.Id;
 
-  document.getElementById(
-    "productId"
-  ).value =
-    product["Id"];
+  productName.value =
+    product.Name || "";
 
+  productPrice.value =
+    product.Price || 0;
 
-  document.getElementById(
-    "productName"
-  ).value =
-    product["Name"] || "";
+  productStock.value =
+    product.Stock || 0;
 
+  productCategory.value =
+    product.Cattogry || "";
 
-  document.getElementById(
-    "productPrice"
-  ).value =
-    product["Price"] ?? "";
-
-
-  document.getElementById(
-    "productStock"
-  ).value =
-    product["Stock"] ?? 0;
-
-
-  document.getElementById(
-    "productCategory"
-  ).value =
-    product["Cattogry"] || "";
-
-
-  document.getElementById(
-    "productImage"
-  ).value =
+  productImage.value =
     product["Image url"] || "";
 
-
-  document.getElementById(
-    "productDescription"
-  ).value =
-    product["Discription"] || "";
-
+  productDescription.value =
+    product.Discription || "";
 
   updateImagePreview();
 
-
-  document.getElementById(
-    "productOverlay"
-  ).classList.add(
-    "show"
-  );
+  productOverlay.classList.add("show");
 }
 
 
-/* ================================
-   CLOSE PRODUCT MODAL
-================================ */
+async function saveProductData(e){
 
-function closeProduct(){
+  e.preventDefault();
 
-  document.getElementById(
-    "productOverlay"
-  ).classList.remove(
-    "show"
-  );
-}
+  saveProduct.disabled = true;
 
-
-/* ================================
-   IMAGE PREVIEW
-================================ */
-
-function updateImagePreview(){
-
-  const url =
-    document.getElementById(
-      "productImage"
-    ).value.trim();
-
-
-  const preview =
-    document.getElementById(
-      "imagePreview"
-    );
-
-
-  if(!url){
-
-    preview.innerHTML =
-      "Image preview";
-
-    return;
-  }
-
-
-  preview.innerHTML = `
-
-    <img
-      src="${escapeHTML(url)}"
-      alt="Product Preview"
-      onerror="
-        this.parentElement.innerHTML=
-        'Image could not be loaded';
-      "
-    >
-
-  `;
-}
-
-
-/* ================================
-   SAVE PRODUCT
-================================ */
-
-async function saveProduct(event){
-
-  event.preventDefault();
-
-
-  const id =
-    document.getElementById(
-      "productId"
-    ).value.trim();
-
-
-  const name =
-    document.getElementById(
-      "productName"
-    ).value.trim();
-
-
-  const price =
-    Number(
-      document.getElementById(
-        "productPrice"
-      ).value
-    );
-
-
-  const stock =
-    Number(
-      document.getElementById(
-        "productStock"
-      ).value
-    );
-
-
-  const category =
-    document.getElementById(
-      "productCategory"
-    ).value.trim();
-
-
-  const image =
-    document.getElementById(
-      "productImage"
-    ).value.trim();
-
-
-  const description =
-    document.getElementById(
-      "productDescription"
-    ).value.trim();
-
-
-  if(!name){
-
-    alert(
-      "Product name is required."
-    );
-
-    return;
-  }
-
-
-  if(!Number.isFinite(price) || price < 0){
-
-    alert(
-      "Please enter a valid price."
-    );
-
-    return;
-  }
-
-
-  if(!Number.isInteger(stock) || stock < 0){
-
-    alert(
-      "Please enter a valid stock quantity."
-    );
-
-    return;
-  }
-
-
-  const button =
-    document.getElementById(
-      "saveProduct"
-    );
-
-
-  button.disabled = true;
-
-  button.textContent =
+  saveProduct.textContent =
     "SAVING...";
 
 
-  const productData = {
+  const id =
+    productId.value.trim();
+
+
+  const payload = {
 
     "Name":
-      name,
-
-    "Price":
-      price,
-
-    "Stock":
-      stock,
-
-    "Cattogry":
-      category,
-
-    "Image url":
-      image,
+      productName.value.trim(),
 
     "Discription":
-      description
+      productDescription.value.trim(),
+
+    "Price":
+      Number(productPrice.value),
+
+    "Cattogry":
+      productCategory.value.trim(),
+
+    "Image url":
+      productImage.value.trim(),
+
+    "Stock":
+      Number(productStock.value)
 
   };
 
 
-  let result;
+  try{
+
+    let error = null;
 
 
-  if(id){
+    if(id){
 
-    result =
-      await supabaseClient
-        .from("products")
-        .update(productData)
-        .eq("Id",id);
+      const result =
+        await supabaseClient
+          .from("products")
+          .update(payload)
+          .eq("Id", id);
+
+      error = result.error;
+
+    }else{
+
+      const result =
+        await supabaseClient
+          .from("products")
+          .insert([payload]);
+
+      error = result.error;
+
+    }
+
+
+    if(error){
+
+      console.error(error);
+
+      alert(
+        "Could not save product.\n\n" +
+        error.message
+      );
+
+      return;
+    }
+
+
+    closeProduct();
+
+    await loadProducts();
+
+
+  }finally{
+
+    saveProduct.disabled = false;
+
+    saveProduct.textContent =
+      "SAVE PRODUCT";
 
   }
-  else{
 
-    result =
-      await supabaseClient
-        .from("products")
-        .insert(
-          productData
-        );
-
-  }
-
-
-  button.disabled = false;
-
-  button.textContent =
-    "SAVE PRODUCT";
-
-
-  if(result.error){
-
-    console.error(
-      "Save error:",
-      result.error
-    );
-
-
-    alert(
-      "Save failed:\n" +
-      result.error.message
-    );
-
-    return;
-  }
-
-
-  closeProduct();
-
-
-  alert(
-    id
-      ? "Product updated successfully."
-      : "Product added successfully."
-  );
-
-
-  await loadProducts();
 }
 
-
-/* ================================
-   DELETE
-================================ */
 
 function openDelete(id){
 
-  deleteId = id;
+  deleteProductId = id;
 
+  deleteOverlay.classList.add("show");
 
-  document.getElementById(
-    "deleteOverlay"
-  ).classList.add(
-    "show"
-  );
-}
-
-
-function closeDelete(){
-
-  deleteId = null;
-
-
-  document.getElementById(
-    "deleteOverlay"
-  ).classList.remove(
-    "show"
-  );
 }
 
 
 async function deleteProduct(){
 
-  if(!deleteId){
-
+  if(!deleteProductId)
     return;
-  }
 
 
-  const id =
-    deleteId;
+  confirmDelete.disabled = true;
 
-
-  const button =
-    document.getElementById(
-      "confirmDelete"
-    );
-
-
-  button.disabled = true;
-
-  button.textContent =
+  confirmDelete.textContent =
     "DELETING...";
 
 
-  const {
-    error
-  } =
-    await supabaseClient
-      .from("products")
-      .delete()
-      .eq("Id",id);
+  try{
+
+    const { error } =
+      await supabaseClient
+        .from("products")
+        .delete()
+        .eq("Id", deleteProductId);
 
 
-  button.disabled = false;
+    if(error){
 
-  button.textContent =
-    "DELETE PRODUCT";
+      console.error(error);
+
+      alert(
+        "Could not delete product.\n\n" +
+        error.message
+      );
+
+      return;
+    }
 
 
-  if(error){
+    closeDelete();
 
-    console.error(
-      "Delete error:",
-      error
-    );
+    await loadProducts();
 
 
-    alert(
-      "Delete failed:\n" +
-      error.message
-    );
+  }finally{
+
+    confirmDelete.disabled = false;
+
+    confirmDelete.textContent =
+      "DELETE";
+
+  }
+
+}
+
+
+function updateImagePreview(){
+
+  const url =
+    productImage.value.trim();
+
+
+  if(!url){
+
+    imagePreview.style.display =
+      "none";
+
+    imagePreview.src = "";
 
     return;
   }
 
 
-  closeDelete();
+  imagePreview.src = url;
 
+  imagePreview.style.display =
+    "block";
 
-  alert(
-    "Product deleted successfully."
-  );
-
-
-  await loadProducts();
 }
 
 
-/* ================================
-   SEARCH
-================================ */
+function closeProduct(){
 
-function searchProducts(){
-
-  const query =
-    document.getElementById(
-      "searchInput"
-    ).value
-      .toLowerCase()
-      .trim();
-
-
-  if(!query){
-
-    renderProducts(
-      products
-    );
-
-    return;
-  }
-
-
-  const filtered =
-    products.filter(
-      function(product){
-
-        const name =
-          String(
-            product["Name"] || ""
-          ).toLowerCase();
-
-
-        const category =
-          String(
-            product["Cattogry"] || ""
-          ).toLowerCase();
-
-
-        const description =
-          String(
-            product["Discription"] || ""
-          ).toLowerCase();
-
-
-        return (
-          name.includes(query) ||
-          category.includes(query) ||
-          description.includes(query)
-        );
-
-      }
-    );
-
-
-  renderProducts(
-    filtered
+  productOverlay.classList.remove(
+    "show"
   );
-}
-/* ================================
-   LOGOUT
-================================ */
 
-async function logout(){
-
-  const {
-    error
-  } = await supabaseClient
-    .auth
-    .signOut();
-
-
-  if(error){
-
-    console.error(
-      "Logout error:",
-      error
-    );
-
-    return;
-  }
-
-
-  window.location.href =
-    "index.html";
 }
 
 
-/* ================================
-   EVENT LISTENERS
-================================ */
+function closeDelete(){
 
-document
-  .getElementById("addProductBtn")
-  .addEventListener(
-    "click",
-    openAdd
+  deleteOverlay.classList.remove(
+    "show"
   );
 
+  deleteProductId = null;
 
-document
-  .getElementById("closeProductModal")
-  .addEventListener(
-    "click",
-    closeProduct
-  );
+}
 
 
-document
-  .getElementById("cancelProduct")
-  .addEventListener(
-    "click",
-    closeProduct
-  );
+function escapeHtml(value){
+
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
 
 
-document
-  .getElementById("productForm")
-  .addEventListener(
-    "submit",
-    saveProduct
-  );
+function escapeAttr(value){
+
+  return escapeHtml(value);
+
+}
 
 
-document
-  .getElementById("productImage")
-  .addEventListener(
-    "input",
-    updateImagePreview
-  );
+/* EVENTS */
 
-
-document
-  .getElementById("closeDeleteModal")
-  .addEventListener(
-    "click",
-    closeDelete
-  );
-
-
-document
-  .getElementById("cancelDelete")
-  .addEventListener(
-    "click",
-    closeDelete
-  );
-
-
-document
-  .getElementById("confirmDelete")
-  .addEventListener(
-    "click",
-    deleteProduct
-  );
-
-
-document
-  .getElementById("searchInput")
-  .addEventListener(
-    "input",
-    searchProducts
-  );
-
-
-document
-  .getElementById("logoutBtn")
-  .addEventListener(
-    "click",
-    logout
+addProductBtn.addEventListener(
+  "click",
+  openAdd
 );
 
 
-/* ================================
-   CLOSE MODALS
-   BY BACKDROP
-================================ */
+closeProductModal.addEventListener(
+  "click",
+  closeProduct
+);
 
-document
-  .getElementById("productOverlay")
-  .addEventListener(
-    "click",
-    function(event){
 
-      if(
-        event.target === this
-      ){
+cancelProduct.addEventListener(
+  "click",
+  closeProduct
+);
 
-        closeProduct();
 
-      }
+productForm.addEventListener(
+  "submit",
+  saveProductData
+);
 
+
+productImage.addEventListener(
+  "input",
+  updateImagePreview
+);
+
+
+searchInput.addEventListener(
+  "input",
+  applySearch
+);
+
+
+closeDeleteModal.addEventListener(
+  "click",
+  closeDelete
+);
+
+
+cancelDelete.addEventListener(
+  "click",
+  closeDelete
+);
+
+
+confirmDelete.addEventListener(
+  "click",
+  deleteProduct
+);
+
+
+/* BACKDROP */
+
+productOverlay.addEventListener(
+  "click",
+  e => {
+
+    if(e.target === productOverlay){
+      closeProduct();
     }
-  );
+
+  }
+);
 
 
-document
-  .getElementById("deleteOverlay")
-  .addEventListener(
-    "click",
-    function(event){
+deleteOverlay.addEventListener(
+  "click",
+  e => {
 
-      if(
-        event.target === this
-      ){
-
-        closeDelete();
-
-      }
-
+    if(e.target === deleteOverlay){
+      closeDelete();
     }
-  );
+
+  }
+);
 
 
-/* ================================
-   ESCAPE KEY
-================================ */
+/* ESCAPE */
 
 document.addEventListener(
   "keydown",
-  function(event){
+  e => {
 
-    if(
-      event.key === "Escape"
-    ){
+    if(e.key === "Escape"){
 
       closeProduct();
-
       closeDelete();
 
     }
@@ -2704,26 +1628,9 @@ document.addEventListener(
 );
 
 
-/* ================================
-   INITIALIZE
-================================ */
+/* START */
 
-document.addEventListener(
-  "DOMContentLoaded",
-  async function(){
-
-    const allowed =
-      await checkAdmin();
-
-
-    if(allowed){
-
-      await loadProducts();
-
-    }
-
-  }
-);
+checkAdmin();
 
 </script>
 
