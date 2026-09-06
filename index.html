@@ -3,373 +3,1505 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
 <title>CIRDRIO | Beauty, refined.</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{--black:#111;--white:#fff;--soft:#f6f6f3;--gray:#777;--line:#e8e8e5}
-body{font-family:Arial,Helvetica,sans-serif;color:var(--black);background:#fff}
-button{font:inherit;cursor:pointer}
-a{text-decoration:none;color:inherit}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-header{
-height:74px;border-bottom:1px solid var(--line);
-display:flex;align-items:center;justify-content:space-between;
-padding:0 5%;position:sticky;top:0;background:rgba(255,255,255,.96);
-backdrop-filter:blur(15px);z-index:100
+:root{
+  --black:#111;
+  --soft:#f7f6f3;
+  --white:#fff;
+  --gray:#777;
+  --line:#e7e5e1;
+  --gold:#b08a52;
 }
-.logo{font-size:24px;font-weight:900;letter-spacing:4px}
-nav{display:flex;gap:32px;font-size:13px;font-weight:600}
-.actions{display:flex;gap:18px;align-items:center}
-.icon-btn{border:0;background:none;font-size:21px;position:relative}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--white);
+  color:var(--black);
+  overflow-x:hidden;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+  border:0;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+/* ================= HEADER ================= */
+
+.header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  height:76px;
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(15px);
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 5%;
+}
+
+.logo{
+  font-size:25px;
+  font-weight:800;
+  letter-spacing:5px;
+}
+
+.nav{
+  display:flex;
+  gap:34px;
+  align-items:center;
+}
+
+.nav a{
+  font-size:13px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  transition:.25s;
+}
+
+.nav a:hover{
+  opacity:.5;
+}
+
+.header-actions{
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+
+.icon-btn{
+  position:relative;
+  width:38px;
+  height:38px;
+  background:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+}
+
 .cart-count{
-position:absolute;top:-8px;right:-9px;background:#111;color:#fff;
-width:17px;height:17px;border-radius:50%;font-size:10px;
-display:flex;align-items:center;justify-content:center
+  position:absolute;
+  top:0;
+  right:-2px;
+  min-width:17px;
+  height:17px;
+  padding:0 4px;
+  border-radius:20px;
+  background:#111;
+  color:white;
+  font-size:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
+
+.mobile-menu{
+  display:none;
+}
+
+/* ================= HERO ================= */
 
 .hero{
-min-height:510px;background:#f5f4f0;display:flex;
-align-items:center;justify-content:center;text-align:center;padding:60px 20px
-}
-.hero-content{max-width:800px}
-.hero-small{font-size:11px;letter-spacing:4px;font-weight:700;margin-bottom:22px}
-.hero h1{font-size:clamp(52px,8vw,100px);line-height:.9;letter-spacing:-6px;margin-bottom:28px}
-.hero p{max-width:570px;margin:auto;color:#666;line-height:1.7;font-size:15px}
-.hero-btn{
-margin-top:32px;background:#111;color:#fff;border:0;
-padding:16px 30px;font-size:12px;font-weight:700;letter-spacing:1px
+  min-height:620px;
+  background:
+    radial-gradient(circle at 75% 35%,#eee9df 0,#f7f5f0 30%,#fff 68%);
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  padding:70px 7%;
+  overflow:hidden;
 }
 
-.products-section{padding:90px 5%}
-.section-head{display:flex;align-items:end;justify-content:space-between;margin-bottom:35px}
-.section-head h2{font-size:38px;letter-spacing:-2px}
-.filters{display:flex;gap:8px;flex-wrap:wrap}
-.filter{border:1px solid var(--line);background:#fff;padding:10px 17px;border-radius:30px;font-size:12px}
-.filter.active{background:#111;color:#fff;border-color:#111}
+.hero-content{
+  max-width:620px;
+}
 
-.product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
-.product-card{position:relative;cursor:pointer}
-.product-image{background:#f5f5f2;aspect-ratio:1/1.12;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.product-image img{width:100%;height:100%;object-fit:cover;transition:.5s}
-.product-card:hover img{transform:scale(1.04)}
-.wishlist{
-position:absolute;right:14px;top:14px;width:38px;height:38px;
-border-radius:50%;border:0;background:#fff;font-size:21px;z-index:2
+.hero-eyebrow{
+  font-size:12px;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  color:#777;
+  margin-bottom:24px;
 }
-.wishlist.active{color:#d22}
-.product-info{padding:16px 2px}
-.product-category{color:#888;font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-bottom:7px}
-.product-name{font-size:15px;font-weight:600}
-.product-price{margin-top:8px;font-size:14px;font-weight:700}
 
-.detail-page{display:none;min-height:calc(100vh - 74px);padding:55px 5%}
-.detail-page.show{display:block}
-.back-btn{border:0;background:none;font-size:13px;margin-bottom:35px}
-.detail-layout{max-width:1200px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:70px}
-.detail-image{background:#f5f5f2;aspect-ratio:1/1;overflow:hidden}
-.detail-image img{width:100%;height:100%;object-fit:cover}
-.detail-info{padding:30px 0}
-.detail-category{font-size:11px;color:#888;letter-spacing:2px;text-transform:uppercase;margin-bottom:18px}
-.detail-info h1{font-size:48px;line-height:1;letter-spacing:-2px;margin-bottom:20px}
-.detail-price{font-size:23px;font-weight:700;margin-bottom:25px}
-.detail-stock{font-size:12px;margin-bottom:28px}
-.detail-description{color:#666;line-height:1.8;font-size:14px;margin-bottom:32px}
-.detail-actions{display:flex;gap:12px}
-.quantity{display:flex;border:1px solid #ddd;height:52px}
-.quantity button{width:45px;border:0;background:#fff}
-.quantity span{width:42px;display:flex;align-items:center;justify-content:center}
-.add-detail{flex:1;border:0;background:#111;color:#fff;font-size:12px;font-weight:700;letter-spacing:1px}
-.detail-wish{width:52px;border:1px solid #ddd;background:#fff;font-size:22px}
+.hero h1{
+  font-size:clamp(58px,8vw,105px);
+  line-height:.88;
+  letter-spacing:-5px;
+  font-weight:800;
+  margin-bottom:30px;
+}
 
-.cart-overlay{
-position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:200;display:none
+.hero-text{
+  max-width:470px;
+  color:#666;
+  font-size:16px;
+  line-height:1.7;
+  margin-bottom:35px;
 }
-.cart-overlay.show{display:block}
-.cart-drawer{
-position:absolute;right:0;top:0;height:100%;width:min(430px,100%);
-background:#fff;padding:25px;display:flex;flex-direction:column
-}
-.cart-head{display:flex;justify-content:space-between;align-items:center;padding-bottom:20px;border-bottom:1px solid var(--line)}
-.close{border:0;background:none;font-size:25px}
-.cart-items{flex:1;overflow:auto;padding:20px 0}
-.cart-item{display:grid;grid-template-columns:70px 1fr auto;gap:13px;margin-bottom:20px}
-.cart-item img{width:70px;height:80px;object-fit:cover;background:#f5f5f2}
-.cart-item-name{font-size:13px;font-weight:600}
-.cart-item-price{font-size:12px;margin-top:7px}
-.cart-controls{display:flex;align-items:center;margin-top:10px;gap:10px}
-.cart-controls button{border:1px solid #ddd;background:#fff;width:25px;height:25px}
-.remove{border:0!important;color:#999;background:none!important;font-size:11px}
-.cart-summary{border-top:1px solid var(--line);padding-top:20px}
-.subtotal{display:flex;justify-content:space-between;font-weight:700;margin-bottom:18px}
-.checkout{width:100%;height:52px;border:0;background:#111;color:#fff;font-weight:700;font-size:12px;letter-spacing:1px}
 
-.search-overlay{
-position:fixed;inset:0;background:#fff;z-index:300;display:none;padding:40px 7%
+.primary-btn{
+  background:#111;
+  color:#fff;
+  padding:16px 28px;
+  min-width:170px;
+  font-size:12px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  transition:.3s;
 }
-.search-overlay.show{display:block}
-.search-top{display:flex;justify-content:space-between}
-.search-input{width:100%;border:0;border-bottom:1px solid #ddd;font-size:35px;padding:25px 0;outline:none}
 
-.auth-overlay{
-position:fixed;inset:0;background:rgba(0,0,0,.45);
-z-index:500;display:none;align-items:center;justify-content:center;padding:20px
+.primary-btn:hover{
+  background:#333;
+  transform:translateY(-2px);
 }
-.auth-overlay.show{display:flex}
-.auth-box{
-width:min(430px,100%);background:#fff;padding:35px
-}
-.auth-box h2{font-size:30px;margin-bottom:8px}
-.auth-sub{color:#777;font-size:13px;margin-bottom:25px}
-.auth-input{
-width:100%;height:50px;border:1px solid #ddd;padding:0 14px;
-margin-bottom:12px;outline:none
-}
-.auth-main{
-width:100%;height:50px;border:0;background:#111;color:#fff;
-font-size:12px;font-weight:700;letter-spacing:1px;margin-top:5px
-}
-.auth-switch{
-border:0;background:none;margin-top:18px;font-size:12px;text-decoration:underline
-}
-.auth-message{font-size:12px;margin-top:15px;line-height:1.5}
-.account-menu{
-position:fixed;right:5%;top:65px;background:#fff;border:1px solid #ddd;
-padding:18px;width:230px;z-index:150;display:none;box-shadow:0 15px 40px rgba(0,0,0,.08)
-}
-.account-menu.show{display:block}
-.account-email{font-size:12px;color:#777;word-break:break-all;margin-bottom:15px}
-.logout-btn{width:100%;height:40px;background:#111;color:#fff;border:0;font-size:11px}
 
-.banner{margin:0 5% 80px;background:#111;color:#fff;padding:70px 30px;text-align:center}
-.banner h2{font-size:40px;letter-spacing:-2px}
-.banner p{color:#aaa;margin-top:12px}
-footer{border-top:1px solid var(--line);padding:50px 5%;display:flex;justify-content:space-between;color:#777;font-size:12px}
-.footer-logo{color:#111;font-weight:900;letter-spacing:3px}
+.hero-visual{
+  position:relative;
+  height:480px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.hero-orbit{
+  width:390px;
+  height:390px;
+  border-radius:50%;
+  border:1px solid #dedbd4;
+  position:absolute;
+}
+
+.hero-orbit::before{
+  content:"";
+  position:absolute;
+  inset:35px;
+  border:1px solid #e5e2dc;
+  border-radius:50%;
+}
+
+.hero-card{
+  position:relative;
+  width:270px;
+  height:360px;
+  background:linear-gradient(145deg,#ddd7cd,#faf9f6);
+  box-shadow:0 30px 80px rgba(0,0,0,.15);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.hero-card::after{
+  content:"CIRDRIO";
+  position:absolute;
+  bottom:35px;
+  font-size:18px;
+  letter-spacing:5px;
+  font-weight:700;
+}
+
+/* ================= TRUST ================= */
+
+.trust{
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  background:#fff;
+}
+
+.trust-item{
+  padding:25px 15px;
+  text-align:center;
+  border-right:1px solid var(--line);
+}
+
+.trust-item:last-child{
+  border-right:0;
+}
+
+.trust-title{
+  font-size:12px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  margin-bottom:7px;
+  font-weight:700;
+}
+
+.trust-text{
+  font-size:11px;
+  color:#777;
+}
+
+/* ================= SECTION ================= */
+
+.section{
+  padding:90px 6%;
+}
+
+.section-head{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  margin-bottom:38px;
+}
+
+.section-label{
+  font-size:11px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:#888;
+  margin-bottom:10px;
+}
+
+.section-title{
+  font-size:42px;
+  letter-spacing:-2px;
+}
+
+.section-link{
+  font-size:11px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  border-bottom:1px solid #111;
+  padding-bottom:5px;
+}
+
+/* ================= CATEGORY ================= */
+
+.categories{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+}
+
+.category{
+  height:170px;
+  background:#f4f2ee;
+  display:flex;
+  align-items:end;
+  padding:24px;
+  position:relative;
+  overflow:hidden;
+  transition:.3s;
+}
+
+.category:hover{
+  transform:translateY(-4px);
+}
+
+.category:nth-child(2){
+  background:#eeeae5;
+}
+
+.category:nth-child(3){
+  background:#f1eee9;
+}
+
+.category:nth-child(4){
+  background:#e9e7e2;
+}
+
+.category span{
+  font-size:13px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  font-weight:700;
+  position:relative;
+  z-index:2;
+}
+
+/* ================= RESPONSIVE ================= */
 
 @media(max-width:900px){
-.product-grid{grid-template-columns:repeat(2,1fr)}
-nav{display:none}
-.detail-layout{grid-template-columns:1fr;gap:20px}
-.detail-info{padding:10px 0 40px}
+
+  .nav{
+    display:none;
+  }
+
+  .mobile-menu{
+    display:flex;
+  }
+
+  .hero{
+    grid-template-columns:1fr;
+    padding:60px 6%;
+    text-align:center;
+  }
+
+  .hero-content{
+    margin:auto;
+  }
+
+  .hero-text{
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .hero-visual{
+    height:390px;
+    margin-top:20px;
+  }
+
+  .hero-orbit{
+    width:320px;
+    height:320px;
+  }
+
+  .trust{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .trust-item:nth-child(2){
+    border-right:0;
+  }
+
+  .trust-item:nth-child(3),
+  .trust-item:nth-child(4){
+    border-top:1px solid var(--line);
+  }
+
+  .categories{
+    grid-template-columns:repeat(2,1fr);
+  }
 }
-@media(max-width:550px){
-header{padding:0 18px}
-.logo{font-size:19px}
-.hero{min-height:450px}
-.hero h1{letter-spacing:-4px}
-.products-section{padding:60px 18px}
-.section-head{display:block}
-.section-head h2{margin-bottom:20px}
-.product-grid{gap:14px}
-.detail-page{padding:30px 18px}
-.detail-info h1{font-size:38px}
-.banner{margin:0 18px 60px}
-footer{padding:40px 18px;display:block}
+
+@media(max-width:520px){
+
+  .header{
+    height:65px;
+    padding:0 5%;
+  }
+
+  .logo{
+    font-size:21px;
+    letter-spacing:4px;
+  }
+
+  .header-actions{
+    gap:8px;
+  }
+
+  .hero{
+    min-height:auto;
+    padding-top:55px;
+  }
+
+  .hero h1{
+    font-size:58px;
+    letter-spacing:-3px;
+  }
+
+  .hero-visual{
+    height:330px;
+  }
+
+  .hero-card{
+    width:215px;
+    height:285px;
+  }
+
+  .hero-orbit{
+    width:270px;
+    height:270px;
+  }
+
+  .section{
+    padding:65px 5%;
+  }
+
+  .section-title{
+    font-size:32px;
+  }
+
+  .categories{
+    grid-template-columns:1fr;
+  }
+
+  .category{
+    height:135px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<header>
-<div class="logo">CIRDRIO</div>
+<!-- ================= HEADER ================= -->
 
-<nav>
-<a href="#" onclick="goHome()">SHOP</a>
-<a href="#categories">CATEGORIES</a>
-<a href="#about">ABOUT</a>
-</nav>
+<header class="header">
 
-<div class="actions">
-<button class="icon-btn" onclick="openSearch()">⌕</button>
+  <a href="#" class="logo">CIRDRIO</a>
 
-<button class="icon-btn" onclick="openAuth()" id="accountButton">♙</button>
+  <nav class="nav">
+    <a href="#shop">Shop</a>
+    <a href="#categories">Categories</a>
+    <a href="#about">About</a>
+  </nav>
 
-<button class="icon-btn" onclick="openCart()">
-🛍
-<span class="cart-count" id="cartCount">0</span>
-</button>
-</div>
+  <div class="header-actions">
+
+    <button class="icon-btn" id="searchBtn" aria-label="Search">
+      ⌕
+    </button>
+
+    <button class="icon-btn" id="accountBtn" aria-label="Account">
+      ♙
+    </button>
+
+    <button class="icon-btn" id="cartBtn" aria-label="Cart">
+      ♧
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+
+    <button class="icon-btn mobile-menu" id="mobileMenuBtn">
+      ☰
+    </button>
+
+  </div>
+
 </header>
 
 
-<main id="homePage">
+<!-- ================= HERO ================= -->
+
+<main>
 
 <section class="hero">
-<div class="hero-content">
-<div class="hero-small">CIRDRIO BEAUTY</div>
-<h1>Beauty,<br>refined.</h1>
-<p>Thoughtfully designed beauty essentials for modern routines. Simple formulas. Elevated experience.</p>
-<button class="hero-btn" onclick="scrollToProducts()">EXPLORE COLLECTION</button>
-</div>
-</section>
 
-<section class="products-section" id="categories">
+  <div class="hero-content">
 
-<div class="section-head">
-<h2>Collection</h2>
+    <div class="hero-eyebrow">
+      CIRDRIO / BEAUTY
+    </div>
 
-<div class="filters">
-<button class="filter active" onclick="filterProducts('all',this)">All</button>
-<button class="filter" onclick="filterProducts('Skincare',this)">Skincare</button>
-<button class="filter" onclick="filterProducts('Makeup',this)">Makeup</button>
-<button class="filter" onclick="filterProducts('Haircare',this)">Haircare</button>
-</div>
-</div>
+    <h1>
+      THE<br>
+      NEW<br>
+      STANDARD.
+    </h1>
 
-<div class="product-grid" id="productGrid">
-<div style="grid-column:1/-1;text-align:center;padding:50px;color:#777">
-Loading collection...
-</div>
-</div>
+    <p class="hero-text">
+      Intelligent beauty designed around modern routines,
+      refined formulas and products made for everyday confidence.
+    </p>
 
-</section>
+    <button class="primary-btn" id="shopNowBtn">
+      Shop collection
+    </button>
 
-<section class="banner" id="about">
-<h2>Build What’s Next.</h2>
-<p>CIRDRIO — intelligent products for the future.</p>
-</section>
+  </div>
 
-</main>
+  <div class="hero-visual">
 
+    <div class="hero-orbit"></div>
 
-<section class="detail-page" id="detailPage">
+    <div class="hero-card"></div>
 
-<button class="back-btn" onclick="goHome()">← Back to collection</button>
+  </div>
 
-<div class="detail-layout">
-
-<div class="detail-image">
-<img id="detailImage" src="" alt="">
-</div>
-
-<div class="detail-info">
-
-<div class="detail-category" id="detailCategory"></div>
-<h1 id="detailName"></h1>
-<div class="detail-price" id="detailPrice"></div>
-<div class="detail-stock" id="detailStock"></div>
-
-<p class="detail-description" id="detailDescription"></p>
-
-<div class="detail-actions">
-
-<div class="quantity">
-<button onclick="changeDetailQty(-1)">−</button>
-<span id="detailQty">1</span>
-<button onclick="changeDetailQty(1)">+</button>
-</div>
-
-<button class="add-detail" onclick="addDetailToCart()">ADD TO BAG</button>
-
-<button class="detail-wish" id="detailWish" onclick="toggleDetailWish()">♡</button>
-
-</div>
-</div>
-</div>
 </section>
 
 
-<div class="cart-overlay" id="cartOverlay" onclick="closeCartOutside(event)">
-<div class="cart-drawer">
+<!-- ================= TRUST ================= -->
 
-<div class="cart-head">
-<h2>Your Bag</h2>
-<button class="close" onclick="closeCart()">×</button>
+<section class="trust">
+
+  <div class="trust-item">
+    <div class="trust-title">Curated Beauty</div>
+    <div class="trust-text">Thoughtfully selected products</div>
+  </div>
+
+  <div class="trust-item">
+    <div class="trust-title">Secure Checkout</div>
+    <div class="trust-text">Safe and protected shopping</div>
+  </div>
+
+  <div class="trust-item">
+    <div class="trust-title">Quality First</div>
+    <div class="trust-text">Built around better choices</div>
+  </div>
+
+  <div class="trust-item">
+    <div class="trust-title">CIRDRIO Care</div>
+    <div class="trust-text">Beauty made simpler</div>
+  </div>
+
+</section>
+
+
+<!-- ================= CATEGORIES ================= -->
+
+<section class="section" id="categories">
+
+  <div class="section-head">
+
+    <div>
+      <div class="section-label">Explore</div>
+      <h2 class="section-title">Shop by category</h2>
+    </div>
+
+    <a href="#shop" class="section-link">
+      View all
+    </a>
+
+  </div>
+
+  <div class="categories">
+
+    <button class="category" data-category="Skincare">
+      <span>Skincare</span>
+    </button>
+
+    <button class="category" data-category="Makeup">
+      <span>Makeup</span>
+    </button>
+
+    <button class="category" data-category="Haircare">
+      <span>Haircare</span>
+    </button>
+
+    <button class="category" data-category="Wellness">
+      <span>Wellness</span>
+    </button>
+
+  </div>
+
+</section>
+<!-- ================= SHOP ================= -->
+
+<section class="section" id="shop">
+
+  <div class="section-head">
+
+    <div>
+      <div class="section-label">CIRDRIO Collection</div>
+      <h2 class="section-title">Featured products</h2>
+    </div>
+
+    <div id="categoryStatus" class="section-label">
+      All products
+    </div>
+
+  </div>
+
+  <div id="productsLoading" class="state-box">
+    Loading collection...
+  </div>
+
+  <div id="productsError" class="state-box error-box" style="display:none;">
+    Unable to load products.
+  </div>
+
+  <div id="productsGrid" class="products-grid"></div>
+
+</section>
+
+
+<!-- ================= PRODUCT DETAIL ================= -->
+
+<section class="product-detail" id="productDetail" style="display:none;">
+
+  <button class="back-btn" id="closeProduct">
+    ← Back to collection
+  </button>
+
+  <div class="detail-grid">
+
+    <div class="detail-image-wrap">
+
+      <img
+        id="detailImage"
+        class="detail-image"
+        src=""
+        alt="Product"
+      >
+
+    </div>
+
+    <div class="detail-info">
+
+      <div class="detail-category" id="detailCategory">
+        BEAUTY
+      </div>
+
+      <h1 id="detailName">
+        Product
+      </h1>
+
+      <div class="detail-price" id="detailPrice">
+        ₹0
+      </div>
+
+      <p class="detail-description" id="detailDescription">
+      </p>
+
+      <div class="detail-stock" id="detailStock">
+        In stock
+      </div>
+
+      <div class="detail-actions">
+
+        <div class="quantity-control">
+
+          <button id="detailMinus">−</button>
+
+          <span id="detailQty">1</span>
+
+          <button id="detailPlus">+</button>
+
+        </div>
+
+        <button
+          class="primary-btn"
+          id="detailAdd"
+        >
+          Add to bag
+        </button>
+
+        <button
+          class="wishlist-detail"
+          id="detailWish"
+          aria-label="Wishlist"
+        >
+          ♡
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= SEARCH OVERLAY ================= -->
+
+<div class="overlay" id="searchOverlay">
+
+  <div class="search-panel">
+
+    <button class="close-overlay" id="closeSearch">
+      ×
+    </button>
+
+    <div class="search-label">
+      SEARCH CIRDRIO
+    </div>
+
+    <input
+      id="searchInput"
+      type="text"
+      placeholder="Search products..."
+      autocomplete="off"
+    >
+
+    <div id="searchResults" class="search-results"></div>
+
+  </div>
+
 </div>
 
-<div class="cart-items" id="cartItems"></div>
 
-<div class="cart-summary">
-<div class="subtotal">
-<span>Subtotal</span>
-<span id="subtotal">₹0</span>
-</div>
-<button class="checkout" onclick="checkout()">CHECKOUT</button>
-</div>
+<!-- ================= CART DRAWER ================= -->
 
-</div>
-</div>
+<div class="overlay cart-overlay" id="cartOverlay">
 
+  <aside class="cart-drawer">
 
-<div class="search-overlay" id="searchOverlay">
+    <div class="cart-header">
 
-<div class="search-top">
-<strong>SEARCH</strong>
-<button class="close" onclick="closeSearch()">×</button>
-</div>
+      <div>
+        <div class="cart-small">
+          YOUR BAG
+        </div>
 
-<input
-class="search-input"
-id="searchInput"
-placeholder="Search products..."
-oninput="searchProducts()"
->
+        <h2>
+          Shopping bag
+        </h2>
+      </div>
 
-</div>
+      <button
+        class="close-overlay"
+        id="closeCart"
+      >
+        ×
+      </button>
 
+    </div>
 
-<!-- AUTH -->
+    <div
+      id="cartItems"
+      class="cart-items"
+    ></div>
 
-<div class="auth-overlay" id="authOverlay" onclick="closeAuthOutside(event)">
+    <div class="cart-footer">
 
-<div class="auth-box">
+      <div class="subtotal-row">
+        <span>Subtotal</span>
+        <strong id="cartSubtotal">
+          ₹0
+        </strong>
+      </div>
 
-<button class="close" onclick="closeAuth()" style="float:right">×</button>
+      <p class="cart-note">
+        Taxes and shipping calculated at checkout.
+      </p>
 
-<h2 id="authTitle">Welcome</h2>
+      <button
+        class="primary-btn checkout-btn"
+        id="checkoutBtn"
+      >
+        Checkout
+      </button>
 
-<div class="auth-sub" id="authSub">
-Sign in to your CIRDRIO account.
-</div>
+    </div>
 
-<input
-class="auth-input"
-id="authEmail"
-type="email"
-placeholder="Email address"
-autocomplete="email"
->
-
-<input
-class="auth-input"
-id="authPassword"
-type="password"
-placeholder="Password"
-autocomplete="current-password"
->
-
-<button class="auth-main" onclick="submitAuth()" id="authSubmit">
-SIGN IN
-</button>
-
-<button class="auth-switch" onclick="switchAuth()" id="authSwitch">
-Create an account
-</button>
-
-<div class="auth-message" id="authMessage"></div>
+  </aside>
 
 </div>
+
+
+<!-- ================= AUTH OVERLAY ================= -->
+
+<div class="overlay" id="authOverlay">
+
+  <div class="auth-panel">
+
+    <button
+      class="close-overlay"
+      id="closeAuth"
+    >
+      ×
+    </button>
+
+    <div class="auth-brand">
+      CIRDRIO
+    </div>
+
+    <div class="auth-title" id="authTitle">
+      Welcome back
+    </div>
+
+    <div class="auth-subtitle" id="authSubtitle">
+      Sign in to your CIRDRIO account.
+    </div>
+
+    <form id="authForm">
+
+      <input
+        id="authEmail"
+        type="email"
+        placeholder="Email address"
+        required
+      >
+
+      <input
+        id="authPassword"
+        type="password"
+        placeholder="Password"
+        minlength="6"
+        required
+      >
+
+      <button
+        type="submit"
+        class="primary-btn auth-submit"
+        id="authSubmit"
+      >
+        Sign in
+      </button>
+
+    </form>
+
+    <div
+      class="auth-message"
+      id="authMessage"
+    ></div>
+
+    <button
+      class="switch-auth"
+      id="authSwitch"
+      type="button"
+    >
+      Create an account
+    </button>
+
+  </div>
+
 </div>
 
 
-<div class="account-menu" id="accountMenu">
-<div class="account-email" id="accountEmail"></div>
-<button class="logout-btn" onclick="logout()">LOG OUT</button>
+<!-- ================= MOBILE MENU ================= -->
+
+<div class="overlay" id="mobileOverlay">
+
+  <div class="mobile-panel">
+
+    <button
+      class="close-overlay"
+      id="closeMobile"
+    >
+      ×
+    </button>
+
+    <a href="#shop" class="mobile-link">
+      Shop
+    </a>
+
+    <a href="#categories" class="mobile-link">
+      Categories
+    </a>
+
+    <a href="#about" class="mobile-link">
+      About
+    </a>
+
+  </div>
+
 </div>
 
 
-<footer>
-<div class="footer-logo">CIRDRIO</div>
-<div>© 2026 CIRDRIO. All rights reserved.</div>
-<div>Build What’s Next.</div>
-</footer>
+<!-- ================= EXTRA STYLES ================= -->
 
+<style>
 
+.products-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:22px;
+}
+
+.product-card{
+  position:relative;
+  background:#f7f6f3;
+  overflow:hidden;
+  cursor:pointer;
+  transition:.35s;
+}
+
+.product-card:hover{
+  transform:translateY(-5px);
+}
+
+.product-image-wrap{
+  position:relative;
+  width:100%;
+  aspect-ratio:1/1.12;
+  overflow:hidden;
+  background:#f0eee9;
+}
+
+.product-image{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transition:.5s;
+}
+
+.product-card:hover .product-image{
+  transform:scale(1.035);
+}
+
+.wishlist{
+  position:absolute;
+  right:14px;
+  top:14px;
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  background:rgba(255,255,255,.9);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:19px;
+  z-index:3;
+}
+
+.product-info{
+  padding:19px 18px 22px;
+  background:#fff;
+}
+
+.product-category{
+  font-size:9px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:#999;
+  margin-bottom:8px;
+}
+
+.product-name{
+  font-size:15px;
+  font-weight:600;
+  margin-bottom:11px;
+}
+
+.product-bottom{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.product-price{
+  font-size:14px;
+  font-weight:700;
+}
+
+.add-btn{
+  background:#111;
+  color:#fff;
+  padding:10px 13px;
+  font-size:9px;
+  letter-spacing:1.4px;
+  text-transform:uppercase;
+}
+
+.stock-low{
+  font-size:10px;
+  color:#9b6c34;
+  margin-top:8px;
+}
+
+.stock-out{
+  font-size:10px;
+  color:#999;
+  margin-top:8px;
+}
+
+.state-box{
+  padding:55px 20px;
+  border:1px solid var(--line);
+  text-align:center;
+  color:#777;
+  font-size:13px;
+  letter-spacing:.5px;
+}
+
+.error-box{
+  color:#a35b5b;
+}
+
+/* DETAIL */
+
+.product-detail{
+  padding:55px 6% 100px;
+  background:#faf9f7;
+}
+
+.back-btn{
+  background:none;
+  font-size:11px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  margin-bottom:45px;
+}
+
+.detail-grid{
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:75px;
+  max-width:1250px;
+  margin:auto;
+}
+
+.detail-image-wrap{
+  background:#f0eee9;
+  min-height:620px;
+}
+
+.detail-image{
+  width:100%;
+  height:100%;
+  min-height:620px;
+  object-fit:cover;
+  display:block;
+}
+
+.detail-info{
+  align-self:center;
+}
+
+.detail-category{
+  color:#999;
+  font-size:10px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  margin-bottom:18px;
+}
+
+.detail-info h1{
+  font-size:55px;
+  letter-spacing:-2.5px;
+  line-height:1;
+  margin-bottom:20px;
+}
+
+.detail-price{
+  font-size:21px;
+  font-weight:700;
+  margin-bottom:28px;
+}
+
+.detail-description{
+  color:#666;
+  line-height:1.8;
+  font-size:14px;
+  max-width:550px;
+  margin-bottom:22px;
+}
+
+.detail-stock{
+  font-size:11px;
+  color:#666;
+  margin-bottom:28px;
+}
+
+.detail-actions{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.quantity-control{
+  display:flex;
+  height:49px;
+  border:1px solid #ddd;
+  background:#fff;
+}
+
+.quantity-control button{
+  width:42px;
+  background:#fff;
+  font-size:19px;
+}
+
+.quantity-control span{
+  min-width:38px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:13px;
+}
+
+.wishlist-detail{
+  width:49px;
+  height:49px;
+  background:#fff;
+  border:1px solid #ddd;
+  font-size:21px;
+}
+
+.wishlist.active,
+.wishlist-detail.active{
+  font-size:0;
+}
+
+.wishlist.active::after,
+.wishlist-detail.active::after{
+  content:"♥";
+  font-size:20px;
+}
+
+.detail-actions .primary-btn{
+  flex:1;
+}
+
+/* SEARCH */
+
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  z-index:2000;
+  display:none;
+  align-items:flex-start;
+  justify-content:center;
+}
+
+.overlay.active{
+  display:flex;
+}
+
+.search-panel{
+  position:relative;
+  width:min(850px,92%);
+  margin-top:100px;
+  background:#fff;
+  padding:45px;
+}
+
+.close-overlay{
+  position:absolute;
+  right:20px;
+  top:18px;
+  background:none;
+  font-size:30px;
+  line-height:1;
+}
+
+.search-label{
+  font-size:10px;
+  letter-spacing:3px;
+  color:#999;
+  margin-bottom:15px;
+}
+
+.search-panel input{
+  width:100%;
+  border:0;
+  border-bottom:1px solid #222;
+  padding:14px 0;
+  outline:none;
+  font-size:25px;
+}
+
+.search-results{
+  margin-top:20px;
+  max-height:400px;
+  overflow:auto;
+}
+
+.search-result{
+  padding:15px 0;
+  border-bottom:1px solid var(--line);
+  cursor:pointer;
+}
+
+.search-result strong{
+  display:block;
+  margin-bottom:5px;
+}
+
+.search-result span{
+  color:#888;
+  font-size:12px;
+}
+
+/* CART */
+
+.cart-overlay{
+  justify-content:flex-end;
+  align-items:stretch;
+}
+
+.cart-drawer{
+  width:min(470px,100%);
+  height:100%;
+  background:#fff;
+  padding:30px;
+  display:flex;
+  flex-direction:column;
+  box-shadow:-20px 0 50px rgba(0,0,0,.12);
+}
+
+.cart-header{
+  display:flex;
+  justify-content:space-between;
+  padding-bottom:25px;
+  border-bottom:1px solid var(--line);
+}
+
+.cart-small{
+  font-size:9px;
+  letter-spacing:3px;
+  color:#999;
+  margin-bottom:7px;
+}
+
+.cart-header h2{
+  font-size:27px;
+}
+
+.cart-items{
+  flex:1;
+  overflow:auto;
+  padding:20px 0;
+}
+
+.empty-cart{
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#888;
+  font-size:13px;
+}
+
+.cart-item{
+  display:grid;
+  grid-template-columns:78px 1fr auto;
+  gap:14px;
+  padding:16px 0;
+  border-bottom:1px solid var(--line);
+}
+
+.cart-item img{
+  width:78px;
+  height:90px;
+  object-fit:cover;
+  background:#f4f2ee;
+}
+
+.cart-item-name{
+  font-size:13px;
+  font-weight:600;
+  margin-bottom:8px;
+}
+
+.cart-item-price{
+  font-size:12px;
+  color:#777;
+  margin-bottom:12px;
+}
+
+.cart-quantity{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.cart-quantity button{
+  width:24px;
+  height:24px;
+  border:1px solid #ddd;
+  background:#fff;
+}
+
+.remove-item{
+  background:none;
+  font-size:11px;
+  color:#999;
+  margin-top:8px;
+}
+
+.cart-total-item{
+  font-size:13px;
+  font-weight:700;
+}
+
+.cart-footer{
+  border-top:1px solid var(--line);
+  padding-top:20px;
+}
+
+.subtotal-row{
+  display:flex;
+  justify-content:space-between;
+  font-size:15px;
+}
+
+.cart-note{
+  color:#999;
+  font-size:10px;
+  margin:10px 0 18px;
+}
+
+.checkout-btn{
+  width:100%;
+}
+
+/* AUTH */
+
+.auth-panel{
+  position:relative;
+  width:min(430px,92%);
+  background:#fff;
+  margin:auto;
+  padding:50px 38px 40px;
+}
+
+.auth-brand{
+  font-weight:800;
+  letter-spacing:4px;
+  font-size:18px;
+  margin-bottom:30px;
+}
+
+.auth-title{
+  font-size:31px;
+  letter-spacing:-1px;
+  margin-bottom:8px;
+}
+
+.auth-subtitle{
+  color:#888;
+  font-size:12px;
+  margin-bottom:25px;
+}
+
+.auth-panel input{
+  width:100%;
+  border:1px solid #ddd;
+  padding:15px;
+  margin-bottom:12px;
+  outline:none;
+}
+
+.auth-panel input:focus{
+  border-color:#111;
+}
+
+.auth-submit{
+  width:100%;
+  margin-top:4px;
+}
+
+.auth-message{
+  min-height:20px;
+  margin-top:15px;
+  text-align:center;
+  font-size:11px;
+  color:#777;
+  line-height:1.5;
+}
+
+.switch-auth{
+  background:none;
+  width:100%;
+  margin-top:12px;
+  font-size:11px;
+  text-decoration:underline;
+}
+
+/* MOBILE */
+
+.mobile-panel{
+  width:100%;
+  height:100%;
+  background:#fff;
+  padding:90px 35px;
+  display:flex;
+  flex-direction:column;
+  gap:28px;
+  position:relative;
+}
+
+.mobile-link{
+  font-size:28px;
+  letter-spacing:-1px;
+}
+
+@media(max-width:1000px){
+
+  .products-grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .detail-grid{
+    gap:40px;
+  }
+
+}
+
+@media(max-width:700px){
+
+  .products-grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+  }
+
+  .product-info{
+    padding:14px 12px 17px;
+  }
+
+  .product-name{
+    font-size:13px;
+  }
+
+  .product-bottom{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .add-btn{
+    width:100%;
+  }
+
+  .detail-grid{
+    grid-template-columns:1fr;
+    gap:35px;
+  }
+
+  .detail-image-wrap,
+  .detail-image{
+    min-height:auto;
+    aspect-ratio:1/1;
+  }
+
+  .detail-info h1{
+    font-size:42px;
+  }
+
+  .detail-actions{
+    flex-wrap:wrap;
+  }
+
+  .detail-actions .primary-btn{
+    flex:1;
+    min-width:170px;
+  }
+
+  .search-panel{
+    padding:35px 25px;
+  }
+
+  .cart-drawer{
+    padding:25px 20px;
+  }
+
+}
+
+@media(max-width:420px){
+
+  .products-grid{
+    gap:9px;
+  }
+
+  .product-name{
+    font-size:12px;
+  }
+
+  .product-price{
+    font-size:12px;
+  }
+
+}
+</style>
 <script>
+
+/* ================= SUPABASE ================= */
 
 const SUPABASE_URL =
 "https://jbnatqugmajorwolsfin.supabase.co";
@@ -377,671 +1509,1119 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "sb_publishable_l7tBbN22fFYgPv5bmkEPtw_Di-XHpsY";
 
-const db = supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
-);
-
-let products=[];
-let currentProduct=null;
-let detailQuantity=1;
-let authMode="login";
-
-let cart=JSON.parse(
-localStorage.getItem("cirdrio_cart") || "[]"
+const supabaseClient =
+supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
 );
 
 
-/* PRODUCTS */
+/* ================= DATA ================= */
+
+let products = [];
+let selectedProduct = null;
+let detailQuantity = 1;
+let authMode = "login";
+
+let cart =
+JSON.parse(localStorage.getItem("cirdrio_cart") || "[]");
+
+
+/* ================= HELPERS ================= */
+
+const $ = id => document.getElementById(id);
+
+function money(value){
+  return "₹" + Number(value || 0).toLocaleString("en-IN");
+}
+
+function escapeHTML(value){
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+
+/* ================= PRODUCTS ================= */
 
 async function loadProducts(){
 
-const {data,error}=await db
-.from("products")
-.select('"Id","Name","Discription","Price","Cattogry","Image url","Stock","created_at"')
-.order("created_at",{ascending:false});
+  $("productsLoading").style.display = "block";
+  $("productsError").style.display = "none";
 
-if(error){
-console.error(error);
-document.getElementById("productGrid").innerHTML=
-`<div style="grid-column:1/-1;text-align:center;padding:50px">
-Unable to load products.
-</div>`;
-return;
-}
+  try{
 
-products=data||[];
-renderProducts(products);
-updateCart();
+    const { data, error } =
+      await supabaseClient
+      .from("products")
+      .select('"Id","Name","Discription","Price","Cattogry","Image url","Stock","created_at"')
+      .order("created_at",{ascending:false});
+
+    if(error) throw error;
+
+    products = data || [];
+
+    $("productsLoading").style.display = "none";
+
+    renderProducts(products);
+
+  }catch(error){
+
+    console.error("CIRDRIO PRODUCTS ERROR:",error);
+
+    $("productsLoading").style.display = "none";
+
+    $("productsError").style.display = "block";
+
+    $("productsError").innerHTML =
+      "Collection could not be loaded.<br><small>" +
+      escapeHTML(error.message) +
+      "</small>";
+
+  }
 }
 
 
 function renderProducts(list){
 
-const grid=document.getElementById("productGrid");
+  const grid = $("productsGrid");
 
-if(!list.length){
-grid.innerHTML=
-`<div style="grid-column:1/-1;text-align:center;padding:60px;color:#777">
-No products found.
-</div>`;
-return;
-}
+  if(!list.length){
 
-grid.innerHTML=list.map(product=>{
+    grid.innerHTML = `
+      <div class="state-box" style="grid-column:1/-1;">
+        No products found.
+      </div>
+    `;
 
-const name=product["Name"]||"CIRDRIO Product";
-const price=Number(product["Price"]||0);
-const image=product["Image url"]||"";
-const category=product["Cattogry"]||"Beauty";
+    return;
+  }
 
-return `
-<article class="product-card"
-onclick="openProduct('${escapeAttr(name)}')">
+  grid.innerHTML = list.map((product,index)=>{
 
-<button class="wishlist"
-onclick="event.stopPropagation();toggleWishlist(this)">
-♡
-</button>
+    const stock = Number(product["Stock"] || 0);
 
-<div class="product-image">
-${image
-? `<img src="${escapeAttr(image)}" alt="${escapeAttr(name)}">`
-: `<span>No Image</span>`
-}
-</div>
+    const stockHTML =
+      stock <= 0
+      ? `<div class="stock-out">Out of stock</div>`
+      : stock <= 5
+      ? `<div class="stock-low">Only ${stock} left</div>`
+      : "";
 
-<div class="product-info">
-<div class="product-category">${escapeHTML(category)}</div>
-<div class="product-name">${escapeHTML(name)}</div>
-<div class="product-price">₹${price.toLocaleString("en-IN")}</div>
-</div>
+    return `
 
-</article>`;
-}).join("");
-}
+      <article
+        class="product-card"
+        onclick="openProductByIndex(${products.indexOf(product)})"
+      >
 
+        <div class="product-image-wrap">
 
-/* PRODUCT DETAIL */
+          <img
+            class="product-image"
+            src="${escapeHTML(product["Image url"] || "")}"
+            alt="${escapeHTML(product["Name"])}"
+            loading="lazy"
+            onerror="this.style.opacity='.2'"
+          >
 
-function openProduct(name){
+          <button
+            class="wishlist"
+            onclick="event.stopPropagation();toggleWishlist('${escapeHTML(product["Id"])}',this)"
+            aria-label="Wishlist"
+          >
+            ♡
+          </button>
 
-const product=products.find(p=>p["Name"]===name);
-if(!product)return;
+        </div>
 
-currentProduct=product;
-detailQuantity=1;
+        <div class="product-info">
 
-document.getElementById("detailQty").textContent="1";
-document.getElementById("detailImage").src=product["Image url"]||"";
-document.getElementById("detailName").textContent=product["Name"]||"";
-document.getElementById("detailCategory").textContent=product["Cattogry"]||"Beauty";
+          <div class="product-category">
+            ${escapeHTML(product["Cattogry"] || "Beauty")}
+          </div>
 
-document.getElementById("detailPrice").textContent=
-"₹"+Number(product["Price"]||0).toLocaleString("en-IN");
+          <div class="product-name">
+            ${escapeHTML(product["Name"])}
+          </div>
 
-document.getElementById("detailDescription").textContent=
-product["Discription"]||"A thoughtfully designed CIRDRIO beauty essential.";
+          <div class="product-bottom">
 
-const stock=Number(product["Stock"]||0);
+            <div class="product-price">
+              ${money(product["Price"])}
+            </div>
 
-document.getElementById("detailStock").textContent=
-stock>0 ? `${stock} units available` : "Currently out of stock";
+            <button
+              class="add-btn"
+              onclick="event.stopPropagation();addToCartById('${escapeHTML(product["Id"])}')"
+              ${stock <= 0 ? "disabled" : ""}
+            >
+              ${stock <= 0 ? "Sold out" : "Add to bag"}
+            </button>
 
-document.getElementById("detailWish").textContent="♡";
+          </div>
 
-document.getElementById("homePage").style.display="none";
-document.getElementById("detailPage").classList.add("show");
+          ${stockHTML}
 
-window.scrollTo(0,0);
-}
+        </div>
 
+      </article>
 
-function changeDetailQty(amount){
+    `;
 
-if(!currentProduct)return;
+  }).join("");
 
-const stock=Number(currentProduct["Stock"]||0);
-
-detailQuantity+=amount;
-
-if(detailQuantity<1)detailQuantity=1;
-if(stock>0 && detailQuantity>stock)detailQuantity=stock;
-
-document.getElementById("detailQty").textContent=detailQuantity;
 }
 
 
-function addDetailToCart(){
+/* ================= PRODUCT DETAIL ================= */
 
-if(!currentProduct)return;
+function openProductByIndex(index){
 
-const stock=Number(currentProduct["Stock"]||0);
+  const product = products[index];
 
-if(stock<=0){
-alert("This product is currently out of stock.");
-return;
+  if(!product) return;
+
+  selectedProduct = product;
+  detailQuantity = 1;
+
+  $("detailImage").src =
+    product["Image url"] || "";
+
+  $("detailImage").alt =
+    product["Name"] || "Product";
+
+  $("detailCategory").textContent =
+    product["Cattogry"] || "Beauty";
+
+  $("detailName").textContent =
+    product["Name"] || "Product";
+
+  $("detailPrice").textContent =
+    money(product["Price"]);
+
+  $("detailDescription").textContent =
+    product["Discription"] || "CIRDRIO beauty product.";
+
+  updateDetailQuantity();
+
+  $("productDetail").style.display = "block";
+
+  $("shop").style.display = "none";
+
+  $("categories").style.display = "none";
+
+  $("productDetail").scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
+
 }
 
-const name=currentProduct["Name"];
-const existing=cart.find(item=>item.name===name);
 
-if(existing){
-existing.qty=Math.min(existing.qty+detailQuantity,stock);
-}else{
-cart.push({
-name:name,
-price:Number(currentProduct["Price"]||0),
-image:currentProduct["Image url"]||"",
-qty:detailQuantity,
-stock:stock
+$("closeProduct").addEventListener("click",()=>{
+
+  $("productDetail").style.display = "none";
+
+  $("shop").style.display = "";
+
+  $("categories").style.display = "";
+
+  window.scrollTo({
+    top:$("shop").offsetTop - 80,
+    behavior:"smooth"
+  });
+
 });
-}
-
-saveCart();
-updateCart();
-openCart();
-}
 
 
-function toggleDetailWish(){
+function updateDetailQuantity(){
 
-const b=document.getElementById("detailWish");
-b.textContent=b.textContent==="♡"?"♥":"♡";
+  $("detailQty").textContent =
+    detailQuantity;
+
 }
 
 
-function goHome(){
+$("detailMinus").addEventListener("click",()=>{
 
-document.getElementById("detailPage").classList.remove("show");
-document.getElementById("homePage").style.display="block";
-window.scrollTo({top:0,behavior:"smooth"});
+  if(detailQuantity > 1){
+
+    detailQuantity--;
+
+    updateDetailQuantity();
+
+  }
+
+});
+
+
+$("detailPlus").addEventListener("click",()=>{
+
+  if(!selectedProduct) return;
+
+  const stock =
+    Number(selectedProduct["Stock"] || 0);
+
+  if(detailQuantity < stock){
+
+    detailQuantity++;
+
+    updateDetailQuantity();
+
+  }
+
+});
+
+
+$("detailAdd").addEventListener("click",()=>{
+
+  if(!selectedProduct) return;
+
+  addToCart(
+    selectedProduct,
+    detailQuantity
+  );
+
+});
+
+
+/* ================= WISHLIST ================= */
+
+function getWishlist(){
+
+  return JSON.parse(
+    localStorage.getItem("cirdrio_wishlist") || "[]"
+  );
+
+}
+
+function toggleWishlist(id,button){
+
+  let wishlist = getWishlist();
+
+  if(wishlist.includes(id)){
+
+    wishlist =
+      wishlist.filter(x=>x!==id);
+
+    button.classList.remove("active");
+
+  }else{
+
+    wishlist.push(id);
+
+    button.classList.add("active");
+
+  }
+
+  localStorage.setItem(
+    "cirdrio_wishlist",
+    JSON.stringify(wishlist)
+  );
+
 }
 
 
-/* FILTER */
+$("detailWish").addEventListener("click",()=>{
 
-function filterProducts(category,button){
+  if(!selectedProduct) return;
 
-document.querySelectorAll(".filter")
-.forEach(b=>b.classList.remove("active"));
+  let wishlist = getWishlist();
 
-button.classList.add("active");
+  const id = selectedProduct["Id"];
 
-if(category==="all"){
-renderProducts(products);
-return;
-}
+  if(wishlist.includes(id)){
 
-renderProducts(products.filter(p=>
-String(p["Cattogry"]||"").toLowerCase()===
-category.toLowerCase()
-));
-}
+    wishlist =
+      wishlist.filter(x=>x!==id);
 
+    $("detailWish").classList.remove("active");
 
-/* SEARCH */
+  }else{
 
-function openSearch(){
+    wishlist.push(id);
 
-document.getElementById("searchOverlay").classList.add("show");
+    $("detailWish").classList.add("active");
 
-setTimeout(()=>
-document.getElementById("searchInput").focus(),100);
-}
+  }
 
-function closeSearch(){
+  localStorage.setItem(
+    "cirdrio_wishlist",
+    JSON.stringify(wishlist)
+  );
 
-document.getElementById("searchOverlay").classList.remove("show");
-document.getElementById("searchInput").value="";
-renderProducts(products);
-}
-
-function searchProducts(){
-
-const q=document.getElementById("searchInput").value.toLowerCase().trim();
-
-renderProducts(products.filter(p=>
-String(p["Name"]||"").toLowerCase().includes(q)||
-String(p["Cattogry"]||"").toLowerCase().includes(q)
-));
-}
+});
 
 
-/* CART */
+/* ================= CART ================= */
 
 function saveCart(){
-localStorage.setItem("cirdrio_cart",JSON.stringify(cart));
+
+  localStorage.setItem(
+    "cirdrio_cart",
+    JSON.stringify(cart)
+  );
+
+  updateCart();
+
 }
+
+
+function addToCartById(id){
+
+  const product =
+    products.find(
+      p=>p["Id"]===id
+    );
+
+  if(product){
+
+    addToCart(product,1);
+
+  }
+
+}
+
+
+function addToCart(product,quantity=1){
+
+  const stock =
+    Number(product["Stock"] || 0);
+
+  if(stock <= 0){
+
+    alert("This product is currently out of stock.");
+
+    return;
+
+  }
+
+  const id = product["Id"];
+
+  const existing =
+    cart.find(item=>item.id===id);
+
+  if(existing){
+
+    existing.quantity =
+      Math.min(
+        existing.quantity + quantity,
+        stock
+      );
+
+  }else{
+
+    cart.push({
+
+      id:id,
+
+      name:product["Name"],
+
+      price:Number(product["Price"] || 0),
+
+      image:product["Image url"] || "",
+
+      stock:stock,
+
+      quantity:Math.min(quantity,stock)
+
+    });
+
+  }
+
+  saveCart();
+
+  openCart();
+
+}
+
 
 function updateCart(){
 
-const count=cart.reduce(
-(t,item)=>t+Number(item.qty||0),0
-);
+  const totalItems =
+    cart.reduce(
+      (sum,item)=>sum + Number(item.quantity || 0),
+      0
+    );
 
-document.getElementById("cartCount").textContent=count;
-renderCart();
+  $("cartCount").textContent =
+    totalItems;
+
+  renderCart();
+
 }
+
 
 function renderCart(){
 
-const box=document.getElementById("cartItems");
+  const container =
+    $("cartItems");
 
-if(!cart.length){
+  if(!cart.length){
 
-box.innerHTML=
-`<div style="text-align:center;color:#888;padding:60px 10px">
-Your bag is empty.
-</div>`;
+    container.innerHTML =
+      `<div class="empty-cart">
+        Your bag is empty.
+      </div>`;
 
-document.getElementById("subtotal").textContent="₹0";
-return;
+    $("cartSubtotal").textContent =
+      "₹0";
+
+    return;
+
+  }
+
+  let subtotal = 0;
+
+  container.innerHTML =
+    cart.map((item,index)=>{
+
+      const total =
+        Number(item.price) *
+        Number(item.quantity);
+
+      subtotal += total;
+
+      return `
+
+        <div class="cart-item">
+
+          <img
+            src="${escapeHTML(item.image)}"
+            alt="${escapeHTML(item.name)}"
+          >
+
+          <div>
+
+            <div class="cart-item-name">
+              ${escapeHTML(item.name)}
+            </div>
+
+            <div class="cart-item-price">
+              ${money(item.price)}
+            </div>
+
+            <div class="cart-quantity">
+
+              <button
+                onclick="changeCartQuantity(${index},-1)"
+              >
+                −
+              </button>
+
+              <span>
+                ${item.quantity}
+              </span>
+
+              <button
+                onclick="changeCartQuantity(${index},1)"
+              >
+                +
+              </button>
+
+            </div>
+
+            <button
+              class="remove-item"
+              onclick="removeCartItem(${index})"
+            >
+              Remove
+            </button>
+
+          </div>
+
+          <div class="cart-total-item">
+            ${money(total)}
+          </div>
+
+        </div>
+
+      `;
+
+    }).join("");
+
+  $("cartSubtotal").textContent =
+    money(subtotal);
+
 }
 
-box.innerHTML=cart.map((item,index)=>`
 
-<div class="cart-item">
+function changeCartQuantity(index,change){
 
-<img src="${escapeAttr(item.image)}" alt="${escapeAttr(item.name)}">
+  const item = cart[index];
 
-<div>
+  if(!item) return;
 
-<div class="cart-item-name">${escapeHTML(item.name)}</div>
+  const next =
+    item.quantity + change;
 
-<div class="cart-item-price">
-₹${Number(item.price).toLocaleString("en-IN")}
-</div>
+  if(next <= 0){
 
-<div class="cart-controls">
+    cart.splice(index,1);
 
-<button onclick="changeCartQty(${index},-1)">−</button>
+  }else if(next <= item.stock){
 
-<span>${item.qty}</span>
+    item.quantity = next;
 
-<button onclick="changeCartQty(${index},1)">+</button>
+  }
 
-<button class="remove" onclick="removeCartItem(${index})">
-Remove
-</button>
+  saveCart();
 
-</div>
-
-</div>
-</div>
-
-`).join("");
-
-const subtotal=cart.reduce(
-(t,item)=>t+Number(item.price)*Number(item.qty),0
-);
-
-document.getElementById("subtotal").textContent=
-"₹"+subtotal.toLocaleString("en-IN");
 }
 
-function changeCartQty(index,amount){
-
-const item=cart[index];
-if(!item)return;
-
-item.qty+=amount;
-
-if(item.qty<=0)cart.splice(index,1);
-else if(item.stock && item.qty>item.stock)item.qty=item.stock;
-
-saveCart();
-updateCart();
-}
 
 function removeCartItem(index){
 
-cart.splice(index,1);
-saveCart();
-updateCart();
+  cart.splice(index,1);
+
+  saveCart();
+
 }
+
 
 function openCart(){
 
-document.getElementById("cartOverlay").classList.add("show");
-renderCart();
-}
-
-function closeCart(){
-document.getElementById("cartOverlay").classList.remove("show");
-}
-
-function closeCartOutside(e){
-
-if(e.target===document.getElementById("cartOverlay"))
-closeCart();
-}
-
-function checkout(){
-
-if(!cart.length){
-alert("Your bag is empty.");
-return;
-}
-
-alert("Checkout system is the next step.");
-}
-
-
-/* WISHLIST */
-
-function toggleWishlist(button){
-
-button.classList.toggle("active");
-button.textContent=
-button.classList.contains("active")?"♥":"♡";
-}
-
-
-/* AUTH */
-
-function openAuth(){
-
-db.auth.getSession().then(({data})=>{
-
-if(data.session){
-
-document.getElementById("accountEmail").textContent=
-data.session.user.email;
-
-document.getElementById("accountMenu").classList.toggle("show");
-
-}else{
-
-document.getElementById("authOverlay").classList.add("show");
-setAuthMode("login");
+  $("cartOverlay")
+    .classList.add("active");
 
 }
 
-});
-}
-
-
-function setAuthMode(mode){
-
-authMode=mode;
-
-document.getElementById("authTitle").textContent=
-mode==="login"?"Welcome back":"Create account";
-
-document.getElementById("authSub").textContent=
-mode==="login"
-?"Sign in to your CIRDRIO account."
-:"Create your CIRDRIO account.";
-
-document.getElementById("authSubmit").textContent=
-mode==="login"?"SIGN IN":"CREATE ACCOUNT";
-
-document.getElementById("authSwitch").textContent=
-mode==="login
-==="login"?"Create an account":"Sign in";
-
-document.getElementById("authMessage").textContent="";
-document.getElementById("authEmail").value="";
-document.getElementById("authPassword").value="";
-}
-
-
-/* SWITCH LOGIN / SIGNUP */
-
-function switchAuth(){
-
-setAuthMode(
-authMode==="login" ? "signup" : "login"
+$("cartBtn").addEventListener(
+  "click",
+  openCart
 );
 
+$("closeCart").addEventListener(
+  "click",
+  ()=>{
+    $("cartOverlay")
+      .classList.remove("active");
+  }
+);
+
+
+/* ================= SEARCH ================= */
+
+$("searchBtn").addEventListener(
+  "click",
+  ()=>{
+
+    $("searchOverlay")
+      .classList.add("active");
+
+    setTimeout(
+      ()=>$("searchInput").focus(),
+      100
+    );
+
+  }
+);
+
+
+$("closeSearch").addEventListener(
+  "click",
+  ()=>{
+
+    $("searchOverlay")
+      .classList.remove("active");
+
+  }
+);
+
+
+$("searchInput").addEventListener(
+  "input",
+  e=>{
+
+    const query =
+      e.target.value
+      .trim()
+      .toLowerCase();
+
+    const results =
+      products.filter(product=>{
+
+        return (
+
+          String(product["Name"] || "")
+            .toLowerCase()
+            .includes(query)
+
+          ||
+
+          String(product["Cattogry"] || "")
+            .toLowerCase()
+            .includes(query)
+
+        );
+
+      });
+
+    const box =
+      $("searchResults");
+
+    if(!query){
+
+      box.innerHTML = "";
+
+      return;
+
+    }
+
+    if(!results.length){
+
+      box.innerHTML =
+        `<div class="search-result">
+          No products found.
+        </div>`;
+
+      return;
+
+    }
+
+    box.innerHTML =
+      results.map(product=>{
+
+        const index =
+          products.indexOf(product);
+
+        return `
+
+          <div
+            class="search-result"
+            onclick="openSearchProduct(${index})"
+          >
+
+            <strong>
+              ${escapeHTML(product["Name"])}
+            </strong>
+
+            <span>
+              ${money(product["Price"])}
+            </span>
+
+          </div>
+
+        `;
+
+      }).join("");
+
+  }
+);
+
+
+function openSearchProduct(index){
+
+  $("searchOverlay")
+    .classList.remove("active");
+
+  openProductByIndex(index);
+
 }
 
 
-/* SUBMIT AUTH */
+/* ================= CATEGORY FILTER ================= */
 
-async function submitAuth(){
+document.querySelectorAll(
+  ".category"
+).forEach(button=>{
 
-const email=document
-.getElementById("authEmail")
-.value
-.trim();
+  button.addEventListener(
+    "click",
+    ()=>{
 
-const password=document
-.getElementById("authPassword")
-.value;
+      const category =
+        button.dataset.category;
 
-const message=document
-.getElementById("authMessage");
+      const filtered =
+        products.filter(
+          product =>
+            String(
+              product["Cattogry"] || ""
+            ).toLowerCase()
+            ===
+            category.toLowerCase()
+        );
 
-message.textContent="";
+      $("categoryStatus").textContent =
+        category;
 
-if(!email || !password){
+      $("shop").scrollIntoView({
+        behavior:"smooth"
+      });
 
-message.textContent="Please enter your email and password.";
-return;
+      renderProducts(filtered);
 
-}
+    }
+  );
 
-if(password.length<6){
-
-message.textContent="Password must be at least 6 characters.";
-return;
-
-}
-
-const submit=document.getElementById("authSubmit");
-
-submit.disabled=true;
-submit.textContent="PLEASE WAIT...";
-
-
-if(authMode==="login"){
-
-const {error}=await db.auth.signInWithPassword({
-email,
-password
 });
 
-if(error){
 
-message.textContent=error.message;
-submit.disabled=false;
-submit.textContent="SIGN IN";
-return;
+$("shopNowBtn").addEventListener(
+  "click",
+  ()=>{
 
-}
+    $("shop").scrollIntoView({
+      behavior:"smooth"
+    });
 
-message.textContent="Signed in successfully.";
+  }
+);
 
-setTimeout(()=>{
-closeAuth();
-updateAuthUI();
-},500);
 
-}else{
+/* ================= MOBILE MENU ================= */
 
-const {data,error}=await db.auth.signUp({
+$("mobileMenuBtn").addEventListener(
+  "click",
+  ()=>{
+    $("mobileOverlay")
+      .classList.add("active");
+  }
+);
 
-email,
-password,
+$("closeMobile").addEventListener(
+  "click",
+  ()=>{
+    $("mobileOverlay")
+      .classList.remove("active");
+  }
+);
 
-options:{
-emailRedirectTo:
-"https://cirdriodm.github.io/cirdrio-store/"
-}
+document.querySelectorAll(
+  ".mobile-link"
+).forEach(link=>{
+
+  link.addEventListener(
+    "click",
+    ()=>{
+      $("mobileOverlay")
+        .classList.remove("active");
+    }
+  );
 
 });
 
-if(error){
 
-message.textContent=error.message;
-submit.disabled=false;
-submit.textContent="CREATE ACCOUNT";
-return;
+/* ================= AUTH ================= */
 
-}
+$("accountBtn").addEventListener(
+  "click",
+  async ()=>{
 
-if(data.session){
+    const {
+      data:{
+        session
+      }
+    } =
+      await supabaseClient.auth.getSession();
 
-message.textContent="Account created successfully.";
+    if(session){
 
-setTimeout(()=>{
-closeAuth();
-updateAuthUI();
-},700);
+      const confirmLogout =
+        confirm(
+          "Logout from CIRDRIO?"
+        );
 
-}else{
+      if(confirmLogout){
 
-message.textContent=
-"Account created. Check your email to confirm your account.";
+        await supabaseClient.auth.signOut();
 
-submit.disabled=false;
-submit.textContent="CREATE ACCOUNT";
+        updateAuthUI();
 
-}
+      }
 
-}
+    }else{
 
-}
+      openAuth("login");
 
+    }
 
-/* CLOSE AUTH */
-
-function closeAuth(){
-
-document
-.getElementById("authOverlay")
-.classList.remove("show");
-
-document
-.getElementById("authMessage")
-.textContent="";
-
-}
+  }
+);
 
 
-/* CLOSE AUTH OUTSIDE */
+function openAuth(mode="login"){
 
-function closeAuthOutside(e){
+  authMode = mode;
 
-if(
-e.target===
-document.getElementById("authOverlay")
-){
+  updateAuthMode();
 
-closeAuth();
-
-}
+  $("authOverlay")
+    .classList.add("active");
 
 }
 
 
-/* LOGOUT */
+function updateAuthMode(){
 
-async function logout(){
+  const login =
+    authMode === "login";
 
-await db.auth.signOut();
+  $("authTitle").textContent =
+    login
+    ? "Welcome back"
+    : "Create your account";
 
-document
-.getElementById("accountMenu")
-.classList.remove("show");
+  $("authSubtitle").textContent =
+    login
+    ? "Sign in to your CIRDRIO account."
+    : "Join CIRDRIO and start your beauty journey.";
 
-updateAuthUI();
+  $("authSubmit").textContent =
+    login
+    ? "Sign in"
+    : "Create account";
+
+  $("authSwitch").textContent =
+    login
+    ? "Create an account"
+    : "Already have an account? Sign in";
+
+  $("authMessage").textContent = "";
 
 }
 
 
-/* AUTH UI */
+$("authSwitch").addEventListener(
+  "click",
+  ()=>{
+
+    authMode =
+      authMode === "login"
+      ? "signup"
+      : "login";
+
+    updateAuthMode();
+
+  }
+);
+
+
+$("closeAuth").addEventListener(
+  "click",
+  ()=>{
+    $("authOverlay")
+      .classList.remove("active");
+  }
+);
+
+
+$("authForm").addEventListener(
+  "submit",
+  async e=>{
+
+    e.preventDefault();
+
+    const email =
+      $("authEmail").value.trim();
+
+    const password =
+      $("authPassword").value;
+
+    $("authSubmit").disabled = true;
+
+    $("authMessage").textContent =
+      "Please wait...";
+
+    try{
+
+      if(authMode === "signup"){
+
+        const {
+          data,
+          error
+        } =
+          await supabaseClient.auth.signUp({
+
+            email:email,
+
+            password:password,
+
+            options:{
+              emailRedirectTo:
+                "https://cirdriodm.github.io/cirdrio-store/"
+            }
+
+          });
+
+        if(error) throw error;
+
+        $("authMessage").textContent =
+          "Account created. Check your email to confirm your account.";
+
+      }else{
+
+        const {
+          data,
+          error
+        } =
+          await supabaseClient.auth.signInWithPassword({
+
+            email:email,
+
+            password:password
+
+          });
+
+        if(error) throw error;
+
+        $("authMessage").textContent =
+          "Signed in successfully.";
+
+        setTimeout(()=>{
+
+          $("authOverlay")
+            .classList.remove("active");
+
+          updateAuthUI();
+
+        },700);
+
+      }
+
+    }catch(error){
+
+      console.error(
+        "AUTH ERROR:",
+        error
+      );
+
+      $("authMessage").textContent =
+        error.message ||
+        "Something went wrong.";
+
+    }finally{
+
+      $("authSubmit").disabled = false;
+
+    }
+
+  }
+);
+
 
 async function updateAuthUI(){
 
-const {data}=await db.auth.getSession();
+  const {
+    data:{
+      session
+    }
+  } =
+    await supabaseClient.auth.getSession();
 
-const button=
-document.getElementById("accountButton");
+  const account =
+    $("accountBtn");
 
-if(data.session){
+  if(session){
 
-button.textContent="●";
+    account.title =
+      "Signed in";
 
-}else{
+    account.innerHTML =
+      "●";
 
-button.textContent="♙";
+  }else{
 
-}
+    account.title =
+      "Account";
 
-}
+    account.innerHTML =
+      "♙";
 
-
-/* AUTH STATE */
-
-db.auth.onAuthStateChange(
-(event,session)=>{
-
-const button=
-document.getElementById("accountButton");
-
-if(session){
-
-button.textContent="●";
-
-}else{
-
-button.textContent="♙";
+  }
 
 }
 
-}
+
+supabaseClient.auth.onAuthStateChange(
+  ()=>{
+    updateAuthUI();
+  }
 );
 
 
-/* ESCAPE HTML */
+/* ================= CHECKOUT ================= */
 
-function escapeHTML(value){
+$("checkoutBtn").addEventListener(
+  "click",
+  async ()=>{
 
-return String(value)
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
+    if(!cart.length){
 
-}
+      alert("Your bag is empty.");
+
+      return;
+
+    }
+
+    const {
+      data:{
+        session
+      }
+    } =
+      await supabaseClient.auth.getSession();
+
+    if(!session){
+
+      $("cartOverlay")
+        .classList.remove("active");
+
+      openAuth("login");
+
+      return;
+
+    }
+
+    alert(
+      "Checkout system will be connected next."
+    );
+
+  }
+);
 
 
-/* ESCAPE ATTRIBUTE */
+/* ================= OVERLAY CLOSE ================= */
 
-function escapeAttr(value){
+document.querySelectorAll(
+  ".overlay"
+).forEach(overlay=>{
 
-return escapeHTML(value);
+  overlay.addEventListener(
+    "click",
+    e=>{
 
-}
+      if(e.target === overlay){
 
+        overlay.classList.remove(
+          "active"
+        );
 
-/* SCROLL */
+      }
 
-function scrollToProducts(){
+    }
+  );
 
-document
-.getElementById("categories")
-.scrollIntoView({
-behavior:"smooth"
 });
 
-}
 
-
-/* INITIALIZE */
+/* ================= START ================= */
 
 document.addEventListener(
-"DOMContentLoaded",
-()=>{
+  "DOMContentLoaded",
+  ()=>{
 
-loadProducts();
-updateAuthUI();
+    loadProducts();
 
-}
+    updateAuthUI();
+
+    updateCart();
+
+  }
 );
 
 </script>
