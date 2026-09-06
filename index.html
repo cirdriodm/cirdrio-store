@@ -1,1 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CIRDRIO — Beauty, Refined.</title>
 
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #faf9f7;
+      --text: #171717;
+      --muted: #777;
+      --line: #e6e3df;
+      --dark: #171717;
+      --white: #fff;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250,249,247,.94);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .topbar {
+      max-width: 1400px;
+      margin: auto;
+      height: 78px;
+      padding: 0 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: 4px;
+    }
+
+    nav {
+      display: flex;
+      gap: 30px;
+      font-size: 14px;
+    }
+
+    nav a:hover {
+      opacity: .55;
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .icon {
+      border: 0;
+      background: none;
+      cursor: pointer;
+      font-size: 20px;
+    }
+
+    /* HERO */
+    .hero {
+      max-width: 1400px;
+      margin: auto;
+      min-height: 650px;
+      padding: 90px 28px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      font-size: clamp(55px, 7vw, 105px);
+      line-height: .9;
+      letter-spacing: -5px;
+      font-weight: 700;
+      max-width: 700px;
+    }
+
+    .hero p {
+      margin-top: 28px;
+      max-width: 480px;
+      color: #666;
+      font-size: 17px;
+    }
+
+    .cta {
+      display: inline-flex;
+      margin-top: 35px;
+      padding: 15px 28px;
+      background: var(--dark);
+      color: white;
+      border-radius: 100px;
+      font-size: 14px;
+      transition: .25s;
+    }
+
+    .cta:hover {
+      transform: translateY(-2px);
+      opacity: .85;
+    }
+
+    .hero-art {
+      min-height: 510px;
+      border-radius: 4px;
+      background:
+        radial-gradient(circle at 50% 35%, #eee5dc 0 18%, transparent 19%),
+        linear-gradient(145deg, #ded8d1, #b8aea5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .bottle {
+      width: 190px;
+      height: 330px;
+      border-radius: 30px 30px 22px 22px;
+      background: linear-gradient(90deg, #dedbd5, #fff, #d4d0c9);
+      box-shadow: 30px 35px 60px rgba(0,0,0,.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .bottle:before {
+      content: "";
+      position: absolute;
+      width: 72px;
+      height: 55px;
+      top: -48px;
+      border-radius: 8px 8px 3px 3px;
+      background: #242424;
+    }
+
+    .bottle span {
+      writing-mode: vertical-rl;
+      letter-spacing: 5px;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    /* SECTION */
+    section {
+      max-width: 1400px;
+      margin: auto;
+      padding: 90px 28px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      margin-bottom: 35px;
+    }
+
+    .section-head h2 {
+      font-size: 42px;
+      letter-spacing: -2px;
+    }
+
+    .view {
+      font-size: 13px;
+      border-bottom: 1px solid;
+      padding-bottom: 5px;
+    }
+
+    /* PRODUCTS */
+    .products {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .product {
+      cursor: pointer;
+    }
+
+    .product-img {
+      aspect-ratio: 1 / 1.15;
+      background: #eeeae5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    .product-img div {
+      width: 105px;
+      height: 190px;
+      border-radius: 18px;
+      background: linear-gradient(90deg,#cfcac3,#fff,#c8c2ba);
+      box-shadow: 15px 20px 30px rgba(0,0,0,.12);
+    }
+
+    .product:nth-child(2) .product-img div {
+      width: 160px;
+      height: 110px;
+      border-radius: 15px;
+    }
+
+    .product:nth-child(3) .product-img div {
+      width: 75px;
+      height: 210px;
+    }
+
+    .product:nth-child(4) .product-img div {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+    }
+
+    .product-name {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .product-info {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 7px;
+      color: #777;
+      font-size: 14px;
+    }
+
+    /* BRAND */
+    .brand {
+      background: #181818;
+      color: white;
+      max-width: none;
+      padding: 120px max(28px, calc((100% - 1344px)/2));
+      text-align: center;
+    }
+
+    .brand h2 {
+      font-size: clamp(45px, 7vw, 90px);
+      letter-spacing: -4px;
+      line-height: .95;
+    }
+
+    .brand p {
+      max-width: 580px;
+      margin: 30px auto 0;
+      color: #aaa;
+      font-size: 16px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #111;
+      color: white;
+      padding: 55px 28px;
+      border-top: 1px solid #333;
+    }
+
+    .footer-inner {
+      max-width: 1344px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .footer-logo {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 4px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 25px;
+      color: #aaa;
+      font-size: 13px;
+    }
+
+    /* MOBILE */
+    @media (max-width: 800px) {
+      nav {
+        display: none;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 60px;
+      }
+
+      .hero-art {
+        min-height: 400px;
+      }
+
+      .products {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .section-head h2 {
+        font-size: 32px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+
+      .footer-links {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="topbar">
+      <div class="logo">CIRDRIO</div>
+
+      <nav>
+        <a href="#">New</a>
+        <a href="#shop">Shop</a>
+        <a href="#">Skincare</a>
+        <a href="#">Makeup</a>
+        <a href="#">About</a>
+      </nav>
+
+      <div class="actions">
+        <button class="icon">⌕</button>
+        <button class="icon">♡</button>
+        <button class="icon">🛍</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <div class="hero">
+      <div>
+        <div class="eyebrow">CIRDRIO / BEAUTY</div>
+        <h1>Beauty,<br>refined.</h1>
+        <p>
+          Discover a new standard of beauty — thoughtfully selected,
+          beautifully designed and made for modern living.
+        </p>
+        <a href="#shop" class="cta">Explore collection →</a>
+      </div>
+
+      <div class="hero-art">
+        <div class="bottle">
+          <span>CIRDRIO</span>
+        </div>
+      </div>
+    </div>
+
+    <section id="shop">
+      <div class="section-head">
+        <h2>Featured</h2>
+        <a href="#" class="view">View all →</a>
+      </div>
+
+      <div class="products">
+
+        <div class="product">
+          <div class="product-img">
+            <div></div>
+          </div>
+          <div class="product-name">Hydra Skin Essence</div>
+          <div class="product-info">
+            <span>Skincare</span>
+            <span>₹899</span>
+          </div>
+        </div>
+
+        <div class="product">
+          <div class="product-img">
+            <div></div>
+          </div>
+          <div class="product-name">Cloud Cream</div>
+          <div class="product-info">
+            <span>Moisturizer</span>
+            <span>₹749</span>
+          </div>
+        </div>
+
+        <div class="product">
+          <div class="product-img">
+            <div></div>
+          </div>
+          <div class="product-name">Pure Glow Serum</div>
+          <div class="product-info">
+            <span>Serum</span>
+            <span>₹999</span>
+          </div>
+        </div>
+
+        <div class="product">
+          <div class="product-img">
+            <div></div>
+          </div>
+          <div class="product-name">Daily Balm</div>
+          <div class="product-info">
+            <span>Beauty</span>
+            <span>₹599</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="brand">
+      <div class="eyebrow">THE CIRDRIO STANDARD</div>
+      <h2>Designed for<br>what's next.</h2>
+      <p>
+        CIRDRIO brings beauty, technology and modern commerce together
+        to create a smarter shopping experience.
+      </p>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">CIRDRIO</div>
+
+      <div class="footer-links">
+        <a href="#">Instagram</a>
+        <a href="#">Contact</a>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
