@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Cancellation Policy | CIRDRIO</title>
+<meta name="description" content="CIRDRIO Cancellation Policy — order cancellation, processing, refunds and support.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --ink:#151515;
+  --muted:#666;
+  --soft:#f7f6f3;
+  --line:#e7e5e0;
+  --white:#fff;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html{scroll-behavior:smooth}
+
+body{
+  background:var(--soft);
+  color:var(--ink);
+  font-family:"DM Sans",sans-serif;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+
+a{color:inherit;text-decoration:none}
+
+.header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  height:74px;
+  display:flex;
+  align-items:center;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line);
+}
+
+.nav{
+  width:min(1180px,calc(100% - 40px));
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  font-family:"Manrope",sans-serif;
+  font-size:22px;
+  font-weight:800;
+  letter-spacing:.13em;
+}
+
+.back{
+  color:#555;
+  font-size:14px;
+  font-weight:600;
+  transition:.2s;
+}
+
+.back:hover{
+  color:#000;
+  transform:translateX(-2px);
+}
+
+.hero{
+  background:#fff;
+  border-bottom:1px solid var(--line);
+  padding:90px 20px 82px;
+}
+
+.hero-inner{
+  width:min(940px,100%);
+  margin:auto;
+}
+
+.eyebrow{
+  margin-bottom:18px;
+  color:#777;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+
+h1{
+  max-width:850px;
+  font-family:"Manrope",sans-serif;
+  font-size:clamp(42px,7vw,76px);
+  line-height:1.02;
+  letter-spacing:-.055em;
+  font-weight:800;
+}
+
+.hero p{
+  max-width:680px;
+  margin-top:24px;
+  color:var(--muted);
+  font-size:16px;
+}
+
+.updated{
+  display:inline-block;
+  margin-top:25px;
+  padding:9px 14px;
+  border:1px solid var(--line);
+  border-radius:100px;
+  background:#faf9f7;
+  color:#666;
+  font-size:12px;
+}
+
+.layout{
+  width:min(1180px,calc(100% - 40px));
+  margin:55px auto 90px;
+  display:grid;
+  grid-template-columns:250px 1fr;
+  gap:70px;
+  align-items:start;
+}
+
+.toc{
+  position:sticky;
+  top:105px;
+  padding:24px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:18px;
+}
+
+.toc-title{
+  margin-bottom:15px;
+  font-family:"Manrope",sans-serif;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+.toc a{
+  display:block;
+  padding:7px 0;
+  color:#777;
+  font-size:13px;
+  transition:.2s;
+}
+
+.toc a:hover{
+  padding-left:4px;
+  color:#111;
+}
+
+.document{
+  padding:clamp(30px,5vw,62px);
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:22px;
+}
+
+.section{
+  scroll-margin-top:105px;
+  margin-bottom:46px;
+  padding-bottom:46px;
+  border-bottom:1px solid var(--line);
+}
+
+.section:last-child{
+  margin-bottom:0;
+  padding-bottom:0;
+  border-bottom:0;
+}
+
+h2{
+  margin-bottom:20px;
+  font-family:"Manrope",sans-serif;
+  font-size:clamp(23px,3vw,31px);
+  line-height:1.2;
+  letter-spacing:-.035em;
+}
+
+p{
+  margin-bottom:15px;
+  color:#555;
+  font-size:15px;
+}
+
+ul{
+  margin:10px 0 18px;
+  padding-left:22px;
+}
+
+li{
+  margin:7px 0;
+  color:#555;
+  font-size:15px;
+}
+
+strong{color:#222}
+
+.info{
+  margin:20px 0;
+  padding:20px;
+  background:#f7f6f3;
+  border:1px solid var(--line);
+  border-radius:15px;
+}
+
+.steps{
+  display:grid;
+  gap:12px;
+  margin-top:22px;
+}
+
+.step{
+  padding:18px 20px;
+  background:#faf9f7;
+  border:1px solid var(--line);
+  border-radius:15px;
+}
+
+.step-number{
+  margin-bottom:4px;
+  font-family:"Manrope",sans-serif;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+.step p{margin:0}
+
+.contact{
+  margin-top:20px;
+  padding:27px;
+  background:#171717;
+  border-radius:18px;
+}
+
+.contact p{
+  margin:5px 0;
+  color:#cfcfcf;
+}
+
+.contact a{
+  color:#fff;
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+
+.footer{
+  padding:45px 20px;
+  background:#151515;
+  color:#fff;
+}
+
+.footer-inner{
+  width:min(1180px,100%);
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:30px;
+}
+
+.footer-logo{
+  font-family:"Manrope",sans-serif;
+  font-weight:800;
+  letter-spacing:.13em;
+}
+
+.footer p{
+  margin:0;
+  color:#999;
+  font-size:12px;
+}
+
+@media(max-width:850px){
+  .layout{
+    grid-template-columns:1fr;
+    gap:25px;
+  }
+
+  .toc{
+    position:relative;
+    top:auto;
+  }
+
+  .toc a{
+    display:inline-block;
+    margin-right:15px;
+  }
+}
+
+@media(max-width:560px){
+  .header{height:66px}
+
+  .nav{
+    width:calc(100% - 28px);
+  }
+
+  .logo{font-size:18px}
+
+  .back{font-size:12px}
+
+  .hero{
+    padding:65px 18px 58px;
+  }
+
+  .hero p{font-size:14px}
+
+  .layout{
+    width:calc(100% - 24px);
+    margin:28px auto 55px;
+  }
+
+  .document{
+    padding:27px 21px;
+    border-radius:18px;
+  }
+
+  p,li{font-size:14px}
+
+  .footer-inner{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <nav class="nav">
+    <a href="index.html" class="logo">CIRDRIO</a>
+    <a href="index.html" class="back">← Back to Store</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">CIRDRIO · Orders</div>
+
+    <h1>Cancel with clarity.</h1>
+
+    <p>
+      A straightforward guide to when an order may be cancelled,
+      what happens after cancellation, and how eligible refunds
+      are handled.
+    </p>
+
+    <span class="updated">Last updated: September 2026</span>
+  </div>
+</section>
+
+<main class="layout">
+
+<aside class="toc">
+  <div class="toc-title">On this page</div>
+  <a href="#overview">Overview</a>
+  <a href="#customer">Customer Cancellation</a>
+  <a href="#processing">Processing Orders</a>
+  <a href="#shipped">Shipped Orders</a>
+  <a href="#cirdrio">CIRDRIO Cancellation</a>
+  <a href="#refund">Refunds</a>
+  <a href="#return">Return Instead</a>
+  <a href="#support">Support</a>
+</aside>
+
+<article class="document">
+
+<section class="section" id="overview">
+<h2>1. Cancellation Overview</h2>
+
+<p>
+CIRDRIO understands that customers may occasionally need to cancel
+an order. Cancellation is handled according to the order's current
+fulfilment status and the applicable policy.
+</p>
+
+<p>
+A cancellation request should be submitted as early as possible
+because orders may move into processing or shipment shortly after
+they are placed.
+</p>
+
+<div class="info">
+<strong>Important:</strong>
+Submitting a cancellation request does not automatically guarantee
+that the order can be cancelled.
+</div>
+</section>
+
+<section class="section" id="customer">
+<h2>2. Customer Cancellation Requests</h2>
+
+<p>
+Customers may contact CIRDRIO to request cancellation of an order
+before it has progressed beyond a stage where cancellation is
+reasonably possible.
+</p>
+
+<p>
+When requesting cancellation, provide the order details and the
+information necessary for us to identify the order.
+</p>
+
+<p>
+CIRDRIO will review the order status and communicate the applicable
+outcome.
+</p>
+</section>
+
+<section class="section" id="processing">
+<h2>3. Orders Already Being Processed</h2>
+
+<p>
+Once an order has entered fulfilment, packing or another operational
+stage, cancellation may no longer be possible.
+</p>
+
+<p>
+If cancellation is not possible, the customer may instead have
+rights under the applicable returns and refund policy, subject to
+product eligibility and applicable law.
+</p>
+</section>
+
+<section class="section" id="shipped">
+<h2>4. Orders Already Shipped</h2>
+
+<p>
+An order that has already been dispatched may generally not be
+cancelled through the normal pre-shipment cancellation process.
+</p>
+
+<p>
+Where applicable, the customer may need to follow the relevant
+return process after delivery.
+</p>
+
+<p>
+Customers should avoid refusing delivery solely as a substitute for
+following the applicable cancellation or return process unless
+CIRDRIO specifically instructs otherwise.
+</p>
+</section>
+
+<section class="section" id="cirdrio">
+<h2>5. Cancellation by CIRDRIO</h2>
+
+<p>
+CIRDRIO may cancel an order in circumstances where fulfilment is
+not reasonably possible or where an order requires cancellation for
+legitimate operational, security or compliance reasons.
+</p>
+
+<p>
+Examples may include significant inventory issues, inaccurate
+pricing or product information, suspected fraudulent activity,
+technical errors or circumstances beyond reasonable operational
+control.
+</p>
+
+<p>
+Where an eligible prepaid order is cancelled by CIRDRIO, the
+applicable refund will be processed according to the payment method
+and circumstances of the order.
+</p>
+</section>
+
+<section class="section" id="refund">
+<h2>6. Refund After Cancellation</h2>
+
+<p>
+Where cancellation is successfully completed and a refund is due,
+CIRDRIO will initiate the applicable refund process.
+</p>
+
+<p>
+The time taken for funds to appear may depend on the payment
+provider, bank or financial institution.
+</p>
+
+<p>
+For Cash on Delivery orders that have been cancelled before payment,
+there is generally no payment amount to refund.
+</p>
+
+<p>
+Any refund will remain subject to applicable law and the specific
+circumstances of the order.
+</p>
+</section>
+
+<section class="section" id="return">
+<h2>7. If Cancellation Is No Longer Available</h2>
+
+<p>
+If an order cannot be cancelled because it has already progressed
+through fulfilment or shipment, CIRDRIO may direct the customer to
+the applicable Returns & Refunds Policy.
+</p>
+
+<p>
+Return eligibility, product condition requirements and any applicable
+exceptions will be assessed under that policy.
+</p>
+</section>
+
+<section class="section" id="support">
+<h2>8. Cancellation Support</h2>
+
+<p>
+For cancellation-related assistance, contact CIRDRIO as soon as
+possible and include your order information.
+</p>
+
+<div class="contact">
+<p><strong style="color:#fff;">CIRDRIO</strong></p>
+<p>
+Email:
+<a href="mailto:cirdrio.dm@gmail.com">cirdrio.dm@gmail.com</a>
+</p>
+<p>Website: cirdrio.com</p>
+</div>
+
+</section>
+
+</article>
+</main>
+
+<footer class="footer">
+<div class="footer-inner">
+  <div class="footer-logo">CIRDRIO</div>
+  <p>© 2026 CIRDRIO. All rights reserved.</p>
+</div>
+</footer>
+
+</body>
+</html>
