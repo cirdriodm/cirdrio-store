@@ -1521,6 +1521,25 @@ color:#777;
 line-height:1.6
 }
 
+/* NOTIFICATIONS */
+.notification-btn{position:relative}
+.notification-count{position:absolute;top:3px;right:2px;min-width:17px;height:17px;padding:0 4px;border-radius:20px;background:#111;color:#fff;font-size:9px;display:flex;align-items:center;justify-content:center;border:2px solid #fff}
+.notification-panel{position:relative;width:min(500px,94%);max-height:78vh;overflow:auto;background:#fff;margin:auto;padding:34px;box-shadow:0 25px 70px rgba(0,0,0,.18)}
+.notification-head{display:flex;justify-content:space-between;align-items:flex-start;gap:15px;padding-bottom:18px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.notification-kicker{font-size:8px;letter-spacing:3px;color:#999;margin-bottom:6px}
+.notification-head h3{font-size:27px;letter-spacing:-1px}
+.notification-readall{background:#f1efeb;padding:9px 12px;font-size:8px;letter-spacing:1.2px;text-transform:uppercase}
+.notification-list{display:flex;flex-direction:column}
+.notification-item{padding:17px 4px;border-bottom:1px solid var(--line);cursor:pointer;transition:.2s;border-left:2px solid transparent}
+.notification-item:hover{background:#faf9f7;padding-left:10px}
+.notification-item.unread{border-left-color:#111;background:#faf9f7}
+.notification-item-top{display:flex;justify-content:space-between;gap:15px;align-items:flex-start}
+.notification-title{font-size:12px;font-weight:700;margin-bottom:5px}
+.notification-message{font-size:10px;color:#666;line-height:1.6}
+.notification-time{font-size:8px;color:#aaa;white-space:nowrap}
+.notification-empty{text-align:center;padding:45px 15px;color:#888;font-size:11px}
+@media(max-width:520px){.notification-panel{padding:28px 20px}.notification-head h3{font-size:24px}}
+
 /* MOBILE */
 .mobile-panel{
 width:100%;
@@ -1993,6 +2012,14 @@ textarea:focus-visible, select:focus-visible{
 <circle cx="10.8" cy="10.8" r="6.8"/>
 <path d="m16 16 5 5"/>
 </svg>
+</button>
+
+<button class="icon-btn notification-btn" id="notificationBtn" aria-label="Notifications">
+<svg viewBox="0 0 24 24">
+<path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/>
+<path d="M10 21h4"/>
+</svg>
+<span class="notification-count" id="notificationCount" style="display:none">0</span>
 </button>
 
 <button class="icon-btn" id="accountBtn" aria-label="Account">
@@ -2663,6 +2690,23 @@ Logout
 </div>
 </div>
 
+<!-- NOTIFICATIONS -->
+<div class="overlay" id="notificationOverlay">
+<div class="notification-panel">
+<button class="close-overlay" id="closeNotifications">×</button>
+<div class="notification-head">
+<div>
+<div class="notification-kicker">CIRDRIO UPDATES</div>
+<h3>Notifications</h3>
+</div>
+<button class="notification-readall" id="markAllNotifications">Mark all read</button>
+</div>
+<div id="notificationList" class="notification-list">
+<div class="notification-empty">Loading notifications...</div>
+</div>
+</div>
+</div>
+
 <!-- ADDRESS FORM -->
 <div
 class="overlay"
@@ -3206,6 +3250,8 @@ let orders=[];
 let currentProfile=null;
 let addresses=[];
 let editingAddressId=null;
+let notifications=[];
+let notificationChannel=null;
 
 let cart=JSON.parse(
 localStorage.getItem("cirdrio_cart")||"[]"
@@ -3257,6 +3303,122 @@ t.classList.remove("show");
 function lockBody(){
 document.body.classList.add("lock");
 }
+
+function notificationStatusLabel(type){
+const map={order_status:"Order update"};
+return map[type]||"CIRDRIO update";
+}
+
+function notificationTime(value){
+const d=new Date(value);
+if(Number.isNaN(d.getTime()))return "";
+return d.toLocaleString("en-IN",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"});
+}
+
+function updateNotificationBadge(){
+const count=notifications.filter(n=>!n.is_read).length;
+const badge=$("notificationCount");
+if(!badge)return;
+badge.textContent=count>99?"99+":String(count);
+badge.style.display=count?"flex":"none";
+}
+
+function renderNotifications(){
+const list=$("notificationList");
+if(!list)return;
+if(!notifications.length){
+list.innerHTML="<div class=\"notification-empty\">You\'re all caught up.</div>";
+updateNotificationBadge();
+return;
+}
+list.innerHTML=notifications.map(n=>`
+<div class="notification-item ${n.is_read?'':'unread'}" data-notification-id="${escapeHTML(n.id)}" data-order-id="${escapeHTML(n.order_id||'')}">
+<div class="notification-item-top">
+<div>
+<div class="notification-title">${escapeHTML(n.title)}</div>
+<div class="notification-message">${escapeHTML(n.message)}</div>
+</div>
+<div class="notification-time">${escapeHTML(notificationTime(n.created_at))}</div>
+</div>
+</div>
+`).join('');
+updateNotificationBadge();
+}
+
+async function loadNotifications(){
+try{
+const {data:{session}}=await supabaseClient.auth.getSession();
+if(!session){notifications=[];renderNotifications();return;}
+const {data,error}=await supabaseClient.from("notifications").select("id,order_id,title,message,notification_type,is_read,created_at").eq("user_id",session.user.id).order("created_at",{ascending:false}).limit(30);
+if(error)throw error;
+notifications=data||[];
+renderNotifications();
+}catch(e){
+console.error("Notifications load error:",e);
+$("notificationList").innerHTML=`<div class="notification-empty">Unable to load notifications.</div>`;
+}
+}
+
+async function markNotificationRead(id){
+const {error}=await supabaseClient.from("notifications").update({is_read:true}).eq("id",id);
+if(error)throw error;
+const n=notifications.find(x=>x.id===id);
+if(n)n.is_read=true;
+renderNotifications();
+}
+
+async function markAllNotificationsRead(){
+try{
+const {data:{session}}=await supabaseClient.auth.getSession();
+if(!session)return;
+const {error}=await supabaseClient.from("notifications").update({is_read:true}).eq("user_id",session.user.id).eq("is_read",false);
+if(error)throw error;
+notifications=notifications.map(n=>({...n,is_read:true}));
+renderNotifications();
+toast("All notifications marked as read.");
+}catch(e){
+console.error(e);
+toast(e.message||"Unable to update notifications.");
+}
+}
+
+async function openNotifications(){
+const {data:{session}}=await supabaseClient.auth.getSession();
+if(!session){openAuth("login");return;}
+$("notificationOverlay").classList.add("active");
+lockBody();
+await loadNotifications();
+}
+
+function stopNotificationRealtime(){
+if(notificationChannel){
+supabaseClient.removeChannel(notificationChannel);
+notificationChannel=null;
+}
+}
+
+async function startNotificationRealtime(userId){
+stopNotificationRealtime();
+notificationChannel=supabaseClient.channel("cirdrio-notifications-"+userId)
+.on("postgres_changes",{event:"INSERT",schema:"public",table:"notifications",filter:"user_id=eq."+userId},payload=>{
+notifications=[payload.new,...notifications.filter(n=>n.id!==payload.new.id)].slice(0,30);
+renderNotifications();
+toast(payload.new.title||"New CIRDRIO notification");
+})
+.subscribe();
+}
+
+$("notificationBtn").onclick=openNotifications;
+$("closeNotifications").onclick=()=>closeOverlay("notificationOverlay");
+$("markAllNotifications").onclick=markAllNotificationsRead;
+$("notificationList").addEventListener("click",async e=>{
+const item=e.target.closest(".notification-item");
+if(!item)return;
+const id=item.dataset.notificationId;
+const orderId=item.dataset.orderId;
+try{await markNotificationRead(id);}catch(err){console.error(err);}
+if(orderId){closeOverlay("notificationOverlay");openOrderDetails(orderId);}
+});
 
 
 function unlockBody(){
@@ -4296,6 +4458,7 @@ closeOverlay(
 );
 
 updateAuthUI();
+(async()=>{const {data:{session}}=await supabaseClient.auth.getSession();if(session){await loadNotifications();startNotificationRealtime(session.user.id);}})();
 
 },700);
 
@@ -5291,6 +5454,7 @@ lockBody();
 await loadProfile();
 await loadAddresses();
 await loadOrders();
+await loadNotifications();
 
 }
 
@@ -5631,6 +5795,9 @@ await supabaseClient.auth.signOut();
 currentProfile=null;
 orders=[];
 addresses=[];
+notifications=[];
+stopNotificationRealtime();
+updateNotificationBadge();
 
 closeOverlay(
 "accountOverlay"
@@ -5646,8 +5813,16 @@ toast(
 
 
 supabaseClient.auth.onAuthStateChange(
-()=>{
+(event,session)=>{
 updateAuthUI();
+if(session){
+loadNotifications();
+startNotificationRealtime(session.user.id);
+}else{
+notifications=[];
+stopNotificationRealtime();
+updateNotificationBadge();
+}
 }
 );
 
