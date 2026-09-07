@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Privacy Policy | CIRDRIO</title>
+<meta name="description" content="CIRDRIO Privacy Policy — how we collect, use, protect and manage customer information.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --ink:#151515;
+  --muted:#686868;
+  --soft:#f7f6f3;
+  --line:#e7e5e0;
+  --paper:#fff;
+  --accent:#202020;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:var(--soft);
+  color:var(--ink);
+  font-family:"DM Sans",sans-serif;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+.header{
+  position:sticky;
+  top:0;
+  z-index:20;
+  height:74px;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+}
+
+.nav{
+  width:min(1180px,calc(100% - 40px));
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  font-family:"Manrope",sans-serif;
+  font-size:22px;
+  font-weight:800;
+  letter-spacing:.12em;
+}
+
+.back{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:14px;
+  font-weight:600;
+  color:#555;
+  transition:.2s ease;
+}
+
+.back:hover{
+  color:#000;
+  transform:translateX(-2px);
+}
+
+.hero{
+  background:#fff;
+  border-bottom:1px solid var(--line);
+  padding:90px 20px 82px;
+}
+
+.hero-inner{
+  width:min(940px,100%);
+  margin:auto;
+}
+
+.eyebrow{
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:#777;
+  margin-bottom:18px;
+}
+
+h1{
+  font-family:"Manrope",sans-serif;
+  font-size:clamp(42px,7vw,76px);
+  line-height:1.02;
+  letter-spacing:-.055em;
+  font-weight:800;
+  max-width:800px;
+}
+
+.hero p{
+  max-width:650px;
+  margin-top:24px;
+  color:var(--muted);
+  font-size:16px;
+}
+
+.updated{
+  display:inline-block;
+  margin-top:25px;
+  padding:9px 14px;
+  border:1px solid var(--line);
+  border-radius:100px;
+  font-size:12px;
+  color:#666;
+  background:#faf9f7;
+}
+
+.layout{
+  width:min(1180px,calc(100% - 40px));
+  margin:55px auto 90px;
+  display:grid;
+  grid-template-columns:250px 1fr;
+  gap:70px;
+  align-items:start;
+}
+
+.toc{
+  position:sticky;
+  top:105px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:24px;
+}
+
+.toc-title{
+  font-family:"Manrope",sans-serif;
+  font-size:12px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  margin-bottom:15px;
+}
+
+.toc a{
+  display:block;
+  color:#777;
+  font-size:13px;
+  padding:7px 0;
+  transition:.2s ease;
+}
+
+.toc a:hover{
+  color:#111;
+  padding-left:4px;
+}
+
+.document{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:clamp(30px,5vw,62px);
+}
+
+.section{
+  scroll-margin-top:105px;
+  padding-bottom:46px;
+  margin-bottom:46px;
+  border-bottom:1px solid var(--line);
+}
+
+.section:last-child{
+  border-bottom:0;
+  margin-bottom:0;
+  padding-bottom:0;
+}
+
+h2{
+  font-family:"Manrope",sans-serif;
+  font-size:clamp(23px,3vw,31px);
+  line-height:1.2;
+  letter-spacing:-.035em;
+  margin-bottom:20px;
+}
+
+h3{
+  font-family:"Manrope",sans-serif;
+  font-size:17px;
+  margin:26px 0 9px;
+}
+
+p{
+  color:#555;
+  font-size:15px;
+  margin-bottom:15px;
+}
+
+ul{
+  padding-left:22px;
+  margin:10px 0 18px;
+}
+
+li{
+  color:#555;
+  font-size:15px;
+  margin:7px 0;
+}
+
+strong{
+  color:#222;
+  font-weight:600;
+}
+
+.info{
+  background:#f7f6f3;
+  border:1px solid var(--line);
+  border-radius:15px;
+  padding:20px;
+  margin:20px 0;
+}
+
+.contact{
+  background:#171717;
+  color:#fff;
+  border-radius:18px;
+  padding:27px;
+  margin-top:20px;
+}
+
+.contact p{
+  color:#cfcfcf;
+  margin:5px 0;
+}
+
+.contact a{
+  color:#fff;
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+
+.footer{
+  background:#151515;
+  color:#fff;
+  padding:45px 20px;
+}
+
+.footer-inner{
+  width:min(1180px,100%);
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  gap:30px;
+  align-items:center;
+}
+
+.footer-logo{
+  font-family:"Manrope",sans-serif;
+  font-weight:800;
+  letter-spacing:.12em;
+}
+
+.footer p{
+  color:#999;
+  font-size:12px;
+  margin:0;
+}
+
+@media(max-width:850px){
+  .layout{
+    grid-template-columns:1fr;
+    gap:25px;
+  }
+
+  .toc{
+    position:relative;
+    top:auto;
+  }
+
+  .toc a{
+    display:inline-block;
+    margin-right:15px;
+  }
+
+  .document{
+    border-radius:18px;
+  }
+}
+
+@media(max-width:560px){
+  .nav{
+    width:calc(100% - 28px);
+  }
+
+  .header{
+    height:66px;
+  }
+
+  .logo{
+    font-size:18px;
+  }
+
+  .back{
+    font-size:12px;
+  }
+
+  .hero{
+    padding:65px 18px 58px;
+  }
+
+  .hero p{
+    font-size:14px;
+  }
+
+  .layout{
+    width:calc(100% - 24px);
+    margin:28px auto 55px;
+  }
+
+  .document{
+    padding:27px 21px;
+  }
+
+  p,li{
+    font-size:14px;
+  }
+
+  .footer-inner{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <nav class="nav">
+    <a href="index.html" class="logo">CIRDRIO</a>
+    <a href="index.html" class="back">← Back to Store</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">CIRDRIO · Legal</div>
+
+    <h1>Privacy, handled with clarity.</h1>
+
+    <p>
+      This Privacy Policy explains how CIRDRIO collects, uses, stores,
+      protects and manages information when you use our website,
+      create an account, place an order or interact with our services.
+    </p>
+
+    <span class="updated">Last updated: September 2026</span>
+  </div>
+</section>
+
+<main class="layout">
+
+  <aside class="toc">
+    <div class="toc-title">On this page</div>
+    <a href="#information">Information We Collect</a>
+    <a href="#use">How We Use Information</a>
+    <a href="#orders">Orders & Payments</a>
+    <a href="#accounts">Accounts</a>
+    <a href="#addresses">Saved Addresses</a>
+    <a href="#sharing">Information Sharing</a>
+    <a href="#security">Data Security</a>
+    <a href="#retention">Data Retention</a>
+    <a href="#rights">Your Choices</a>
+    <a href="#children">Children's Privacy</a>
+    <a href="#changes">Policy Changes</a>
+    <a href="#contact">Contact</a>
+  </aside>
+
+  <article class="document">
+
+    <section class="section" id="information">
+      <h2>1. Information We Collect</h2>
+
+      <p>
+        CIRDRIO collects information that you voluntarily provide when
+        using our website and information that is necessary to operate
+        our services.
+      </p>
+
+      <h3>Information you provide</h3>
+      <ul>
+        <li>Full name</li>
+        <li>Email address</li>
+        <li>Phone number</li>
+        <li>Shipping and billing address information</li>
+        <li>Account information</li>
+        <li>Order and purchase information</li>
+        <li>Information you provide when contacting support</li>
+      </ul>
+
+      <h3>Information generated through use</h3>
+      <p>
+        Depending on how you use the website, we may also process
+        information associated with your account, orders, saved
+        addresses, cart activity and other actions necessary to provide
+        the requested service.
+      </p>
+    </section>
+
+    <section class="section" id="use">
+      <h2>2. How We Use Your Information</h2>
+
+      <p>We may use information to:</p>
+
+      <ul>
+        <li>Create and manage your CIRDRIO account.</li>
+        <li>Process and fulfil orders.</li>
+        <li>Deliver products to the address you provide.</li>
+        <li>Provide customer support.</li>
+        <li>Maintain and improve our website and services.</li>
+        <li>Prevent fraud, abuse and unauthorized activity.</li>
+        <li>Maintain business, security and operational records.</li>
+        <li>Communicate with you regarding your account or orders.</li>
+      </ul>
+
+      <p>
+        We aim to collect and use information only for legitimate
+        business and service purposes relevant to your interaction with
+        CIRDRIO.
+      </p>
+    </section>
+
+    <section class="section" id="orders">
+      <h2>3. Orders & Payments</h2>
+
+      <p>
+        When you place an order, we process information required to
+        create and fulfil that order, including your contact details,
+        delivery information, purchased products and order totals.
+      </p>
+
+      <div class="info">
+        <strong>Payment information:</strong>
+        CIRDRIO does not intend to store complete payment-card
+        credentials on its own systems. When online payment services
+        are introduced, payment processing will be handled through the
+        applicable payment service provider under that provider's
+        terms and privacy practices.
+      </div>
+
+      <p>
+        Where Cash on Delivery or another payment method is offered,
+        relevant payment and order information may be recorded to
+        manage the transaction.
+      </p>
+    </section>
+
+    <section class="section" id="accounts">
+      <h2>4. Accounts & Profile Information</h2>
+
+      <p>
+        If you create a CIRDRIO account, information associated with
+        your account may be stored so that we can authenticate you,
+        maintain your profile and provide account-related services.
+      </p>
+
+      <p>
+        You are responsible for keeping your account credentials
+        confidential and for activity performed through your account.
+      </p>
+    </section>
+
+    <section class="section" id="addresses">
+      <h2>5. Saved Addresses</h2>
+
+      <p>
+        CIRDRIO may allow registered customers to save delivery
+        addresses for faster checkout.
+      </p>
+
+      <p>
+        Saved addresses are associated with your account and are used
+        to support checkout and delivery-related functionality.
+      </p>
+
+      <p>
+        You can review, update or remove saved address information
+        through the available account functionality, subject to any
+        information that must be retained for legitimate business,
+        legal or transaction-record purposes.
+      </p>
+    </section>
+
+    <section class="section" id="sharing">
+      <h2>6. When We Share Information</h2>
+
+      <p>
+        CIRDRIO does not sell your personal information as a standalone
+        product.
+      </p>
+
+      <p>
+        We may share information where reasonably necessary with
+        service providers and partners that help us operate the
+        business, such as technology, hosting, payment, logistics,
+        communication or customer-support providers.
+      </p>
+
+      <p>
+        Information may also be disclosed when required by applicable
+        law, legal process, regulatory requirements, or where necessary
+        to protect the rights, security or property of CIRDRIO, our
+        customers or others.
+      </p>
+    </section>
+
+    <section class="section" id="security">
+      <h2>7. Data Security</h2>
+
+      <p>
+        We take reasonable technical and organizational measures to
+        protect information against unauthorized access, alteration,
+        disclosure or destruction.
+      </p>
+
+      <p>
+        However, no internet transmission or electronic storage system
+        can be guaranteed to be completely secure. You should therefore
+        use appropriate care when sharing information online.
+      </p>
+    </section>
+
+    <section class="section" id="retention">
+      <h2>8. Data Retention</h2>
+
+      <p>
+        We retain information for as long as reasonably necessary to
+        provide our services, maintain accounts, fulfil and document
+        transactions, resolve disputes, comply with legal obligations,
+        prevent abuse and enforce our agreements.
+      </p>
+
+      <p>
+        Retention periods may vary depending on the type and purpose of
+        the information.
+      </p>
+    </section>
+
+    <section class="section" id="rights">
+      <h2>9. Your Choices & Requests</h2>
+
+      <p>
+        Depending on applicable law, you may have rights relating to
+        your personal information, including requesting access,
+        correction or deletion of certain information.
+      </p>
+
+      <p>
+        You may also choose not to provide certain information.
+        However, some information is necessary for account creation,
+        checkout, delivery and other requested services.
+      </p>
+
+      <p>
+        To make a privacy-related request, contact CIRDRIO using the
+        details provided below.
+      </p>
+    </section>
+
+    <section class="section" id="children">
+      <h2>10. Children's Privacy</h2>
+
+      <p>
+        CIRDRIO's services are intended for users who are legally able
+        to use the service and make purchases under applicable law.
+        We do not knowingly seek to collect personal information from
+        children in circumstances where such collection is prohibited.
+      </p>
+
+      <p>
+        If you believe that a child has provided personal information
+        to us inappropriately, please contact us so that the matter can
+        be reviewed.
+      </p>
+    </section>
+
+    <section class="section" id="changes">
+      <h2>11. Changes to This Privacy Policy</h2>
+
+      <p>
+        CIRDRIO may update this Privacy Policy from time to time to
+        reflect changes in our services, technology, legal requirements
+        or business practices.
+      </p>
+
+      <p>
+        When changes are made, the updated version will be published
+        on this page with a revised “Last updated” date.
+      </p>
+    </section>
+
+    <section class="section" id="contact">
+      <h2>12. Contact CIRDRIO</h2>
+
+      <p>
+        If you have questions, concerns or requests relating to this
+        Privacy Policy or the handling of your information, contact us.
+      </p>
+
+      <div class="contact">
+        <p><strong style="color:#fff;">CIRDRIO</strong></p>
+        <p>Email: <a href="mailto:cirdrio.dm@gmail.com">cirdrio.dm@gmail.com</a></p>
+        <p>Website: cirdrio.com</p>
+      </div>
+    </section>
+
+  </article>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">CIRDRIO</div>
+    <p>© 2026 CIRDRIO. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>
