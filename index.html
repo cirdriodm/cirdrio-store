@@ -798,54 +798,52 @@ width:35px;
 height:35px;
 border-radius:50%;
 font-size:24px;
-color:#111
+line-height:1;
+color:#111;
+z-index:4
 }
-.close-overlay:hover{background:#f1efeb}
-.search-overlay{
-align-items:flex-start;
-padding-top:80px
-}
+.close-overlay:hover{background:#f2f0ec}
+
+/* SEARCH */
 .search-panel{
-width:min(850px,94%);
+position:relative;
+width:min(850px,92%);
+margin-top:100px;
 background:#fff;
 padding:45px;
-box-shadow:0 25px 70px rgba(0,0,0,.18)
+box-shadow:0 30px 80px rgba(0,0,0,.15)
 }
-.search-title{
-font-size:10px;
+.search-label{
+font-size:9px;
 letter-spacing:3px;
-text-transform:uppercase;
 color:#999;
 margin-bottom:15px
 }
-.search-input{
+.search-panel input{
 width:100%;
 border:0;
-border-bottom:1px solid #ccc;
-padding:13px 0;
-font-size:25px;
-outline:none
+border-bottom:1px solid #222;
+padding:14px 0;
+outline:none;
+font-size:25px
 }
 .search-results{
-margin-top:25px;
-display:flex;
-flex-direction:column;
-gap:10px
+margin-top:20px;
+max-height:400px;
+overflow:auto
 }
 .search-result{
-padding:14px 0;
+padding:15px 0;
 border-bottom:1px solid var(--line);
 cursor:pointer
 }
-.search-result:hover{padding-left:8px}
-.search-result-name{
-font-size:13px;
-font-weight:700;
-margin-bottom:4px
+.search-result strong{
+display:block;
+margin-bottom:5px
 }
-.search-result-meta{
-font-size:9px;
-color:#888
+.search-result span{
+color:#888;
+font-size:11px
 }
 
 /* CART */
@@ -854,137 +852,226 @@ justify-content:flex-end;
 align-items:stretch
 }
 .cart-drawer{
-width:min(450px,100%);
+width:min(470px,100%);
 height:100%;
 background:#fff;
-padding:35px;
-box-shadow:-20px 0 60px rgba(0,0,0,.16);
+padding:30px;
 display:flex;
-flex-direction:column
+flex-direction:column;
+box-shadow:-20px 0 50px rgba(0,0,0,.12)
 }
-.cart-head{
+.cart-header{
 display:flex;
-align-items:center;
 justify-content:space-between;
-padding-bottom:22px;
-border-bottom:1px solid var(--line)
+padding-bottom:25px;
+border-bottom:1px solid var(--line);
+position:relative
 }
-.cart-title{
-font-size:27px;
-letter-spacing:-1px
+.cart-small{
+font-size:8px;
+letter-spacing:3px;
+color:#999;
+margin-bottom:7px
 }
+.cart-header h2{font-size:27px}
 .cart-items{
 flex:1;
 overflow:auto;
 padding:20px 0
 }
-.cart-empty{
-padding:55px 0;
-text-align:center;
+.empty-cart{
+height:100%;
+display:flex;
+align-items:center;
+justify-content:center;
 color:#888;
-font-size:11px
+font-size:12px
 }
 .cart-item{
 display:grid;
-grid-template-columns:75px 1fr auto;
-gap:13px;
-padding:14px 0;
+grid-template-columns:78px 1fr auto;
+gap:14px;
+padding:16px 0;
 border-bottom:1px solid var(--line)
 }
-.cart-item-image{
-width:75px;
-height:82px;
-background:#f0eee9;
-object-fit:cover
+.cart-item img{
+width:78px;
+height:90px;
+object-fit:cover;
+background:#f4f2ee
 }
 .cart-item-name{
-font-size:11px;
-font-weight:700;
-margin-bottom:5px
+font-size:12px;
+font-weight:600;
+margin-bottom:8px
 }
 .cart-item-price{
-font-size:10px;
-color:#666
+font-size:11px;
+color:#777;
+margin-bottom:12px
 }
-.cart-item-controls{
+.cart-quantity{
 display:flex;
 align-items:center;
-gap:6px;
-margin-top:10px
+gap:10px
 }
-.cart-qty-btn{
-width:25px;
-height:25px;
+.cart-quantity button{
+width:24px;
+height:24px;
 border:1px solid #ddd;
 background:#fff
 }
-.cart-qty{
-font-size:10px;
-min-width:20px;
-text-align:center
-}
 .remove-item{
 background:none;
+font-size:10px;
 color:#999;
-font-size:8px;
-letter-spacing:1px;
-text-transform:uppercase;
 margin-top:8px
 }
-.remove-item:hover{color:#111}
-.cart-summary{
+.cart-total-item{
+font-size:12px;
+font-weight:700
+}
+.cart-footer{
 border-top:1px solid var(--line);
 padding-top:20px
 }
-.cart-summary-row{
+.subtotal-row{
 display:flex;
 justify-content:space-between;
-font-size:12px;
-margin-bottom:15px
+font-size:14px
 }
-.cart-summary-row.total{
-font-size:16px;
-font-weight:700;
-margin-bottom:20px
+.cart-note{
+color:#999;
+font-size:9px;
+margin:10px 0 18px
 }
-.cart-checkout{
-width:100%
-}
+.checkout-btn{width:100%}
 
 /* AUTH */
-.auth-overlay{
-align-items:center;
-padding:20px
-}
 .auth-panel{
 position:relative;
-width:min(430px,100%);
+width:min(430px,92%);
 background:#fff;
-padding:45px;
-box-shadow:0 25px 70px rgba(0,0,0,.2)
+margin:auto;
+padding:50px 38px 40px;
+box-shadow:0 25px 70px rgba(0,0,0,.18)
 }
-.auth-kicker{
-font-size:9px;
-letter-spacing:3px;
-color:#999;
-text-transform:uppercase;
-margin-bottom:10px
+.auth-brand{
+font-weight:800;
+letter-spacing:4px;
+font-size:18px;
+margin-bottom:30px
 }
-.auth-panel h2{
-font-size:32px;
-letter-spacing:-1.5px;
-margin-bottom:7px
+.auth-title{
+font-size:31px;
+letter-spacing:-1px;
+margin-bottom:8px
 }
 .auth-subtitle{
-font-size:10px;
 color:#888;
-margin-bottom:25px;
-line-height:1.6
+font-size:11px;
+margin-bottom:25px
 }
-.auth-field{
-margin-bottom:14px
+.auth-panel input{
+width:100%;
+border:1px solid #ddd;
+padding:15px;
+margin-bottom:12px;
+outline:none
 }
-.auth-field label{
+.auth-panel input:focus{
+border-color:#111
+}
+.auth-submit{
+width:100%;
+margin-top:4px
+}
+.auth-message{
+min-height:20px;
+margin-top:15px;
+text-align:center;
+font-size:10px;
+color:#777;
+line-height:1.5
+}
+.switch-auth{
+background:none;
+width:100%;
+margin-top:12px;
+font-size:10px;
+text-decoration:underline
+}
+
+/* ACCOUNT */
+.account-panel{
+position:relative;
+width:min(820px,94%);
+max-height:92vh;
+overflow:auto;
+background:#fff;
+margin:auto;
+padding:42px;
+box-shadow:0 25px 70px rgba(0,0,0,.18)
+}
+.account-head{
+display:flex;
+justify-content:space-between;
+align-items:center;
+border-bottom:1px solid var(--line);
+padding-bottom:22px;
+margin-bottom:25px
+}
+.account-kicker{
+font-size:8px;
+letter-spacing:3px;
+color:#999;
+margin-bottom:7px
+}
+.account-head h2{
+font-size:30px;
+letter-spacing:-1px
+}
+.account-email{
+font-size:11px;
+color:#777
+}
+.account-section-title{
+font-size:9px;
+letter-spacing:2px;
+text-transform:uppercase;
+color:#888;
+margin:25px 0 12px
+}
+.account-profile{
+display:grid;
+grid-template-columns:110px 1fr;
+gap:25px;
+align-items:center;
+padding:22px;
+background:#f7f6f3;
+border:1px solid #ebe8e2
+}
+.profile-avatar{
+width:92px;
+height:92px;
+border-radius:50%;
+background:#111;
+color:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+font-weight:700;
+letter-spacing:1px;
+overflow:hidden;
+margin:auto
+}
+.profile-avatar img{
+width:100%;
+height:100%;
+object-fit:cover
+}
+.profile-label{
 display:block;
 font-size:8px;
 letter-spacing:1.7px;
@@ -992,452 +1079,284 @@ text-transform:uppercase;
 color:#777;
 margin-bottom:7px
 }
-.auth-field input{
+.profile-field{
+width:100%;
+border:1px solid #ddd;
+background:#fff;
+padding:13px;
+outline:none;
+margin-bottom:12px
+}
+.profile-field:focus{
+border-color:#111
+}
+.profile-save{
+background:#111;
+color:#fff;
+padding:12px 18px;
+font-size:9px;
+letter-spacing:1.5px;
+text-transform:uppercase
+}
+.profile-message{
+font-size:10px;
+color:#777;
+margin-top:10px;
+min-height:15px
+}
+
+/* ADDRESSES */
+.address-actions{
+display:flex;
+gap:10px;
+align-items:center;
+justify-content:space-between;
+margin-bottom:12px
+}
+.address-list{
+display:flex;
+flex-direction:column;
+gap:10px
+}
+.address-card{
+border:1px solid var(--line);
+padding:18px;
+background:#fff
+}
+.address-card.default{
+border-color:#111
+}
+.address-card-top{
+display:flex;
+justify-content:space-between;
+gap:12px;
+align-items:flex-start
+}
+.address-name{
+font-size:13px;
+font-weight:700;
+margin-bottom:5px
+}
+.address-phone{
+font-size:10px;
+color:#777;
+margin-bottom:10px
+}
+.default-badge{
+font-size:8px;
+letter-spacing:1px;
+text-transform:uppercase;
+padding:6px 8px;
+background:#111;
+color:#fff
+}
+.address-text{
+font-size:11px;
+color:#555;
+line-height:1.7
+}
+.address-card-actions{
+display:flex;
+gap:8px;
+margin-top:14px
+}
+.address-card-actions button{
+background:#f1efeb;
+padding:8px 11px;
+font-size:8px;
+letter-spacing:1px;
+text-transform:uppercase
+}
+.address-empty{
+text-align:center;
+padding:28px;
+border:1px dashed #ddd;
+color:#888;
+font-size:11px
+}
+
+/* ADDRESS FORM */
+.address-form-panel{
+position:relative;
+width:min(680px,94%);
+max-height:92vh;
+overflow:auto;
+background:#fff;
+margin:auto;
+padding:42px;
+box-shadow:0 25px 70px rgba(0,0,0,.18)
+}
+.address-form-title{
+font-size:31px;
+letter-spacing:-1px;
+margin-bottom:7px
+}
+.address-form-subtitle{
+font-size:11px;
+color:#888;
+margin-bottom:25px
+}
+.address-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:14px
+}
+.address-field{
+margin-bottom:5px
+}
+.address-field.full{
+grid-column:1/-1
+}
+.address-field label{
+display:block;
+font-size:8px;
+letter-spacing:1.7px;
+text-transform:uppercase;
+color:#777;
+margin-bottom:7px
+}
+.address-field input{
 width:100%;
 border:1px solid #ddd;
 padding:13px;
 outline:none
 }
-.auth-field input:focus{
+.address-field input:focus{
 border-color:#111
 }
-.auth-message{
-min-height:18px;
+.address-default{
+display:flex;
+gap:8px;
+align-items:center;
 font-size:10px;
-color:#777;
-margin:10px 0
+color:#555;
+margin-top:12px
 }
-.auth-switch{
-text-align:center;
-font-size:9px;
-color:#888;
-margin-top:17px
+.address-default input{
+width:15px;
+height:15px
 }
-.auth-switch button{
-background:none;
-font-weight:700;
-text-decoration:underline
+.form-actions{
+display:flex;
+gap:10px;
+margin-top:22px
 }
+.form-actions .primary-btn{flex:1}
 
-/* ACCOUNT */
-.account-overlay{
-align-items:flex-start;
-padding:35px 0;
-overflow:auto
-}
-.account-panel{
-position:relative;
-width:min(850px,94%);
-background:#fff;
-padding:45px;
-box-shadow:0 25px 70px rgba(0,0,0,.18)
-}
-.account-head{
-display:flex;
-align-items:flex-start;
-justify-content:space-between;
-gap:20px;
-padding-bottom:25px;
-border-bottom:1px solid var(--line);
-margin-bottom:30px
-}
-.account-kicker{
-font-size:8px;
-letter-spacing:3px;
-text-transform:uppercase;
-color:#999;
-margin-bottom:8px
-}
-.account-head h2{
-font-size:35px;
-letter-spacing:-1.5px
-}
-.account-profile{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:20px;
-padding:20px;
-background:#faf9f7;
-border:1px solid #ebe8e2;
-margin-bottom:30px
-}
-.account-email{
-grid-column:1/-1;
-font-size:11px;
-color:#777
-}
-.profile-field label{
-display:block;
-font-size:8px;
-letter-spacing:1.5px;
-text-transform:uppercase;
-color:#777;
-margin-bottom:7px
-}
-.profile-field input{
-width:100%;
-border:1px solid #ddd;
-padding:12px;
-background:#fff;
-outline:none
-}
-.profile-save{
-margin-top:15px;
-background:#111;
-color:#fff;
-padding:12px 18px;
-font-size:9px;
-letter-spacing:1.4px;
-text-transform:uppercase
-}
-.account-section{
-margin-top:35px
-}
-.account-section-head{
-display:flex;
-justify-content:space-between;
-align-items:end;
-margin-bottom:16px
-}
-.account-section-title{
-font-size:18px;
-font-weight:700
-}
-.account-section-sub{
-font-size:9px;
-color:#999
-}
-.address-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:12px
-}
-.address-card{
-border:1px solid #e3dfd8;
-padding:18px;
-background:#fff
-}
-.address-card.default{
-border-color:#111;
-box-shadow:0 7px 20px rgba(0,0,0,.05)
-}
-.address-badge{
-display:inline-block;
-font-size:7px;
-letter-spacing:1.5px;
-text-transform:uppercase;
-padding:5px 7px;
-background:#111;
-color:#fff;
-margin-bottom:9px
-}
-.address-name{
-font-size:11px;
-font-weight:700;
-margin-bottom:4px
-}
-.address-line{
-font-size:10px;
-color:#666;
-line-height:1.6
-}
-.address-actions{
-display:flex;
-gap:7px;
-margin-top:12px;
-flex-wrap:wrap
-}
-.small-btn{
-background:#f3f1ed;
-padding:8px 10px;
-font-size:7px;
-letter-spacing:1px;
-text-transform:uppercase
-}
-.danger-btn{
-background:#f7eeee;
-color:#8c4444;
-border-color:#ead7d7
-}
-.orders-list{
+/* ORDER */
+.order-list{
 display:flex;
 flex-direction:column;
 gap:10px
 }
 .order-card{
-border:1px solid #e3dfd8;
+border:1px solid var(--line);
 padding:17px;
-display:grid;
-grid-template-columns:1fr auto;
-gap:12px;
 cursor:pointer;
-transition:.2s
+transition:.25s
 }
 .order-card:hover{
-transform:translateY(-1px);
-box-shadow:0 7px 18px rgba(0,0,0,.05)
+border-color:#aaa;
+transform:translateY(-1px)
 }
-.order-number{
+.order-top{
+display:flex;
+justify-content:space-between;
+gap:15px;
+margin-bottom:8px
+}
+.order-id{
 font-size:11px;
-font-weight:700;
-margin-bottom:5px
+font-weight:700
 }
 .order-date{
-font-size:9px;
+font-size:10px;
 color:#999
 }
-.order-total{
-font-size:12px;
-font-weight:700;
-text-align:right
-}
-.status-pill{
-display:inline-flex;
+.order-bottom{
+display:flex;
+justify-content:space-between;
 align-items:center;
-padding:6px 9px;
-font-size:7px;
+font-size:11px;
+color:#666
+}
+.status{
+font-size:8px;
 letter-spacing:1px;
 text-transform:uppercase;
+padding:6px 8px;
 background:#f1efeb;
-margin-top:6px
+color:#555
 }
-.status-confirmed,
-.status-processing{
-background:#edf3ef;
-color:#526d59
-}
-.status-shipped{
-background:#eef1f6;
-color:#52627b
-}
-.status-delivered{
-background:#eaf3eb;
-color:#486a4e
-}
-.status-cancelled{
-background:#f7eeee;
-color:#8c4444
+.status.confirmed{background:#eef3f7;color:#536b7c}
+.status.processing{background:#f3efe7;color:#8a7045}
+.status.shipped{background:#edf1f5;color:#536b80}
+.status.delivered{background:#e9f0ea;color:#55705c}
+.status.cancelled{background:#f2e8e8;color:#895d5d}
+.orders-empty{
+text-align:center;
+padding:40px;
+color:#888;
+font-size:11px
 }
 
-/* ORDER DETAIL */
-.order-detail-overlay{
-align-items:center;
-padding:25px
-}
+/* ORDER DETAILS */
 .order-detail-panel{
 position:relative;
-width:min(700px,100%);
+width:min(620px,94%);
 max-height:90vh;
 overflow:auto;
 background:#fff;
-padding:42px;
-box-shadow:0 25px 70px rgba(0,0,0,.2)
+margin:auto;
+padding:40px
 }
-.order-detail-head{
-padding-bottom:20px;
-border-bottom:1px solid var(--line);
-margin-bottom:20px
+.order-detail-title{
+font-size:29px;
+letter-spacing:-1px;
+margin-bottom:5px
 }
-.order-detail-kicker{
-font-size:8px;
-letter-spacing:3px;
-color:#999;
-margin-bottom:8px
+.order-detail-sub{
+font-size:10px;
+color:#888;
+margin-bottom:25px
 }
-.order-detail-head h3{
-font-size:27px;
-margin-bottom:8px
-}
-.order-detail-status{
-font-size:8px;
-letter-spacing:1.5px;
-text-transform:uppercase;
-display:inline-block;
-padding:7px 9px;
-background:#f1efeb
-}
-.order-items-detail{
+.detail-row{
 display:flex;
-flex-direction:column;
-gap:10px;
+justify-content:space-between;
+gap:20px;
+padding:12px 0;
+border-bottom:1px solid var(--line);
+font-size:11px
+}
+.detail-row span:first-child{color:#888}
+.order-items{
 margin:20px 0
 }
-.order-item-detail{
-display:grid;
-grid-template-columns:60px 1fr auto;
-gap:12px;
-align-items:center;
-padding:10px 0;
-border-bottom:1px solid #eee
-}
-.order-item-thumb{
-width:60px;
-height:65px;
-background:#f0eee9;
-object-fit:cover
-}
-.order-item-detail-name{
-font-size:10px;
-font-weight:700
-}
-.order-item-detail-meta{
-font-size:9px;
-color:#888;
-margin-top:4px
-}
-.order-item-detail-total{
-font-size:10px;
-font-weight:700
-}
-.order-info-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:15px;
-margin-top:25px
-}
-.order-info-box{
-padding:15px;
-background:#faf9f7;
-border:1px solid #ebe8e2
-}
-.order-info-box h4{
-font-size:8px;
-letter-spacing:1.7px;
-text-transform:uppercase;
-color:#777;
-margin-bottom:8px
-}
-.order-info-box p{
-font-size:10px;
-line-height:1.7;
-color:#555
-}
-.order-totals{
-margin-top:20px;
-border-top:1px solid var(--line);
-padding-top:15px
-}
-.order-total-row{
+.order-item-line{
 display:flex;
 justify-content:space-between;
-font-size:10px;
-margin-bottom:8px
-}
-.order-total-row.grand{
-font-size:15px;
-font-weight:700;
-padding-top:8px;
-border-top:1px solid var(--line)
+padding:10px 0;
+font-size:11px
 }
 
-/* TRACKING */
-.tracking-box{
-margin-top:22px;
-padding:20px;
-background:#faf9f7;
-border:1px solid #ebe8e2
-}
-.tracking-head{
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:15px;
-margin-bottom:18px
-}
-.tracking-kicker{
-font-size:8px;
-letter-spacing:2px;
-text-transform:uppercase;
-color:#999
-}
-.tracking-status{
-padding:7px 10px;
-background:#111;
-color:#fff;
-font-size:7px;
-letter-spacing:1.2px;
-text-transform:uppercase
-}
-.tracking-steps{
-position:relative;
-display:grid;
-grid-template-columns:repeat(5,1fr);
-gap:5px
-}
-.tracking-steps:before{
-content:"";
-position:absolute;
-left:10%;
-right:10%;
-top:11px;
-height:1px;
-background:#d9d5cd
-}
-.track-step{
-position:relative;
-z-index:1;
-text-align:center
-}
-.track-dot{
-width:23px;
-height:23px;
-margin:auto;
-border-radius:50%;
-background:#fff;
-border:1px solid #d9d5cd;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:10px;
-color:#999
-}
-.track-step.active .track-dot,
-.track-step.complete .track-dot{
-background:#111;
-color:#fff;
-border-color:#111
-}
-.track-step.complete .track-dot:before{
-content:"✓"
-}
-.track-step.complete .track-dot{
-font-size:0
-}
-.track-label{
-font-size:8px;
-color:#999;
-line-height:1.3
-}
-.track-step.active .track-label,
-.track-step.complete .track-label{
-color:#111;
-font-weight:700
-}
-.track-note{
-margin-top:16px;
-padding-top:14px;
-border-top:1px solid #ebe8e2;
-font-size:10px;
-color:#777;
-line-height:1.6
-}
-@media(max-width:520px){
-.tracking-box{padding:18px 14px}
-.tracking-steps:before{
-left:8%;
-right:8%;
-top:11px
-}
-.track-dot{
-width:23px;
-height:23px
-}
-.track-label{font-size:7px}
-.tracking-status{
-font-size:7px;
-padding:6px 8px
-}
-}
+
+/* ORDER TRACKING TIMELINE */
+.tracking-box{margin:24px 0 28px;padding:22px 20px;background:#faf9f7;border:1px solid #ebe8e2;border-radius:16px}
+.tracking-head{display:flex;justify-content:space-between;align-items:flex-start;gap:15px;margin-bottom:20px}
+.tracking-kicker{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#999;margin-bottom:6px}
+.tracking-title{font-size:16px;font-weight:700;letter-spacing:-.3px}
+.tracking-status{font-size:8px;letter-spacing:1px;text-transform:uppercase;padding:7px 10px;border-radius:999px;background:#eeeae5;color:#555;white-space:nowrap}
+.tracking-steps{display:grid;grid-template-columns:repeat(5,1fr);position:relative}
+.tracking-steps:before{content:"";position:absolute;left:10%;right:10%;top:12px;height:1px;background:#ddd9d1}
+.track-step{position:relative;text-align:center;z-index:1}
+.track-dot{width:25px;height:25px;border-radius:50%;margin:0 auto 9px;background:#fff;border:1px solid #d9d5cd;display:flex;align-items:center;justify-content:center;font-size:10px;color:#999}
+.track-step.active .track-dot,.track-step.complete .track-dot{background:#111;color:#fff;border-color:#111}
+.track-step.complete .track-dot:before{content:"✓"}
+.track-step.complete .track-dot{font-size:0}
+.track-label{font-size:8px;color:#999;line-height:1.3}
+.track-step.active .track-label,.track-step.complete .track-label{color:#111;font-weight:700}
+.track-note{margin-top:16px;padding-top:14px;border-top:1px solid #ebe8e2;font-size:10px;color:#777;line-height:1.6}
+@media(max-width:520px){.tracking-box{padding:18px 14px}.tracking-steps:before{left:8%;right:8%;top:11px}.track-dot{width:23px;height:23px}.track-label{font-size:7px}.tracking-status{font-size:7px;padding:6px 8px}}
 
 /* CHECKOUT */
 .checkout-overlay{
@@ -1604,112 +1523,22 @@ line-height:1.6
 
 /* NOTIFICATIONS */
 .notification-btn{position:relative}
-.notification-count{
-position:absolute;
-top:3px;
-right:2px;
-min-width:17px;
-height:17px;
-padding:0 4px;
-border-radius:20px;
-background:#111;
-color:#fff;
-font-size:9px;
-display:flex;
-align-items:center;
-justify-content:center;
-border:2px solid #fff
-}
-.notification-panel{
-position:relative;
-width:min(500px,94%);
-max-height:78vh;
-overflow:auto;
-background:#fff;
-margin:auto;
-padding:34px;
-box-shadow:0 25px 70px rgba(0,0,0,.18)
-}
-.notification-head{
-display:flex;
-justify-content:space-between;
-align-items:flex-start;
-gap:15px;
-padding-bottom:18px;
-border-bottom:1px solid var(--line);
-margin-bottom:8px
-}
-.notification-kicker{
-font-size:8px;
-letter-spacing:3px;
-color:#999;
-margin-bottom:6px
-}
-.notification-head h3{
-font-size:27px;
-letter-spacing:-1px
-}
-.notification-readall{
-background:#f1efeb;
-padding:9px 12px;
-font-size:8px;
-letter-spacing:1.2px;
-text-transform:uppercase
-}
-.notification-list{
-display:flex;
-flex-direction:column
-}
-.notification-item{
-padding:17px 4px;
-border-bottom:1px solid var(--line);
-cursor:pointer;
-transition:.2s;
-border-left:2px solid transparent
-}
-.notification-item:hover{
-background:#faf9f7;
-padding-left:10px
-}
-.notification-item.unread{
-border-left-color:#111;
-background:#faf9f7
-}
-.notification-item-top{
-display:flex;
-justify-content:space-between;
-gap:15px;
-align-items:flex-start
-}
-.notification-title{
-font-size:12px;
-font-weight:700;
-margin-bottom:5px
-}
-.notification-message{
-font-size:10px;
-color:#666;
-line-height:1.6
-}
-.notification-time{
-font-size:8px;
-color:#aaa;
-white-space:nowrap
-}
-.notification-empty{
-text-align:center;
-padding:45px 15px;
-color:#888;
-font-size:11px
-}
-@media(max-width:520px){
-.notification-panel{
-padding:28px 20px
-}
-.notification-head h3{
-font-size:24px
-}
-}
+.notification-count{position:absolute;top:3px;right:2px;min-width:17px;height:17px;padding:0 4px;border-radius:20px;background:#111;color:#fff;font-size:9px;display:flex;align-items:center;justify-content:center;border:2px solid #fff}
+.notification-panel{position:relative;width:min(500px,94%);max-height:78vh;overflow:auto;background:#fff;margin:auto;padding:34px;box-shadow:0 25px 70px rgba(0,0,0,.18)}
+.notification-head{display:flex;justify-content:space-between;align-items:flex-start;gap:15px;padding-bottom:18px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.notification-kicker{font-size:8px;letter-spacing:3px;color:#999;margin-bottom:6px}
+.notification-head h3{font-size:27px;letter-spacing:-1px}
+.notification-readall{background:#f1efeb;padding:9px 12px;font-size:8px;letter-spacing:1.2px;text-transform:uppercase}
+.notification-list{display:flex;flex-direction:column}
+.notification-item{padding:17px 4px;border-bottom:1px solid var(--line);cursor:pointer;transition:.2s;border-left:2px solid transparent}
+.notification-item:hover{background:#faf9f7;padding-left:10px}
+.notification-item.unread{border-left-color:#111;background:#faf9f7}
+.notification-item-top{display:flex;justify-content:space-between;gap:15px;align-items:flex-start}
+.notification-title{font-size:12px;font-weight:700;margin-bottom:5px}
+.notification-message{font-size:10px;color:#666;line-height:1.6}
+.notification-time{font-size:8px;color:#aaa;white-space:nowrap}
+.notification-empty{text-align:center;padding:45px 15px;color:#888;font-size:11px}
+@media(max-width:520px){.notification-panel{padding:28px 20px}.notification-head h3{font-size:24px}}
 
 /* MOBILE */
 .mobile-panel{
@@ -1737,266 +1566,6 @@ letter-spacing:-1px
 .mobile-menu{display:flex}
 .hero{
 grid-template-columns:1fr;
-padding:60px 6%;
-text-align:center
-}
-.hero-content{margin:auto}
-.hero-text{
-margin-left:auto;
-margin-right:auto
-}
-.hero-visual{
-height:390px;
-margin-top:20px
-}
-.hero-orbit{
-width:320px;
-height:320px
-}
-.trust{
-grid-template-columns:repeat(2,1fr)
-}
-.trust-item:nth-child(2){border-right:0}
-.trust-item:nth-child(3),
-.trust-item:nth-child(4){
-border-top:1px solid var(--line)
-}
-.categories{
-grid-template-columns:repeat(2,1fr)
-}
-.about{
-grid-template-columns:1fr;
-text-align:center
-}
-.about p{margin:auto}
-.footer-grid{
-grid-template-columns:1fr 1fr
-}
-}
-
-@media(max-width:700px){
-.products-grid{
-grid-template-columns:repeat(2,1fr);
-gap:12px
-}
-.product-info{
-padding:14px 12px 17px
-}
-.product-name{font-size:13px}
-.product-bottom{
-align-items:flex-start;
-flex-direction:column
-}
-.add-btn{width:100%}
-.detail-grid{
-grid-template-columns:1fr;
-gap:35px
-}
-.detail-image-wrap,
-.detail-image{
-min-height:auto;
-aspect-ratio:1/1
-}
-.detail-info h1{font-size:42px}
-.detail-actions{flex-wrap:wrap}
-.detail-actions .primary-btn{
-flex:1;
-min-width:170px
-}
-.search-panel{padding:35px 25px}
-.cart-drawer{padding:25px 20px}
-.checkout-panel{padding:32px 22px}
-.checkout-grid{
-grid-template-columns:1fr
-}
-.checkout-field.full{
-grid-column:auto
-}
-.about h2{font-size:42px}
-.footer-grid{grid-template-columns:1fr}
-.account-panel,
-.order-detail-panel,
-.address-form-panel{
-padding:30px 22px
-}
-.account-profile{
-grid-template-columns:1fr;
-text-align:center
-}
-.address-grid{
-grid-template-columns:1fr
-}
-.address-field.full{
-grid-column:auto
-}
-}
-
-@media(max-width:520px){
-.header{
-height:65px;
-padding:0 5%
-}
-.logo{
-font-size:21px;
-letter-spacing:4px
-}
-.header-actions{gap:1px}
-.hero{
-min-height:auto;
-padding-top:55px
-}
-.hero h1{
-font-size:58px;
-letter-spacing:-3px
-}
-.hero-visual{height:330px}
-.hero-card{
-width:215px;
-height:285px
-}
-.hero-bottle{
-width:90px;
-height:170px
-}
-.hero-cap{top:58px}
-.hero-orbit{
-width:270px;
-height:270px
-}
-.section{padding:65px 5%}
-.section-title{font-size:32px}
-.categories{
-grid-template-columns:1fr
-}
-.category{height:135px}
-.trust-title{font-size:9px}
-.trust-text{font-size:9px}
-}
-
-@media(max-width:420px){
-.products-grid{gap:9px}
-.product-name{font-size:12px}
-.product-price{font-size:12px}
-}
-
-/* =========================================================
-   CIRDRIO PREMIUM UI SYSTEM
-   ========================================================= */
-:root{
---premium-ink:#161616;
---premium-soft:#f7f5f1;
---premium-surface:#ffffff;
---premium-line:#e5e1da;
---premium-muted:#77736d;
---premium-shadow:0 12px 35px rgba(22,22,22,.08);
-}
-
-button,
-.primary-btn,
-.secondary-btn,
-.small-btn,
-.profile-save,
-.add-btn,
-.back-btn,
-.wishlist-detail,
-.quantity-control button,
-.remove-item,
-.icon-btn,
-.close-overlay,
-.category{
--webkit-tap-highlight-color:transparent;
-}
-
-button:focus-visible,
-a:focus-visible,
-input:focus-visible,
-textarea:focus-visible,
-select:focus-visible{
-outline:2px solid #9b8a70;
-outline-offset:3px;
-}
-
-.primary-btn{
-min-height:50px;
-padding:14px 24px;
-border:1px solid #161616;
-border-radius:13px;
-background:linear-gradient(135deg,#181818,#0e0e0e);
-box-shadow:0 7px 18px rgba(0,0,0,.10);
-font-family:"Manrope",sans-serif;
-font-size:10px;
-font-weight:700;
-letter-spacing:1.7px;
-}
-
-.primary-btn:hover{
-transform:translateY(-2px);
-box-shadow:0 14px 28px rgba(0,0,0,.15);
-background:linear-gradient(135deg,#242424,#111);
-}
-
-.primary-btn:active{
-transform:translateY(0);
-box-shadow:0 5px 12px rgba(0,0,0,.10)
-}
-
-.secondary-btn,
-.small-btn{
-min-height:43px;
-padding:11px 16px;
-border:1px solid var(--premium-line);
-border-radius:11px;
-background:linear-gradient(180deg,#fff,#f6f4f0);
-color:#292724;
-font-family:"Manrope",sans-serif;
-font-size:9px;
-font-weight:700;
-letter-spacing:1.2px;
-text-transform:uppercase;
-box-shadow:0 4px 12px rgba(0,0,0,.04);
-transition:.22s ease;
-}
-
-.secondary-btn:hover,
-.small-btn:hover{
-border-color:#cfc9c0;
-background:#fff;
-transform:translateY(-1px);
-box-shadow:0 8px 18px rgba(0,0,0,.07);
-}
-
-.icon-btn{
-width:43px;
-height:43px;
-border:1px solid transparent;
-background:transparent;
-border-radius:13px;
-transition:.22s ease;
-}
-
-.icon-btn:hover{
-background:#f5f2ed;
-border-color:#e4dfd7;
-box-shadow:0 6px 16px rgba(0,0,0,.06);
-transform:translateY(-1px);
-}
-
-.cart-count{
-top:1px;
-right:0;
-min-width:18px;
-height:18px;
-background:#181818;
-border:2px solid #fff;
-font-weight:700;
-}
-
-.close-overlay{
-width:40px;
-height:40px;
-top:16px;
-right:16px;
-border:1px solid #e7e2da;
 padding:60px 6%;
 text-align:center
 }
@@ -2427,135 +1996,78 @@ textarea:focus-visible, select:focus-visible{
 .catalog-badge{padding:6px 9px;border-radius:999px;background:rgba(255,255,255,.94);border:1px solid rgba(0,0,0,.07);font-size:8px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;box-shadow:0 5px 15px rgba(0,0,0,.05)}
 .catalog-badge.dark{background:#111;color:#fff;border-color:#111}
 .catalog-badge.gold{background:#f4ead8;color:#6e5632}
-.product-brand{
-font-size:9px;
-font-weight:800;
-letter-spacing:1.5px;
-text-transform:uppercase;
-color:#8a8379;
-margin-bottom:6px
+.product-brand{font-size:8px;letter-spacing:1.8px;text-transform:uppercase;color:#888;margin-bottom:6px}
+.product-short{font-size:10px;line-height:1.55;color:#777;margin:0 0 12px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.product-rating{display:flex;align-items:center;gap:6px;margin-bottom:12px;font-size:10px;color:#666}
+.product-rating .stars{letter-spacing:1px;color:#111}
+.compare-price{font-size:11px;color:#999;text-decoration:line-through;margin-left:6px;font-weight:500}
+.detail-brand{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:#888;margin:-8px 0 14px}
+.detail-rating{display:flex;align-items:center;gap:8px;font-size:11px;color:#666;margin:-10px 0 24px}
+.detail-rating .stars{letter-spacing:1px;color:#111}
+.detail-short{font-size:13px;line-height:1.7;color:#555;margin:-6px 0 18px;max-width:550px}
+.detail-compare{font-size:13px;color:#999;text-decoration:line-through;margin:-20px 0 25px}
+@media(max-width:700px){
+ .catalog-badges{left:10px;top:10px;gap:5px}
+ .catalog-badge{padding:5px 7px;font-size:7px}
+ .product-short{font-size:9px}
+ .detail-brand{margin-bottom:12px}
 }
-.product-short{
-font-size:10px;
-line-height:1.55;
-color:#777;
-margin:7px 0 12px;
-display:-webkit-box;
--webkit-line-clamp:2;
--webkit-box-orient:vertical;
-overflow:hidden
-}
-.product-rating{
-display:flex;
-align-items:center;
-gap:6px;
-font-size:9px;
-color:#6f675c;
-margin-bottom:9px
-}
-.product-rating .stars{letter-spacing:1px;color:#a18b64}
-.compare-price{
-margin-left:6px;
-font-size:10px;
-color:#9b9690;
-text-decoration:line-through
-}
-.detail-brand{
-font-size:10px;
-font-weight:800;
-letter-spacing:2px;
-text-transform:uppercase;
-color:#8a8379;
-margin-bottom:10px
-}
-.detail-short{
-font-size:13px;
-line-height:1.7;
-color:#6f6a64;
-margin:14px 0 20px
-}
-.detail-rating{
-display:flex;
-align-items:center;
-gap:8px;
-font-size:11px;
-color:#70695f;
-margin-bottom:12px
-}
-.detail-rating .stars{color:#a18b64;letter-spacing:1px}
-.detail-compare{
-font-size:14px;
-color:#9b9690;
-text-decoration:line-through;
-margin-left:8px
-}
-
-/* =========================================================
-   BASE DOCUMENT
-   ========================================================= */
 </style>
-
 </head>
 
 <body>
 
 <header class="header">
 
-<a href="#" class="logo">
-CIRDRIO
-</a>
+<a href="#" class="logo">CIRDRIO</a>
 
 <nav class="nav">
-
-<a href="#shop">
-Shop
-</a>
-
-<a href="#categories">
-Categories
-</a>
-
-<a href="#about">
-About
-</a>
-
+<a href="#shop">Shop</a>
+<a href="#categories">Categories</a>
+<a href="#about">About</a>
 </nav>
 
 <div class="header-actions">
 
 <button class="icon-btn" id="searchBtn" aria-label="Search">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<circle cx="11" cy="11" r="6.5"></circle>
-<path d="M16 16l5 5"></path>
+<svg viewBox="0 0 24 24">
+<circle cx="10.8" cy="10.8" r="6.8"/>
+<path d="m16 16 5 5"/>
 </svg>
 </button>
 
-<button class="icon-btn" id="notificationBtn" aria-label="Notifications">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"></path>
-<path d="M10 21h4"></path>
+<button class="icon-btn notification-btn" id="notificationBtn" aria-label="Notifications">
+<svg viewBox="0 0 24 24">
+<path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/>
+<path d="M10 21h4"/>
 </svg>
-<span class="notification-count" id="notificationCount">0</span>
+<span class="notification-count" id="notificationCount" style="display:none">0</span>
 </button>
 
 <button class="icon-btn" id="accountBtn" aria-label="Account">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<circle cx="12" cy="8" r="3.5"></circle>
-<path d="M5 20c.8-3.5 3.1-5.5 7-5.5s6.2 2 7 5.5"></path>
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="8" r="3.5"/>
+<path d="M5 20c.7-3.6 3.2-5.5 7-5.5s6.3 1.9 7 5.5"/>
 </svg>
 </button>
 
 <button class="icon-btn" id="cartBtn" aria-label="Cart">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<path d="M4 5h2l2 11h10l2-8H7"></path>
-<circle cx="10" cy="20" r="1"></circle>
-<circle cx="17" cy="20" r="1"></circle>
+<svg viewBox="0 0 24 24">
+<path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 2-1.5L21 8H6"/>
+<circle cx="10" cy="20" r="1"/>
+<circle cx="18" cy="20" r="1"/>
 </svg>
+
 <span class="cart-count" id="cartCount">0</span>
 </button>
 
-</div>
+<button class="icon-btn mobile-menu" id="mobileMenuBtn" aria-label="Menu">
+<svg viewBox="0 0 24 24">
+<path d="M4 7h16M4 12h16M4 17h16"/>
+</svg>
+</button>
 
+</div>
 </header>
 
 <main>
@@ -2564,57 +2076,40 @@ About
 
 <div class="hero-content">
 
-<div class="hero-kicker">
-INTELLIGENT BEAUTY · CIRDRIO
+<div class="hero-eyebrow">
+CIRDRIO / BEAUTY
 </div>
 
 <h1>
-Build<br>
-What’s<br>
-Next.
+THE<br>
+NEW<br>
+STANDARD.
 </h1>
 
 <p class="hero-text">
-Thoughtfully designed beauty essentials for a
-more intelligent everyday routine.
+Intelligent beauty designed around modern routines,
+refined formulas and products made for everyday confidence.
 </p>
 
-<div class="hero-actions">
-
-<a href="#shop" class="primary-btn hero-btn">
-Explore collection
-</a>
-
-<a href="#about" class="secondary-btn">
-Our philosophy
-</a>
-
-</div>
+<button class="primary-btn" id="shopNowBtn">
+Shop collection
+</button>
 
 </div>
 
 <div class="hero-visual">
 
 <div class="hero-orbit"></div>
+<div class="hero-dot"></div>
 
 <div class="hero-card">
 
-<div class="hero-card-top">
-CIRDRIO
-</div>
-
-<div class="hero-bottle">
-
 <div class="hero-cap"></div>
+<div class="hero-bottle"></div>
+<div class="hero-shine"></div>
 
-<div class="hero-bottle-body">
-<span>C</span>
-</div>
-
-</div>
-
-<div class="hero-card-bottom">
-INTELLIGENT BEAUTY
+<div class="hero-label">
+01 / CIRDRIO
 </div>
 
 </div>
@@ -2626,53 +2121,108 @@ INTELLIGENT BEAUTY
 <section class="trust">
 
 <div class="trust-item">
-
-<div class="trust-title">
-CURATED
+<div class="trust-icon">
+<svg viewBox="0 0 24 24">
+<path d="M12 3 20 7v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4Z"/>
+<path d="m8 12 2.5 2.5L16 9"/>
+</svg>
 </div>
-
-<div class="trust-text">
-Thoughtful product selection
-</div>
-
-</div>
-
-<div class="trust-item">
-
-<div class="trust-title">
-QUALITY
-</div>
-
-<div class="trust-text">
-Designed around everyday use
-</div>
-
+<div class="trust-title">Curated Beauty</div>
+<div class="trust-text">Thoughtfully selected products</div>
 </div>
 
 <div class="trust-item">
-
-<div class="trust-title">
-SIMPLE
+<div class="trust-icon">
+<svg viewBox="0 0 24 24">
+<rect x="4" y="5" width="16" height="15" rx="2"/>
+<path d="M8 5V3h8v2M8 12h8M8 16h5"/>
+</svg>
 </div>
-
-<div class="trust-text">
-Clean shopping experience
-</div>
-
+<div class="trust-title">Secure Checkout</div>
+<div class="trust-text">Safe and protected shopping</div>
 </div>
 
 <div class="trust-item">
-
-<div class="trust-title">
-CIRDRIO
+<div class="trust-icon">
+<svg viewBox="0 0 24 24">
+<path d="m12 3 2.8 5.7L21 9.6l-4.5 4.4-5.6 2.9 1.1-6.2L3 9.6l6.2-.9L12 3Z"/>
+</svg>
+</div>
+<div class="trust-title">Quality First</div>
+<div class="trust-text">Built around better choices</div>
 </div>
 
-<div class="trust-text">
-Build what’s next
+<div class="trust-item">
+<div class="trust-icon">
+<svg viewBox="0 0 24 24">
+<path d="M12 21s-7-4.4-7-10V5l7-2 7 2v6c0 5.6-7 10-7 10Z"/>
+<path d="M9 12c2 0 3.5 1 4.5 3"/>
+</svg>
 </div>
+<div class="trust-title">CIRDRIO Care</div>
+<div class="trust-text">Beauty made simpler</div>
+</div>
+
+</section>
+
+<section class="section" id="categories">
+
+<div class="section-head">
+
+<div>
+<div class="section-label">Explore</div>
+<h2 class="section-title">Shop by category</h2>
+</div>
+
+<a href="#shop" class="section-link">
+View all
+</a>
 
 </div>
 
+<div class="categories">
+
+<button class="category" data-category="Skincare">
+<div class="category-icon">
+<svg viewBox="0 0 24 24">
+<path d="M9 4h6M10 4v3l-2 3v8a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-8l-2-3V4"/>
+<path d="M8 11h8"/>
+</svg>
+</div>
+<span>Skincare</span>
+</button>
+
+<button class="category" data-category="Makeup">
+<div class="category-icon">
+<svg viewBox="0 0 24 24">
+<path d="m8 4 12 12-4 4L4 8l4-4Z"/>
+<path d="M6 10 3 13M11 5l3-2"/>
+</svg>
+</div>
+<span>Makeup</span>
+</button>
+
+<button class="category" data-category="Haircare">
+<div class="category-icon">
+<svg viewBox="0 0 24 24">
+<path d="M8 21c-2-4 0-7 3-9s4-4 1-7c-1.5-1.5-3.5-2-5-1"/>
+<path d="M13 20c-1-3 1-5 4-7 2-1.5 2-4 0-6"/>
+</svg>
+</div>
+<span>Haircare</span>
+</button>
+
+<button class="category" data-category="Wellness">
+<div class="category-icon">
+<svg viewBox="0 0 24 24">
+<path d="M12 21C5 17 3 12 5 8c1.2-2.5 4-3.5 7-1 3-2.5 5.8-1.5 7 1 2 4 0 9-7 13Z"/>
+<path d="M12 7v9M8 12h8"/>
+</svg>
+</div>
+<span>Wellness</span>
+</button>
+
+</div>
 </section>
 
 <section class="section" id="shop">
@@ -2680,157 +2230,96 @@ Build what’s next
 <div class="section-head">
 
 <div>
-
-<div class="section-kicker">
-THE COLLECTION
+<div class="section-label">CIRDRIO Collection</div>
+<h2 class="section-title">Shop the collection</h2>
 </div>
 
-<h2 class="section-title">
-Shop the collection
-</h2>
+<div id="categoryStatus" class="section-label">
+All products
+</div>
 
 </div>
 
-<a href="#shop" class="section-link">
-View all
-<span>→</span>
-</a>
-
+<div id="productsLoading" class="state-box">
+Loading collection...
 </div>
 
 <div
-class="products-grid"
-id="productsGrid">
-
-<div class="loading-state">
-Loading products...
+id="productsError"
+class="state-box error-box"
+style="display:none">
+Unable to load products.
 </div>
 
-</div>
+<div id="productsGrid" class="products-grid"></div>
 
 </section>
 
-<section class="section categories-section" id="categories">
+<section
+class="product-detail"
+id="productDetail"
+style="display:none">
 
-<div class="section-head">
+<button
+class="back-btn"
+id="closeProduct">
 
-<div>
+<svg
+viewBox="0 0 24 24"
+width="15"
+fill="none"
+stroke="currentColor">
+<path d="M19 12H5M11 18l-6-6 6-6"/>
+</svg>
 
-<div class="section-kicker">
-SHOP BY CATEGORY
-</div>
+Back to collection
 
-<h2 class="section-title">
-Find your ritual.
-</h2>
-
-</div>
-
-</div>
-
-<div class="categories">
-
-<button class="category" data-category="All">
-<span>All products</span>
-<span>01</span>
 </button>
-
-<button class="category" data-category="Skincare">
-<span>Skincare</span>
-<span>02</span>
-</button>
-
-<button class="category" data-category="Haircare">
-<span>Haircare</span>
-<span>03</span>
-</button>
-
-<button class="category" data-category="Bodycare">
-<span>Bodycare</span>
-<span>04</span>
-</button>
-
-</div>
-
-</section>
-
-<section class="section product-detail-section" id="productDetailSection">
-
-<div class="detail-top">
-
-<button class="back-btn" id="backToShop">
-← Back to collection
-</button>
-
-</div>
 
 <div class="detail-grid">
 
 <div class="detail-image-wrap">
-
 <img
 id="detailImage"
 class="detail-image"
 src=""
 alt="Product">
-
 </div>
 
 <div class="detail-info">
 
 <div
-class="detail-brand"
-id="detailBrand">
-CIRDRIO
-</div>
-
-<div
 class="detail-category"
 id="detailCategory">
-SKINCARE
+BEAUTY
 </div>
+
+<div class="detail-brand" id="detailBrand"></div>
 
 <h1 id="detailName">
 Product
 </h1>
 
 <div
-class="detail-rating"
-id="detailRating">
-<span class="stars">★★★★★</span>
-<span>0 reviews</span>
+class="detail-price"
+id="detailPrice">
+₹0
 </div>
+
+<div class="detail-compare" id="detailCompare"></div>
+<div class="detail-rating" id="detailRating"></div>
+<p class="detail-short" id="detailShort"></p>
 
 <p
-class="detail-short"
-id="detailShort">
+class="detail-description"
+id="detailDescription">
 </p>
-
-<div class="detail-price-row">
-
-<strong
-id="detailPrice"
-class="detail-price">
-₹0
-</strong>
-
-<span
-id="detailCompare"
-class="detail-compare">
-</span>
-
-</div>
 
 <div
 class="detail-stock"
 id="detailStock">
 In stock
 </div>
-
-<p
-id="detailDescription"
-class="detail-description">
-</p>
 
 <div class="detail-actions">
 
@@ -2840,7 +2329,7 @@ class="detail-description">
 −
 </button>
 
-<span id="detailQuantity">
+<span id="detailQty">
 1
 </span>
 
@@ -2852,36 +2341,39 @@ class="detail-description">
 
 <button
 class="primary-btn"
-id="detailAddBtn">
+id="detailAdd">
 Add to bag
 </button>
 
 <button
 class="wishlist-detail"
-id="detailWishlist"
+id="detailWish"
 aria-label="Wishlist">
-♡
+
+<svg viewBox="0 0 24 24">
+<path d="M20.8 8.8c0 5-8.8 10-8.8 10s-8.8-5-8.8-10A4.8 4.8 0 0 1 12 6.2a4.8 4.8 0 0 1 8.8 2.6Z"/>
+</svg>
+
 </button>
 
 </div>
 
 </div>
-
 </div>
 
 </section>
 
-<section class="section about" id="about">
+<section class="about" id="about">
 
 <div>
 
-<div class="section-kicker">
-THE CIRDRIO APPROACH
+<div class="about-label">
+THE CIRDRIO PHILOSOPHY
 </div>
 
-<h2 class="section-title">
-Beauty,<br>
-made intelligent.
+<h2>
+BEAUTY.<br>
+REFINED.
 </h2>
 
 </div>
@@ -2889,131 +2381,22 @@ made intelligent.
 <div>
 
 <p>
-CIRDRIO is building a modern beauty ecosystem
-where thoughtful products, digital systems and
-technology come together to create a simpler,
-better everyday experience.
+CIRDRIO is built around a simple idea:
+better products, better experiences and
+a more intelligent approach to modern beauty.
+<br><br>
+We focus on thoughtful design, quality,
+clarity and products that naturally belong
+in everyday routines.
 </p>
 
+</div>
+
+<div class="about-mark">
+<span>CIRDRIO</span>
 </div>
 
 </section>
-
-</main>
-
-<footer class="footer">
-
-<div class="footer-grid">
-
-<div class="footer-brand-block">
-
-<div class="footer-logo">
-CIRDRIO
-</div>
-
-<p>
-Build What’s Next.
-</p>
-
-<div class="footer-signature">
-INTELLIGENT BEAUTY SYSTEMS
-</div>
-
-</div>
-
-<div>
-
-<div class="footer-title">
-Explore
-</div>
-
-<div class="footer-links">
-
-<a href="#shop">
-Shop
-<span>→</span>
-</a>
-
-<a href="#categories">
-Categories
-<span>→</span>
-</a>
-
-<a href="#about">
-About
-<span>→</span>
-</a>
-
-</div>
-
-</div>
-
-<div>
-
-<div class="footer-title">
-Information
-</div>
-
-<div class="footer-links">
-
-<a href="privacy.html">
-Privacy Policy
-<span>→</span>
-</a>
-
-<a href="terms.html">
-Terms & Conditions
-<span>→</span>
-</a>
-
-<a href="shipping.html">
-Shipping Policy
-<span>→</span>
-</a>
-
-<a href="returns.html">
-Returns & Refunds
-<span>→</span>
-</a>
-
-</div>
-
-</div>
-
-<div>
-
-<div class="footer-title">
-Support
-</div>
-
-<div class="footer-links">
-
-<a href="cancellation.html">
-Cancellation
-<span>→</span>
-</a>
-
-<a href="cookies.html">
-Cookies
-<span>→</span>
-</a>
-
-<a href="contact.html">
-Contact & Support
-<span>→</span>
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="footer-bottom">
-© 2026 CIRDRIO. All rights reserved.
-</div>
-
-</footer>
 
 <!-- SEARCH -->
 <div
@@ -3028,23 +2411,15 @@ id="closeSearch">
 ×
 </button>
 
-<div class="search-kicker">
-CIRDRIO SEARCH
+<div class="search-label">
+SEARCH CIRDRIO
 </div>
-
-<h2>
-Find your product
-</h2>
-
-<div class="search-input-wrap">
 
 <input
 id="searchInput"
-type="search"
-placeholder="Search products, categories, brands..."
+type="text"
+placeholder="Search products..."
 autocomplete="off">
-
-</div>
 
 <div
 id="searchResults"
@@ -3061,39 +2436,31 @@ id="cartOverlay">
 
 <aside class="cart-drawer">
 
+<div class="cart-header">
+
+<div>
+<div class="cart-small">YOUR BAG</div>
+<h2>Shopping bag</h2>
+</div>
+
 <button
 class="close-overlay"
 id="closeCart">
 ×
 </button>
 
-<div class="cart-kicker">
-YOUR BAG
 </div>
-
-<h2>
-Shopping bag
-</h2>
 
 <div
 id="cartItems"
 class="cart-items">
 </div>
 
-<div
-id="cartEmpty"
-class="cart-empty"
-style="display:none">
-Your bag is currently empty.
-</div>
+<div class="cart-footer">
 
-<div class="cart-summary">
+<div class="subtotal-row">
 
-<div class="cart-summary-row">
-
-<span>
-Subtotal
-</span>
+<span>Subtotal</span>
 
 <strong id="cartSubtotal">
 ₹0
@@ -3768,9 +3135,8 @@ id="checkoutMessage">
 </div>
 
 <div
-<div
-class="success-box"
 id="checkoutSuccess"
+class="success-box"
 style="display:none">
 
 <div class="success-icon">
@@ -3778,18 +3144,17 @@ style="display:none">
 </div>
 
 <h3>
-Order confirmed.
+Order placed.
 </h3>
 
-<p>
-Your CIRDRIO order has been placed successfully.
+<p id="successText">
+Your CIRDRIO order has been created successfully.
 </p>
-
-<p id="successOrderId"></p>
 
 <button
 class="primary-btn"
-id="successContinue">
+id="continueShopping"
+style="margin-top:22px">
 Continue shopping
 </button>
 
@@ -3798,6 +3163,85 @@ Continue shopping
 </div>
 </div>
 
+<!-- MOBILE -->
+<div
+class="overlay"
+id="mobileOverlay">
+
+<div class="mobile-panel">
+
+<button
+class="close-overlay"
+id="closeMobile">
+×
+</button>
+
+<a
+href="#shop"
+class="mobile-link">
+Shop
+</a>
+
+<a
+href="#categories"
+class="mobile-link">
+Categories
+</a>
+
+<a
+href="#about"
+class="mobile-link">
+About
+</a>
+
+</div>
+</div>
+
+</main>
+
+<footer>
+
+<div class="footer-grid">
+
+<div class="footer-brand-block">
+<div class="footer-logo">CIRDRIO</div>
+<div class="footer-desc">
+Intelligent beauty designed around modern routines, refined products and better everyday experiences.
+</div>
+<div class="footer-signature">BUILD WHAT'S NEXT.</div>
+</div>
+
+<div>
+<div class="footer-title">Explore</div>
+<div class="footer-links">
+<a href="#shop">Shop collection <span>↗</span></a>
+<a href="#categories">Categories <span>↗</span></a>
+<a href="#about">About CIRDRIO <span>↗</span></a>
+</div>
+</div>
+
+<div>
+<div class="footer-title">Information</div>
+<div class="footer-links">
+<a href="privacy.html">Privacy Policy <span>↗</span></a>
+<a href="terms.html">Terms &amp; Conditions <span>↗</span></a>
+<a href="shipping.html">Shipping Policy <span>↗</span></a>
+<a href="returns.html">Returns &amp; Refunds <span>↗</span></a>
+<a href="cancellation.html">Cancellation Policy <span>↗</span></a>
+<a href="cookies.html">Cookie &amp; Tracking <span>↗</span></a>
+<a href="contact.html">Contact &amp; Support <span>↗</span></a>
+</div>
+</div>
+
+</div>
+
+<div class="footer-bottom">
+<span>© 2026 CIRDRIO</span>
+<span>Designed for modern beauty.</span>
+</div>
+
+</footer>
+
 <div
 class="toast"
 id="toast">
@@ -3805,261 +3249,342 @@ id="toast">
 
 <script>
 
-const SUPABASE_URL =
+/* =========================================================
+SUPABASE
+========================================================= */
+
+const SUPABASE_URL=
 "https://jbnatqugmajorwolsfin.supabase.co";
 
-const SUPABASE_KEY =
+const SUPABASE_KEY=
 "sb_publishable_l7tBbN22fFYgPv5bmkEPtw_Di-XHpsY";
 
-const supabaseClient =
+const supabaseClient=
 supabase.createClient(
 SUPABASE_URL,
 SUPABASE_KEY
 );
 
-const $ = id => document.getElementById(id);
 
-let products = [];
-let filteredProducts = [];
-let currentProduct = null;
-let detailQuantity = 1;
-let cart = JSON.parse(
-localStorage.getItem("cirdrio_cart") || "[]"
+/* =========================================================
+STATE
+========================================================= */
+
+let products=[];
+let selectedProduct=null;
+let detailQuantity=1;
+let authMode="login";
+let orders=[];
+let currentProfile=null;
+let addresses=[];
+let editingAddressId=null;
+let notifications=[];
+let notificationChannel=null;
+
+let cart=JSON.parse(
+localStorage.getItem("cirdrio_cart")||"[]"
 );
 
-let currentSession = null;
-let notificationChannel = null;
-let notifications = [];
 
-const money = value =>
-"₹" + Number(value || 0).toLocaleString("en-IN",{
-maximumFractionDigits:2
-});
+/* =========================================================
+HELPERS
+========================================================= */
 
-function escapeHTML(value){
-return String(value ?? "")
+const $=id=>
+document.getElementById(id);
+
+const money=v=>
+"₹"+Number(v||0).toLocaleString("en-IN");
+
+const escapeHTML=v=>
+String(v??"")
 .replace(/&/g,"&amp;")
 .replace(/</g,"&lt;")
 .replace(/>/g,"&gt;")
 .replace(/"/g,"&quot;")
 .replace(/'/g,"&#039;");
+
+
+function toast(message){
+
+const t=$("toast");
+
+t.textContent=message;
+
+t.classList.add("show");
+
+clearTimeout(
+window.__toastTimer
+);
+
+window.__toastTimer=
+setTimeout(
+()=>{
+t.classList.remove("show");
+},
+2200
+);
+
 }
 
-function slugify(value){
-return String(value || "")
-.toLowerCase()
-.trim()
-.replace(/[^a-z0-9]+/g,"-")
-.replace(/^-+|-+$/g,"");
-}
 
-function showToast(message){
-const toast = $("toast");
-if(!toast)return;
-
-toast.textContent = message;
-toast.classList.add("show");
-
-clearTimeout(window.__toastTimer);
-
-window.__toastTimer =
-setTimeout(()=>{
-toast.classList.remove("show");
-},2800);
-}
-
-function openOverlay(id){
-const el = $(id);
-if(!el)return;
-
-el.classList.add("active");
+function lockBody(){
 document.body.classList.add("lock");
 }
 
-function closeOverlay(id){
-const el = $(id);
-if(!el)return;
+function notificationStatusLabel(type){
+const map={order_status:"Order update"};
+return map[type]||"CIRDRIO update";
+}
 
-el.classList.remove("active");
+function notificationTime(value){
+const d=new Date(value);
+if(Number.isNaN(d.getTime()))return "";
+return d.toLocaleString("en-IN",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"});
+}
+
+function updateNotificationBadge(){
+const count=notifications.filter(n=>!n.is_read).length;
+const badge=$("notificationCount");
+if(!badge)return;
+badge.textContent=count>99?"99+":String(count);
+badge.style.display=count?"flex":"none";
+}
+
+function renderNotifications(){
+const list=$("notificationList");
+if(!list)return;
+if(!notifications.length){
+list.innerHTML="<div class=\"notification-empty\">You\'re all caught up.</div>";
+updateNotificationBadge();
+return;
+}
+list.innerHTML=notifications.map(n=>`
+<div class="notification-item ${n.is_read?'':'unread'}" data-notification-id="${escapeHTML(n.id)}" data-order-id="${escapeHTML(n.order_id||'')}">
+<div class="notification-item-top">
+<div>
+<div class="notification-title">${escapeHTML(n.title)}</div>
+<div class="notification-message">${escapeHTML(n.message)}</div>
+</div>
+<div class="notification-time">${escapeHTML(notificationTime(n.created_at))}</div>
+</div>
+</div>
+`).join('');
+updateNotificationBadge();
+}
+
+async function loadNotifications(){
+try{
+const {data:{session}}=await supabaseClient.auth.getSession();
+if(!session){notifications=[];renderNotifications();return;}
+const {data,error}=await supabaseClient.from("notifications").select("id,order_id,title,message,notification_type,is_read,created_at").eq("user_id",session.user.id).order("created_at",{ascending:false}).limit(30);
+if(error)throw error;
+notifications=data||[];
+renderNotifications();
+}catch(e){
+console.error("Notifications load error:",e);
+$("notificationList").innerHTML=`<div class="notification-empty">Unable to load notifications.</div>`;
+}
+}
+
+async function markNotificationRead(id){
+const {error}=await supabaseClient.from("notifications").update({is_read:true}).eq("id",id);
+if(error)throw error;
+const n=notifications.find(x=>x.id===id);
+if(n)n.is_read=true;
+renderNotifications();
+}
+
+async function markAllNotificationsRead(){
+try{
+const {data:{session}}=await supabaseClient.auth.getSession();
+if(!session)return;
+const {error}=await supabaseClient.from("notifications").update({is_read:true}).eq("user_id",session.user.id).eq("is_read",false);
+if(error)throw error;
+notifications=notifications.map(n=>({...n,is_read:true}));
+renderNotifications();
+toast("All notifications marked as read.");
+}catch(e){
+console.error(e);
+toast(e.message||"Unable to update notifications.");
+}
+}
+
+async function openNotifications(){
+const {data:{session}}=await supabaseClient.auth.getSession();
+if(!session){openAuth("login");return;}
+$("notificationOverlay").classList.add("active");
+lockBody();
+await loadNotifications();
+}
+
+function stopNotificationRealtime(){
+if(notificationChannel){
+supabaseClient.removeChannel(notificationChannel);
+notificationChannel=null;
+}
+}
+
+async function startNotificationRealtime(userId){
+stopNotificationRealtime();
+notificationChannel=supabaseClient.channel("cirdrio-notifications-"+userId)
+.on("postgres_changes",{event:"INSERT",schema:"public",table:"notifications",filter:"user_id=eq."+userId},payload=>{
+notifications=[payload.new,...notifications.filter(n=>n.id!==payload.new.id)].slice(0,30);
+renderNotifications();
+toast(payload.new.title||"New CIRDRIO notification");
+})
+.subscribe();
+}
+
+$("notificationBtn").onclick=openNotifications;
+$("closeNotifications").onclick=()=>closeOverlay("notificationOverlay");
+$("markAllNotifications").onclick=markAllNotificationsRead;
+$("notificationList").addEventListener("click",async e=>{
+const item=e.target.closest(".notification-item");
+if(!item)return;
+const id=item.dataset.notificationId;
+const orderId=item.dataset.orderId;
+try{await markNotificationRead(id);}catch(err){console.error(err);}
+if(orderId){closeOverlay("notificationOverlay");openOrderDetails(orderId);}
+});
+
+
+function unlockBody(){
 
 if(!document.querySelector(".overlay.active")){
 document.body.classList.remove("lock");
 }
+
 }
 
-function formatDate(date){
-try{
-return new Date(date).toLocaleDateString(
-"en-IN",
-{
-day:"numeric",
-month:"short",
-year:"numeric"
+
+function closeOverlay(id){
+
+if($(id)){
+$(id).classList.remove("active");
 }
-);
-}catch{
-return "";
+
+unlockBody();
+
 }
-}
+
 
 /* =========================================================
-   PRODUCT CATALOG
-   ========================================================= */
+PRODUCTS
+========================================================= */
 
 async function loadProducts(){
 
-const grid = $("productsGrid");
+$("productsLoading").style.display="block";
+$("productsError").style.display="none";
 
-if(grid){
-grid.innerHTML =
-`<div class="state-box">Loading collection...</div>`;
-}
+try{
 
-const {data,error} =
+const {data,error}=
 await supabaseClient
 .from("products")
-.select('"Id","Name","Discription","Price","Cattogry","Image url","Stock","created_at","slug","brand","short_description","is_active","is_featured","is_bestseller","compare_at_price","rating","review_count","updated_at"')
+.select(
+'"Id","Name","Discription","Price","Cattogry","Image url","Stock","created_at","slug","brand","short_description","is_active","is_featured","is_bestseller","compare_at_price","rating","review_count","updated_at"'
+)
 .eq("is_active",true)
 .order("is_featured",{ascending:false})
 .order("is_bestseller",{ascending:false})
 .order("created_at",{ascending:false});
 
-if(error){
+if(error)throw error;
 
-console.error("Product load error:",error);
+products=data||[];
 
-if(grid){
-grid.innerHTML =
-`<div class="state-box error-box">
-Unable to load products right now.
-</div>`;
+$("productsLoading").style.display="none";
+
+renderProducts(products);
+
+}catch(e){
+
+console.error(e);
+
+$("productsLoading").style.display="none";
+$("productsError").style.display="block";
+
+$("productsError").innerHTML=
+"Collection could not be loaded.<br><small>"+
+escapeHTML(e.message)+
+"</small>";
+
 }
 
-return;
 }
 
-products = data || [];
-filteredProducts = [...products];
 
-renderProducts(filteredProducts);
-}
+function productImage(p){
 
-function productImage(product,className="product-image"){
+const url=p["Image url"]||"";
 
-const image =
-product["Image url"];
-
-if(image){
-
-return `
-<img
-class="${className}"
-src="${escapeHTML(image)}"
-alt="${escapeHTML(product.Name || "CIRDRIO product")}"
+return url
+?
+`<img
+class="product-image"
+src="${escapeHTML(url)}"
+alt="${escapeHTML(p["Name"])}"
 loading="lazy"
-onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
->
-<div class="no-image" style="display:none"></div>
-`;
+onerror="this.outerHTML='<div class=&quot;no-image&quot;></div>'">`
+:
+`<div class="no-image"></div>`;
 
 }
 
-return `<div class="no-image"></div>`;
-}
-
-function ratingHTML(product){
-
-const rating =
-Number(product.rating || 0);
-
-const reviews =
-Number(product.review_count || 0);
-
-const rounded =
-Math.max(0,Math.min(5,Math.round(rating)));
-
-const stars =
-"★".repeat(rounded) +
-"☆".repeat(5-rounded);
-
-return `
-<div class="product-rating">
-<span class="stars">${stars}</span>
-<span>${rating.toFixed(1)} · ${reviews} reviews</span>
-</div>
-`;
-}
 
 function renderProducts(list){
 
-const grid = $("productsGrid");
-
-if(!grid)return;
+const grid=$("productsGrid");
 
 if(!list.length){
 
-grid.innerHTML =
-`<div class="state-box">
-No products found.
-</div>`;
+grid.innerHTML=
+'<div class="state-box" style="grid-column:1/-1">No products found.</div>';
 
 return;
+
 }
 
-grid.innerHTML =
-list.map(product => {
+grid.innerHTML=
+list.map(p=>{
 
-const stock =
-Number(product.Stock || 0);
+const stock=
+Number(p["Stock"]||0);
 
-const isOut =
-stock <= 0;
-
-const brand =
-product.brand || "CIRDRIO";
-
-const short =
-product.short_description ||
-product.Discription ||
-"";
-
-const compare =
-Number(product.compare_at_price || 0);
-
-const price =
-Number(product.Price || 0);
-
-let badges = "";
-
-if(product.is_featured){
-badges +=
-`<span class="catalog-badge gold">Featured</span>`;
-}
-
-if(product.is_bestseller){
-badges +=
-`<span class="catalog-badge dark">Bestseller</span>`;
-}
+const id=
+escapeHTML(p["Id"]);
+const rating=Math.max(0,Math.min(5,Number(p.rating||0)));
+const reviewCount=Math.max(0,Number(p.review_count||0));
+const compareAt=Number(p.compare_at_price||0);
+const badges=[];
+if(p.is_featured)badges.push('<span class="catalog-badge gold">Featured</span>');
+if(p.is_bestseller)badges.push('<span class="catalog-badge dark">Bestseller</span>');
 
 return `
+
 <article
 class="product-card"
-data-product-id="${escapeHTML(product.Id)}">
+onclick="openProductById('${id}')">
 
 <div class="product-image-wrap">
 
-${productImage(product)}
+${badges.length?`<div class="catalog-badges">${badges.join("")}</div>`:""}
 
-<div class="catalog-badges">
-${badges}
-</div>
+${productImage(p)}
 
 <button
 class="wishlist"
-type="button"
-data-wishlist="${escapeHTML(product.Id)}"
-aria-label="Add to wishlist">
-♡
+onclick="event.stopPropagation();toggleWishlist('${id}',this)"
+aria-label="Wishlist">
+
+<svg viewBox="0 0 24 24">
+
+<path d="M20.8 8.8c0 5-8.8 10-8.8 10s-8.8-5-8.8-10A4.8 4.8 0 0 1 12 6.2a4.8 4.8 0 0 1 8.8 2.6Z"/>
+
+</svg>
+
 </button>
 
 </div>
@@ -4067,57 +3592,43 @@ aria-label="Add to wishlist">
 <div class="product-info">
 
 <div class="product-category">
-${escapeHTML(product.Cattogry || "Beauty")}
+${escapeHTML(p["Cattogry"]||"Beauty")}
 </div>
 
-<div class="product-brand">
-${escapeHTML(brand)}
-</div>
+${p.brand?`<div class="product-brand">${escapeHTML(p.brand)}</div>`:""}
 
 <div class="product-name">
-${escapeHTML(product.Name || "Product")}
+${escapeHTML(p["Name"])}
 </div>
 
-<div class="product-short">
-${escapeHTML(short)}
-</div>
+${p.short_description?`<div class="product-short">${escapeHTML(p.short_description)}</div>`:""}
 
-${ratingHTML(product)}
+${rating>0?`<div class="product-rating"><span class="stars">${"★".repeat(Math.round(rating))}${"☆".repeat(5-Math.round(rating))}</span><span>${rating.toFixed(1)}${reviewCount?` · ${reviewCount} reviews`:""}</span></div>`:""}
 
 <div class="product-bottom">
 
-<div>
-
-<span class="product-price">
-${money(price)}
-</span>
-
-${
-compare > price
-?
-`<span class="compare-price">${money(compare)}</span>`
-:
-""
-}
-
+<div class="product-price">
+${money(p["Price"])}
+${compareAt>Number(p["Price"]||0)?`<span class="compare-price">${money(compareAt)}</span>`:""}
 </div>
 
 <button
 class="add-btn"
-type="button"
-data-add="${escapeHTML(product.Id)}"
-${isOut ? "disabled" : ""}>
-${isOut ? "Sold out" : "Add to bag"}
+onclick="event.stopPropagation();addToCartById('${id}')"
+${stock<=0?"disabled":""}>
+
+${stock<=0?"Sold out":"Add to bag"}
+
 </button>
 
 </div>
 
 ${
-isOut
+stock<=0
 ?
-`<div class="stock-out">Currently unavailable</div>`
+'<div class="stock-out">Out of stock</div>'
 :
-stock <= 5
+stock<=5
 ?
 `<div class="stock-low">Only ${stock} left</div>`
 :
@@ -4127,265 +3638,300 @@ stock <= 5
 </div>
 
 </article>
+
 `;
 
 }).join("");
 
-}
-
-function filterCategory(category){
-
-if(category === "All"){
-filteredProducts = [...products];
-}else{
-
-filteredProducts =
-products.filter(product =>
-String(product.Cattogry || "").toLowerCase() ===
-String(category || "").toLowerCase()
-);
+syncWishlistButtons();
 
 }
 
-renderProducts(filteredProducts);
-}
-
-function searchProducts(query){
-
-const q =
-String(query || "").trim().toLowerCase();
-
-if(!q){
-renderSearchResults([]);
-return;
-}
-
-const results =
-products.filter(product => {
-
-const name =
-String(product.Name || "").toLowerCase();
-
-const brand =
-String(product.brand || "").toLowerCase();
-
-const category =
-String(product.Cattogry || "").toLowerCase();
-
-const short =
-String(product.short_description || "").toLowerCase();
-
-const description =
-String(product.Discription || "").toLowerCase();
-
-return (
-name.includes(q) ||
-brand.includes(q) ||
-category.includes(q) ||
-short.includes(q) ||
-description.includes(q)
-);
-
-});
-
-renderSearchResults(results);
-}
-
-function renderSearchResults(results){
-
-const box = $("searchResults");
-
-if(!box)return;
-
-if(!results.length){
-
-box.innerHTML =
-`<div class="search-empty">
-No matching products found.
-</div>`;
-
-return;
-}
-
-box.innerHTML =
-results.slice(0,8).map(product => {
-
-return `
-<div
-class="search-result"
-data-search-product="${escapeHTML(product.Id)}">
-
-<div class="search-result-name">
-${escapeHTML(product.Name)}
-</div>
-
-<div class="search-result-meta">
-${escapeHTML(product.brand || "CIRDRIO")}
- ·
-${escapeHTML(product.Cattogry || "Beauty")}
- ·
-${money(product.Price)}
-</div>
-
-</div>
-`;
-
-}).join("");
-
-}
 
 /* =========================================================
-   PRODUCT DETAIL
-   ========================================================= */
+DETAIL
+========================================================= */
 
-function openProduct(productId){
+function openProductById(id){
 
-const product =
-products.find(p =>
-String(p.Id) === String(productId)
+const p=
+products.find(
+x=>x["Id"]===id
 );
 
-if(!product)return;
+if(!p)return;
 
-currentProduct = product;
-detailQuantity = 1;
+selectedProduct=p;
 
-$("detailQuantity").textContent =
-"1";
+detailQuantity=1;
 
-$("detailName").textContent =
-product.Name || "Product";
-
-$("detailBrand").textContent =
-product.brand || "CIRDRIO";
-
-$("detailCategory").textContent =
-product.Cattogry || "Beauty";
-
-$("detailShort").textContent =
-product.short_description ||
-product.Discription ||
-"";
-
-$("detailDescription").textContent =
-product.Discription ||
-"";
-
-$("detailPrice").textContent =
-money(product.Price);
-
-const compare =
-Number(product.compare_at_price || 0);
-
-$("detailCompare").textContent =
-compare > Number(product.Price || 0)
-?
-money(compare)
-:
-"";
-
-const rating =
-Number(product.rating || 0);
-
-const reviews =
-Number(product.review_count || 0);
-
-const rounded =
-Math.max(0,Math.min(5,Math.round(rating)));
-
-$("detailRating").innerHTML =
-`
-<span class="stars">
-${"★".repeat(rounded)}${"☆".repeat(5-rounded)}
-</span>
-<span>
-${rating.toFixed(1)} · ${reviews} reviews
-</span>
-`;
-
-const stock =
-Number(product.Stock || 0);
-
-$("detailStock").textContent =
-stock > 0
-?
-`${stock} available`
-:
-"Currently unavailable";
-
-const image =
-product["Image url"];
-
-const detailImage =
-$("detailImage");
+const image=
+p["Image url"]||"";
 
 if(image){
 
-detailImage.src = image;
-detailImage.style.display = "block";
+$("detailImage").src=image;
+$("detailImage").style.display="block";
 
 }else{
 
-detailImage.removeAttribute("src");
-detailImage.style.display = "none";
+$("detailImage").removeAttribute("src");
+$("detailImage").style.display="none";
 
 }
 
-$("detailAddBtn").disabled =
-stock <= 0;
+$("detailImage").alt=
+p["Name"]||"Product";
 
-$("detailAddBtn").textContent =
-stock <= 0
+$("detailCategory").textContent=
+p["Cattogry"]||"Beauty";
+
+$("detailBrand").textContent=p.brand||"";
+$("detailBrand").style.display=p.brand?"block":"none";
+
+$("detailName").textContent=
+p["Name"]||"Product";
+
+$("detailPrice").textContent=
+money(p["Price"]);
+
+const compareAt=Number(p.compare_at_price||0);
+$("detailCompare").textContent=compareAt>Number(p["Price"]||0)?money(compareAt):"";
+$("detailCompare").style.display=compareAt>Number(p["Price"]||0)?"block":"none";
+
+const rating=Math.max(0,Math.min(5,Number(p.rating||0)));
+const reviewCount=Math.max(0,Number(p.review_count||0));
+$("detailRating").innerHTML=rating>0?`<span class="stars">${"★".repeat(Math.round(rating))}${"☆".repeat(5-Math.round(rating))}</span><span>${rating.toFixed(1)}${reviewCount?` · ${reviewCount} reviews`:""}</span>`:"";
+$("detailRating").style.display=rating>0?"flex":"none";
+
+$("detailShort").textContent=p.short_description||"";
+$("detailShort").style.display=p.short_description?"block":"none";
+
+$("detailDescription").textContent=
+p["Discription"]||
+"CIRDRIO beauty product.";
+
+const stock=
+Number(p["Stock"]||0);
+
+$("detailStock").textContent=
+stock>0
 ?
-"Sold out"
+`${stock} available`
 :
-"Add to bag";
+"Out of stock";
 
-$("detailWishlist").classList.remove("active");
+$("detailAdd").disabled=
+stock<=0;
 
-$("productDetailSection").style.display =
+updateDetailQuantity();
+updateDetailWishlist();
+
+$("productDetail").style.display=
 "block";
 
-$("productDetailSection").scrollIntoView({
+$("shop").style.display=
+"none";
+
+$("categories").style.display=
+"none";
+
+$("productDetail").scrollIntoView({
 behavior:"smooth",
 block:"start"
 });
 
 }
 
-function closeProductDetail(){
 
-$("productDetailSection").style.display =
+$("closeProduct").onclick=()=>{
+
+$("productDetail").style.display=
 "none";
 
-currentProduct = null;
+$("shop").style.display="";
+$("categories").style.display="";
+
+$("shop").scrollIntoView({
+behavior:"smooth"
+});
+
+};
+
+
+function updateDetailQuantity(){
+
+$("detailQty").textContent=
+detailQuantity;
 
 }
 
-function updateDetailQuantity(amount){
 
-if(!currentProduct)return;
+$("detailMinus").onclick=()=>{
 
-const stock =
-Number(currentProduct.Stock || 0);
+if(detailQuantity>1){
 
-detailQuantity =
-Math.max(
-1,
-Math.min(
-stock,
-detailQuantity + amount
+detailQuantity--;
+
+updateDetailQuantity();
+
+}
+
+};
+
+
+$("detailPlus").onclick=()=>{
+
+if(
+selectedProduct &&
+detailQuantity<
+Number(selectedProduct["Stock"]||0)
+){
+
+detailQuantity++;
+
+updateDetailQuantity();
+
+}
+
+};
+
+
+$("detailAdd").onclick=()=>{
+
+if(selectedProduct){
+
+addToCart(
+selectedProduct,
+detailQuantity
+);
+
+}
+
+};
+
+
+/* =========================================================
+WISHLIST
+========================================================= */
+
+function getWishlist(){
+
+return JSON.parse(
+localStorage.getItem(
+"cirdrio_wishlist"
+)||"[]"
+);
+
+}
+
+
+function saveWishlist(x){
+
+localStorage.setItem(
+"cirdrio_wishlist",
+JSON.stringify(x)
+);
+
+}
+
+
+function toggleWishlist(id,b){
+
+let w=getWishlist();
+
+w=w.includes(id)
+?
+w.filter(x=>x!==id)
+:
+[...w,id];
+
+saveWishlist(w);
+
+if(b){
+
+b.classList.toggle(
+"active",
+w.includes(id)
+);
+
+}
+
+updateDetailWishlist();
+syncWishlistButtons();
+
+toast(
+w.includes(id)
+?
+"Added to wishlist"
+:
+"Removed from wishlist"
+);
+
+}
+
+
+function updateDetailWishlist(){
+
+if(selectedProduct){
+
+$("detailWish").classList.toggle(
+"active",
+getWishlist().includes(
+selectedProduct["Id"]
 )
 );
 
-$("detailQuantity").textContent =
-String(detailQuantity);
+}
 
 }
 
+
+function syncWishlistButtons(){
+
+const w=getWishlist();
+
+document
+.querySelectorAll(".wishlist")
+.forEach(b=>{
+
+const m=
+(b.getAttribute("onclick")||"")
+.match(
+/toggleWishlist\('([^']+)'/
+);
+
+if(m){
+
+b.classList.toggle(
+"active",
+w.includes(m[1])
+);
+
+}
+
+});
+
+}
+
+
+$("detailWish").onclick=()=>{
+
+if(selectedProduct){
+
+toggleWishlist(
+selectedProduct["Id"],
+$("detailWish")
+);
+
+}
+
+};
+
+
 /* =========================================================
-   CART
-   ========================================================= */
+CART
+========================================================= */
 
 function saveCart(){
 
@@ -4394,227 +3940,175 @@ localStorage.setItem(
 JSON.stringify(cart)
 );
 
+updateCart();
+
 }
 
-function getCartCount(){
 
-return cart.reduce(
-(sum,item)=>sum + Number(item.quantity || 0),
-0
+function addToCartById(id){
+
+const p=
+products.find(
+x=>x["Id"]===id
 );
 
-}
-
-function getCartSubtotal(){
-
-return cart.reduce(
-(sum,item)=>
-sum +
-(Number(item.price || 0) *
- Number(item.quantity || 0)),
-0
-);
+if(p)addToCart(p,1);
 
 }
 
-function updateCartCount(){
 
-$("cartCount").textContent =
-String(getCartCount());
+function addToCart(p,q=1){
 
-}
+const stock=
+Number(p["Stock"]||0);
 
-function addToCart(productId,quantity=1){
+if(stock<=0){
 
-const product =
-products.find(p =>
-String(p.Id) === String(productId)
-);
-
-if(!product)return;
-
-const stock =
-Number(product.Stock || 0);
-
-if(stock <= 0){
-
-showToast("This product is currently unavailable.");
-
-return;
-}
-
-const existing =
-cart.find(item =>
-String(item.id) === String(product.Id)
-);
-
-if(existing){
-
-if(existing.quantity + quantity > stock){
-
-showToast(
-`Only ${stock} available for ${product.Name}.`
+toast(
+"This product is out of stock."
 );
 
 return;
+
 }
 
-existing.quantity += quantity;
+const x=
+cart.find(
+i=>i.id===p["Id"]
+);
+
+if(x){
+
+if(
+x.quantity+q>
+stock
+){
+
+x.quantity=
+stock;
+
+toast(
+"Maximum available quantity reached."
+);
+
+}else{
+
+x.quantity+=q;
+
+toast(
+"Added to your bag."
+);
+
+}
+
+x.stock=stock;
 
 }else{
 
 cart.push({
-id:product.Id,
-name:product.Name,
-price:Number(product.Price || 0),
-image:product["Image url"] || "",
-quantity:quantity,
-stock:stock
+
+id:p["Id"],
+name:p["Name"],
+price:Number(p["Price"]||0),
+image:p["Image url"]||"",
+stock,
+quantity:Math.min(
+q,
+stock
+)
+
 });
 
+toast(
+"Added to your bag."
+);
+
 }
 
 saveCart();
+openCart();
+
+}
+
+
+function updateCart(){
+
+$("cartCount").textContent=
+cart.reduce(
+(s,i)=>
+s+Number(i.quantity||0),
+0
+);
+
 renderCart();
-updateCartCount();
-
-showToast(
-`${product.Name} added to your bag.`
-);
 
 }
 
-function removeFromCart(productId){
-
-cart =
-cart.filter(item =>
-String(item.id) !== String(productId)
-);
-
-saveCart();
-renderCart();
-updateCartCount();
-
-}
-
-function changeCartQuantity(productId,delta){
-
-const item =
-cart.find(i =>
-String(i.id) === String(productId)
-);
-
-if(!item)return;
-
-const product =
-products.find(p =>
-String(p.Id) === String(productId)
-);
-
-const maxStock =
-product
-?
-Number(product.Stock || 0)
-:
-Number(item.stock || 0);
-
-const next =
-item.quantity + delta;
-
-if(next <= 0){
-
-removeFromCart(productId);
-return;
-
-}
-
-if(next > maxStock){
-
-showToast(
-`Only ${maxStock} available.`
-);
-
-return;
-
-}
-
-item.quantity = next;
-
-saveCart();
-renderCart();
-updateCartCount();
-
-}
 
 function renderCart(){
 
-const box = $("cartItems");
-const empty = $("cartEmpty");
-
-if(!box)return;
+const c=
+$("cartItems");
 
 if(!cart.length){
 
-box.innerHTML = "";
+c.innerHTML=
+'<div class="empty-cart">Your bag is empty.</div>';
 
-if(empty){
-empty.style.display = "block";
-}
-
-$("cartSubtotal").textContent =
-money(0);
+$("cartSubtotal").textContent=
+"₹0";
 
 return;
 
 }
 
-if(empty){
-empty.style.display = "none";
-}
+let sub=0;
 
-box.innerHTML =
-cart.map(item => {
+c.innerHTML=
+cart.map((i,n)=>{
+
+const total=
+i.price*i.quantity;
+
+sub+=total;
 
 return `
+
 <div class="cart-item">
 
 ${
-item.image
+i.image
 ?
 `<img
-class="cart-item-image"
-src="${escapeHTML(item.image)}"
-alt="${escapeHTML(item.name)}"
-onerror="this.style.visibility='hidden'">`
+src="${escapeHTML(i.image)}"
+alt="${escapeHTML(i.name)}">`
 :
-`<div class="cart-item-image"></div>`
+`<div
+class="no-image"
+style="width:78px;height:90px"></div>`
 }
 
 <div>
 
 <div class="cart-item-name">
-${escapeHTML(item.name)}
+${escapeHTML(i.name)}
 </div>
 
 <div class="cart-item-price">
-${money(item.price)}
+${money(i.price)}
 </div>
 
-<div class="cart-item-controls">
+<div class="cart-quantity">
 
-<button
-class="cart-qty-btn"
-data-cart-minus="${escapeHTML(item.id)}">
+<button onclick="changeCartQuantity(${n},-1)">
 −
 </button>
 
-<span class="cart-qty">
-${item.quantity}
+<span>
+${i.quantity}
 </span>
 
-<button
-class="cart-qty-btn"
-data-cart-plus="${escapeHTML(item.id)}">
+<button onclick="changeCartQuantity(${n},1)">
 +
 </button>
 
@@ -4622,1814 +4116,454 @@ data-cart-plus="${escapeHTML(item.id)}">
 
 <button
 class="remove-item"
-data-cart-remove="${escapeHTML(item.id)}">
+onclick="removeCartItem(${n})">
 Remove
 </button>
 
 </div>
 
-<div>
-<strong>
-${money(item.price * item.quantity)}
-</strong>
+<div class="cart-total-item">
+${money(total)}
 </div>
 
 </div>
+
 `;
 
 }).join("");
 
-$("cartSubtotal").textContent =
-money(getCartSubtotal());
+$("cartSubtotal").textContent=
+money(sub);
 
 }
 
-/* =========================================================
-   CHECKOUT
-   ========================================================= */
 
-function openCheckout(){
+function changeCartQuantity(n,d){
 
-if(!cart.length){
+const i=cart[n];
 
-showToast("Your bag is empty.");
+if(!i)return;
 
-return;
-}
+const next=
+i.quantity+d;
 
-if(!currentSession){
+if(next<=0){
 
-closeOverlay("cartOverlay");
-openOverlay("authOverlay");
-showAuthMode("login");
-showToast("Please sign in before checkout.");
+cart.splice(n,1);
 
-return;
-}
-
-closeOverlay("cartOverlay");
-
-renderCheckoutSummary();
-
-loadProfile();
-loadAddresses();
-
-openOverlay("checkoutOverlay");
-
-}
-
-function renderCheckoutSummary(){
-
-const subtotal =
-getCartSubtotal();
-
-$("checkoutSubtotal").textContent =
-money(subtotal);
-
-$("checkoutShipping").textContent =
-money(0);
-
-$("checkoutTax").textContent =
-money(0);
-
-$("checkoutTotal").textContent =
-money(subtotal);
-
-}
-
-async function loadProfile(){
-
-if(!currentSession)return;
-
-const {data,error} =
-await supabaseClient
-.from("profiles")
-.select("*")
-.eq("id",currentSession.user.id)
-.maybeSingle();
-
-if(error){
-
-console.error("Profile load error:",error);
-return;
-
-}
-
-if(!data)return;
-
-$("profileName").value =
-data.full_name || "";
-
-$("profilePhone").value =
-data.phone || "";
-
-$("profileAvatarUrl").value =
-data.avatar_url || "";
-
-$("checkoutName").value =
-data.full_name || "";
-
-$("checkoutPhone").value =
-data.phone || "";
-
-$("accountEmail").textContent =
-currentSession.user.email || "";
-
-updateProfileAvatar(
-data.full_name,
-data.avatar_url
-);
-
-}
-
-function updateProfileAvatar(name,url){
-
-const avatar =
-$("profileAvatar");
-
-if(!avatar)return;
-
-if(url){
-
-avatar.innerHTML =
-`<img
-src="${escapeHTML(url)}"
-alt="Profile"
-style="width:100%;height:100%;object-fit:cover;border-radius:50%"
-onerror="this.remove()">`;
-
-return;
-}
-
-const first =
-String(name || "C")
-.trim()
-.charAt(0)
-.toUpperCase() || "C";
-
-avatar.textContent = first;
-
-}
-
-async function saveProfile(){
-
-if(!currentSession)return;
-
-const full_name =
-$("profileName").value.trim();
-
-const phone =
-$("profilePhone").value.trim();
-
-const avatar_url =
-$("profileAvatarUrl").value.trim();
-
-const {error} =
-await supabaseClient
-.from("profiles")
-.upsert({
-id:currentSession.user.id,
-full_name,
-phone,
-avatar_url,
-updated_at:new Date().toISOString()
-},{
-onConflict:"id"
-});
-
-if(error){
-
-console.error(error);
-
-$("profileMessage").textContent =
-"Unable to save profile.";
-
-return;
-
-}
-
-$("profileMessage").textContent =
-"Profile saved.";
-
-updateProfileAvatar(full_name,avatar_url);
-
-$("checkoutName").value = full_name;
-$("checkoutPhone").value = phone;
-
-setTimeout(()=>{
-$("profileMessage").textContent="";
-},2200);
-
-showToast("Profile updated.");
-
-}
-
-async function placeOrder(){
-
-if(!currentSession){
-
-showToast("Please sign in.");
-
-return;
-}
-
-if(!cart.length){
-
-showToast("Your bag is empty.");
-
-return;
-}
-
-const btn =
-$("placeOrderBtn");
-
-const message =
-$("checkoutMessage");
-
-btn.disabled = true;
-btn.textContent = "Processing...";
-
-message.textContent = "";
-
-const customerName =
-$("checkoutName").value.trim();
-
-const customerEmail =
-$("checkoutEmail").value.trim() ||
-currentSession.user.email ||
-"";
-
-const customerPhone =
-$("checkoutPhone").value.trim();
-
-const addressLine1 =
-$("checkoutAddress").value.trim();
-
-const city =
-$("checkoutCity").value.trim();
-
-const state =
-$("checkoutState").value.trim();
-
-const postal =
-$("checkoutPostal").value.trim();
-
-if(
-!customerName ||
-!customerEmail ||
-!customerPhone ||
-!addressLine1 ||
-!city ||
-!state ||
-!postal
+}else if(
+next<=Number(i.stock||0)
 ){
 
-message.textContent =
-"Please complete all required delivery details.";
-
-btn.disabled = false;
-btn.textContent = "Place order";
-
-return;
-
-}
-
-const items =
-cart.map(item => ({
-product_id:item.id,
-quantity:Number(item.quantity)
-}));
-
-const subtotal =
-getCartSubtotal();
-
-const {data,error} =
-await supabaseClient.rpc(
-"place_order_secure",
-{
-p_customer_name:customerName,
-p_customer_email:customerEmail,
-p_customer_phone:customerPhone,
-p_address_line1:addressLine1,
-p_address_line2:"",
-p_city:city,
-p_state:state,
-p_postal_code:postal,
-p_country:"India",
-p_subtotal:subtotal,
-p_discount:0,
-p_shipping:0,
-p_tax:0,
-p_total:subtotal,
-p_payment_method:"cod",
-p_items:items
-}
-);
-
-if(error){
-
-console.error("Order error:",error);
-
-message.textContent =
-error.message ||
-"Unable to place order.";
-
-btn.disabled = false;
-btn.textContent = "Place order";
-
-return;
-
-}
-
-const orderId = data;
-
-cart = [];
-
-saveCart();
-renderCart();
-updateCartCount();
-
-$("checkoutFormView").style.display =
-"none";
-
-$("checkoutSuccess").style.display =
-"block";
-
-$("successOrderId").textContent =
-"Order ID: " + orderId;
-
-btn.disabled = false;
-btn.textContent = "Place order";
-
-loadProducts();
-
-}
-
-/* =========================================================
-   ADDRESSES
-   ========================================================= */
-
-let addresses = [];
-
-async function loadAddresses(){
-
-if(!currentSession)return;
-
-const {data,error} =
-await supabaseClient
-.from("addresses")
-.select("*")
-.eq("user_id",currentSession.user.id)
-.order("is_default",{ascending:false})
-.order("created_at",{ascending:false});
-
-if(error){
-
-console.error("Address load error:",error);
-return;
-
-}
-
-addresses = data || [];
-
-renderAddresses();
-renderCheckoutAddresses();
-
-}
-
-function renderAddresses(){
-
-const list =
-$("addressList");
-
-const empty =
-$("addressEmpty");
-
-if(!list)return;
-
-if(!addresses.length){
-
-list.innerHTML = "";
-
-if(empty){
-empty.style.display = "block";
-}
-
-return;
-}
-
-if(empty){
-empty.style.display = "none";
-}
-
-list.innerHTML =
-addresses.map(address => {
-
-return `
-<div
-class="address-card ${address.is_default ? "default" : ""}">
-
-${
-address.is_default
-?
-`<span class="address-badge">Default</span>`
-:
-""
-}
-
-<div class="address-name">
-${escapeHTML(address.full_name)}
-</div>
-
-<div class="address-line">
-${escapeHTML(address.phone)}
-</div>
-
-<div class="address-line">
-${escapeHTML(address.address_line1)}
-</div>
-
-${
-address.address_line2
-?
-`<div class="address-line">
-${escapeHTML(address.address_line2)}
-</div>`
-:
-""
-}
-
-<div class="address-line">
-${escapeHTML(address.city)},
-${escapeHTML(address.state)}
--
-${escapeHTML(address.postal_code)}
-</div>
-
-<div class="address-actions">
-
-<button
-class="small-btn"
-data-edit-address="${escapeHTML(address.id)}">
-Edit
-</button>
-
-${
-!address.is_default
-?
-`<button
-class="small-btn"
-data-default-address="${escapeHTML(address.id)}">
-Make default
-</button>`
-:
-""
-}
-
-<button
-class="small-btn danger-btn"
-data-delete-address="${escapeHTML(address.id)}">
-Delete
-</button>
-
-</div>
-
-</div>
-`;
-
-}).join("");
-
-}
-
-function renderCheckoutAddresses(){
-
-const box =
-$("checkoutSavedAddressBox");
-
-const select =
-$("checkoutAddressSelect");
-
-if(!box || !select)return;
-
-if(!addresses.length){
-
-box.style.display = "none";
-return;
-
-}
-
-box.style.display = "block";
-
-select.innerHTML =
-`<option value="">
-Select a saved address
-</option>` +
-addresses.map(address =>
-`
-<option value="${escapeHTML(address.id)}">
-${escapeHTML(address.full_name)}
- ·
-${escapeHTML(address.city)}
-${address.is_default ? " · Default" : ""}
-</option>
-`
-).join("");
-
-const defaultAddress =
-addresses.find(a => a.is_default);
-
-if(defaultAddress){
-
-select.value =
-defaultAddress.id;
-
-applyCheckoutAddress(
-defaultAddress.id
-);
-
-}
-
-}
-
-function applyCheckoutAddress(id){
-
-const address =
-addresses.find(a =>
-String(a.id) === String(id)
-);
-
-if(!address)return;
-
-$("checkoutName").value =
-address.full_name || "";
-
-$("checkoutPhone").value =
-address.phone || "";
-
-$("checkoutAddress").value =
-[address.address_line1,address.address_line2]
-.filter(Boolean)
-.join(", ");
-
-$("checkoutCity").value =
-address.city || "";
-
-$("checkoutState").value =
-address.state || "";
-
-$("checkoutPostal").value =
-address.postal_code || "";
-
-}
-
-function openAddressForm(address=null){
-
-$("addressId").value =
-address?.id || "";
-
-$("addressFormTitle").textContent =
-address
-?
-"Edit address"
-:
-"Add address";
-
-$("addressName").value =
-address?.full_name || "";
-
-$("addressPhone").value =
-address?.phone || "";
-
-$("addressLine1").value =
-address?.address_line1 || "";
-
-$("addressLine2").value =
-address?.address_line2 || "";
-
-$("addressCity").value =
-address?.city || "";
-
-$("addressState").value =
-address?.state || "";
-
-$("addressPostal").value =
-address?.postal_code || "";
-
-$("addressDefault").checked =
-Boolean(address?.is_default);
-
-$("addressMessage").textContent = "";
-
-openOverlay("addressFormOverlay");
-
-}
-
-async function saveAddress(event){
-
-event.preventDefault();
-
-if(!currentSession)return;
-
-const id =
-$("addressId").value;
-
-const payload = {
-user_id:currentSession.user.id,
-full_name:$("addressName").value.trim(),
-phone:$("addressPhone").value.trim(),
-address_line1:$("addressLine1").value.trim(),
-address_line2:$("addressLine2").value.trim(),
-city:$("addressCity").value.trim(),
-state:$("addressState").value.trim(),
-postal_code:$("addressPostal").value.trim(),
-country:"India",
-is_default:$("addressDefault").checked,
-updated_at:new Date().toISOString()
-};
-
-if(
-!payload.full_name ||
-!payload.phone ||
-!payload.address_line1 ||
-!payload.city ||
-!payload.state ||
-!payload.postal_code
-){
-
-$("addressMessage").textContent =
-"Please complete all required fields.";
-
-return;
-
-}
-
-let error;
-
-if(id){
-
-({error} =
-await supabaseClient
-.from("addresses")
-.update(payload)
-.eq("id",id)
-.eq("user_id",currentSession.user.id));
+i.quantity=next;
 
 }else{
 
-({error} =
-await supabaseClient
-.from("addresses")
-.insert(payload));
-
-}
-
-if(error){
-
-console.error(error);
-
-$("addressMessage").textContent =
-error.message ||
-"Unable to save address.";
-
-return;
-
-}
-
-closeOverlay("addressFormOverlay");
-
-await loadAddresses();
-
-showToast(
-id
-?
-"Address updated."
-:
-"Address saved."
+toast(
+"Maximum available stock reached."
 );
 
 }
 
-async function makeDefaultAddress(id){
-
-if(!currentSession)return;
-
-const {error} =
-await supabaseClient
-.from("addresses")
-.update({
-is_default:true,
-updated_at:new Date().toISOString()
-})
-.eq("id",id)
-.eq("user_id",currentSession.user.id);
-
-if(error){
-
-console.error(error);
-
-showToast("Unable to update address.");
-
-return;
+saveCart();
 
 }
 
-await loadAddresses();
 
-showToast("Default address updated.");
+function removeCartItem(n){
 
-}
+cart.splice(n,1);
 
-async function deleteAddress(id){
+saveCart();
 
-if(!currentSession)return;
-
-if(!confirm("Delete this saved address?")){
-return;
-}
-
-const {error} =
-await supabaseClient
-.from("addresses")
-.delete()
-.eq("id",id)
-.eq("user_id",currentSession.user.id);
-
-if(error){
-
-console.error(error);
-
-showToast("Unable to delete address.");
-
-return;
+toast(
+"Removed from your bag."
+);
 
 }
 
-await loadAddresses();
 
-showToast("Address deleted.");
+function openCart(){
+
+$("cartOverlay").classList.add(
+"active"
+);
+
+lockBody();
 
 }
+
+
+$("cartBtn").onclick=
+openCart;
+
+$("closeCart").onclick=()=>
+closeOverlay("cartOverlay");
+
 
 /* =========================================================
-   ORDERS
-   ========================================================= */
+SEARCH
+========================================================= */
 
-let customerOrders = [];
+$("searchBtn").onclick=()=>{
 
-async function loadCustomerOrders(){
+$("searchOverlay").classList.add(
+"active"
+);
 
-if(!currentSession)return;
+lockBody();
 
-$("ordersLoading").style.display =
-"block";
+setTimeout(
+()=>$("searchInput").focus(),
+100
+);
 
-$("ordersList").innerHTML = "";
+};
 
-const {data,error} =
-await supabaseClient
-.from("orders")
-.select("*")
-.eq("user_id",currentSession.user.id)
-.order("created_at",{ascending:false});
 
-if(error){
+$("closeSearch").onclick=()=>
+closeOverlay(
+"searchOverlay"
+);
 
-console.error("Orders load error:",error);
 
-$("ordersLoading").textContent =
-"Unable to load orders.";
+$("searchInput").oninput=e=>{
 
-return;
+const q=
+e.target.value
+.trim()
+.toLowerCase();
 
-}
-
-customerOrders = data || [];
-
-$("ordersLoading").style.display =
-"none";
-
-renderCustomerOrders();
-
-}
-
-function orderStatusClass(status){
-
-return String(status || "pending")
+const r=
+products.filter(p=>
+String(
+p["Name"]||""
+)
 .toLowerCase()
-.replace(/[^a-z]/g,"-");
+.includes(q)
+||
+String(
+p["Cattogry"]||""
+)
+.toLowerCase()
+.includes(q)
+);
 
-}
+$("searchResults").innerHTML=
+!q
+?
+""
+:
+r.length
+?
+r.map(p=>`
 
-function orderStatusLabel(status){
-
-return String(status || "pending")
-.replace(/_/g," ")
-.replace(/\b\w/g,
-c=>c.toUpperCase());
-
-}
-
-function renderCustomerOrders(){
-
-const list =
-$("ordersList");
-
-if(!list)return;
-
-if(!customerOrders.length){
-
-list.innerHTML =
-`<div class="state-box">
-No orders yet.
-</div>`;
-
-return;
-
-}
-
-list.innerHTML =
-customerOrders.map(order => {
-
-const status =
-orderStatusClass(order.order_status);
-
-return `
 <div
-class="order-card"
-data-order-id="${escapeHTML(order.id)}">
+class="search-result"
+onclick="openSearchProduct('${escapeHTML(p["Id"])}')">
 
-<div>
+<strong>
+${escapeHTML(p["Name"])}
+</strong>
 
-<div class="order-number">
-Order #${escapeHTML(order.id.slice(0,8).toUpperCase())}
-</div>
-
-<div class="order-date">
-${formatDate(order.created_at)}
-</div>
-
-<span class="status-pill status-${status}">
-${orderStatusLabel(order.order_status)}
+<span>
+${escapeHTML(
+p["Cattogry"]||"Beauty"
+)}
+ ·
+${money(p["Price"])}
 </span>
 
 </div>
 
-<div class="order-total">
-${money(order.total)}
-</div>
-
-</div>
-`;
-
-}).join("");
-
-}
-
-async function openOrderDetails(orderId){
-
-const order =
-customerOrders.find(o =>
-String(o.id) === String(orderId)
-);
-
-if(!order)return;
-
-$("orderDetailTitle").textContent =
-"Order #" +
-order.id.slice(0,8).toUpperCase();
-
-$("orderDetailSub").textContent =
-formatDate(order.created_at);
-
-$("orderDetailSubtotal").textContent =
-money(order.subtotal);
-
-$("orderDetailDiscount").textContent =
-money(order.discount);
-
-$("orderDetailShipping").textContent =
-money(order.shipping);
-
-$("orderDetailTax").textContent =
-money(order.tax);
-
-$("orderDetailTotal").textContent =
-money(order.total);
-
-$("orderDetailPayment").textContent =
-order.payment_method === "cod"
-?
-"Cash on Delivery"
+`).join("")
 :
-order.payment_method || "Pending";
+'<div class="search-result">No products found.</div>';
 
-$("orderDetailPaymentStatus").textContent =
-orderStatusLabel(order.payment_status);
+};
 
-$("orderDetailOrderStatus").textContent =
-orderStatusLabel(order.order_status);
 
-$("orderDetailAddress").textContent =
-[
-order.address_line1,
-order.address_line2,
-order.city,
-order.state,
-order.postal_code,
-order.country
-]
-.filter(Boolean)
-.join(", ");
+function openSearchProduct(id){
 
-const {data,error} =
-await supabaseClient
-.from("order_items")
-.select("*")
-.eq("order_id",order.id)
-.order("created_at",{ascending:true});
-
-if(error){
-
-console.error(error);
-
-$("orderItemsDetail").innerHTML =
-`<div class="state-box">
-Unable to load order items.
-</div>`;
-
-}else{
-
-$("orderItemsDetail").innerHTML =
-(data || []).map(item => {
-
-const product =
-products.find(p =>
-String(p.Id) === String(item.product_id)
+closeOverlay(
+"searchOverlay"
 );
 
-const image =
-product?.["Image url"] || "";
-
-return `
-<div class="order-item-detail">
-
-${
-image
-?
-`<img
-class="order-item-thumb"
-src="${escapeHTML(image)}"
-alt="${escapeHTML(item.product_name)}">`
-:
-`<div class="order-item-thumb"></div>`
-}
-
-<div>
-
-<div class="order-item-detail-name">
-${escapeHTML(item.product_name)}
-</div>
-
-<div class="order-item-detail-meta">
-${item.quantity} × ${money(item.unit_price)}
-</div>
-
-</div>
-
-<div class="order-item-detail-total">
-${money(item.line_total)}
-</div>
-
-</div>
-`;
-
-}).join("");
+openProductById(id);
 
 }
 
-updateOrderTracking(
-order.order_status || "pending"
+
+/* =========================================================
+CATEGORY
+========================================================= */
+
+document
+.querySelectorAll(".category")
+.forEach(b=>{
+
+b.onclick=()=>{
+
+const c=
+b.dataset.category;
+
+$("categoryStatus").textContent=
+c;
+
+renderProducts(
+products.filter(
+p=>
+String(p["Cattogry"]||"")
+.toLowerCase()
+===
+c.toLowerCase()
+)
 );
 
-openOverlay("orderDetailOverlay");
+$("shop").scrollIntoView({
+behavior:"smooth"
+});
 
-}
-
-function updateOrderTracking(status){
-
-const normalized =
-String(status || "pending").toLowerCase();
-
-const steps =
-["pending","confirmed","processing","shipped","delivered"];
-
-const index =
-steps.indexOf(normalized);
-
-const effectiveIndex =
-index >= 0 ? index : 0;
-
-document.querySelectorAll(
-"#orderTrackingSteps .track-step"
-).forEach((step,i)=>{
-
-step.classList.remove(
-"active",
-"complete",
-"cancelled"
-);
-
-if(normalized === "cancelled"){
-
-if(i === 0){
-step.classList.add("complete");
-}
-
-return;
-
-}
-
-if(i < effectiveIndex){
-step.classList.add("complete");
-}
-
-if(i === effectiveIndex){
-step.classList.add("active");
-}
+};
 
 });
 
-$("orderTrackingStatus").textContent =
-orderStatusLabel(normalized);
 
-const notes = {
-pending:"Your order has been received and is awaiting confirmation.",
-confirmed:"Your order has been confirmed.",
-processing:"Your order is being prepared.",
-shipped:"Your order is on the way.",
-delivered:"Your order has been delivered.",
-cancelled:"This order has been cancelled."
+$("shopNowBtn").onclick=()=>{
+
+$("categoryStatus").textContent=
+"All products";
+
+renderProducts(products);
+
+$("shop").scrollIntoView({
+behavior:"smooth"
+});
+
 };
 
-$("orderTrackingNote").textContent =
-notes[normalized] ||
-"Your order status has been updated.";
-
-if(normalized === "cancelled"){
-$("orderTrackingStatus").classList.add("cancelled");
-}else{
-$("orderTrackingStatus").classList.remove("cancelled");
-}
-
-}
 
 /* =========================================================
-   AUTH
-   ========================================================= */
+MOBILE
+========================================================= */
 
-let authMode = "login";
+$("mobileMenuBtn").onclick=()=>{
 
-function showAuthMode(mode){
+$("mobileOverlay").classList.add(
+"active"
+);
 
-authMode = mode;
+lockBody();
 
-if(mode === "signup"){
+};
 
-$("authTitle").textContent =
+
+$("closeMobile").onclick=()=>
+closeOverlay(
+"mobileOverlay"
+);
+
+
+document
+.querySelectorAll(".mobile-link")
+.forEach(a=>{
+
+a.onclick=()=>
+closeOverlay(
+"mobileOverlay"
+);
+
+});
+
+
+/* =========================================================
+AUTH
+========================================================= */
+
+function openAuth(m="login"){
+
+authMode=m;
+
+updateAuthMode();
+
+$("authOverlay").classList.add(
+"active"
+);
+
+lockBody();
+
+}
+
+
+function updateAuthMode(){
+
+const l=
+authMode==="login";
+
+$("authTitle").textContent=
+l
+?
+"Welcome back"
+:
 "Create your account";
 
-$("authSubtitle").textContent =
-"Join CIRDRIO for a more personal shopping experience.";
+$("authSubtitle").textContent=
+l
+?
+"Sign in to your CIRDRIO account."
+:
+"Join CIRDRIO and start your beauty journey.";
 
-$("authSubmit").textContent =
+$("authSubmit").textContent=
+l
+?
+"Sign in"
+:
 "Create account";
 
-$("authSwitch").textContent =
+$("authSwitch").textContent=
+l
+?
+"Create an account"
+:
 "Already have an account? Sign in";
 
-}else{
-
-$("authTitle").textContent =
-"Welcome back";
-
-$("authSubtitle").textContent =
-"Sign in to your CIRDRIO account.";
-
-$("authSubmit").textContent =
-"Sign in";
-
-$("authSwitch").textContent =
-"Create an account";
+$("authMessage").textContent=
+"";
 
 }
 
-$("authMessage").textContent = "";
 
-}
+$("authSwitch").onclick=()=>{
 
-async function handleAuth(event){
+authMode=
+authMode==="login"
+?
+"signup"
+:
+"login";
 
-event.preventDefault();
+updateAuthMode();
 
-const email =
+};
+
+
+$("closeAuth").onclick=()=>
+closeOverlay(
+"authOverlay"
+);
+
+
+$("authForm").onsubmit=async e=>{
+
+e.preventDefault();
+
+const email=
 $("authEmail").value.trim();
 
-const password =
+const password=
 $("authPassword").value;
 
-if(!email || !password)return;
+$("authSubmit").disabled=
+true;
 
-const button =
-$("authSubmit");
+$("authMessage").textContent=
+"Please wait...";
 
-button.disabled = true;
+try{
 
-button.textContent =
-authMode === "signup"
-?
-"Creating..."
-:
-"Signing in...";
+if(authMode==="signup"){
 
-$("authMessage").textContent = "";
+const {
+error
+}=await supabaseClient.auth.signUp({
 
-let result;
-
-if(authMode === "signup"){
-
-result =
-await supabaseClient.auth.signUp({
 email,
 password,
+
 options:{
 emailRedirectTo:
 "https://cirdriodm.github.io/cirdrio-store/"
 }
+
 });
+
+if(error)throw error;
+
+$("authMessage").textContent=
+"Account created. Check your email to confirm your account.";
 
 }else{
 
-result =
-await supabaseClient.auth.signInWithPassword({
+const {
+error
+}=await supabaseClient.auth.signInWithPassword({
 email,
 password
 });
 
-}
+if(error)throw error;
 
-if(result.error){
+$("authMessage").textContent=
+"Signed in successfully.";
 
-console.error(result.error);
+setTimeout(()=>{
 
-$("authMessage").textContent =
-result.error.message ||
-"Authentication failed.";
+closeOverlay(
+"authOverlay"
+);
 
-button.disabled = false;
+updateAuthUI();
+(async()=>{const {data:{session}}=await supabaseClient.auth.getSession();if(session){await loadNotifications();startNotificationRealtime(session.user.id);}})();
 
-button.textContent =
-authMode === "signup"
-?
-"Create account"
-:
-"Sign in";
-
-return;
+},700);
 
 }
 
-if(authMode === "signup"){
+}catch(e){
 
-$("authMessage").textContent =
-"Account created. Check your email if confirmation is required.";
+$("authMessage").textContent=
+e.message||
+"Something went wrong.";
 
-button.disabled = false;
+}finally{
 
-button.textContent =
-"Create account";
-
-}else{
-
-closeOverlay("authOverlay");
-
-showToast("Welcome back.");
-
-button.disabled = false;
-
-button.textContent =
-"Sign in";
+$("authSubmit").disabled=
+false;
 
 }
 
-}
+};
+
 
 async function updateAuthUI(){
 
 const {
 data:{session}
-} =
-await supabaseClient.auth.getSession();
-
-currentSession = session;
-
-const loggedIn =
-Boolean(session);
-
-if(loggedIn){
-
-$("accountBtn").classList.add("logged-in");
-
-}else{
-
-$("accountBtn").classList.remove("logged-in");
-
-}
-
-}
-
-async function openAccount(){
-
-if(!currentSession){
-
-openAuth("login");
-
-return;
-
-}
-
-await loadProfile();
-await loadAddresses();
-await loadCustomerOrders();
-
-openOverlay("accountOverlay");
-
-}
-
-function openAuth(mode="login"){
-
-showAuthMode(mode);
-openOverlay("authOverlay");
-
-}
-
-async function logout(){
-
-await supabaseClient.auth.signOut();
-
-currentSession = null;
-
-notifications = [];
-
-if(notificationChannel){
-
-await supabaseClient.removeChannel(
-notificationChannel
-);
-
-notificationChannel = null;
-
-}
-
-renderNotifications();
-
-$("notificationCount").textContent = "0";
-
-closeOverlay("accountOverlay");
-
-showToast("You have been signed out.");
-
-}
-
-/* =========================================================
-   NOTIFICATIONS
-   ========================================================= */
-
-function notificationTime(date){
-
-try{
-
-return new Date(date).toLocaleString(
-"en-IN",
-{
-day:"numeric",
-month:"short",
-hour:"numeric",
-minute:"2-digit"
-}
-);
-
-}catch{
-
-return "";
-
-}
-
-}
-
-async function loadNotifications(){
-
-if(!currentSession){
-
-notifications = [];
-
-renderNotifications();
-
-return;
-
-}
-
-const {data,error} =
-await supabaseClient
-.from("notifications")
-.select("*")
-.eq("user_id",currentSession.user.id)
-.order("created_at",{ascending:false})
-.limit(30);
-
-if(error){
-
-console.error("Notifications load error:",error);
-
-return;
-
-}
-
-notifications = data || [];
-
-renderNotifications();
-
-}
-
-function renderNotifications(){
-
-const list =
-$("notificationList");
-
-const count =
-$("notificationCount");
-
-if(!list)return;
-
-const unread =
-notifications.filter(n =>
-!n.is_read
-).length;
-
-count.textContent =
-String(unread);
-
-if(!notifications.length){
-
-list.innerHTML =
-`<div class="notification-empty">
-You're all caught up.
-</div>`;
-
-return;
-
-}
-
-list.innerHTML =
-notifications.map(notification => {
-
-return `
-<div
-class="notification-item ${notification.is_read ? "" : "unread"}"
-data-notification-id="${escapeHTML(notification.id)}"
-data-notification-order="${escapeHTML(notification.order_id || "")}">
-
-<div class="notification-item-top">
-
-<div>
-
-<div class="notification-title">
-${escapeHTML(notification.title)}
-</div>
-
-<div class="notification-message">
-${escapeHTML(notification.message)}
-</div>
-
-</div>
-
-<div class="notification-time">
-${notificationTime(notification.created_at)}
-</div>
-
-</div>
-
-</div>
-`;
-
-}).join("");
-
-}
-
-async function markNotificationRead(id){
-
-if(!currentSession)return;
-
-const {error} =
-await supabaseClient
-.from("notifications")
-.update({is_read:true})
-.eq("id",id)
-.eq("user_id",currentSession.user.id);
-
-if(error){
-
-console.error(error);
-return;
-
-}
-
-const item =
-notifications.find(n =>
-String(n.id) === String(id)
-);
-
-if(item){
-item.is_read = true;
-}
-
-renderNotifications();
-
-}
-
-async function markAllNotificationsRead(){
-
-if(!currentSession)return;
-
-const {error} =
-await supabaseClient
-.from("notifications")
-.update({is_read:true})
-.eq("user_id",currentSession.user.id)
-.eq("is_read",false);
-
-if(error){
-
-console.error(error);
-
-showToast("Unable to update notifications.");
-
-return;
-
-}
-
-notifications =
-notifications.map(n=>({
-...n,
-is_read:true
-}));
-
-renderNotifications();
-
-showToast("All notifications marked as read.");
-
-}
-
-async function openNotificationOrder(orderId){
-
-if(!orderId){
-
-return;
-
-}
-
-closeOverlay("notificationOverlay");
-
-await loadCustomerOrders();
-
-const order =
-customerOrders.find(o =>
-String(o.id) === String(orderId)
-);
-
-if(order){
-
-openOrderDetails(order.id);
-
-return;
-
-}
-
-showToast("Order details are unavailable.");
-
-}
-
-async function startNotificationRealtime(){
-
-if(!currentSession)return;
-
-if(notificationChannel){
-
-await supabaseClient.removeChannel(
-notificationChannel
-);
-
-}
-
-notificationChannel =
-supabaseClient
-.channel(
-"customer-notifications-" +
-currentSession.user.id
-)
-.on(
-"postgres_changes",
-{
-event:"INSERT",
-schema:"public",
-table:"notifications",
-filter:
-"user_id=eq." +
-currentSession.user.id
-},
-payload => {
-
-notifications.unshift(
-payload.new
-);
-
-notifications =
-notifications.slice(0,30);
-
-renderNotifications();
-
-showToast(
-payload.new.title ||
-"New notification"
-);
-
-}
-)
-.subscribe();
-
-}
-
-async function stopNotificationRealtime(){
-
-if(!notificationChannel)return;
-
-await supabaseClient.removeChannel(
-notificationChannel
-);
-
-notificationChannel = null;
-
-}
-
-/* =========================================================
-   EVENTS
-   ========================================================= */
-
-document.addEventListener(
-"click",
-async event => {
-
-const addButton =
-event.target.closest("[data-add]");
-
-if(addButton){
-
-addToCart(
-addButton.dataset.add,
-1
-);
-
-return;
-
-}
-
-const productCard =
-event.target.closest(".product-card");
-
-if(
-productCard &&
-!event.target.closest("button")
-){
-
-openProduct(
-productCard.dataset.productId
-);
-
-return;
-
-}
-
-const wishlist =
-event.target.closest("[data-wishlist]");
-
-if(wishlist){
-
-wishlist.classList.toggle("active");
-
-showToast(
-wishlist.classList.contains("active")
+}=await supabaseClient.auth.getSession();
+
+$("accountBtn").setAttribute(
+"aria-label",
+session
 ?
-"Added to wishlist."
+"My account"
 :
-"Removed from wishlist."
+"Sign in"
 );
 
-return;
-
 }
 
-const searchProduct =
-event.target.closest("[data-search-product]");
+/* =========================================================
+ACCOUNT BUTTON — EXPLICIT CLICK/TOUCH HANDLER
+========================================================= */
 
-if(searchProduct){
+$("accountBtn").addEventListener("click", async ()=>{
 
-closeOverlay("searchOverlay");
-
-openProduct(
-searchProduct.dataset.searchProduct
-);
-
-return;
-
-}
-
-const cartMinus =
-event.target.closest("[data-cart-minus]");
-
-if(cartMinus){
-
-changeCartQuantity(
-cartMinus.dataset.cartMinus,
--1
-);
-
-return;
-
-}
-
-const cartPlus =
-event.target.closest("[data-cart-plus]");
-
-if(cartPlus){
-
-changeCartQuantity(
-cartPlus.dataset.cartPlus,
-1
-);
-
-return;
-
-}
-
-const cartRemove =
-event.target.closest("[data-cart-remove]");
-
-if(cartRemove){
-
-removeFromCart(
-cartRemove.dataset.cartRemove
-);
-
-return;
-
-}
-
-const category =
-event.target.closest("[data-category]");
-
-if(category){
-
-filterCategory(
-category.dataset.category
-);
-
-return;
-
-}
-
-const orderCard =
-event.target.closest("[data-order-id]");
-
-if(
-orderCard &&
-!event.target.closest(
-"[data-notification-id]"
-)
-){
-
-openOrderDetails(
-orderCard.dataset.orderId
-);
-
-return;
-
-}
-
-const editAddress =
-event.target.closest("[data-edit-address]");
-
-if(editAddress){
-
-const address =
-addresses.find(a =>
-String(a.id) ===
-String(editAddress.dataset.editAddress)
-);
-
-if(address){
-openAddressForm(address);
-}
-
-return;
-
-}
-
-const defaultAddress =
-event.target.closest("[data-default-address]");
-
-if(defaultAddress){
-
-await makeDefaultAddress(
-defaultAddress.dataset.defaultAddress
-);
-
-return;
-
-}
-
-const deleteAddressButton =
-event.target.closest("[data-delete-address]");
-
-if(deleteAddressButton){
-
-await deleteAddress(
-deleteAddressButton.dataset.deleteAddress
-);
-
-return;
-
-}
-
-const notification =
-event.target.closest(
-"[data-notification-id]"
-);
-
-if(notification){
-
-const id =
-notification.dataset.notificationId;
-
-const orderId =
-notification.dataset.notificationOrder;
-
-await markNotificationRead(id);
-
-if(orderId){
-
-await openNotificationOrder(orderId);
-
-}
-
-return;
-
-}
-
-}
-);
-
-$("searchBtn").onclick = () => {
-
-openOverlay("searchOverlay");
-
-setTimeout(()=>{
-$("searchInput").focus();
-},100);
-
-};
-
-$("closeSearch").onclick = () =>
-closeOverlay("searchOverlay");
-
-$("cartBtn").onclick = () => {
-
-renderCart();
-
-openOverlay("cartOverlay");
-
-};
-
-$("closeCart").onclick = () =>
-closeOverlay("cartOverlay");
-
-$("accountBtn").addEventListener(
-"click",
-async ()=>{
 try{
 
 const {
 data:{session}
-} =
-await supabaseClient.auth.getSession();
+}=await supabaseClient.auth.getSession();
 
 if(session){
 
@@ -6443,54 +4577,173 @@ openAuth("login");
 
 }catch(e){
 
-console.error(
-"Account button error:",
-e
-);
-
+console.error("Account button error:",e);
 openAuth("login");
 
 }
 
+});
+
+
+/* =========================================================
+PROFILE
+========================================================= */
+
+function profileInitials(
+name,
+email
+){
+
+const n=
+String(name||"")
+.trim();
+
+if(n){
+
+const parts=
+n.split(/\s+/);
+
+if(parts.length>=2){
+
+return(
+parts[0][0]+
+parts[parts.length-1][0]
+)
+.toUpperCase();
+
 }
+
+return n
+.substring(0,2)
+.toUpperCase();
+
+}
+
+return String(
+email||"C"
+)
+.substring(0,1)
+.toUpperCase();
+
+}
+
+
+function setProfileAvatar(
+name,
+email,
+url
+){
+
+const box=
+$("profileAvatar");
+
+box.innerHTML="";
+
+const fallback=
+profileInitials(
+name,
+email
 );
 
-$("closeAuth").onclick = () =>
-closeOverlay("authOverlay");
+if(url){
 
-$("authForm").addEventListener(
-"submit",
-handleAuth
+const img=
+document.createElement(
+"img"
 );
 
-$("authSwitch").onclick = () => {
+img.src=url;
+img.alt="Profile";
 
-showAuthMode(
-authMode === "login"
-?
-"signup"
-:
-"login"
-);
+img.onerror=()=>{
+
+box.innerHTML="";
+box.textContent=
+fallback;
 
 };
 
-$("logoutBtn").onclick =
-logout;
+box.appendChild(img);
 
-$("saveProfile").onclick =
-saveProfile;
+}else{
 
-$("refreshOrders").onclick =
-loadCustomerOrders;
+box.textContent=
+fallback;
 
-$("closeAccount").onclick = () =>
-closeOverlay("accountOverlay");
+}
 
-$("notificationBtn").onclick =
-async ()=>{
+}
 
-if(!currentSession){
+
+async function loadProfile(){
+
+const {
+data:{session}
+}=
+await supabaseClient.auth.getSession();
+
+if(!session)return;
+
+try{
+
+const {
+data,
+error
+}=
+await supabaseClient
+.from("profiles")
+.select(
+"id,full_name,phone,avatar_url"
+)
+.eq(
+"id",
+session.user.id
+)
+.maybeSingle();
+
+if(error)throw error;
+
+currentProfile=
+data||null;
+
+$("profileName").value=
+data?.full_name||"";
+
+$("profilePhone").value=
+data?.phone||"";
+
+$("profileAvatarUrl").value=
+data?.avatar_url||"";
+
+setProfileAvatar(
+data?.full_name,
+session.user.email,
+data?.avatar_url
+);
+
+$("profileMessage").textContent=
+"";
+
+}catch(e){
+
+console.error(e);
+
+$("profileMessage").textContent=
+"Profile could not be loaded.";
+
+}
+
+}
+
+
+async function saveProfile(){
+
+const {
+data:{session}
+}=
+await supabaseClient.auth.getSession();
+
+if(!session){
 
 openAuth("login");
 
@@ -6498,362 +4751,1806 @@ return;
 
 }
 
+const fullName=
+$("profileName")
+.value
+.trim();
+
+const phone=
+$("profilePhone")
+.value
+.trim();
+
+const avatarUrl=
+$("profileAvatarUrl")
+.value
+.trim();
+
+$("saveProfile").disabled=
+true;
+
+$("profileMessage").textContent=
+"Saving...";
+
+try{
+
+const {
+data,
+error
+}=
+await supabaseClient
+.from("profiles")
+.upsert({
+
+id:
+session.user.id,
+
+full_name:
+fullName||null,
+
+phone:
+phone||null,
+
+avatar_url:
+avatarUrl||null,
+
+updated_at:
+new Date().toISOString()
+
+},{
+onConflict:"id"
+})
+.select(
+"id,full_name,phone,avatar_url"
+)
+.single();
+
+if(error)throw error;
+
+currentProfile=data;
+
+setProfileAvatar(
+data.full_name,
+session.user.email,
+data.avatar_url
+);
+
+$("profileMessage").textContent=
+"Profile saved successfully.";
+
+toast(
+"Profile updated."
+);
+
+}catch(e){
+
+console.error(e);
+
+$("profileMessage").textContent=
+e.message||
+"Unable to save profile.";
+
+}finally{
+
+$("saveProfile").disabled=
+false;
+
+}
+
+}
+
+
+$("saveProfile").onclick=
+saveProfile;
+
+
+/* =========================================================
+ADDRESSES
+========================================================= */
+
+async function loadAddresses(){
+
+const {
+data:{session}
+}=
+await supabaseClient.auth.getSession();
+
+if(!session)return;
+
+try{
+
+const {
+data,
+error
+}=
+await supabaseClient
+.from("addresses")
+.select("*")
+.eq(
+"user_id",
+session.user.id
+)
+.order(
+"is_default",
+{
+ascending:false
+}
+)
+.order(
+"created_at",
+{
+ascending:false
+}
+);
+
+if(error)throw error;
+
+addresses=
+data||[];
+
+renderAddresses();
+
+}catch(e){
+
+console.error(
+"Address load error:",
+e
+);
+
+$("addressList").innerHTML=
+`
+<div class="address-empty">
+Unable to load addresses.<br>
+<small>
+${escapeHTML(e.message)}
+</small>
+</div>
+`;
+
+}
+
+}
+
+
+function renderAddresses(){
+
+const list=
+$("addressList");
+
+const empty=
+$("addressEmpty");
+
+if(!addresses.length){
+
+list.innerHTML="";
+empty.style.display=
+"block";
+
+return;
+
+}
+
+empty.style.display=
+"none";
+
+list.innerHTML=
+addresses.map(address=>{
+
+const addressText=
+[
+address.address_line1,
+address.address_line2,
+address.city,
+address.state,
+address.postal_code,
+address.country
+]
+.filter(Boolean)
+.join(", ");
+
+return `
+
+<div
+class="address-card ${address.is_default?"default":""}">
+
+<div class="address-card-top">
+
+<div>
+
+<div class="address-name">
+${escapeHTML(address.full_name)}
+</div>
+
+<div class="address-phone">
+${escapeHTML(address.phone)}
+</div>
+
+</div>
+
+${
+address.is_default
+?
+`<div class="default-badge">
+Default
+</div>`
+:
+""
+}
+
+</div>
+
+<div class="address-text">
+${escapeHTML(addressText)}
+</div>
+
+<div class="address-card-actions">
+
+<button
+onclick="editAddress('${escapeHTML(address.id)}')">
+Edit
+</button>
+
+<button
+onclick="deleteAddress('${escapeHTML(address.id)}')">
+Delete
+</button>
+
+${
+!address.is_default
+?
+`<button
+onclick="makeDefaultAddress('${escapeHTML(address.id)}')">
+Set default
+</button>`
+:
+""
+}
+
+</div>
+
+</div>
+
+`;
+
+}).join("");
+
+}
+
+
+function resetAddressForm(){
+
+editingAddressId=null;
+
+$("addressId").value="";
+$("addressName").value="";
+$("addressPhone").value="";
+$("addressLine1").value="";
+$("addressLine2").value="";
+$("addressCity").value="";
+$("addressState").value="";
+$("addressPostal").value="";
+$("addressDefault").checked=
+false;
+
+$("addressFormTitle").textContent=
+"Add address";
+
+$("addressMessage").textContent=
+"";
+
+}
+
+
+function openAddressForm(){
+
+resetAddressForm();
+
+if(currentProfile){
+
+$("addressName").value=
+currentProfile.full_name||"";
+
+$("addressPhone").value=
+currentProfile.phone||"";
+
+}
+
+$("addressFormOverlay").classList.add(
+"active"
+);
+
+lockBody();
+
+}
+
+
+function editAddress(id){
+
+const address=
+addresses.find(
+x=>x.id===id
+);
+
+if(!address)return;
+
+editingAddressId=id;
+
+$("addressId").value=id;
+
+$("addressName").value=
+address.full_name||"";
+
+$("addressPhone").value=
+address.phone||"";
+
+$("addressLine1").value=
+address.address_line1||"";
+
+$("addressLine2").value=
+address.address_line2||"";
+
+$("addressCity").value=
+address.city||"";
+
+$("addressState").value=
+address.state||"";
+
+$("addressPostal").value=
+address.postal_code||"";
+
+$("addressDefault").checked=
+Boolean(
+address.is_default
+);
+
+$("addressFormTitle").textContent=
+"Edit address";
+
+$("addressMessage").textContent=
+"";
+
+$("addressFormOverlay")
+.classList.add("active");
+
+lockBody();
+
+}
+
+
+async function makeDefaultAddress(id){
+
+const {
+data:{session}
+}=
+await supabaseClient.auth.getSession();
+
+if(!session)return;
+
+try{
+
+const reset=
+await supabaseClient
+.from("addresses")
+.update({
+is_default:false,
+updated_at:new Date().toISOString()
+})
+.eq(
+"user_id",
+session.user.id
+);
+
+if(reset.error)throw reset.error;
+
+const setDefault=
+await supabaseClient
+.from("addresses")
+.update({
+is_default:true,
+updated_at:new Date().toISOString()
+})
+.eq(
+"id",
+id
+)
+.eq(
+"user_id",
+session.user.id
+);
+
+if(setDefault.error)
+throw setDefault.error;
+
+await loadAddresses();
+
+toast(
+"Default address updated."
+);
+
+}catch(e){
+
+toast(
+"Unable to update default address."
+);
+
+console.error(e);
+
+}
+
+}
+
+
+async function deleteAddress(id){
+
+const address=
+addresses.find(
+x=>x.id===id
+);
+
+if(!address)return;
+
+const confirmed=
+confirm(
+"Delete this saved address?"
+);
+
+if(!confirmed)return;
+
+const {
+data:{session}
+}=
+await supabaseClient.auth.getSession();
+
+if(!session)return;
+
+try{
+
+const {
+error
+}=
+await supabaseClient
+.from("addresses")
+.delete()
+.eq(
+"id",
+id
+)
+.eq(
+"user_id",
+session.user.id
+);
+
+if(error)throw error;
+
+if(address.is_default){
+
+const remaining=
+addresses.filter(
+x=>x.id!==id
+);
+
+if(remaining.length){
+
+await makeDefaultAddress(
+remaining[0].id
+);
+
+}else{
+
+await loadAddresses();
+
+}
+
+}else{
+
+await loadAddresses();
+
+}
+
+toast(
+"Address deleted."
+);
+
+}catch(e){
+
+console.error(e);
+
+toast(
+"Unable to delete address."
+);
+
+}
+
+}
+
+
+$("newAddressBtn").onclick=
+openAddressForm;
+
+
+$("closeAddressForm").onclick=()=>{
+
+closeOverlay(
+"addressFormOverlay"
+);
+
+};
+
+
+$("cancelAddressForm").onclick=()=>{
+
+closeOverlay(
+"addressFormOverlay"
+);
+
+};
+
+
+$("addressForm").onsubmit=async e=>{
+
+e.preventDefault();
+
+const {
+data:{session}
+}=
+await supabaseClient.auth.getSession();
+
+if(!session){
+
+openAuth("login");
+
+return;
+
+}
+
+const payload={
+
+user_id:
+session.user.id,
+
+full_name:
+$("addressName")
+.value
+.trim(),
+
+phone:
+$("addressPhone")
+.value
+.trim(),
+
+address_line1:
+$("addressLine1")
+.value
+.trim(),
+
+address_line2:
+$("addressLine2")
+.value
+.trim()||null,
+
+city:
+$("addressCity")
+.value
+.trim(),
+
+state:
+$("addressState")
+.value
+.trim(),
+
+postal_code:
+$("addressPostal")
+.value
+.trim(),
+
+country:
+"India",
+
+is_default:
+$("addressDefault")
+.checked
+
+};
+
+$("saveAddressBtn").disabled=
+true;
+
+$("addressMessage").textContent=
+"Saving...";
+
+try{
+
+if(
+payload.is_default ||
+addresses.length===0
+){
+
+const reset=
+await supabaseClient
+.from("addresses")
+.update({
+is_default:false,
+updated_at:new Date().toISOString()
+})
+.eq(
+"user_id",
+session.user.id
+);
+
+if(reset.error)
+throw reset.error;
+
+payload.is_default=
+true;
+
+}
+
+let result;
+
+if(editingAddressId){
+
+result=
+await supabaseClient
+.from("addresses")
+.update({
+full_name:
+payload.full_name,
+
+phone:
+payload.phone,
+
+address_line1:
+payload.address_line1,
+
+address_line2:
+payload.address_line2,
+
+city:
+payload.city,
+
+state:
+payload.state,
+
+postal_code:
+payload.postal_code,
+
+country:
+payload.country,
+
+is_default:
+payload.is_default,
+
+updated_at:
+new Date().toISOString()
+
+})
+.eq(
+"id",
+editingAddressId
+)
+.eq(
+"user_id",
+session.user.id
+);
+
+}else{
+
+result=
+await supabaseClient
+.from("addresses")
+.insert(
+payload
+);
+
+}
+
+if(result.error)
+throw result.error;
+
+$("addressMessage").textContent=
+"Address saved.";
+
+await loadAddresses();
+
+setTimeout(
+()=>{
+closeOverlay(
+"addressFormOverlay"
+);
+},
+500
+);
+
+}catch(e){
+
+console.error(e);
+
+$("addressMessage").textContent=
+e.message||
+"Unable to save address.";
+
+}finally{
+
+$("saveAddressBtn").disabled=
+false;
+
+}
+
+};
+
+
+/* =========================================================
+ACCOUNT / ORDERS
+========================================================= */
+
+async function openAccount(){
+
+const {
+data:{session}
+}=
+await supabaseClient.auth.getSession();
+
+if(!session){
+
+openAuth("login");
+
+return;
+
+}
+
+$("accountEmail").textContent=
+session.user.email||"";
+
+$("accountOverlay").classList.add(
+"active"
+);
+
+lockBody();
+
+await loadProfile();
+await loadAddresses();
+await loadOrders();
 await loadNotifications();
 
-openOverlay("notificationOverlay");
+}
+
+
+$("closeAccount").onclick=()=>
+closeOverlay(
+"accountOverlay"
+);
+
+
+$("refreshOrders").onclick=loadOrders;
+
+
+async function loadOrders(){
+
+$("ordersLoading").style.display=
+"block";
+
+$("ordersList").innerHTML="";
+
+try{
+
+const {
+data:{session}
+}=
+await supabaseClient.auth.getSession();
+
+if(!session){
+
+closeOverlay(
+"accountOverlay"
+);
+
+return;
+
+}
+
+const {
+data,
+error
+}=
+await supabaseClient
+.from("orders")
+.select("*")
+.eq(
+"user_id",
+session.user.id
+)
+.order(
+"created_at",
+{
+ascending:false
+}
+);
+
+if(error)throw error;
+
+orders=
+data||[];
+
+$("ordersLoading").style.display=
+"none";
+
+if(!orders.length){
+
+$("ordersList").innerHTML=
+`
+<div class="orders-empty">
+You haven't placed any orders yet.
+</div>
+`;
+
+return;
+
+}
+
+$("ordersList").innerHTML=
+orders.map(o=>{
+
+const status=
+String(
+o.order_status||"pending"
+)
+.toLowerCase();
+
+const shortId=
+String(o.id)
+.slice(0,8)
+.toUpperCase();
+
+const date=
+new Date(
+o.created_at
+).toLocaleDateString(
+"en-IN",
+{
+day:"2-digit",
+month:"short",
+year:"numeric"
+}
+);
+
+return `
+
+<div
+class="order-card"
+onclick="openOrderDetails('${escapeHTML(o.id)}')">
+
+<div class="order-top">
+
+<div>
+
+<div class="order-id">
+ORDER #${shortId}
+</div>
+
+<div class="order-date">
+${date}
+</div>
+
+</div>
+
+<div class="status ${escapeHTML(status)}">
+${escapeHTML(status)}
+</div>
+
+</div>
+
+<div class="order-bottom">
+
+<span>
+${escapeHTML(
+String(
+o.payment_method||"COD"
+).toUpperCase()
+)}
+</span>
+
+<strong>
+${money(o.total)}
+</strong>
+
+</div>
+
+</div>
+
+`;
+
+}).join("");
+
+}catch(e){
+
+console.error(e);
+
+$("ordersLoading").style.display=
+"none";
+
+$("ordersList").innerHTML=
+`
+<div class="orders-empty">
+Unable to load orders.<br>
+<small>
+${escapeHTML(e.message)}
+</small>
+</div>
+`;
+
+}
+
+}
+
+
+/* =========================================================
+ORDER DETAIL
+========================================================= */
+
+function updateOrderTracking(status){
+const key=String(status||"pending").toLowerCase();
+const stages=["pending","confirmed","processing","shipped","delivered"];
+const idx=stages.indexOf(key);
+const safeIdx=idx<0?0:idx;
+const labels={pending:"Pending",confirmed:"Confirmed",processing:"Processing",shipped:"Shipped",delivered:"Delivered",cancelled:"Cancelled"};
+const notes={pending:"Your order has been received and is awaiting confirmation.",confirmed:"Your order has been confirmed and is being prepared.",processing:"Your order is being prepared for dispatch.",shipped:"Your order is on the way to your delivery address.",delivered:"Your order has been delivered successfully.",cancelled:"This order has been cancelled."};
+$("orderTrackingStatus").textContent=labels[key]||key;
+$("orderTrackingNote").textContent=notes[key]||"Order status updated.";
+$("orderTrackingStatus").style.background=key==="delivered"?"#e9f0ea":key==="cancelled"?"#f2e8e8":"#eeeae5";
+$("orderTrackingStatus").style.color=key==="delivered"?"#55705c":key==="cancelled"?"#895d5d":"#555";
+document.querySelectorAll(".track-step").forEach((step,i)=>{
+step.classList.remove("active","complete");
+if(key!=="cancelled"){if(i<safeIdx)step.classList.add("complete");if(i===safeIdx)step.classList.add("active");}
+});
+}
+
+async function openOrderDetails(id){
+
+const order=
+orders.find(
+o=>o.id===id
+);
+
+if(!order)return;
+
+$("orderDetailTitle").textContent=
+"Order #"+
+String(order.id)
+.slice(0,8)
+.toUpperCase();
+
+$("orderDetailSub").textContent=
+new Date(
+order.created_at
+).toLocaleString(
+"en-IN"
+);
+
+$("orderDetailSubtotal").textContent=
+money(order.subtotal);
+
+$("orderDetailDiscount").textContent=
+money(order.discount);
+
+$("orderDetailShipping").textContent=
+money(order.shipping);
+
+$("orderDetailTax").textContent=
+money(order.tax);
+
+$("orderDetailTotal").textContent=
+money(order.total);
+
+$("orderDetailPayment").textContent=
+String(
+order.payment_method||"COD"
+).toUpperCase();
+
+$("orderDetailPaymentStatus").textContent=
+String(
+order.payment_status||"pending"
+);
+
+$("orderDetailOrderStatus").textContent=
+String(
+order.order_status||"pending"
+);
+
+updateOrderTracking(order.order_status||"pending");
+
+$("orderDetailAddress").textContent=
+[
+order.address_line1,
+order.city,
+order.state,
+order.postal_code,
+order.country
+]
+.filter(Boolean)
+.join(", ");
+
+$("orderItemsDetail").innerHTML=
+"Loading items...";
+
+$("orderDetailOverlay").classList.add(
+"active"
+);
+
+lockBody();
+
+try{
+
+const {
+data,
+error
+}=
+await supabaseClient
+.from("order_items")
+.select("*")
+.eq(
+"order_id",
+id
+);
+
+if(error)throw error;
+
+$("orderItemsDetail").innerHTML=
+(data||[]).length
+?
+(data||[]).map(i=>`
+
+<div class="order-item-line">
+
+<span>
+${escapeHTML(
+i.product_name
+)}
+× ${i.quantity}
+</span>
+
+<strong>
+${money(i.line_total)}
+</strong>
+
+</div>
+
+`).join("")
+:
+`
+<div class="orders-empty">
+No item details available.
+</div>
+`;
+
+}catch(e){
+
+console.error(e);
+
+$("orderItemsDetail").innerHTML=
+`
+<div class="orders-empty">
+Unable to load items.
+</div>
+`;
+
+}
+
+}
+
+
+$("closeOrderDetail").onclick=()=>
+closeOverlay(
+"orderDetailOverlay"
+);
+
+
+$("logoutBtn").onclick=async()=>{
+
+await supabaseClient.auth.signOut();
+
+currentProfile=null;
+orders=[];
+addresses=[];
+notifications=[];
+stopNotificationRealtime();
+updateNotificationBadge();
+
+closeOverlay(
+"accountOverlay"
+);
+
+updateAuthUI();
+
+toast(
+"Signed out of CIRDRIO."
+);
 
 };
 
-$("closeNotifications").onclick = () =>
-closeOverlay("notificationOverlay");
 
-$("markAllNotifications").onclick =
-markAllNotificationsRead;
-
-$("newAddressBtn").onclick = () =>
-openAddressForm();
-
-$("closeAddressForm").onclick = () =>
-closeOverlay("addressFormOverlay");
-
-$("cancelAddressForm").onclick = () =>
-closeOverlay("addressFormOverlay");
-<!-- STEP 40 — PART 4 -->
-<!-- Continue directly after Part 3 -->
-
-<!--
-  CIRDRIO
-  Premium Beauty Commerce
-  Step 40 — Product Catalogue Frontend
--->
-
-<script>
-/*
-  Final safety refresh:
-  Keep storefront product data synchronized with
-  Supabase whenever the page becomes visible again.
-*/
-
-document.addEventListener("visibilitychange", async () => {
-  if (!document.hidden) {
-    try {
-      await loadProducts();
-
-      if (currentSession) {
-        await loadNotifications();
-      }
-
-      renderCart();
-      updateCartCount();
-
-    } catch (error) {
-      console.error("Visibility refresh error:", error);
-    }
-  }
-});
-
-/*
-  Keep cart stock synchronized with the latest catalogue.
-*/
-async function syncCartStock(){
-
-  if(!cart.length)return;
-
-  let changed = false;
-
-  cart = cart.map(item => {
-
-    const product =
-      products.find(p =>
-        String(p.Id) === String(item.id)
-      );
-
-    if(!product){
-      changed = true;
-      return null;
-    }
-
-    const latestStock =
-      Number(product.Stock || 0);
-
-    if(latestStock <= 0){
-      changed = true;
-      return null;
-    }
-
-    if(item.quantity > latestStock){
-      changed = true;
-
-      return {
-        ...item,
-        quantity:latestStock,
-        stock:latestStock,
-        price:Number(product.Price || 0),
-        name:product.Name,
-        image:product["Image url"] || ""
-      };
-    }
-
-    return {
-      ...item,
-      stock:latestStock,
-      price:Number(product.Price || 0),
-      name:product.Name,
-      image:product["Image url"] || ""
-    };
-
-  }).filter(Boolean);
-
-  if(changed){
-    saveCart();
-    renderCart();
-    updateCartCount();
-  }
-
+supabaseClient.auth.onAuthStateChange(
+(event,session)=>{
+updateAuthUI();
+if(session){
+loadNotifications();
+startNotificationRealtime(session.user.id);
+}else{
+notifications=[];
+stopNotificationRealtime();
+updateNotificationBadge();
 }
+}
+);
 
-/*
-  Re-check stock after the catalogue refresh.
-*/
-const originalLoadProducts =
-  loadProducts;
 
-loadProducts = async function(){
+/* =========================================================
+CHECKOUT
+========================================================= */
 
-  await originalLoadProducts();
+function getCartTotals(){
 
-  await syncCartStock();
+const subtotal=
+cart.reduce(
+(s,i)=>
+s+
+i.price*i.quantity,
+0
+);
+
+const shipping=0;
+const tax=0;
+const discount=0;
+
+return{
+
+subtotal,
+shipping,
+tax,
+discount,
+
+total:
+subtotal+
+shipping+
+tax-
+discount
 
 };
 
-/*
-  Navigation category buttons.
-*/
-document.querySelectorAll(
-  "[data-category]"
-).forEach(button => {
+}
 
-  button.addEventListener(
-    "click",
-    () => {
 
-      document.querySelectorAll(
-        "[data-category]"
-      ).forEach(item =>
-        item.classList.remove("active")
-      );
+function fillCheckoutSummary(){
 
-      button.classList.add("active");
+const t=
+getCartTotals();
 
-    }
-  );
+$("checkoutSubtotal").textContent=
+money(t.subtotal);
+
+$("checkoutShipping").textContent=
+money(t.shipping);
+
+$("checkoutTax").textContent=
+money(t.tax);
+
+$("checkoutTotal").textContent=
+money(t.total);
+
+}
+
+
+function renderCheckoutAddresses(){
+
+const box=
+$("checkoutSavedAddressBox");
+
+const select=
+$("checkoutAddressSelect");
+
+if(!addresses.length){
+
+box.style.display=
+"none";
+
+select.innerHTML=
+'<option value="">Select a saved address</option>';
+
+return;
+
+}
+
+box.style.display=
+"block";
+
+select.innerHTML=
+`
+<option value="">
+Select a saved address
+</option>
+`
++
+addresses.map(a=>{
+
+const label=
+[
+a.full_name,
+a.address_line1,
+a.city,
+a.state,
+a.postal_code
+]
+.filter(Boolean)
+.join(" · ");
+
+return `
+<option value="${escapeHTML(a.id)}">
+${escapeHTML(
+a.is_default
+?
+"Default — "+label
+:
+label
+)}
+</option>
+`;
+
+}).join("");
+
+const defaultAddress=
+addresses.find(
+a=>a.is_default
+);
+
+if(defaultAddress){
+
+select.value=
+defaultAddress.id;
+
+applyCheckoutAddress(
+defaultAddress
+);
+
+}
+
+}
+
+
+function applyCheckoutAddress(
+address
+){
+
+if(!address)return;
+
+$("checkoutName").value=
+address.full_name||"";
+
+$("checkoutPhone").value=
+address.phone||"";
+
+$("checkoutPostal").value=
+address.postal_code||"";
+
+$("checkoutAddress").value=
+[
+address.address_line1,
+address.address_line2
+]
+.filter(Boolean)
+.join(", ");
+
+$("checkoutCity").value=
+address.city||"";
+
+$("checkoutState").value=
+address.state||"";
+
+}
+
+
+$("checkoutAddressSelect").onchange=
+()=>{
+
+const id=
+$("checkoutAddressSelect").value;
+
+if(!id)return;
+
+const address=
+addresses.find(
+x=>x.id===id
+);
+
+if(address){
+
+applyCheckoutAddress(
+address
+);
+
+}
+
+};
+
+
+async function openCheckout(){
+
+if(!cart.length){
+
+toast(
+"Your bag is empty."
+);
+
+return;
+
+}
+
+const {
+data:{session}
+}=
+await supabaseClient.auth.getSession();
+
+if(!session){
+
+closeOverlay(
+"cartOverlay"
+);
+
+openAuth("login");
+
+return;
+
+}
+
+await loadProfile();
+await loadAddresses();
+
+$("checkoutMessage").textContent="";
+
+$("checkoutFormView")
+.style.display=
+"block";
+
+$("checkoutSuccess")
+.style.display=
+"none";
+
+fillCheckoutSummary();
+
+if(session.user.email){
+
+$("checkoutEmail").value=
+session.user.email;
+
+}
+
+renderCheckoutAddresses();
+
+if(
+currentProfile &&
+currentProfile.full_name &&
+!$("checkoutName").value
+){
+
+$("checkoutName").value=
+currentProfile.full_name;
+
+}
+
+if(
+currentProfile &&
+currentProfile.phone &&
+!$("checkoutPhone").value
+){
+
+$("checkoutPhone").value=
+currentProfile.phone;
+
+}
+
+closeOverlay(
+"cartOverlay"
+);
+
+$("checkoutOverlay").classList.add(
+"active"
+);
+
+lockBody();
+
+}
+
+
+$("checkoutBtn").onclick=
+openCheckout;
+
+
+$("closeCheckout").onclick=()=>
+closeOverlay(
+"checkoutOverlay"
+);
+
+
+$("backToCart").onclick=()=>{
+
+closeOverlay(
+"checkoutOverlay"
+);
+
+openCart();
+
+};
+
+
+/* =========================================================
+SAVE CHECKOUT ADDRESS
+========================================================= */
+
+async function saveCurrentCheckoutAddress(){
+
+const {
+data:{session}
+}=
+await supabaseClient.auth.getSession();
+
+if(!session)return;
+
+const name=
+$("checkoutName")
+.value
+.trim();
+
+const phone=
+$("checkoutPhone")
+.value
+.trim();
+
+const addressLine1=
+$("checkoutAddress")
+.value
+.trim();
+
+const city=
+$("checkoutCity")
+.value
+.trim();
+
+const state=
+$("checkoutState")
+.value
+.trim();
+
+const postal=
+$("checkoutPostal")
+.value
+.trim();
+
+if(
+!name||
+!phone||
+!addressLine1||
+!city||
+!state||
+!postal
+){
+
+toast(
+"Complete your delivery details first."
+);
+
+return;
+
+}
+
+try{
+
+const shouldDefault=
+addresses.length===0;
+
+if(shouldDefault){
+
+await supabaseClient
+.from("addresses")
+.update({
+is_default:false
+})
+.eq(
+"user_id",
+session.user.id
+);
+
+}
+
+const {
+error
+}=
+await supabaseClient
+.from("addresses")
+.insert({
+
+user_id:
+session.user.id,
+
+full_name:
+name,
+
+phone:
+phone,
+
+address_line1:
+addressLine1,
+
+address_line2:
+null,
+
+city:
+city,
+
+state:
+state,
+
+postal_code:
+postal,
+
+country:
+"India",
+
+is_default:
+shouldDefault
 
 });
 
-/*
-  Mobile navigation.
-*/
-const menuBtn =
-$("menuBtn");
+if(error)throw error;
 
-const mobileMenu =
-$("mobileMenu");
+await loadAddresses();
 
-if(menuBtn && mobileMenu){
+renderCheckoutAddresses();
 
-  menuBtn.addEventListener(
-    "click",
-    () => {
+toast(
+"Address saved."
+);
 
-      mobileMenu.classList.toggle("active");
+}catch(e){
 
-    }
-  );
+console.error(e);
 
-  mobileMenu
-    .querySelectorAll("a")
-    .forEach(link => {
-
-      link.addEventListener(
-        "click",
-        () => {
-          mobileMenu.classList.remove("active");
-        }
-      );
-
-    });
+toast(
+"Unable to save address."
+);
 
 }
 
-/*
-  Close overlays when clicking outside
-  their main content.
-*/
-document.querySelectorAll(
-  ".overlay"
-).forEach(overlay => {
+}
 
-  overlay.addEventListener(
-    "click",
-    event => {
 
-      if(event.target === overlay){
+/* =========================================================
+SECURE ORDER
+========================================================= */
 
-        overlay.classList.remove("active");
+$("checkoutForm").onsubmit=
+async e=>{
 
-        if(
-          !document.querySelector(
-            ".overlay.active"
-          )
-        ){
-          document.body.classList.remove("lock");
-        }
+e.preventDefault();
 
-      }
+if(!cart.length){
 
-    }
-  );
+$("checkoutMessage").textContent=
+"Your bag is empty.";
+
+return;
+
+}
+
+const {
+data:{session}
+}=
+await supabaseClient.auth.getSession();
+
+if(!session){
+
+closeOverlay(
+"checkoutOverlay"
+);
+
+openAuth("login");
+
+return;
+
+}
+
+const t=
+getCartTotals();
+
+$("placeOrderBtn").disabled=
+true;
+
+$("checkoutMessage").textContent=
+"Placing your order...";
+
+try{
+
+const items=
+cart.map(i=>({
+
+product_id:
+i.id,
+
+quantity:
+Number(i.quantity)
+
+}));
+
+const {
+data:orderId,
+error
+}=
+await supabaseClient.rpc(
+"place_order_secure",
+{
+
+p_customer_name:
+$("checkoutName")
+.value.trim(),
+
+p_customer_email:
+$("checkoutEmail")
+.value.trim(),
+
+p_customer_phone:
+$("checkoutPhone")
+.value.trim(),
+
+p_address_line1:
+$("checkoutAddress")
+.value.trim(),
+
+p_address_line2:
+null,
+
+p_city:
+$("checkoutCity")
+.value.trim(),
+
+p_state:
+$("checkoutState")
+.value.trim(),
+
+p_postal_code:
+$("checkoutPostal")
+.value.trim(),
+
+p_country:
+"India",
+
+p_subtotal:
+t.subtotal,
+
+p_discount:
+t.discount,
+
+p_shipping:
+t.shipping,
+
+p_tax:
+t.tax,
+
+p_total:
+t.total,
+
+p_payment_method:
+"cod",
+
+p_items:
+items
 
 });
 
-/*
-  Search shortcut.
-*/
-document.addEventListener(
-  "keydown",
-  event => {
+if(error)throw error;
 
-    if(
-      (event.ctrlKey || event.metaKey) &&
-      event.key.toLowerCase() === "k"
-    ){
+const shortId=
+String(orderId)
+.slice(0,8)
+.toUpperCase();
 
-      event.preventDefault();
+cart=[];
 
-      openOverlay("searchOverlay");
+saveCart();
 
-      setTimeout(
-        () => $("searchInput")?.focus(),
-        100
-      );
+$("checkoutFormView")
+.style.display=
+"none";
 
-    }
+$("checkoutSuccess")
+.style.display=
+"block";
 
-  }
-);
+$("successText").textContent=
+`Order #${shortId} has been placed successfully. Payment method: Cash on Delivery.`;
 
-/*
-  Scroll reveal.
-*/
-const revealElements =
-document.querySelectorAll(
-  ".section, .product-card, .feature-card"
-);
+}catch(e){
 
-if("IntersectionObserver" in window){
+console.error(e);
 
-  const observer =
-    new IntersectionObserver(
-      entries => {
+$("checkoutMessage").textContent=
+e.message||
+"Unable to place order. Please try again.";
 
-        entries.forEach(entry => {
+}finally{
 
-          if(entry.isIntersecting){
-
-            entry.target.classList.add(
-              "revealed"
-            );
-
-            observer.unobserve(
-              entry.target
-            );
-
-          }
-
-        });
-
-      },
-      {
-        threshold:0.08
-      }
-    );
-
-  revealElements.forEach(
-    element => observer.observe(element)
-  );
+$("placeOrderBtn").disabled=
+false;
 
 }
 
-/*
-  Product grid click protection.
-*/
-document.addEventListener(
-  "click",
-  event => {
+};
 
-    const card =
-      event.target.closest(
-        ".product-card"
-      );
 
-    if(!card)return;
+/* =========================================================
+CONTINUE SHOPPING
+========================================================= */
 
-    if(
-      event.target.closest(
-        "button, a, input, select"
-      )
-    ){
-      return;
-    }
+$("continueShopping").onclick=()=>{
 
-    const id =
-      card.dataset.productId;
-
-    if(id){
-      openProduct(id);
-    }
-
-  }
+closeOverlay(
+"checkoutOverlay"
 );
 
-/*
-  Refresh product catalogue when the browser
-  regains network connection.
-*/
-window.addEventListener(
-  "online",
-  async () => {
+$("checkoutSuccess").style.display=
+"none";
 
-    showToast(
-      "Connection restored. Refreshing collection..."
-    );
+$("checkoutFormView").style.display=
+"block";
 
-    try{
-      await loadProducts();
-    }catch(error){
-      console.error(error);
-    }
+$("checkoutForm").reset();
 
-  }
+$("checkoutAddressBox")&&(
+$("checkoutAddressBox").style.display="none"
 );
 
-/*
-  Initial visual state.
-*/
-document.documentElement.classList.add(
-  "cirdrio-ready"
-);
+$("shop").scrollIntoView({
+behavior:"smooth"
+});
 
-/*
-  Footer year.
-*/
-const yearElement =
-$("footerYear");
+};
 
-if(yearElement){
-  yearElement.textContent =
-    new Date().getFullYear();
+
+/* =========================================================
+OVERLAY CLICK
+========================================================= */
+
+document
+.querySelectorAll(".overlay")
+.forEach(o=>{
+
+o.onclick=e=>{
+
+if(e.target===o){
+
+o.classList.remove("active");
+
+unlockBody();
+
 }
+
+};
+
+});
+
+
+/* =========================================================
+START
+========================================================= */
+
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
+
+loadProducts();
+
+updateAuthUI();
+
+updateCart();
+
+}
+);
 
 </script>
 
