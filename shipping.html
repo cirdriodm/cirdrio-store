@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Shipping Policy | CIRDRIO</title>
+<meta name="description" content="CIRDRIO Shipping Policy — delivery timelines, shipping, address accuracy and order delivery information.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --ink:#151515;
+  --muted:#666;
+  --soft:#f7f6f3;
+  --line:#e7e5e0;
+  --white:#fff;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html{scroll-behavior:smooth}
+
+body{
+  background:var(--soft);
+  color:var(--ink);
+  font-family:"DM Sans",sans-serif;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+
+a{color:inherit;text-decoration:none}
+
+.header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  height:74px;
+  display:flex;
+  align-items:center;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line);
+}
+
+.nav{
+  width:min(1180px,calc(100% - 40px));
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  font-family:"Manrope",sans-serif;
+  font-size:22px;
+  font-weight:800;
+  letter-spacing:.13em;
+}
+
+.back{
+  color:#555;
+  font-size:14px;
+  font-weight:600;
+  transition:.2s;
+}
+
+.back:hover{
+  color:#000;
+  transform:translateX(-2px);
+}
+
+.hero{
+  background:#fff;
+  border-bottom:1px solid var(--line);
+  padding:90px 20px 82px;
+}
+
+.hero-inner{
+  width:min(940px,100%);
+  margin:auto;
+}
+
+.eyebrow{
+  margin-bottom:18px;
+  color:#777;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+
+h1{
+  max-width:850px;
+  font-family:"Manrope",sans-serif;
+  font-size:clamp(42px,7vw,76px);
+  line-height:1.02;
+  letter-spacing:-.055em;
+  font-weight:800;
+}
+
+.hero p{
+  max-width:680px;
+  margin-top:24px;
+  color:var(--muted);
+  font-size:16px;
+}
+
+.updated{
+  display:inline-block;
+  margin-top:25px;
+  padding:9px 14px;
+  border:1px solid var(--line);
+  border-radius:100px;
+  background:#faf9f7;
+  color:#666;
+  font-size:12px;
+}
+
+.layout{
+  width:min(1180px,calc(100% - 40px));
+  margin:55px auto 90px;
+  display:grid;
+  grid-template-columns:250px 1fr;
+  gap:70px;
+  align-items:start;
+}
+
+.toc{
+  position:sticky;
+  top:105px;
+  padding:24px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:18px;
+}
+
+.toc-title{
+  margin-bottom:15px;
+  font-family:"Manrope",sans-serif;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+.toc a{
+  display:block;
+  padding:7px 0;
+  color:#777;
+  font-size:13px;
+  transition:.2s;
+}
+
+.toc a:hover{
+  padding-left:4px;
+  color:#111;
+}
+
+.document{
+  padding:clamp(30px,5vw,62px);
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:22px;
+}
+
+.section{
+  scroll-margin-top:105px;
+  margin-bottom:46px;
+  padding-bottom:46px;
+  border-bottom:1px solid var(--line);
+}
+
+.section:last-child{
+  margin-bottom:0;
+  padding-bottom:0;
+  border-bottom:0;
+}
+
+h2{
+  margin-bottom:20px;
+  font-family:"Manrope",sans-serif;
+  font-size:clamp(23px,3vw,31px);
+  line-height:1.2;
+  letter-spacing:-.035em;
+}
+
+h3{
+  margin:26px 0 9px;
+  font-family:"Manrope",sans-serif;
+  font-size:17px;
+}
+
+p{
+  margin-bottom:15px;
+  color:#555;
+  font-size:15px;
+}
+
+ul{
+  margin:10px 0 18px;
+  padding-left:22px;
+}
+
+li{
+  margin:7px 0;
+  color:#555;
+  font-size:15px;
+}
+
+strong{color:#222}
+
+.info{
+  margin:20px 0;
+  padding:20px;
+  background:#f7f6f3;
+  border:1px solid var(--line);
+  border-radius:15px;
+}
+
+.steps{
+  display:grid;
+  gap:12px;
+  margin-top:22px;
+}
+
+.step{
+  padding:18px 20px;
+  border:1px solid var(--line);
+  border-radius:15px;
+  background:#faf9f7;
+}
+
+.step-number{
+  margin-bottom:4px;
+  font-family:"Manrope",sans-serif;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+.step p{
+  margin:0;
+}
+
+.contact{
+  margin-top:20px;
+  padding:27px;
+  background:#171717;
+  border-radius:18px;
+}
+
+.contact p{
+  margin:5px 0;
+  color:#cfcfcf;
+}
+
+.contact a{
+  color:#fff;
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+
+.footer{
+  padding:45px 20px;
+  background:#151515;
+  color:#fff;
+}
+
+.footer-inner{
+  width:min(1180px,100%);
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:30px;
+}
+
+.footer-logo{
+  font-family:"Manrope",sans-serif;
+  font-weight:800;
+  letter-spacing:.13em;
+}
+
+.footer p{
+  margin:0;
+  color:#999;
+  font-size:12px;
+}
+
+@media(max-width:850px){
+  .layout{
+    grid-template-columns:1fr;
+    gap:25px;
+  }
+
+  .toc{
+    position:relative;
+    top:auto;
+  }
+
+  .toc a{
+    display:inline-block;
+    margin-right:15px;
+  }
+}
+
+@media(max-width:560px){
+  .header{height:66px}
+
+  .nav{
+    width:calc(100% - 28px);
+  }
+
+  .logo{font-size:18px}
+
+  .back{font-size:12px}
+
+  .hero{
+    padding:65px 18px 58px;
+  }
+
+  .hero p{font-size:14px}
+
+  .layout{
+    width:calc(100% - 24px);
+    margin:28px auto 55px;
+  }
+
+  .document{
+    padding:27px 21px;
+    border-radius:18px;
+  }
+
+  p,li{font-size:14px}
+
+  .footer-inner{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <nav class="nav">
+    <a href="index.html" class="logo">CIRDRIO</a>
+    <a href="index.html" class="back">← Back to Store</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">CIRDRIO · Shipping</div>
+
+    <h1>Delivered with clarity.</h1>
+
+    <p>
+      Everything you need to know about order processing,
+      delivery, shipping addresses and the journey from CIRDRIO
+      to your door.
+    </p>
+
+    <span class="updated">Last updated: September 2026</span>
+  </div>
+</section>
+
+<main class="layout">
+
+<aside class="toc">
+  <div class="toc-title">On this page</div>
+  <a href="#overview">Overview</a>
+  <a href="#processing">Order Processing</a>
+  <a href="#delivery">Delivery</a>
+  <a href="#address">Address Accuracy</a>
+  <a href="#delays">Delays</a>
+  <a href="#failed">Failed Delivery</a>
+  <a href="#tracking">Tracking</a>
+  <a href="#damaged">Damaged Packages</a>
+  <a href="#contact">Contact</a>
+</aside>
+
+<article class="document">
+
+<section class="section" id="overview">
+<h2>1. Shipping Overview</h2>
+
+<p>
+CIRDRIO aims to provide a clear, reliable and convenient delivery
+experience for every eligible order.
+</p>
+
+<p>
+Shipping availability, delivery timelines and applicable charges may
+vary depending on the destination, product availability, logistics
+partner and other operational factors.
+</p>
+
+<div class="info">
+<strong>Important:</strong>
+A delivery estimate is an indication rather than a guaranteed
+delivery date unless CIRDRIO expressly states otherwise.
+</div>
+</section>
+
+<section class="section" id="processing">
+<h2>2. Order Processing</h2>
+
+<p>
+After an order is successfully placed, CIRDRIO may require time to
+verify, prepare and package the products before dispatch.
+</p>
+
+<div class="steps">
+
+<div class="step">
+<div class="step-number">Stage 01</div>
+<p><strong>Order received</strong> — Your order is recorded in the CIRDRIO system.</p>
+</div>
+
+<div class="step">
+<div class="step-number">Stage 02</div>
+<p><strong>Order confirmed</strong> — The order is reviewed and accepted for fulfilment.</p>
+</div>
+
+<div class="step">
+<div class="step-number">Stage 03</div>
+<p><strong>Processing</strong> — Products are prepared and packaged.</p>
+</div>
+
+<div class="step">
+<div class="step-number">Stage 04</div>
+<p><strong>Shipped</strong> — The package is handed to the applicable delivery partner.</p>
+</div>
+
+<div class="step">
+<div class="step-number">Stage 05</div>
+<p><strong>Delivered</strong> — The package reaches the delivery destination.</p>
+</div>
+
+</div>
+</section>
+
+<section class="section" id="delivery">
+<h2>3. Delivery</h2>
+
+<p>
+Orders are delivered to the address supplied during checkout or to
+an eligible saved address selected by the customer.
+</p>
+
+<p>
+Customers should ensure that the recipient is available to receive
+the shipment where required by the delivery provider.
+</p>
+
+<p>
+Delivery timelines can vary according to destination, logistics
+capacity, public holidays, weather, local conditions and other
+circumstances outside CIRDRIO's reasonable control.
+</p>
+</section>
+
+<section class="section" id="address">
+<h2>4. Shipping Address Accuracy</h2>
+
+<p>
+Customers are responsible for providing a complete and accurate
+delivery address, including the correct name, phone number, postal
+code and other required details.
+</p>
+
+<p>
+CIRDRIO cannot guarantee successful delivery where an address is
+incorrect, incomplete or inaccessible.
+</p>
+
+<p>
+If you identify an address error, contact CIRDRIO as soon as possible.
+We will attempt to assist where the order has not yet entered a
+stage where changes are no longer possible.
+</p>
+</section>
+
+<section class="section" id="delays">
+<h2>5. Delivery Delays</h2>
+
+<p>
+Occasional delays may occur because of circumstances beyond our
+reasonable control, including:</p>
+
+<ul>
+<li>Severe weather or natural events</li>
+<li>Public holidays and regional closures</li>
+<li>Transportation or logistics disruptions</li>
+<li>Operational issues with delivery partners</li>
+<li>Incorrect or incomplete delivery information</li>
+<li>Unexpected demand or service interruptions</li>
+</ul>
+
+<p>
+Where practical, CIRDRIO or its delivery partner may provide updated
+delivery information.
+</p>
+</section>
+
+<section class="section" id="failed">
+<h2>6. Failed or Missed Delivery</h2>
+
+<p>
+If a delivery attempt is unsuccessful, the delivery partner may
+attempt redelivery or follow its applicable delivery procedure.
+</p>
+
+<p>
+Repeated failed delivery attempts, refusal to accept a package or
+incorrect delivery information may result in the order being returned
+to the sender.
+</p>
+
+<p>
+Any applicable refund, reshipment or additional delivery charges will
+be handled according to the relevant CIRDRIO policy and applicable law.
+</p>
+</section>
+
+<section class="section" id="tracking">
+<h2>7. Order Tracking</h2>
+
+<p>
+Where tracking information is available, customers may receive
+delivery updates through the applicable order or communication
+system.
+</p>
+
+<p>
+Tracking information is provided by the relevant logistics provider
+and may not update immediately at every stage of transit.
+</p>
+</section>
+
+<section class="section" id="damaged">
+<h2>8. Damaged or Incorrect Packages</h2>
+
+<p>
+If your package arrives visibly damaged, contains the wrong product,
+or appears incomplete, contact CIRDRIO as soon as reasonably possible.
+</p>
+
+<p>
+For faster assistance, keep the original packaging and provide
+relevant order information and photographs where requested.
+</p>
+
+<p>
+Any resolution will be assessed under CIRDRIO's applicable Returns &
+Refund Policy and applicable consumer protection requirements.
+</p>
+</section>
+
+<section class="section" id="contact">
+<h2>9. Shipping Support</h2>
+
+<p>
+For questions about delivery, shipping or an order that has not
+arrived as expected, contact CIRDRIO.
+</p>
+
+<div class="contact">
+<p><strong style="color:#fff;">CIRDRIO</strong></p>
+<p>Email:
+<a href="mailto:cirdrio.dm@gmail.com">cirdrio.dm@gmail.com</a>
+</p>
+<p>Website: cirdrio.com</p>
+</div>
+
+</section>
+
+</article>
+</main>
+
+<footer class="footer">
+<div class="footer-inner">
+  <div class="footer-logo">CIRDRIO</div>
+  <p>© 2026 CIRDRIO. All rights reserved.</p>
+</div>
+</footer>
+
+</body>
+</html>
