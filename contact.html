@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Contact & Support | CIRDRIO</title>
+<meta name="description" content="Contact CIRDRIO for order support, product questions, returns, refunds and general assistance.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --ink:#151515;
+  --muted:#686868;
+  --soft:#f7f6f3;
+  --line:#e7e5e0;
+  --white:#fff;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:var(--soft);
+  color:var(--ink);
+  font-family:"DM Sans",sans-serif;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+.header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  height:74px;
+  display:flex;
+  align-items:center;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line);
+}
+
+.nav{
+  width:min(1180px,calc(100% - 40px));
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  font-family:"Manrope",sans-serif;
+  font-size:22px;
+  font-weight:800;
+  letter-spacing:.13em;
+}
+
+.back{
+  color:#555;
+  font-size:14px;
+  font-weight:600;
+  transition:.2s;
+}
+
+.back:hover{
+  color:#000;
+  transform:translateX(-2px);
+}
+
+.hero{
+  padding:92px 20px 82px;
+  background:#fff;
+  border-bottom:1px solid var(--line);
+}
+
+.hero-inner{
+  width:min(1000px,100%);
+  margin:auto;
+}
+
+.eyebrow{
+  margin-bottom:18px;
+  color:#777;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+
+h1{
+  max-width:850px;
+  font-family:"Manrope",sans-serif;
+  font-size:clamp(44px,7vw,78px);
+  line-height:1.02;
+  letter-spacing:-.055em;
+  font-weight:800;
+}
+
+.hero p{
+  max-width:690px;
+  margin-top:25px;
+  color:var(--muted);
+  font-size:16px;
+}
+
+.updated{
+  display:inline-block;
+  margin-top:25px;
+  padding:9px 14px;
+  border:1px solid var(--line);
+  border-radius:100px;
+  background:#faf9f7;
+  color:#666;
+  font-size:12px;
+}
+
+.main{
+  width:min(1180px,calc(100% - 40px));
+  margin:55px auto 90px;
+}
+
+.support-grid{
+  display:grid;
+  grid-template-columns:1.35fr .65fr;
+  gap:25px;
+}
+
+.card{
+  padding:38px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:22px;
+}
+
+.card h2{
+  margin-bottom:10px;
+  font-family:"Manrope",sans-serif;
+  font-size:27px;
+  letter-spacing:-.035em;
+}
+
+.card-intro{
+  margin-bottom:27px;
+  color:#666;
+  font-size:14px;
+}
+
+.email-box{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  padding:20px 22px;
+  background:#171717;
+  border-radius:16px;
+}
+
+.email-label{
+  color:#aaa;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+}
+
+.email{
+  margin-top:3px;
+  color:#fff;
+  font-size:15px;
+  font-weight:600;
+  word-break:break-word;
+}
+
+.email-box a{
+  flex-shrink:0;
+  padding:10px 16px;
+  background:#fff;
+  color:#111;
+  border-radius:100px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.topics{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  margin-top:25px;
+}
+
+.topic{
+  padding:19px;
+  background:#faf9f7;
+  border:1px solid var(--line);
+  border-radius:15px;
+}
+
+.topic-title{
+  margin-bottom:5px;
+  font-family:"Manrope",sans-serif;
+  font-size:14px;
+  font-weight:700;
+}
+
+.topic p{
+  margin:0;
+  color:#777;
+  font-size:12px;
+  line-height:1.6;
+}
+
+.side{
+  display:flex;
+  flex-direction:column;
+  gap:25px;
+}
+
+.mini{
+  padding:30px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:22px;
+}
+
+.mini h3{
+  margin-bottom:10px;
+  font-family:"Manrope",sans-serif;
+  font-size:19px;
+  letter-spacing:-.025em;
+}
+
+.mini p{
+  color:#666;
+  font-size:13px;
+}
+
+.links{
+  display:grid;
+  gap:9px;
+  margin-top:18px;
+}
+
+.links a{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px 14px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  color:#555;
+  font-size:13px;
+  font-weight:600;
+  transition:.2s;
+}
+
+.links a:hover{
+  background:#faf9f7;
+  color:#111;
+  transform:translateX(2px);
+}
+
+.faq{
+  margin-top:25px;
+  padding:38px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:22px;
+}
+
+.faq h2{
+  margin-bottom:25px;
+  font-family:"Manrope",sans-serif;
+  font-size:27px;
+  letter-spacing:-.035em;
+}
+
+details{
+  border-top:1px solid var(--line);
+}
+
+details:last-child{
+  border-bottom:1px solid var(--line);
+}
+
+summary{
+  padding:19px 0;
+  cursor:pointer;
+  list-style:none;
+  font-family:"Manrope",sans-serif;
+  font-size:15px;
+  font-weight:700;
+}
+
+summary::-webkit-details-marker{
+  display:none;
+}
+
+summary::after{
+  content:"+";
+  float:right;
+  color:#888;
+  font-size:18px;
+  font-weight:400;
+}
+
+details[open] summary::after{
+  content:"−";
+}
+
+.answer{
+  max-width:850px;
+  padding:0 0 20px;
+  color:#666;
+  font-size:14px;
+}
+
+.note{
+  margin-top:25px;
+  padding:20px;
+  background:#f7f6f3;
+  border:1px solid var(--line);
+  border-radius:15px;
+  color:#666;
+  font-size:13px;
+}
+
+.footer{
+  padding:45px 20px;
+  background:#151515;
+  color:#fff;
+}
+
+.footer-inner{
+  width:min(1180px,100%);
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:30px;
+}
+
+.footer-logo{
+  font-family:"Manrope",sans-serif;
+  font-weight:800;
+  letter-spacing:.13em;
+}
+
+.footer p{
+  margin:0;
+  color:#999;
+  font-size:12px;
+}
+
+@media(max-width:850px){
+  .support-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:600px){
+  .header{
+    height:66px;
+  }
+
+  .nav{
+    width:calc(100% - 28px);
+  }
+
+  .logo{
+    font-size:18px;
+  }
+
+  .back{
+    font-size:12px;
+  }
+
+  .hero{
+    padding:65px 18px 58px;
+  }
+
+  .hero p{
+    font-size:14px;
+  }
+
+  .main{
+    width:calc(100% - 24px);
+    margin:28px auto 55px;
+  }
+
+  .card,
+  .mini,
+  .faq{
+    padding:25px 21px;
+    border-radius:18px;
+  }
+
+  .topics{
+    grid-template-columns:1fr;
+  }
+
+  .email-box{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .email-box a{
+    width:100%;
+    text-align:center;
+  }
+
+  .footer-inner{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <nav class="nav">
+    <a href="index.html" class="logo">CIRDRIO</a>
+    <a href="index.html" class="back">← Back to Store</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">CIRDRIO · Support</div>
+
+    <h1>We’re here to help.</h1>
+
+    <p>
+      Need help with an order, product, return, refund or account?
+      Send us the details and our support team can review your request.
+    </p>
+
+    <span class="updated">Support · CIRDRIO</span>
+  </div>
+</section>
+
+<main class="main">
+
+<section class="support-grid">
+
+<div class="card">
+  <h2>Contact CIRDRIO</h2>
+
+  <p class="card-intro">
+    For the fastest assistance, include your order number when
+    contacting us about an existing purchase.
+  </p>
+
+  <div class="email-box">
+    <div>
+      <div class="email-label">Support Email</div>
+      <div class="email">cirdrio.dm@gmail.com</div>
+    </div>
+
+    <a href="mailto:cirdrio.dm@gmail.com?subject=CIRDRIO%20Support%20Request">
+      Email Support
+    </a>
+  </div>
+
+  <div class="topics">
+
+    <div class="topic">
+      <div class="topic-title">Orders</div>
+      <p>Order status, delivery or general order assistance.</p>
+    </div>
+
+    <div class="topic">
+      <div class="topic-title">Returns</div>
+      <p>Return eligibility and return-related questions.</p>
+    </div>
+
+    <div class="topic">
+      <div class="topic-title">Refunds</div>
+      <p>Questions regarding an approved refund.</p>
+    </div>
+
+    <div class="topic">
+      <div class="topic-title">Products</div>
+      <p>Product information and general questions.</p>
+    </div>
+
+  </div>
+
+  <div class="note">
+    <strong>Tip:</strong>
+    For order-related requests, include your registered email,
+    order number and a short description of the issue.
+  </div>
+</div>
+
+<div class="side">
+
+  <div class="mini">
+    <h3>Self-service</h3>
+
+    <p>
+      You can review your account, saved addresses and order history
+      directly from your CIRDRIO account.
+    </p>
+
+    <div class="links">
+      <a href="index.html">
+        <span>Open Store</span>
+        <span>→</span>
+      </a>
+
+      <a href="returns.html">
+        <span>Returns & Refunds</span>
+        <span>→</span>
+      </a>
+
+      <a href="cancellation.html">
+        <span>Cancellation Policy</span>
+        <span>→</span>
+      </a>
+
+      <a href="shipping.html">
+        <span>Shipping Policy</span>
+        <span>→</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="mini">
+    <h3>Before contacting us</h3>
+
+    <p>
+      Keep your order information available. Photos may also be useful
+      when reporting damaged or incorrect products.
+    </p>
+  </div>
+
+</div>
+
+</section>
+
+<section class="faq">
+
+<h2>Common Questions</h2>
+
+<details>
+  <summary>How can I ask about my order?</summary>
+  <div class="answer">
+    Contact CIRDRIO by email and include your order number,
+    registered email address and the issue you are experiencing.
+  </div>
+</details>
+
+<details>
+  <summary>What if my product arrives damaged?</summary>
+  <div class="answer">
+    Contact CIRDRIO promptly and retain the product and packaging.
+    Photos of the damage and packaging may be requested to help
+    assess the issue.
+  </div>
+</details>
+
+<details>
+  <summary>Can I cancel my order?</summary>
+  <div class="answer">
+    Cancellation depends on the current fulfilment status of the
+    order. Please contact CIRDRIO as early as possible.
+  </div>
+</details>
+
+<details>
+  <summary>Where can I find the return policy?</summary>
+  <div class="answer">
+    Our Returns & Refunds Policy explains the general return,
+    refund and eligibility framework.
+  </div>
+</details>
+
+<details>
+  <summary>How long does a refund take?</summary>
+  <div class="answer">
+    Once a refund is approved and initiated, the time required for
+    the funds to appear may depend on the relevant payment provider
+    or financial institution.
+  </div>
+</details>
+
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">CIRDRIO</div>
+    <p>© 2026 CIRDRIO. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>
