@@ -6,6 +6,9 @@
 <meta name="theme-color" content="#111111">
 <title>CIRDRIO | Beauty, refined.</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -23,7 +26,7 @@
 }
 html{scroll-behavior:smooth}
 body{
-font-family:Arial,Helvetica,sans-serif;
+font-family:"Manrope","DM Sans",Arial,sans-serif;
 background:#fff;
 color:#111;
 overflow-x:hidden
@@ -1666,6 +1669,289 @@ grid-template-columns:1fr
 .product-name{font-size:12px}
 .product-price{font-size:12px}
 }
+
+/* =========================================================
+   CIRDRIO PREMIUM UI SYSTEM
+   ========================================================= */
+:root{
+  --premium-ink:#161616;
+  --premium-soft:#f7f5f1;
+  --premium-surface:#ffffff;
+  --premium-line:#e5e1da;
+  --premium-muted:#77736d;
+  --premium-shadow:0 12px 35px rgba(22,22,22,.08);
+}
+
+button, .primary-btn, .secondary-btn, .small-btn, .profile-save,
+.add-btn, .back-btn, .wishlist-detail, .quantity-control button,
+.remove-item, .icon-btn, .close-overlay, .category{
+  -webkit-tap-highlight-color:transparent;
+}
+
+button:focus-visible, a:focus-visible, input:focus-visible,
+textarea:focus-visible, select:focus-visible{
+  outline:2px solid #9b8a70;
+  outline-offset:3px;
+}
+
+.primary-btn{
+  min-height:50px;
+  padding:14px 24px;
+  border:1px solid #161616;
+  border-radius:13px;
+  background:linear-gradient(135deg,#181818,#0e0e0e);
+  box-shadow:0 7px 18px rgba(0,0,0,.10);
+  font-family:"Manrope",sans-serif;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:1.7px;
+}
+.primary-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 14px 28px rgba(0,0,0,.15);
+  background:linear-gradient(135deg,#242424,#111);
+}
+.primary-btn:active{transform:translateY(0);box-shadow:0 5px 12px rgba(0,0,0,.10)}
+
+.secondary-btn, .small-btn{
+  min-height:43px;
+  padding:11px 16px;
+  border:1px solid var(--premium-line);
+  border-radius:11px;
+  background:linear-gradient(180deg,#fff,#f6f4f0);
+  color:#292724;
+  font-family:"Manrope",sans-serif;
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:1.2px;
+  text-transform:uppercase;
+  box-shadow:0 4px 12px rgba(0,0,0,.04);
+  transition:.22s ease;
+}
+.secondary-btn:hover, .small-btn:hover{
+  border-color:#cfc9c0;
+  background:#fff;
+  transform:translateY(-1px);
+  box-shadow:0 8px 18px rgba(0,0,0,.07);
+}
+
+.icon-btn{
+  width:43px;height:43px;
+  border:1px solid transparent;
+  background:transparent;
+  border-radius:13px;
+  transition:.22s ease;
+}
+.icon-btn:hover{
+  background:#f5f2ed;
+  border-color:#e4dfd7;
+  box-shadow:0 6px 16px rgba(0,0,0,.06);
+  transform:translateY(-1px);
+}
+.cart-count{
+  top:1px;right:0;
+  min-width:18px;height:18px;
+  background:#181818;
+  border:2px solid #fff;
+  font-weight:700;
+}
+
+.close-overlay{
+  width:40px;height:40px;
+  top:16px;right:16px;
+  border:1px solid #e7e2da;
+  background:#faf9f7;
+  color:#333;
+  font-size:20px;
+  box-shadow:0 5px 14px rgba(0,0,0,.05);
+  transition:.2s ease;
+}
+.close-overlay:hover{
+  background:#171717;
+  border-color:#171717;
+  color:#fff;
+  transform:rotate(4deg);
+}
+
+.back-btn{
+  min-height:42px;
+  padding:10px 15px;
+  border:1px solid var(--premium-line);
+  border-radius:11px;
+  background:#fff;
+  color:#555;
+  box-shadow:0 4px 12px rgba(0,0,0,.04);
+  transition:.2s ease;
+}
+.back-btn:hover{background:#f7f5f1;color:#111;transform:translateX(-2px)}
+
+.section-link{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 13px;
+  border:1px solid var(--premium-line);
+  border-radius:10px;
+  background:#fff;
+  color:#555;
+  text-decoration:none;
+  transition:.2s ease;
+}
+.section-link:hover{background:#f7f5f1;color:#111;transform:translateY(-1px)}
+
+.category{
+  position:relative;
+  overflow:hidden;
+  border:1px solid #e3dfd7;
+  border-radius:18px;
+  background:linear-gradient(145deg,#faf9f7,#f0ede7);
+  box-shadow:0 8px 22px rgba(0,0,0,.045);
+  transition:.25s ease;
+}
+.category:hover{
+  border-color:#cbc4b9;
+  transform:translateY(-3px);
+  box-shadow:0 15px 30px rgba(0,0,0,.09);
+}
+
+.add-btn{
+  min-height:38px;
+  padding:9px 13px;
+  border:1px solid #171717;
+  border-radius:10px;
+  background:#171717;
+  font-family:"Manrope",sans-serif;
+  font-weight:700;
+  box-shadow:0 5px 12px rgba(0,0,0,.10);
+}
+.add-btn:hover{background:#292929;transform:translateY(-1px);box-shadow:0 8px 17px rgba(0,0,0,.14)}
+
+.wishlist-detail{
+  border-radius:12px;
+  border-color:#e0dcd5;
+  box-shadow:0 4px 12px rgba(0,0,0,.04);
+  transition:.2s ease;
+}
+.wishlist-detail:hover{background:#f7f5f1;transform:translateY(-1px)}
+
+.quantity-control{
+  overflow:hidden;
+  border-radius:12px;
+  border-color:#dfdbd4;
+  box-shadow:0 4px 12px rgba(0,0,0,.04);
+}
+.quantity-control button{transition:.18s ease}
+.quantity-control button:hover{background:#f5f2ed}
+
+.profile-save{
+  min-height:44px;
+  border:1px solid #171717;
+  border-radius:11px;
+  background:#171717;
+  color:#fff;
+  font-family:"Manrope",sans-serif;
+  font-weight:700;
+  box-shadow:0 6px 15px rgba(0,0,0,.10);
+  transition:.2s ease;
+}
+.profile-save:hover{background:#292929;transform:translateY(-1px)}
+
+.address-card{
+  border-radius:15px;
+  box-shadow:0 4px 14px rgba(0,0,0,.035);
+  transition:.2s ease;
+}
+.address-card:hover{box-shadow:0 10px 24px rgba(0,0,0,.07);transform:translateY(-1px)}
+.address-card.default{
+  border-color:#9d8d73;
+  box-shadow:0 8px 22px rgba(120,100,70,.08);
+}
+.default-badge{border-radius:999px;background:#171717;padding:6px 10px;font-weight:700}
+.address-card-actions button{
+  border:1px solid #e3ded6;
+  border-radius:9px;
+  background:#f7f5f1;
+  transition:.18s ease;
+}
+.address-card-actions button:hover{background:#171717;color:#fff;border-color:#171717;transform:translateY(-1px)}
+
+.status{border-radius:999px;font-weight:700;box-shadow:inset 0 0 0 1px rgba(0,0,0,.03)}
+.status.pending{background:#f3f1ed;color:#69645c}
+.status.confirmed{background:#edf3f6;color:#526b79}
+.status.processing{background:#f4efe5;color:#876e45}
+.status.shipped{background:#edf1f5;color:#536b80}
+.status.delivered{background:#e9f1ea;color:#55705c}
+.status.cancelled{background:#f3e9e9;color:#895d5d}
+
+.checkout-address-box, .payment-box{border-radius:14px;box-shadow:0 5px 16px rgba(0,0,0,.035)}
+.checkout-field input,.checkout-field textarea,.checkout-address-box select,
+.profile-field,.address-field input{
+  border:1px solid #ddd8d0;
+  border-radius:11px;
+  transition:.2s ease;
+}
+.checkout-field input:focus,.checkout-field textarea:focus,
+.checkout-address-box select:focus,.profile-field:focus,.address-field input:focus{
+  border-color:#a49379;
+  box-shadow:0 0 0 4px rgba(164,147,121,.10);
+}
+
+.remove-item{
+  padding:6px 9px;
+  border:1px solid transparent;
+  border-radius:8px;
+  transition:.18s ease;
+}
+.remove-item:hover{background:#f6eeee;color:#8b5555;border-color:#eadada}
+
+.search-result{
+  border-radius:12px;
+  transition:.18s ease;
+}
+.search-result:hover{background:#f7f5f1;transform:translateX(2px)}
+
+.toast{
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:13px;
+  box-shadow:0 15px 35px rgba(0,0,0,.20);
+  backdrop-filter:blur(12px);
+}
+
+/* PREMIUM FOOTER */
+.footer-brand-block{position:relative}
+.footer-signature{
+  display:inline-block;
+  margin-top:22px;
+  padding:9px 12px;
+  border:1px solid #2c2c2c;
+  border-radius:999px;
+  color:#aaa;
+  font-size:8px;
+  font-weight:700;
+  letter-spacing:2px;
+}
+.footer-links a{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  width:max-content;
+  max-width:100%;
+  padding:5px 0;
+  transition:.2s ease;
+}
+.footer-links a span{
+  color:#666;
+  transition:.2s ease;
+}
+.footer-links a:hover{transform:translateX(3px);color:#fff}
+.footer-links a:hover span{color:#fff}
+
+@media(max-width:700px){
+  .primary-btn{min-height:48px}
+  .footer-links a{width:100%}
+  .footer-signature{margin-top:18px}
+}
 </style>
 </head>
 
@@ -2811,62 +3097,41 @@ About
 
 <div class="footer-grid">
 
-<div>
-
-<div class="footer-logo">
-CIRDRIO
-</div>
-
+<div class="footer-brand-block">
+<div class="footer-logo">CIRDRIO</div>
 <div class="footer-desc">
-Intelligent beauty designed around modern
-routines, refined products and better everyday
-experiences.
+Intelligent beauty designed around modern routines, refined products and better everyday experiences.
 </div>
-
-</div>
-
-<div>
-
-<div class="footer-title">
-Explore
-</div>
-
-<div class="footer-links">
-<a href="#shop">Shop</a>
-<a href="#categories">Categories</a>
-<a href="#about">About CIRDRIO</a>
-</div>
-
+<div class="footer-signature">BUILD WHAT'S NEXT.</div>
 </div>
 
 <div>
-
-<div class="footer-title">
-Information
-</div>
-
+<div class="footer-title">Explore</div>
 <div class="footer-links">
-<a href="#">Privacy</a>
-<a href="#">Terms</a>
-<a href="mailto:cirdrio.dm@gmail.com">
-Contact
-</a>
+<a href="#shop">Shop collection <span>↗</span></a>
+<a href="#categories">Categories <span>↗</span></a>
+<a href="#about">About CIRDRIO <span>↗</span></a>
+</div>
 </div>
 
+<div>
+<div class="footer-title">Information</div>
+<div class="footer-links">
+<a href="privacy.html">Privacy Policy <span>↗</span></a>
+<a href="terms.html">Terms &amp; Conditions <span>↗</span></a>
+<a href="shipping.html">Shipping Policy <span>↗</span></a>
+<a href="returns.html">Returns &amp; Refunds <span>↗</span></a>
+<a href="cancellation.html">Cancellation Policy <span>↗</span></a>
+<a href="cookies.html">Cookie &amp; Tracking <span>↗</span></a>
+<a href="contact.html">Contact &amp; Support <span>↗</span></a>
+</div>
 </div>
 
 </div>
 
 <div class="footer-bottom">
-
-<span>
-© 2026 CIRDRIO
-</span>
-
-<span>
-BUILD WHAT'S NEXT.
-</span>
-
+<span>© 2026 CIRDRIO</span>
+<span>Designed for modern beauty.</span>
 </div>
 
 </footer>
@@ -4964,7 +5229,7 @@ await loadOrders();
 
 }
 
-$("accountBtn").onclick=openAccount;
+
 $("closeAccount").onclick=()=>
 closeOverlay(
 "accountOverlay"
