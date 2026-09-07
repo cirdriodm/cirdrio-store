@@ -1339,6 +1339,25 @@ padding:10px 0;
 font-size:11px
 }
 
+
+/* ORDER TRACKING TIMELINE */
+.tracking-box{margin:24px 0 28px;padding:22px 20px;background:#faf9f7;border:1px solid #ebe8e2;border-radius:16px}
+.tracking-head{display:flex;justify-content:space-between;align-items:flex-start;gap:15px;margin-bottom:20px}
+.tracking-kicker{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#999;margin-bottom:6px}
+.tracking-title{font-size:16px;font-weight:700;letter-spacing:-.3px}
+.tracking-status{font-size:8px;letter-spacing:1px;text-transform:uppercase;padding:7px 10px;border-radius:999px;background:#eeeae5;color:#555;white-space:nowrap}
+.tracking-steps{display:grid;grid-template-columns:repeat(5,1fr);position:relative}
+.tracking-steps:before{content:"";position:absolute;left:10%;right:10%;top:12px;height:1px;background:#ddd9d1}
+.track-step{position:relative;text-align:center;z-index:1}
+.track-dot{width:25px;height:25px;border-radius:50%;margin:0 auto 9px;background:#fff;border:1px solid #d9d5cd;display:flex;align-items:center;justify-content:center;font-size:10px;color:#999}
+.track-step.active .track-dot,.track-step.complete .track-dot{background:#111;color:#fff;border-color:#111}
+.track-step.complete .track-dot:before{content:"✓"}
+.track-step.complete .track-dot{font-size:0}
+.track-label{font-size:8px;color:#999;line-height:1.3}
+.track-step.active .track-label,.track-step.complete .track-label{color:#111;font-weight:700}
+.track-note{margin-top:16px;padding-top:14px;border-top:1px solid #ebe8e2;font-size:10px;color:#777;line-height:1.6}
+@media(max-width:520px){.tracking-box{padding:18px 14px}.tracking-steps:before{left:8%;right:8%;top:11px}.track-dot{width:23px;height:23px}.track-label{font-size:7px}.tracking-status{font-size:7px;padding:6px 8px}}
+
 /* CHECKOUT */
 .checkout-overlay{
 align-items:center;
@@ -2807,6 +2826,21 @@ Order
 <div
 class="order-detail-sub"
 id="orderDetailSub">
+</div>
+
+<div class="tracking-box" id="orderTrackingBox">
+<div class="tracking-head">
+<div><div class="tracking-kicker">Order progress</div><div class="tracking-title">Delivery journey</div></div>
+<div class="tracking-status" id="orderTrackingStatus">Pending</div>
+</div>
+<div class="tracking-steps" id="orderTrackingSteps">
+<div class="track-step" data-track="pending"><div class="track-dot">1</div><div class="track-label">Pending</div></div>
+<div class="track-step" data-track="confirmed"><div class="track-dot">2</div><div class="track-label">Confirmed</div></div>
+<div class="track-step" data-track="processing"><div class="track-dot">3</div><div class="track-label">Processing</div></div>
+<div class="track-step" data-track="shipped"><div class="track-dot">4</div><div class="track-label">Shipped</div></div>
+<div class="track-step" data-track="delivered"><div class="track-dot">5</div><div class="track-label">Delivered</div></div>
+</div>
+<div class="track-note" id="orderTrackingNote">Your order has been received.</div>
 </div>
 
 <div
@@ -5433,6 +5467,23 @@ ${escapeHTML(e.message)}
 ORDER DETAIL
 ========================================================= */
 
+function updateOrderTracking(status){
+const key=String(status||"pending").toLowerCase();
+const stages=["pending","confirmed","processing","shipped","delivered"];
+const idx=stages.indexOf(key);
+const safeIdx=idx<0?0:idx;
+const labels={pending:"Pending",confirmed:"Confirmed",processing:"Processing",shipped:"Shipped",delivered:"Delivered",cancelled:"Cancelled"};
+const notes={pending:"Your order has been received and is awaiting confirmation.",confirmed:"Your order has been confirmed and is being prepared.",processing:"Your order is being prepared for dispatch.",shipped:"Your order is on the way to your delivery address.",delivered:"Your order has been delivered successfully.",cancelled:"This order has been cancelled."};
+$("orderTrackingStatus").textContent=labels[key]||key;
+$("orderTrackingNote").textContent=notes[key]||"Order status updated.";
+$("orderTrackingStatus").style.background=key==="delivered"?"#e9f0ea":key==="cancelled"?"#f2e8e8":"#eeeae5";
+$("orderTrackingStatus").style.color=key==="delivered"?"#55705c":key==="cancelled"?"#895d5d":"#555";
+document.querySelectorAll(".track-step").forEach((step,i)=>{
+step.classList.remove("active","complete");
+if(key!=="cancelled"){if(i<safeIdx)step.classList.add("complete");if(i===safeIdx)step.classList.add("active");}
+});
+}
+
 async function openOrderDetails(id){
 
 const order=
@@ -5484,6 +5535,8 @@ $("orderDetailOrderStatus").textContent=
 String(
 order.order_status||"pending"
 );
+
+updateOrderTracking(order.order_status||"pending");
 
 $("orderDetailAddress").textContent=
 [
