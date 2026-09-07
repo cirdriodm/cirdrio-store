@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Cookie & Tracking Disclosure | CIRDRIO</title>
+<meta name="description" content="CIRDRIO Cookie & Tracking Disclosure — how cookies, local storage and similar technologies may be used.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --ink:#151515;
+  --muted:#666;
+  --soft:#f7f6f3;
+  --line:#e7e5e0;
+  --white:#fff;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:var(--soft);
+  color:var(--ink);
+  font-family:"DM Sans",sans-serif;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+.header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  height:74px;
+  display:flex;
+  align-items:center;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line);
+}
+
+.nav{
+  width:min(1180px,calc(100% - 40px));
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  font-family:"Manrope",sans-serif;
+  font-size:22px;
+  font-weight:800;
+  letter-spacing:.13em;
+}
+
+.back{
+  color:#555;
+  font-size:14px;
+  font-weight:600;
+  transition:.2s;
+}
+
+.back:hover{
+  color:#000;
+  transform:translateX(-2px);
+}
+
+.hero{
+  padding:90px 20px 82px;
+  background:#fff;
+  border-bottom:1px solid var(--line);
+}
+
+.hero-inner{
+  width:min(940px,100%);
+  margin:auto;
+}
+
+.eyebrow{
+  margin-bottom:18px;
+  color:#777;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+
+h1{
+  max-width:850px;
+  font-family:"Manrope",sans-serif;
+  font-size:clamp(42px,7vw,76px);
+  line-height:1.02;
+  letter-spacing:-.055em;
+  font-weight:800;
+}
+
+.hero p{
+  max-width:690px;
+  margin-top:24px;
+  color:var(--muted);
+  font-size:16px;
+}
+
+.updated{
+  display:inline-block;
+  margin-top:25px;
+  padding:9px 14px;
+  border:1px solid var(--line);
+  border-radius:100px;
+  background:#faf9f7;
+  color:#666;
+  font-size:12px;
+}
+
+.layout{
+  width:min(1180px,calc(100% - 40px));
+  margin:55px auto 90px;
+  display:grid;
+  grid-template-columns:250px 1fr;
+  gap:70px;
+  align-items:start;
+}
+
+.toc{
+  position:sticky;
+  top:105px;
+  padding:24px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:18px;
+}
+
+.toc-title{
+  margin-bottom:15px;
+  font-family:"Manrope",sans-serif;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+.toc a{
+  display:block;
+  padding:7px 0;
+  color:#777;
+  font-size:13px;
+  transition:.2s;
+}
+
+.toc a:hover{
+  padding-left:4px;
+  color:#111;
+}
+
+.document{
+  padding:clamp(30px,5vw,62px);
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:22px;
+}
+
+.section{
+  scroll-margin-top:105px;
+  margin-bottom:46px;
+  padding-bottom:46px;
+  border-bottom:1px solid var(--line);
+}
+
+.section:last-child{
+  margin-bottom:0;
+  padding-bottom:0;
+  border-bottom:0;
+}
+
+h2{
+  margin-bottom:20px;
+  font-family:"Manrope",sans-serif;
+  font-size:clamp(23px,3vw,31px);
+  line-height:1.2;
+  letter-spacing:-.035em;
+}
+
+h3{
+  margin:25px 0 9px;
+  font-family:"Manrope",sans-serif;
+  font-size:17px;
+}
+
+p{
+  margin-bottom:15px;
+  color:#555;
+  font-size:15px;
+}
+
+ul{
+  margin:10px 0 18px;
+  padding-left:22px;
+}
+
+li{
+  margin:7px 0;
+  color:#555;
+  font-size:15px;
+}
+
+strong{
+  color:#222;
+}
+
+.info{
+  margin:20px 0;
+  padding:20px;
+  background:#f7f6f3;
+  border:1px solid var(--line);
+  border-radius:15px;
+}
+
+.contact{
+  margin-top:20px;
+  padding:27px;
+  background:#171717;
+  border-radius:18px;
+}
+
+.contact p{
+  margin:5px 0;
+  color:#cfcfcf;
+}
+
+.contact a{
+  color:#fff;
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+
+.footer{
+  padding:45px 20px;
+  background:#151515;
+  color:#fff;
+}
+
+.footer-inner{
+  width:min(1180px,100%);
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:30px;
+}
+
+.footer-logo{
+  font-family:"Manrope",sans-serif;
+  font-weight:800;
+  letter-spacing:.13em;
+}
+
+.footer p{
+  margin:0;
+  color:#999;
+  font-size:12px;
+}
+
+@media(max-width:850px){
+  .layout{
+    grid-template-columns:1fr;
+    gap:25px;
+  }
+
+  .toc{
+    position:relative;
+    top:auto;
+  }
+
+  .toc a{
+    display:inline-block;
+    margin-right:15px;
+  }
+}
+
+@media(max-width:560px){
+  .header{
+    height:66px;
+  }
+
+  .nav{
+    width:calc(100% - 28px);
+  }
+
+  .logo{
+    font-size:18px;
+  }
+
+  .back{
+    font-size:12px;
+  }
+
+  .hero{
+    padding:65px 18px 58px;
+  }
+
+  .hero p{
+    font-size:14px;
+  }
+
+  .layout{
+    width:calc(100% - 24px);
+    margin:28px auto 55px;
+  }
+
+  .document{
+    padding:27px 21px;
+    border-radius:18px;
+  }
+
+  p,li{
+    font-size:14px;
+  }
+
+  .footer-inner{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <nav class="nav">
+    <a href="index.html" class="logo">CIRDRIO</a>
+    <a href="index.html" class="back">← Back to Store</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+
+    <div class="eyebrow">CIRDRIO · Privacy</div>
+
+    <h1>How technology remembers.</h1>
+
+    <p>
+      This disclosure explains how CIRDRIO may use cookies,
+      browser storage and similar technologies to operate,
+      remember preferences and improve the shopping experience.
+    </p>
+
+    <span class="updated">Last updated: September 2026</span>
+
+  </div>
+</section>
+
+<main class="layout">
+
+<aside class="toc">
+
+  <div class="toc-title">On this page</div>
+
+  <a href="#overview">Overview</a>
+  <a href="#cookies">Cookies</a>
+  <a href="#storage">Browser Storage</a>
+  <a href="#essential">Essential Technologies</a>
+  <a href="#analytics">Analytics</a>
+  <a href="#thirdparty">Third-Party Services</a>
+  <a href="#choices">Your Choices</a>
+  <a href="#changes">Changes</a>
+  <a href="#contact">Contact</a>
+
+</aside>
+
+<article class="document">
+
+<section class="section" id="overview">
+
+<h2>1. Overview</h2>
+
+<p>
+CIRDRIO may use cookies and similar technologies to provide,
+secure and improve its website and services.
+</p>
+
+<p>
+These technologies can allow a website to remember information
+between visits, maintain functionality and understand how visitors
+interact with the website.
+</p>
+
+<div class="info">
+<strong>Important:</strong>
+The technologies actually used by CIRDRIO may change as the website,
+analytics systems and third-party services evolve.
+</div>
+
+</section>
+
+<section class="section" id="cookies">
+
+<h2>2. Cookies</h2>
+
+<p>
+Cookies are small data files that a website may store in a user's
+browser. They can help websites recognise a browser or remember
+certain information.
+</p>
+
+<p>
+Depending on how CIRDRIO operates its website, cookies may be used
+for purposes such as:
+</p>
+
+<ul>
+  <li>Maintaining website functionality.</li>
+  <li>Remembering certain preferences.</li>
+  <li>Supporting account or session functionality.</li>
+  <li>Improving website performance and usability.</li>
+  <li>Understanding website usage where analytics are enabled.</li>
+</ul>
+
+</section>
+
+<section class="section" id="storage">
+
+<h2>3. Browser & Local Storage</h2>
+
+<p>
+CIRDRIO may also use browser technologies such as local storage
+where appropriate for website functionality.
+</p>
+
+<p>
+For example, shopping-cart information may be stored locally in
+your browser so that items can remain available while you navigate
+the website.
+</p>
+
+<p>
+Browser-stored information can generally be removed through your
+browser settings, although doing so may affect certain website
+features.
+</p>
+
+</section>
+
+<section class="section" id="essential">
+
+<h2>4. Essential Technologies</h2>
+
+<p>
+Some technologies may be necessary for the website to function
+properly.
+</p>
+
+<p>
+These may support functions such as account sessions, authentication,
+shopping-cart functionality, security and other core website
+operations.
+</p>
+
+<p>
+Disabling essential technologies may prevent some parts of the
+website from working correctly.
+</p>
+
+</section>
+
+<section class="section" id="analytics">
+
+<h2>5. Analytics</h2>
+
+<p>
+If analytics tools are enabled on the CIRDRIO website, they may
+collect information about website usage, such as pages viewed,
+general interaction patterns, device information or technical
+performance data.
+</p>
+
+<p>
+Analytics are intended to help CIRDRIO understand website
+performance and improve the customer experience.
+</p>
+
+<p>
+The specific analytics providers and technologies used may change
+over time.
+</p>
+
+</section>
+
+<section class="section" id="thirdparty">
+
+<h2>6. Third-Party Services</h2>
+
+<p>
+CIRDRIO may use third-party technology providers to operate parts
+of its website or business infrastructure.
+</p>
+
+<p>
+These providers may process certain technical information or use
+cookies and similar technologies according to their own policies
+and applicable contractual arrangements.
+</p>
+
+<p>
+Examples of third-party infrastructure may include hosting,
+authentication, storage, payment, analytics or other service
+providers.
+</p>
+
+<p>
+Where applicable, third-party providers' own privacy and cookie
+policies may also apply.
+</p>
+
+</section>
+
+<section class="section" id="choices">
+
+<h2>7. Your Choices</h2>
+
+<p>
+Most modern browsers allow users to control or delete cookies
+through browser settings.
+</p>
+
+<p>
+You may also be able to control certain website storage and
+tracking technologies through your device or browser settings.
+</p>
+
+<p>
+However, restricting essential technologies may affect the
+availability or functionality of some CIRDRIO features.
+</p>
+
+<div class="info">
+<strong>Browser controls:</strong>
+Cookie and storage controls vary between browsers and devices.
+For precise instructions, consult the settings or help information
+provided by your browser or device manufacturer.
+</div>
+
+</section>
+
+<section class="section" id="changes">
+
+<h2>8. Changes to This Disclosure</h2>
+
+<p>
+CIRDRIO may update this Cookie & Tracking Disclosure when website
+functionality, technology, legal requirements or business practices
+change.
+</p>
+
+<p>
+The latest version will be published on this page with an updated
+revision date.
+</p>
+
+</section>
+
+<section class="section" id="contact">
+
+<h2>9. Contact</h2>
+
+<p>
+If you have questions about cookies, tracking technologies or
+privacy practices associated with CIRDRIO, contact us using the
+details below.
+</p>
+
+<div class="contact">
+
+<p>
+<strong style="color:#fff;">CIRDRIO</strong>
+</p>
+
+<p>
+Email:
+<a href="mailto:cirdrio.dm@gmail.com">
+cirdrio.dm@gmail.com
+</a>
+</p>
+
+<p>
+Website: cirdrio.com
+</p>
+
+</div>
+
+</section>
+
+</article>
+
+</main>
+
+<footer class="footer">
+
+<div class="footer-inner">
+
+  <div class="footer-logo">CIRDRIO</div>
+
+  <p>
+    © 2026 CIRDRIO. All rights reserved.
+  </p>
+
+</div>
+
+</footer>
+
+</body>
+</html>
