@@ -5,38 +5,237 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>CIRDRIO | Beauty, refined.</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--black:#111;--soft:#f7f6f3;--white:#fff;--gray:#777;--line:#e7e5e1}
 html{scroll-behavior:smooth}
 body{font-family:Arial,Helvetica,sans-serif;background:#fff;color:#111;overflow-x:hidden}
-button,input,textarea,select{font:inherit}button{cursor:pointer;border:0}a{color:inherit;text-decoration:none}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer;border:0}
+a{color:inherit;text-decoration:none}
+
 .header{position:sticky;top:0;z-index:1000;height:76px;background:rgba(255,255,255,.96);backdrop-filter:blur(15px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 5%}
-.logo{font-size:25px;font-weight:800;letter-spacing:5px}.nav{display:flex;gap:34px;align-items:center}.nav a{font-size:13px;letter-spacing:1.5px;text-transform:uppercase}.header-actions{display:flex;align-items:center;gap:18px}.icon-btn{position:relative;width:38px;height:38px;background:none;display:flex;align-items:center;justify-content:center;font-size:20px}.cart-count{position:absolute;top:0;right:-2px;min-width:17px;height:17px;padding:0 4px;border-radius:20px;background:#111;color:#fff;font-size:10px;display:flex;align-items:center;justify-content:center}.mobile-menu{display:none}
-.hero{min-height:620px;background:radial-gradient(circle at 75% 35%,#eee9df 0,#f7f5f0 30%,#fff 68%);display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:70px 7%;overflow:hidden}.hero-content{max-width:620px}.hero-eyebrow{font-size:12px;letter-spacing:4px;text-transform:uppercase;color:#777;margin-bottom:24px}.hero h1{font-size:clamp(58px,8vw,105px);line-height:.88;letter-spacing:-5px;font-weight:800;margin-bottom:30px}.hero-text{max-width:470px;color:#666;font-size:16px;line-height:1.7;margin-bottom:35px}.primary-btn{background:#111;color:#fff;padding:16px 28px;min-width:170px;font-size:12px;letter-spacing:2px;text-transform:uppercase;transition:.3s}.primary-btn:hover{background:#333;transform:translateY(-2px)}.primary-btn:disabled{opacity:.45;cursor:not-allowed;transform:none}.hero-visual{position:relative;height:480px;display:flex;align-items:center;justify-content:center}.hero-orbit{width:390px;height:390px;border-radius:50%;border:1px solid #dedbd4;position:absolute}.hero-orbit:before{content:"";position:absolute;inset:35px;border:1px solid #e5e2dc;border-radius:50%}.hero-card{position:relative;width:270px;height:360px;background:linear-gradient(145deg,#ddd7cd,#faf9f6);box-shadow:0 30px 80px rgba(0,0,0,.15);display:flex;align-items:center;justify-content:center;overflow:hidden}.hero-card:after{content:"CIRDRIO";position:absolute;bottom:35px;font-size:18px;letter-spacing:5px;font-weight:700}
-.trust{border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);background:#fff}.trust-item{padding:25px 15px;text-align:center;border-right:1px solid var(--line)}.trust-item:last-child{border-right:0}.trust-title{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:7px;font-weight:700}.trust-text{font-size:11px;color:#777}
-.section{padding:90px 6%}.section-head{display:flex;align-items:end;justify-content:space-between;margin-bottom:38px}.section-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#888;margin-bottom:10px}.section-title{font-size:42px;letter-spacing:-2px}.section-link{font-size:11px;letter-spacing:2px;text-transform:uppercase;border-bottom:1px solid #111;padding-bottom:5px}
-.categories{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.category{height:170px;background:#f4f2ee;display:flex;align-items:end;padding:24px;position:relative;overflow:hidden;transition:.3s}.category:hover{transform:translateY(-4px)}.category:nth-child(2){background:#eeeae5}.category:nth-child(3){background:#f1eee9}.category:nth-child(4){background:#e9e7e2}.category span{font-size:13px;letter-spacing:2px;text-transform:uppercase;font-weight:700}
-.products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}.product-card{position:relative;background:#f7f6f3;overflow:hidden;cursor:pointer;transition:.35s}.product-card:hover{transform:translateY(-5px)}.product-image-wrap{position:relative;width:100%;aspect-ratio:1/1.12;overflow:hidden;background:#f0eee9}.product-image{width:100%;height:100%;object-fit:cover;display:block;transition:.5s}.product-card:hover .product-image{transform:scale(1.035)}.wishlist{position:absolute;right:14px;top:14px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;font-size:19px;z-index:3}.product-info{padding:19px 18px 22px;background:#fff}.product-category{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#999;margin-bottom:8px}.product-name{font-size:15px;font-weight:600;margin-bottom:11px}.product-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px}.product-price{font-size:14px;font-weight:700}.add-btn{background:#111;color:#fff;padding:10px 13px;font-size:9px;letter-spacing:1.4px;text-transform:uppercase}.stock-low{font-size:10px;color:#9b6c34;margin-top:8px}.stock-out{font-size:10px;color:#999;margin-top:8px}.state-box{padding:55px 20px;border:1px solid var(--line);text-align:center;color:#777;font-size:13px;letter-spacing:.5px}.error-box{color:#a35b5b}
-.product-detail{padding:55px 6% 100px;background:#faf9f7}.back-btn{background:none;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:45px}.detail-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:75px;max-width:1250px;margin:auto}.detail-image-wrap{background:#f0eee9;min-height:620px}.detail-image{width:100%;height:100%;min-height:620px;object-fit:cover;display:block}.detail-info{align-self:center}.detail-category{color:#999;font-size:10px;letter-spacing:3px;text-transform:uppercase;margin-bottom:18px}.detail-info h1{font-size:55px;letter-spacing:-2.5px;line-height:1;margin-bottom:20px}.detail-price{font-size:21px;font-weight:700;margin-bottom:28px}.detail-description{color:#666;line-height:1.8;font-size:14px;max-width:550px;margin-bottom:22px}.detail-stock{font-size:11px;color:#666;margin-bottom:28px}.detail-actions{display:flex;align-items:center;gap:12px}.quantity-control{display:flex;height:49px;border:1px solid #ddd;background:#fff}.quantity-control button{width:42px;background:#fff;font-size:19px}.quantity-control span{min-width:38px;display:flex;align-items:center;justify-content:center;font-size:13px}.wishlist-detail{width:49px;height:49px;background:#fff;border:1px solid #ddd;font-size:21px}.wishlist.active,.wishlist-detail.active{font-size:0}.wishlist.active:after,.wishlist-detail.active:after{content:"♥";font-size:20px}.detail-actions .primary-btn{flex:1}
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:2000;display:none;align-items:flex-start;justify-content:center}.overlay.active{display:flex}.close-overlay{position:absolute;right:20px;top:18px;background:none;font-size:30px;line-height:1}
-.search-panel{position:relative;width:min(850px,92%);margin-top:100px;background:#fff;padding:45px}.search-label{font-size:10px;letter-spacing:3px;color:#999;margin-bottom:15px}.search-panel input{width:100%;border:0;border-bottom:1px solid #222;padding:14px 0;outline:none;font-size:25px}.search-results{margin-top:20px;max-height:400px;overflow:auto}.search-result{padding:15px 0;border-bottom:1px solid var(--line);cursor:pointer}.search-result strong{display:block;margin-bottom:5px}.search-result span{color:#888;font-size:12px}
-.cart-overlay{justify-content:flex-end;align-items:stretch}.cart-drawer{width:min(470px,100%);height:100%;background:#fff;padding:30px;display:flex;flex-direction:column;box-shadow:-20px 0 50px rgba(0,0,0,.12)}.cart-header{display:flex;justify-content:space-between;padding-bottom:25px;border-bottom:1px solid var(--line)}.cart-small{font-size:9px;letter-spacing:3px;color:#999;margin-bottom:7px}.cart-header h2{font-size:27px}.cart-items{flex:1;overflow:auto;padding:20px 0}.empty-cart{height:100%;display:flex;align-items:center;justify-content:center;color:#888;font-size:13px}.cart-item{display:grid;grid-template-columns:78px 1fr auto;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}.cart-item img{width:78px;height:90px;object-fit:cover;background:#f4f2ee}.cart-item-name{font-size:13px;font-weight:600;margin-bottom:8px}.cart-item-price{font-size:12px;color:#777;margin-bottom:12px}.cart-quantity{display:flex;align-items:center;gap:10px}.cart-quantity button{width:24px;height:24px;border:1px solid #ddd;background:#fff}.remove-item{background:none;font-size:11px;color:#999;margin-top:8px}.cart-total-item{font-size:13px;font-weight:700}.cart-footer{border-top:1px solid var(--line);padding-top:20px}.subtotal-row{display:flex;justify-content:space-between;font-size:15px}.cart-note{color:#999;font-size:10px;margin:10px 0 18px}.checkout-btn{width:100%}
-.auth-panel{position:relative;width:min(430px,92%);background:#fff;margin:auto;padding:50px 38px 40px}.auth-brand{font-weight:800;letter-spacing:4px;font-size:18px;margin-bottom:30px}.auth-title{font-size:31px;letter-spacing:-1px;margin-bottom:8px}.auth-subtitle{color:#888;font-size:12px;margin-bottom:25px}.auth-panel input{width:100%;border:1px solid #ddd;padding:15px;margin-bottom:12px;outline:none}.auth-submit{width:100%;margin-top:4px}.auth-message{min-height:20px;margin-top:15px;text-align:center;font-size:11px;color:#777;line-height:1.5}.switch-auth{background:none;width:100%;margin-top:12px;font-size:11px;text-decoration:underline}
-.checkout-overlay{align-items:center;overflow:auto;padding:30px 0}.checkout-panel{position:relative;width:min(760px,94%);max-height:92vh;overflow:auto;background:#fff;padding:42px}.checkout-title{font-size:34px;letter-spacing:-1.5px;margin-bottom:7px}.checkout-subtitle{font-size:12px;color:#888;margin-bottom:28px}.checkout-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.checkout-field{margin-bottom:14px}.checkout-field.full{grid-column:1/-1}.checkout-field label{display:block;font-size:9px;letter-spacing:1.7px;text-transform:uppercase;color:#777;margin-bottom:7px}.checkout-field input,.checkout-field textarea,.checkout-field select{width:100%;border:1px solid #ddd;background:#fff;padding:13px;outline:none}.checkout-field textarea{min-height:85px;resize:vertical}.checkout-summary{margin-top:10px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0}.summary-row{display:flex;justify-content:space-between;font-size:13px;margin-bottom:10px}.summary-row.total{font-size:17px;font-weight:700;margin:0;padding-top:8px;border-top:1px solid var(--line)}.payment-box{margin-top:20px;padding:16px;background:#f7f6f3;border:1px solid #ebe8e2}.payment-title{font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}.payment-text{font-size:12px;color:#666}.checkout-actions{display:flex;gap:10px;margin-top:22px}.secondary-btn{background:#f1efeb;color:#111;padding:16px 20px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase}.checkout-actions .primary-btn{flex:1}.checkout-message{min-height:18px;margin-top:13px;font-size:11px;text-align:center;color:#777}.success-box{text-align:center;padding:30px 10px}.success-icon{font-size:42px;margin-bottom:15px}.success-box h3{font-size:27px;margin-bottom:8px}.success-box p{font-size:12px;color:#777;line-height:1.6}
-.mobile-panel{width:100%;height:100%;background:#fff;padding:90px 35px;display:flex;flex-direction:column;gap:28px;position:relative}.mobile-link{font-size:28px;letter-spacing:-1px}
-@media(max-width:1000px){.products-grid{grid-template-columns:repeat(3,1fr)}.detail-grid{gap:40px}}
-@media(max-width:900px){.nav{display:none}.mobile-menu{display:flex}.hero{grid-template-columns:1fr;padding:60px 6%;text-align:center}.hero-content{margin:auto}.hero-text{margin-left:auto;margin-right:auto}.hero-visual{height:390px;margin-top:20px}.hero-orbit{width:320px;height:320px}.trust{grid-template-columns:repeat(2,1fr)}.trust-item:nth-child(2){border-right:0}.trust-item:nth-child(3),.trust-item:nth-child(4){border-top:1px solid var(--line)}.categories{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:700px){.products-grid{grid-template-columns:repeat(2,1fr);gap:12px}.product-info{padding:14px 12px 17px}.product-name{font-size:13px}.product-bottom{align-items:flex-start;flex-direction:column}.add-btn{width:100%}.detail-grid{grid-template-columns:1fr;gap:35px}.detail-image-wrap,.detail-image{min-height:auto;aspect-ratio:1/1}.detail-info h1{font-size:42px}.detail-actions{flex-wrap:wrap}.detail-actions .primary-btn{flex:1;min-width:170px}.search-panel{padding:35px 25px}.cart-drawer{padding:25px 20px}.checkout-panel{padding:32px 22px}.checkout-grid{grid-template-columns:1fr}.checkout-field.full{grid-column:auto}}
-@media(max-width:520px){.header{height:65px;padding:0 5%}.logo{font-size:21px;letter-spacing:4px}.header-actions{gap:8px}.hero{min-height:auto;padding-top:55px}.hero h1{font-size:58px;letter-spacing:-3px}.hero-visual{height:330px}.hero-card{width:215px;height:285px}.hero-orbit{width:270px;height:270px}.section{padding:65px 5%}.section-title{font-size:32px}.categories{grid-template-columns:1fr}.category{height:135px}}
-@media(max-width:420px){.products-grid{gap:9px}.product-name{font-size:12px}.product-price{font-size:12px}}
+.logo{font-size:25px;font-weight:800;letter-spacing:5px}
+.nav{display:flex;gap:34px;align-items:center}
+.nav a{font-size:13px;letter-spacing:1.5px;text-transform:uppercase}
+.header-actions{display:flex;align-items:center;gap:18px}
+.icon-btn{position:relative;width:38px;height:38px;background:none;display:flex;align-items:center;justify-content:center;font-size:20px}
+.cart-count{position:absolute;top:0;right:-2px;min-width:17px;height:17px;padding:0 4px;border-radius:20px;background:#111;color:#fff;font-size:10px;display:flex;align-items:center;justify-content:center}
+.mobile-menu{display:none}
+
+.hero{min-height:620px;background:radial-gradient(circle at 75% 35%,#eee9df 0,#f7f5f0 30%,#fff 68%);display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:70px 7%;overflow:hidden}
+.hero-content{max-width:620px}
+.hero-eyebrow{font-size:12px;letter-spacing:4px;text-transform:uppercase;color:#777;margin-bottom:24px}
+.hero h1{font-size:clamp(58px,8vw,105px);line-height:.88;letter-spacing:-5px;font-weight:800;margin-bottom:30px}
+.hero-text{max-width:470px;color:#666;font-size:16px;line-height:1.7;margin-bottom:35px}
+.primary-btn{background:#111;color:#fff;padding:16px 28px;min-width:170px;font-size:12px;letter-spacing:2px;text-transform:uppercase;transition:.3s}
+.primary-btn:hover{background:#333;transform:translateY(-2px)}
+.primary-btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.hero-visual{position:relative;height:480px;display:flex;align-items:center;justify-content:center}
+.hero-orbit{width:390px;height:390px;border-radius:50%;border:1px solid #dedbd4;position:absolute}
+.hero-orbit:before{content:"";position:absolute;inset:35px;border:1px solid #e5e2dc;border-radius:50%}
+.hero-card{position:relative;width:270px;height:360px;background:linear-gradient(145deg,#ddd7cd,#faf9f6);box-shadow:0 30px 80px rgba(0,0,0,.15);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero-card:after{content:"CIRDRIO";position:absolute;bottom:35px;font-size:18px;letter-spacing:5px;font-weight:700}
+
+.trust{border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);background:#fff}
+.trust-item{padding:25px 15px;text-align:center;border-right:1px solid var(--line)}
+.trust-item:last-child{border-right:0}
+.trust-title{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:7px;font-weight:700}
+.trust-text{font-size:11px;color:#777}
+
+.section{padding:90px 6%}
+.section-head{display:flex;align-items:end;justify-content:space-between;margin-bottom:38px}
+.section-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#888;margin-bottom:10px}
+.section-title{font-size:42px;letter-spacing:-2px}
+.section-link{font-size:11px;letter-spacing:2px;text-transform:uppercase;border-bottom:1px solid #111;padding-bottom:5px}
+
+.categories{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.category{height:170px;background:#f4f2ee;display:flex;align-items:end;padding:24px;position:relative;overflow:hidden;transition:.3s}
+.category:hover{transform:translateY(-4px)}
+.category:nth-child(2){background:#eeeae5}
+.category:nth-child(3){background:#f1eee9}
+.category:nth-child(4){background:#e9e7e2}
+.category span{font-size:13px;letter-spacing:2px;text-transform:uppercase;font-weight:700}
+
+.products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.product-card{position:relative;background:#f7f6f3;overflow:hidden;cursor:pointer;transition:.35s}
+.product-card:hover{transform:translateY(-5px)}
+.product-image-wrap{position:relative;width:100%;aspect-ratio:1/1.12;overflow:hidden;background:#f0eee9}
+.product-image{width:100%;height:100%;object-fit:cover;display:block;transition:.5s}
+.product-card:hover .product-image{transform:scale(1.035)}
+.wishlist{position:absolute;right:14px;top:14px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;font-size:19px;z-index:3}
+.product-info{padding:19px 18px 22px;background:#fff}
+.product-category{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#999;margin-bottom:8px}
+.product-name{font-size:15px;font-weight:600;margin-bottom:11px}
+.product-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.product-price{font-size:14px;font-weight:700}
+.add-btn{background:#111;color:#fff;padding:10px 13px;font-size:9px;letter-spacing:1.4px;text-transform:uppercase}
+.stock-low{font-size:10px;color:#9b6c34;margin-top:8px}
+.stock-out{font-size:10px;color:#999;margin-top:8px}
+.state-box{padding:55px 20px;border:1px solid var(--line);text-align:center;color:#777;font-size:13px;letter-spacing:.5px}
+.error-box{color:#a35b5b}
+
+.product-detail{padding:55px 6% 100px;background:#faf9f7}
+.back-btn{background:none;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:45px}
+.detail-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:75px;max-width:1250px;margin:auto}
+.detail-image-wrap{background:#f0eee9;min-height:620px}
+.detail-image{width:100%;height:100%;min-height:620px;object-fit:cover;display:block}
+.detail-info{align-self:center}
+.detail-category{color:#999;font-size:10px;letter-spacing:3px;text-transform:uppercase;margin-bottom:18px}
+.detail-info h1{font-size:55px;letter-spacing:-2.5px;line-height:1;margin-bottom:20px}
+.detail-price{font-size:21px;font-weight:700;margin-bottom:28px}
+.detail-description{color:#666;line-height:1.8;font-size:14px;max-width:550px;margin-bottom:22px}
+.detail-stock{font-size:11px;color:#666;margin-bottom:28px}
+.detail-actions{display:flex;align-items:center;gap:12px}
+.quantity-control{display:flex;height:49px;border:1px solid #ddd;background:#fff}
+.quantity-control button{width:42px;background:#fff;font-size:19px}
+.quantity-control span{min-width:38px;display:flex;align-items:center;justify-content:center;font-size:13px}
+.wishlist-detail{width:49px;height:49px;background:#fff;border:1px solid #ddd;font-size:21px}
+.wishlist.active,.wishlist-detail.active{font-size:0}
+.wishlist.active:after,.wishlist-detail.active:after{content:"♥";font-size:20px}
+.detail-actions .primary-btn{flex:1}
+
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:2000;display:none;align-items:flex-start;justify-content:center}
+.overlay.active{display:flex}
+.close-overlay{position:absolute;right:20px;top:18px;background:none;font-size:30px;line-height:1}
+
+.search-panel{position:relative;width:min(850px,92%);margin-top:100px;background:#fff;padding:45px}
+.search-label{font-size:10px;letter-spacing:3px;color:#999;margin-bottom:15px}
+.search-panel input{width:100%;border:0;border-bottom:1px solid #222;padding:14px 0;outline:none;font-size:25px}
+.search-results{margin-top:20px;max-height:400px;overflow:auto}
+.search-result{padding:15px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.search-result strong{display:block;margin-bottom:5px}
+.search-result span{color:#888;font-size:12px}
+
+.cart-overlay{justify-content:flex-end;align-items:stretch}
+.cart-drawer{width:min(470px,100%);height:100%;background:#fff;padding:30px;display:flex;flex-direction:column;box-shadow:-20px 0 50px rgba(0,0,0,.12)}
+.cart-header{display:flex;justify-content:space-between;padding-bottom:25px;border-bottom:1px solid var(--line)}
+.cart-small{font-size:9px;letter-spacing:3px;color:#999;margin-bottom:7px}
+.cart-header h2{font-size:27px}
+.cart-items{flex:1;overflow:auto;padding:20px 0}
+.empty-cart{height:100%;display:flex;align-items:center;justify-content:center;color:#888;font-size:13px}
+.cart-item{display:grid;grid-template-columns:78px 1fr auto;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+.cart-item img{width:78px;height:90px;object-fit:cover;background:#f4f2ee}
+.cart-item-name{font-size:13px;font-weight:600;margin-bottom:8px}
+.cart-item-price{font-size:12px;color:#777;margin-bottom:12px}
+.cart-quantity{display:flex;align-items:center;gap:10px}
+.cart-quantity button{width:24px;height:24px;border:1px solid #ddd;background:#fff}
+.remove-item{background:none;font-size:11px;color:#999;margin-top:8px}
+.cart-total-item{font-size:13px;font-weight:700}
+.cart-footer{border-top:1px solid var(--line);padding-top:20px}
+.subtotal-row{display:flex;justify-content:space-between;font-size:15px}
+.cart-note{color:#999;font-size:10px;margin:10px 0 18px}
+.checkout-btn{width:100%}
+
+.auth-panel{position:relative;width:min(430px,92%);background:#fff;margin:auto;padding:50px 38px 40px}
+.auth-brand{font-weight:800;letter-spacing:4px;font-size:18px;margin-bottom:30px}
+.auth-title{font-size:31px;letter-spacing:-1px;margin-bottom:8px}
+.auth-subtitle{color:#888;font-size:12px;margin-bottom:25px}
+.auth-panel input{width:100%;border:1px solid #ddd;padding:15px;margin-bottom:12px;outline:none}
+.auth-submit{width:100%;margin-top:4px}
+.auth-message{min-height:20px;margin-top:15px;text-align:center;font-size:11px;color:#777;line-height:1.5}
+.switch-auth{background:none;width:100%;margin-top:12px;font-size:11px;text-decoration:underline}
+
+.checkout-overlay{align-items:center;overflow:auto;padding:30px 0}
+.checkout-panel{position:relative;width:min(760px,94%);max-height:92vh;overflow:auto;background:#fff;padding:42px}
+.checkout-title{font-size:34px;letter-spacing:-1.5px;margin-bottom:7px}
+.checkout-subtitle{font-size:12px;color:#888;margin-bottom:28px}
+.checkout-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.checkout-field{margin-bottom:14px}
+.checkout-field.full{grid-column:1/-1}
+.checkout-field label{display:block;font-size:9px;letter-spacing:1.7px;text-transform:uppercase;color:#777;margin-bottom:7px}
+.checkout-field input,.checkout-field textarea,.checkout-field select{width:100%;border:1px solid #ddd;background:#fff;padding:13px;outline:none}
+.checkout-field textarea{min-height:85px;resize:vertical}
+.checkout-summary{margin-top:10px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0}
+.summary-row{display:flex;justify-content:space-between;font-size:13px;margin-bottom:10px}
+.summary-row.total{font-size:17px;font-weight:700;margin:0;padding-top:8px;border-top:1px solid var(--line)}
+.payment-box{margin-top:20px;padding:16px;background:#f7f6f3;border:1px solid #ebe8e2}
+.payment-title{font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.payment-text{font-size:12px;color:#666}
+.checkout-actions{display:flex;gap:10px;margin-top:22px}
+.secondary-btn{background:#f1efeb;color:#111;padding:16px 20px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase}
+.checkout-actions .primary-btn{flex:1}
+.checkout-message{min-height:18px;margin-top:13px;font-size:11px;text-align:center;color:#777}
+.success-box{text-align:center;padding:30px 10px}
+.success-icon{font-size:42px;margin-bottom:15px}
+.success-box h3{font-size:27px;margin-bottom:8px}
+.success-box p{font-size:12px;color:#777;line-height:1.6}
+
+.mobile-panel{width:100%;height:100%;background:#fff;padding:90px 35px;display:flex;flex-direction:column;gap:28px;position:relative}
+.mobile-link{font-size:28px;letter-spacing:-1px}
+
+@media(max-width:1000px){
+.products-grid{grid-template-columns:repeat(3,1fr)}
+.detail-grid{gap:40px}
+}
+
+@media(max-width:900px){
+.nav{display:none}
+.mobile-menu{display:flex}
+.hero{grid-template-columns:1fr;padding:60px 6%;text-align:center}
+.hero-content{margin:auto}
+.hero-text{margin-left:auto;margin-right:auto}
+.hero-visual{height:390px;margin-top:20px}
+.hero-orbit{width:320px;height:320px}
+.trust{grid-template-columns:repeat(2,1fr)}
+.trust-item:nth-child(2){border-right:0}
+.trust-item:nth-child(3),.trust-item:nth-child(4){border-top:1px solid var(--line)}
+.categories{grid-template-columns:repeat(2,1fr)}
+}
+
+@media(max-width:700px){
+.products-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+.product-info{padding:14px 12px 17px}
+.product-name{font-size:13px}
+.product-bottom{align-items:flex-start;flex-direction:column}
+.add-btn{width:100%}
+.detail-grid{grid-template-columns:1fr;gap:35px}
+.detail-image-wrap,.detail-image{min-height:auto;aspect-ratio:1/1}
+.detail-info h1{font-size:42px}
+.detail-actions{flex-wrap:wrap}
+.detail-actions .primary-btn{flex:1;min-width:170px}
+.search-panel{padding:35px 25px}
+.cart-drawer{padding:25px 20px}
+.checkout-panel{padding:32px 22px}
+.checkout-grid{grid-template-columns:1fr}
+.checkout-field.full{grid-column:auto}
+}
+
+@media(max-width:520px){
+.header{height:65px;padding:0 5%}
+.logo{font-size:21px;letter-spacing:4px}
+.header-actions{gap:8px}
+.hero{min-height:auto;padding-top:55px}
+.hero h1{font-size:58px;letter-spacing:-3px}
+.hero-visual{height:330px}
+.hero-card{width:215px;height:285px}
+.hero-orbit{width:270px;height:270px}
+.section{padding:65px 5%}
+.section-title{font-size:32px}
+.categories{grid-template-columns:1fr}
+.category{height:135px}
+}
+
+@media(max-width:420px){
+.products-grid{gap:9px}
+.product-name{font-size:12px}
+.product-price{font-size:12px}
+}
 </style>
 </head>
+
 <body>
 
 <header class="header">
 <a href="#" class="logo">CIRDRIO</a>
-<nav class="nav"><a href="#shop">Shop</a><a href="#categories">Categories</a><a href="#about">About</a></nav>
+
+<nav class="nav">
+<a href="#shop">Shop</a>
+<a href="#categories">Categories</a>
+<a href="#about">About</a>
+</nav>
+
 <div class="header-actions">
 <button class="icon-btn" id="searchBtn">⌕</button>
 <button class="icon-btn" id="accountBtn">♙</button>
@@ -46,6 +245,7 @@ button,input,textarea,select{font:inherit}button{cursor:pointer;border:0}a{color
 </header>
 
 <main>
+
 <section class="hero">
 <div class="hero-content">
 <div class="hero-eyebrow">CIRDRIO / BEAUTY</div>
@@ -53,7 +253,11 @@ button,input,textarea,select{font:inherit}button{cursor:pointer;border:0}a{color
 <p class="hero-text">Intelligent beauty designed around modern routines, refined formulas and products made for everyday confidence.</p>
 <button class="primary-btn" id="shopNowBtn">Shop collection</button>
 </div>
-<div class="hero-visual"><div class="hero-orbit"></div><div class="hero-card"></div></div>
+
+<div class="hero-visual">
+<div class="hero-orbit"></div>
+<div class="hero-card"></div>
+</div>
 </section>
 
 <section class="trust">
@@ -64,7 +268,14 @@ button,input,textarea,select{font:inherit}button{cursor:pointer;border:0}a{color
 </section>
 
 <section class="section" id="categories">
-<div class="section-head"><div><div class="section-label">Explore</div><h2 class="section-title">Shop by category</h2></div><a href="#shop" class="section-link">View all</a></div>
+<div class="section-head">
+<div>
+<div class="section-label">Explore</div>
+<h2 class="section-title">Shop by category</h2>
+</div>
+<a href="#shop" class="section-link">View all</a>
+</div>
+
 <div class="categories">
 <button class="category" data-category="Skincare"><span>Skincare</span></button>
 <button class="category" data-category="Makeup"><span>Makeup</span></button>
@@ -74,195 +285,1391 @@ button,input,textarea,select{font:inherit}button{cursor:pointer;border:0}a{color
 </section>
 
 <section class="section" id="shop">
-<div class="section-head"><div><div class="section-label">CIRDRIO Collection</div><h2 class="section-title">Featured products</h2></div><div id="categoryStatus" class="section-label">All products</div></div>
+<div class="section-head">
+<div>
+<div class="section-label">CIRDRIO Collection</div>
+<h2 class="section-title">Featured products</h2>
+</div>
+<div id="categoryStatus" class="section-label">All products</div>
+</div>
+
 <div id="productsLoading" class="state-box">Loading collection...</div>
 <div id="productsError" class="state-box error-box" style="display:none;">Unable to load products.</div>
 <div id="productsGrid" class="products-grid"></div>
 </section>
 
 <section class="product-detail" id="productDetail" style="display:none;">
+
 <button class="back-btn" id="closeProduct">← Back to collection</button>
+
 <div class="detail-grid">
-<div class="detail-image-wrap"><img id="detailImage" class="detail-image" src="" alt="Product"></div>
+
+<div class="detail-image-wrap">
+<img id="detailImage" class="detail-image" src="" alt="Product">
+</div>
+
 <div class="detail-info">
 <div class="detail-category" id="detailCategory">BEAUTY</div>
 <h1 id="detailName">Product</h1>
 <div class="detail-price" id="detailPrice">₹0</div>
 <p class="detail-description" id="detailDescription"></p>
 <div class="detail-stock" id="detailStock">In stock</div>
+
 <div class="detail-actions">
-<div class="quantity-control"><button id="detailMinus">−</button><span id="detailQty">1</span><button id="detailPlus">+</button></div>
+
+<div class="quantity-control">
+<button id="detailMinus">−</button>
+<span id="detailQty">1</span>
+<button id="detailPlus">+</button>
+</div>
+
 <button class="primary-btn" id="detailAdd">Add to bag</button>
 <button class="wishlist-detail" id="detailWish">♡</button>
+
 </div>
 </div>
 </div>
 </section>
 
 <div class="overlay" id="searchOverlay">
-<div class="search-panel"><button class="close-overlay" id="closeSearch">×</button><div class="search-label">SEARCH CIRDRIO</div><input id="searchInput" type="text" placeholder="Search products..." autocomplete="off"><div id="searchResults" class="search-results"></div></div>
+<div class="search-panel">
+<button class="close-overlay" id="closeSearch">×</button>
+<div class="search-label">SEARCH CIRDRIO</div>
+<input id="searchInput" type="text" placeholder="Search products..." autocomplete="off">
+<div id="searchResults" class="search-results"></div>
+</div>
 </div>
 
 <div class="overlay cart-overlay" id="cartOverlay">
 <aside class="cart-drawer">
-<div class="cart-header"><div><div class="cart-small">YOUR BAG</div><h2>Shopping bag</h2></div><button class="close-overlay" id="closeCart">×</button></div>
+
+<div class="cart-header">
+<div>
+<div class="cart-small">YOUR BAG</div>
+<h2>Shopping bag</h2>
+</div>
+<button class="close-overlay" id="closeCart">×</button>
+</div>
+
 <div id="cartItems" class="cart-items"></div>
-<div class="cart-footer"><div class="subtotal-row"><span>Subtotal</span><strong id="cartSubtotal">₹0</strong></div><p class="cart-note">Taxes and shipping calculated at checkout.</p><button class="primary-btn checkout-btn" id="checkoutBtn">Checkout</button></div>
+
+<div class="cart-footer">
+<div class="subtotal-row">
+<span>Subtotal</span>
+<strong id="cartSubtotal">₹0</strong>
+</div>
+
+<p class="cart-note">Taxes and shipping calculated at checkout.</p>
+
+<button class="primary-btn checkout-btn" id="checkoutBtn">Checkout</button>
+</div>
+
 </aside>
 </div>
 
 <div class="overlay" id="authOverlay">
-<div class="auth-panel"><button class="close-overlay" id="closeAuth">×</button><div class="auth-brand">CIRDRIO</div><div class="auth-title" id="authTitle">Welcome back</div><div class="auth-subtitle" id="authSubtitle">Sign in to your CIRDRIO account.</div>
-<form id="authForm"><input id="authEmail" type="email" placeholder="Email address" required><input id="authPassword" type="password" placeholder="Password" minlength="6" required><button type="submit" class="primary-btn auth-submit" id="authSubmit">Sign in</button></form>
-<div class="auth-message" id="authMessage"></div><button class="switch-auth" id="authSwitch" type="button">Create an account</button>
+
+<div class="auth-panel">
+
+<button class="close-overlay" id="closeAuth">×</button>
+
+<div class="auth-brand">CIRDRIO</div>
+<div class="auth-title" id="authTitle">Welcome back</div>
+<div class="auth-subtitle" id="authSubtitle">Sign in to your CIRDRIO account.</div>
+
+<form id="authForm">
+<input id="authEmail" type="email" placeholder="Email address" required>
+<input id="authPassword" type="password" placeholder="Password" minlength="6" required>
+<button type="submit" class="primary-btn auth-submit" id="authSubmit">Sign in</button>
+</form>
+
+<div class="auth-message" id="authMessage"></div>
+
+<button class="switch-auth" id="authSwitch" type="button">Create an account</button>
+
 </div>
 </div>
 
 <div class="overlay checkout-overlay" id="checkoutOverlay">
+
 <div class="checkout-panel">
+
 <button class="close-overlay" id="closeCheckout">×</button>
+
 <div id="checkoutFormView">
-<div class="checkout-title">Checkout</div><div class="checkout-subtitle">Complete your delivery details to place your CIRDRIO order.</div>
+
+<div class="checkout-title">Checkout</div>
+<div class="checkout-subtitle">Complete your delivery details to place your CIRDRIO order.</div>
+
 <form id="checkoutForm">
+
 <div class="checkout-grid">
-<div class="checkout-field"><label>Full name</label><input id="checkoutName" type="text" required></div>
-<div class="checkout-field"><label>Email</label><input id="checkoutEmail" type="email" required></div>
-<div class="checkout-field"><label>Phone</label><input id="checkoutPhone" type="tel" required></div>
-<div class="checkout-field"><label>Postal code</label><input id="checkoutPostal" type="text" required></div>
-<div class="checkout-field full"><label>Address</label><textarea id="checkoutAddress" required placeholder="House / Flat / Street"></textarea></div>
-<div class="checkout-field"><label>City</label><input id="checkoutCity" type="text" required></div>
-<div class="checkout-field"><label>State</label><input id="checkoutState" type="text" required></div>
+
+<div class="checkout-field">
+<label>Full name</label>
+<input id="checkoutName" type="text" required>
 </div>
-<div class="payment-box"><div class="payment-title">Payment method</div><div class="payment-text">Cash on Delivery — payment gateway can be connected later.</div></div>
+
+<div class="checkout-field">
+<label>Email</label>
+<input id="checkoutEmail" type="email" required>
+</div>
+
+<div class="checkout-field">
+<label>Phone</label>
+<input id="checkoutPhone" type="tel" required>
+</div>
+
+<div class="checkout-field">
+<label>Postal code</label>
+<input id="checkoutPostal" type="text" required>
+</div>
+
+<div class="checkout-field full">
+<label>Address</label>
+<textarea id="checkoutAddress" required placeholder="House / Flat / Street"></textarea>
+</div>
+
+<div class="checkout-field">
+<label>City</label>
+<input id="checkoutCity" type="text" required>
+</div>
+
+<div class="checkout-field">
+<label>State</label>
+<input id="checkoutState" type="text" required>
+</div>
+
+</div>
+
+<div class="payment-box">
+<div class="payment-title">Payment method</div>
+<div class="payment-text">Cash on Delivery — payment gateway can be connected later.</div>
+</div>
+
 <div class="checkout-summary">
-<div class="summary-row"><span>Subtotal</span><strong id="checkoutSubtotal">₹0</strong></div>
-<div class="summary-row"><span>Shipping</span><strong id="checkoutShipping">₹0</strong></div>
-<div class="summary-row"><span>Tax</span><strong id="checkoutTax">₹0</strong></div>
-<div class="summary-row total"><span>Total</span><strong id="checkoutTotal">₹0</strong></div>
+
+<div class="summary-row">
+<span>Subtotal</span>
+<strong id="checkoutSubtotal">₹0</strong>
 </div>
-<div class="checkout-actions"><button type="button" class="secondary-btn" id="backToCart">Back</button><button type="submit" class="primary-btn" id="placeOrderBtn">Place order</button></div>
+
+<div class="summary-row">
+<span>Shipping</span>
+<strong id="checkoutShipping">₹0</strong>
+</div>
+
+<div class="summary-row">
+<span>Tax</span>
+<strong id="checkoutTax">₹0</strong>
+</div>
+
+<div class="summary-row total">
+<span>Total</span>
+<strong id="checkoutTotal">₹0</strong>
+</div>
+
+</div>
+
+<div class="checkout-actions">
+<button type="button" class="secondary-btn" id="backToCart">Back</button>
+<button type="submit" class="primary-btn" id="placeOrderBtn">Place order</button>
+</div>
+
 <div class="checkout-message" id="checkoutMessage"></div>
+
 </form>
 </div>
-<div id="checkoutSuccess" class="success-box" style="display:none;"><div class="success-icon">✓</div><h3>Order placed.</h3><p id="successText">Your CIRDRIO order has been created successfully.</p><button class="primary-btn" id="continueShopping" style="margin-top:22px;">Continue shopping</button></div>
+
+<div id="checkoutSuccess" class="success-box" style="display:none;">
+
+<div class="success-icon">✓</div>
+
+<h3>Order placed.</h3>
+
+<p id="successText">Your CIRDRIO order has been created successfully.</p>
+
+<button class="primary-btn" id="continueShopping" style="margin-top:22px;">
+Continue shopping
+</button>
+
+</div>
+
 </div>
 </div>
 
-<div class="overlay" id="mobileOverlay"><div class="mobile-panel"><button class="close-overlay" id="closeMobile">×</button><a href="#shop" class="mobile-link">Shop</a><a href="#categories" class="mobile-link">Categories</a><a href="#about" class="mobile-link">About</a></div></div>
+<div class="overlay" id="mobileOverlay">
+
+<div class="mobile-panel">
+
+<button class="close-overlay" id="closeMobile">×</button>
+
+<a href="#shop" class="mobile-link">Shop</a>
+<a href="#categories" class="mobile-link">Categories</a>
+<a href="#about" class="mobile-link">About</a>
+
+</div>
+</div>
+
 </main>
 
 <script>
-const SUPABASE_URL="https://jbnatqugmajorwolsfin.supabase.co";
-const SUPABASE_KEY="sb_publishable_l7tBbN22fFYgPv5bmkEPtw_Di-XHpsY";
-const supabaseClient=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 
-let products=[],selectedProduct=null,detailQuantity=1,authMode="login";
-let cart=JSON.parse(localStorage.getItem("cirdrio_cart")||"[]");
+const SUPABASE_URL="https://jbnatqugmajorwolsfin.supabase.co";
+
+const SUPABASE_KEY="sb_publishable_l7tBbN22fFYgPv5bmkEPtw_Di-XHpsY";
+
+const supabaseClient=supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+let products=[];
+let selectedProduct=null;
+let detailQuantity=1;
+let authMode="login";
+
+let cart=JSON.parse(
+localStorage.getItem("cirdrio_cart")||"[]"
+);
+
 const $=id=>document.getElementById(id);
+
 const money=v=>"₹"+Number(v||0).toLocaleString("en-IN");
-const escapeHTML=v=>String(v??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");
+
+const escapeHTML=v=>String(v??"")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+
+/* PRODUCTS */
 
 async function loadProducts(){
-$("productsLoading").style.display="block";$("productsError").style.display="none";
+
+$("productsLoading").style.display="block";
+$("productsError").style.display="none";
+
 try{
-const {data,error}=await supabaseClient.from("products").select('"Id","Name","Discription","Price","Cattogry","Image url","Stock","created_at"').order("created_at",{ascending:false});
-if(error)throw error;products=data||[];$("productsLoading").style.display="none";renderProducts(products);
-}catch(e){console.error(e);$("productsLoading").style.display="none";$("productsError").style.display="block";$("productsError").innerHTML="Collection could not be loaded.<br><small>"+escapeHTML(e.message)+"</small>"}
+
+const {data,error}=await supabaseClient
+.from("products")
+.select('"Id","Name","Discription","Price","Cattogry","Image url","Stock","created_at"')
+.order("created_at",{ascending:false});
+
+if(error)throw error;
+
+products=data||[];
+
+$("productsLoading").style.display="none";
+
+renderProducts(products);
+
+}catch(e){
+
+console.error(e);
+
+$("productsLoading").style.display="none";
+
+$("productsError").style.display="block";
+
+$("productsError").innerHTML=
+"Collection could not be loaded.<br><small>"+
+escapeHTML(e.message)+
+"</small>";
+
 }
+
+}
+
 
 function renderProducts(list){
+
 const grid=$("productsGrid");
-if(!list.length){grid.innerHTML='<div class="state-box" style="grid-column:1/-1;">No products found.</div>';return}
-grid.innerHTML=list.map(p=>{
-const stock=Number(p["Stock"]||0);
-return `<article class="product-card" onclick="openProductById('${escapeHTML(p["Id"])}')">
-<div class="product-image-wrap"><img class="product-image" src="${escapeHTML(p["Image url"]||"")}" alt="${escapeHTML(p["Name"])}" loading="lazy"><button class="wishlist" onclick="event.stopPropagation();toggleWishlist('${escapeHTML(p["Id"])}',this)">♡</button></div>
-<div class="product-info"><div class="product-category">${escapeHTML(p["Cattogry"]||"Beauty")}</div><div class="product-name">${escapeHTML(p["Name"])}</div>
-<div class="product-bottom"><div class="product-price">${money(p["Price"])}</div><button class="add-btn" onclick="event.stopPropagation();addToCartById('${escapeHTML(p["Id"])}')" ${stock<=0?"disabled":""}>${stock<=0?"Sold out":"Add to bag"}</button></div>
-${stock<=0?'<div class="stock-out">Out of stock</div>':stock<=5?`<div class="stock-low">Only ${stock} left</div>`:""}</div></article>`;
-}).join("");syncWishlistButtons();
+
+if(!list.length){
+
+grid.innerHTML=
+'<div class="state-box" style="grid-column:1/-1;">No products found.</div>';
+
+return;
+
 }
+
+grid.innerHTML=list.map(p=>{
+
+const stock=Number(p["Stock"]||0);
+
+return `
+<article class="product-card" onclick="openProductById('${escapeHTML(p["Id"])}')">
+
+<div class="product-image-wrap">
+
+<img
+class="product-image"
+src="${escapeHTML(p["Image url"]||"")}"
+alt="${escapeHTML(p["Name"])}"
+loading="lazy">
+
+<button
+class="wishlist"
+onclick="event.stopPropagation();toggleWishlist('${escapeHTML(p["Id"])}',this)">
+♡
+</button>
+
+</div>
+
+<div class="product-info">
+
+<div class="product-category">
+${escapeHTML(p["Cattogry"]||"Beauty")}
+</div>
+
+<div class="product-name">
+${escapeHTML(p["Name"])}
+</div>
+
+<div class="product-bottom">
+
+<div class="product-price">
+${money(p["Price"])}
+</div>
+
+<button
+class="add-btn"
+onclick="event.stopPropagation();addToCartById('${escapeHTML(p["Id"])}')"
+${stock<=0?"disabled":""}>
+${stock<=0?"Sold out":"Add to bag"}
+</button>
+
+</div>
+
+${
+stock<=0
+?'<div class="stock-out">Out of stock</div>'
+:stock<=5
+?`<div class="stock-low">Only ${stock} left</div>`
+:""
+}
+
+</div>
+</article>
+`;
+
+}).join("");
+
+syncWishlistButtons();
+
+}
+
+
+/* PRODUCT DETAIL */
 
 function openProductById(id){
-const p=products.find(x=>x["Id"]===id);if(!p)return;selectedProduct=p;detailQuantity=1;
-$("detailImage").src=p["Image url"]||"";$("detailImage").alt=p["Name"]||"Product";$("detailCategory").textContent=p["Cattogry"]||"Beauty";$("detailName").textContent=p["Name"]||"Product";$("detailPrice").textContent=money(p["Price"]);$("detailDescription").textContent=p["Discription"]||"CIRDRIO beauty product.";
-const stock=Number(p["Stock"]||0);$("detailStock").textContent=stock>0?`${stock} available`:"Out of stock";$("detailAdd").disabled=stock<=0;updateDetailQuantity();updateDetailWishlist();
-$("productDetail").style.display="block";$("shop").style.display="none";$("categories").style.display="none";$("productDetail").scrollIntoView({behavior:"smooth",block:"start"});
+
+const p=products.find(x=>x["Id"]===id);
+
+if(!p)return;
+
+selectedProduct=p;
+detailQuantity=1;
+
+$("detailImage").src=p["Image url"]||"";
+$("detailImage").alt=p["Name"]||"Product";
+
+$("detailCategory").textContent=
+p["Cattogry"]||"Beauty";
+
+$("detailName").textContent=
+p["Name"]||"Product";
+
+$("detailPrice").textContent=
+money(p["Price"]);
+
+$("detailDescription").textContent=
+p["Discription"]||"CIRDRIO beauty product.";
+
+const stock=Number(p["Stock"]||0);
+
+$("detailStock").textContent=
+stock>0?`${stock} available`:"Out of stock";
+
+$("detailAdd").disabled=stock<=0;
+
+updateDetailQuantity();
+updateDetailWishlist();
+
+$("productDetail").style.display="block";
+$("shop").style.display="none";
+$("categories").style.display="none";
+
+$("productDetail").scrollIntoView({
+behavior:"smooth",
+block:"start"
+});
+
 }
-$("closeProduct").onclick=()=>{$("productDetail").style.display="none";$("shop").style.display="";$("categories").style.display="";$("shop").scrollIntoView({behavior:"smooth"})};
-function updateDetailQuantity(){$("detailQty").textContent=detailQuantity}
-$("detailMinus").onclick=()=>{if(detailQuantity>1){detailQuantity--;updateDetailQuantity()}}
-$("detailPlus").onclick=()=>{if(selectedProduct&&detailQuantity<Number(selectedProduct["Stock"]||0)){detailQuantity++;updateDetailQuantity()}}
-$("detailAdd").onclick=()=>{if(selectedProduct)addToCart(selectedProduct,detailQuantity)}
 
-function getWishlist(){return JSON.parse(localStorage.getItem("cirdrio_wishlist")||"[]")}
-function saveWishlist(x){localStorage.setItem("cirdrio_wishlist",JSON.stringify(x))}
-function toggleWishlist(id,b){let w=getWishlist();w=w.includes(id)?w.filter(x=>x!==id):[...w,id];saveWishlist(w);b.classList.toggle("active",w.includes(id));updateDetailWishlist();syncWishlistButtons()}
-function updateDetailWishlist(){if(selectedProduct)$("detailWish").classList.toggle("active",getWishlist().includes(selectedProduct["Id"]))}
-function syncWishlistButtons(){const w=getWishlist();document.querySelectorAll(".wishlist").forEach(b=>{const m=(b.getAttribute("onclick")||"").match(/toggleWishlist\('([^']+)'/);if(m)b.classList.toggle("active",w.includes(m[1]))})}
-$("detailWish").onclick=()=>{if(selectedProduct)toggleWishlist(selectedProduct["Id"],$("detailWish"))};
 
-function saveCart(){localStorage.setItem("cirdrio_cart",JSON.stringify(cart));updateCart()}
-function addToCartById(id){const p=products.find(x=>x["Id"]===id);if(p)addToCart(p,1)}
-function addToCart(p,q=1){
-const stock=Number(p["Stock"]||0);if(stock<=0){alert("This product is currently out of stock.");return}
-const x=cart.find(i=>i.id===p["Id"]);
-if(x){x.quantity=Math.min(x.quantity+q,stock);x.stock=stock}else cart.push({id:p["Id"],name:p["Name"],price:Number(p["Price"]||0),image:p["Image url"]||"",stock,quantity:Math.min(q,stock)});
-saveCart();openCart();
-}
-function updateCart(){ $("cartCount").textContent=cart.reduce((s,i)=>s+Number(i.quantity||0),0);renderCart()}
-function renderCart(){
-const c=$("cartItems");if(!cart.length){c.innerHTML='<div class="empty-cart">Your bag is empty.</div>';$("cartSubtotal").textContent="₹0";return}
-let sub=0;c.innerHTML=cart.map((i,n)=>{const total=i.price*i.quantity;sub+=total;return `<div class="cart-item"><img src="${escapeHTML(i.image)}" alt="${escapeHTML(i.name)}"><div><div class="cart-item-name">${escapeHTML(i.name)}</div><div class="cart-item-price">${money(i.price)}</div><div class="cart-quantity"><button onclick="changeCartQuantity(${n},-1)">−</button><span>${i.quantity}</span><button onclick="changeCartQuantity(${n},1)">+</button></div><button class="remove-item" onclick="removeCartItem(${n})">Remove</button></div><div class="cart-total-item">${money(total)}</div></div>`}).join("");$("cartSubtotal").textContent=money(sub)}
-function changeCartQuantity(n,d){const i=cart[n];if(!i)return;const next=i.quantity+d;if(next<=0)cart.splice(n,1);else if(next<=Number(i.stock||0))i.quantity=next;saveCart()}
-function removeCartItem(n){cart.splice(n,1);saveCart()}
-function openCart(){$("cartOverlay").classList.add("active")}
-$("cartBtn").onclick=openCart;$("closeCart").onclick=()=>$("cartOverlay").classList.remove("active");
+$("closeProduct").onclick=()=>{
 
-$("searchBtn").onclick=()=>{$("searchOverlay").classList.add("active");setTimeout(()=>$("searchInput").focus(),100)}
-$("closeSearch").onclick=()=>$("searchOverlay").classList.remove("active");
-$("searchInput").oninput=e=>{const q=e.target.value.trim().toLowerCase(),r=products.filter(p=>String(p["Name"]||"").toLowerCase().includes(q)||String(p["Cattogry"]||"").toLowerCase().includes(q));$("searchResults").innerHTML=!q?"":r.length?r.map(p=>`<div class="search-result" onclick="openSearchProduct('${escapeHTML(p["Id"])}')"><strong>${escapeHTML(p["Name"])}</strong><span>${money(p["Price"])}</span></div>`).join():'<div class="search-result">No products found.</div>'}
-function openSearchProduct(id){$("searchOverlay").classList.remove("active");openProductById(id)}
+$("productDetail").style.display="none";
+$("shop").style.display="";
+$("categories").style.display="";
 
-document.querySelectorAll(".category").forEach(b=>b.onclick=()=>{const c=b.dataset.category;$("categoryStatus").textContent=c;renderProducts(products.filter(p=>String(p["Cattogry"]||"").toLowerCase()===c.toLowerCase()));$("shop").scrollIntoView({behavior:"smooth"})});
-$("shopNowBtn").onclick=()=>{$("categoryStatus").textContent="All products";renderProducts(products);$("shop").scrollIntoView({behavior:"smooth"})};
+$("shop").scrollIntoView({
+behavior:"smooth"
+});
 
-$("mobileMenuBtn").onclick=()=>$("mobileOverlay").classList.add("active");$("closeMobile").onclick=()=>$("mobileOverlay").classList.remove("active");document.querySelectorAll(".mobile-link").forEach(a=>a.onclick=()=>$("mobileOverlay").classList.remove("active"));
-
-$("accountBtn").onclick=async()=>{const {data:{session}}=await supabaseClient.auth.getSession();if(session){if(confirm("Logout from CIRDRIO?")){await supabaseClient.auth.signOut();updateAuthUI()}}else openAuth("login")};
-function openAuth(m="login"){authMode=m;updateAuthMode();$("authOverlay").classList.add("active")}
-function updateAuthMode(){const l=authMode==="login";$("authTitle").textContent=l?"Welcome back":"Create your account";$("authSubtitle").textContent=l?"Sign in to your CIRDRIO account.":"Join CIRDRIO and start your beauty journey.";$("authSubmit").textContent=l?"Sign in":"Create account";$("authSwitch").textContent=l?"Create an account":"Already have an account? Sign in";$("authMessage").textContent=""}
-$("authSwitch").onclick=()=>{authMode=authMode==="login"?"signup":"login";updateAuthMode()};$("closeAuth").onclick=()=>$("authOverlay").classList.remove("active");
-$("authForm").onsubmit=async e=>{e.preventDefault();const email=$("authEmail").value.trim(),password=$("authPassword").value;$("authSubmit").disabled=true;$("authMessage").textContent="Please wait...";try{if(authMode==="signup"){const {error}=await supabaseClient.auth.signUp({email,password,options:{emailRedirectTo:"https://cirdriodm.github.io/cirdrio-store/"}});if(error)throw error;$("authMessage").textContent="Account created. Check your email to confirm your account."}else{const {error}=await supabaseClient.auth.signInWithPassword({email,password});if(error)throw error;$("authMessage").textContent="Signed in successfully.";setTimeout(()=>{$("authOverlay").classList.remove("active");updateAuthUI()},700)}}catch(e){$("authMessage").textContent=e.message||"Something went wrong."}finally{$("authSubmit").disabled=false}};
-async function updateAuthUI(){const {data:{session}}=await supabaseClient.auth.getSession();$("accountBtn").innerHTML=session?"●":"♙"}supabaseClient.auth.onAuthStateChange(()=>updateAuthUI());
-
-function getCartTotals(){const subtotal=cart.reduce((s,i)=>s+i.price*i.quantity,0),shipping=0,tax=0,discount=0;return{subtotal,shipping,tax,discount,total:subtotal+shipping+tax-discount}}
-function fillCheckoutSummary(){const t=getCartTotals();$("checkoutSubtotal").textContent=money(t.subtotal);$("checkoutShipping").textContent=money(t.shipping);$("checkoutTax").textContent=money(t.tax);$("checkoutTotal").textContent=money(t.total)}
-async function openCheckout(){
-if(!cart.length){alert("Your bag is empty.");return}
-const {data:{session}}=await supabaseClient.auth.getSession();if(!session){$("cartOverlay").classList.remove("active");openAuth("login");return}
-$("checkoutMessage").textContent="";$("checkoutFormView").style.display="block";$("checkoutSuccess").style.display="none";fillCheckoutSummary();if(session.user.email)$("checkoutEmail").value=session.user.email;$("cartOverlay").classList.remove("active");$("checkoutOverlay").classList.add("active")
-}
-$("checkoutBtn").onclick=openCheckout;$("closeCheckout").onclick=()=>$("checkoutOverlay").classList.remove("active");$("backToCart").onclick=()=>{$("checkoutOverlay").classList.remove("active");openCart()};
-
-$("checkoutForm").onsubmit=async e=>{
-e.preventDefault();if(!cart.length){$("checkoutMessage").textContent="Your bag is empty.";return}
-const {data:{session}}=await supabaseClient.auth.getSession();if(!session){$("checkoutOverlay").classList.remove("active");openAuth("login");return}
-const t=getCartTotals();$("placeOrderBtn").disabled=true;$("checkoutMessage").textContent="Placing your order...";
-try{
-const {data:order,error}=await supabaseClient.from("orders").insert({
-user_id:session.user.id,customer_name:$("checkoutName").value.trim(),customer_email:$("checkoutEmail").value.trim(),customer_phone:$("checkoutPhone").value.trim(),address_line1:$("checkoutAddress").value.trim(),address_line2:null,city:$("checkoutCity").value.trim(),state:$("checkoutState").value.trim(),postal_code:$("checkoutPostal").value.trim(),country:"India",subtotal:t.subtotal,discount:t.discount,shipping:t.shipping,tax:t.tax,total:t.total,coupon_code:null,payment_method:"cod",payment_status:"pending",order_status:"pending"
-}).select("id").single();
-if(error)throw error;
-const items=cart.map(i=>({order_id:order.id,product_id:i.id,product_name:i.name,quantity:Number(i.quantity),unit_price:Number(i.price),line_total:Number(i.price)*Number(i.quantity)}));
-const {error:itemError}=await supabaseClient.from("order_items").insert(items);if(itemError)throw itemError;
-const shortId=String(order.id).slice(0,8).toUpperCase();cart=[];saveCart();$("checkoutFormView").style.display="none";$("checkoutSuccess").style.display="block";$("successText").textContent=`Order #${shortId} has been placed successfully. Payment method: Cash on Delivery.`;
-}catch(e){$("checkoutMessage").textContent=e.message||"Unable to place order. Please try again."}finally{$("placeOrderBtn").disabled=false}
 };
 
-$("continueShopping").onclick=()=>{$("checkoutOverlay").classList.remove("active");$("checkoutSuccess").style.display="none";$("checkoutFormView").style.display="block";$("checkoutForm").reset();$("shop").scrollIntoView({behavior:"smooth"})};
-document.querySelectorAll(".overlay").forEach(o=>o.onclick=e=>{if(e.target===o)o.classList.remove("active")});
-document.addEventListener("DOMContentLoaded",()=>{loadProducts();updateAuthUI();updateCart()});
+
+function updateDetailQuantity(){
+
+$("detailQty").textContent=detailQuantity;
+
+}
+
+
+$("detailMinus").onclick=()=>{
+
+if(detailQuantity>1){
+
+detailQuantity--;
+
+updateDetailQuantity();
+
+}
+
+};
+
+
+$("detailPlus").onclick=()=>{
+
+if(
+selectedProduct &&
+detailQuantity<
+Number(selectedProduct["Stock"]||0)
+){
+
+detailQuantity++;
+
+updateDetailQuantity();
+
+}
+
+};
+
+
+$("detailAdd").onclick=()=>{
+
+if(selectedProduct){
+
+addToCart(
+selectedProduct,
+detailQuantity
+);
+
+}
+
+};
+
+
+/* WISHLIST */
+
+function getWishlist(){
+
+return JSON.parse(
+localStorage.getItem("cirdrio_wishlist")||"[]"
+);
+
+}
+
+
+function saveWishlist(x){
+
+localStorage.setItem(
+"cirdrio_wishlist",
+JSON.stringify(x)
+);
+
+}
+
+
+function toggleWishlist(id,b){
+
+let w=getWishlist();
+
+w=w.includes(id)
+?w.filter(x=>x!==id)
+:[...w,id];
+
+saveWishlist(w);
+
+b.classList.toggle(
+"active",
+w.includes(id)
+);
+
+updateDetailWishlist();
+syncWishlistButtons();
+
+}
+
+
+function updateDetailWishlist(){
+
+if(selectedProduct){
+
+$("detailWish").classList.toggle(
+"active",
+getWishlist().includes(selectedProduct["Id"])
+);
+
+}
+
+}
+
+
+function syncWishlistButtons(){
+
+const w=getWishlist();
+
+document.querySelectorAll(".wishlist")
+.forEach(b=>{
+
+const m=(b.getAttribute("onclick")||"")
+.match(/toggleWishlist\('([^']+)'/);
+
+if(m){
+
+b.classList.toggle(
+"active",
+w.includes(m[1])
+);
+
+}
+
+});
+
+}
+
+
+$("detailWish").onclick=()=>{
+
+if(selectedProduct){
+
+toggleWishlist(
+selectedProduct["Id"],
+$("detailWish")
+);
+
+}
+
+};
+
+
+/* CART */
+
+function saveCart(){
+
+localStorage.setItem(
+"cirdrio_cart",
+JSON.stringify(cart)
+);
+
+updateCart();
+
+}
+
+
+function addToCartById(id){
+
+const p=products.find(
+x=>x["Id"]===id
+);
+
+if(p)addToCart(p,1);
+
+}
+
+
+function addToCart(p,q=1){
+
+const stock=Number(p["Stock"]||0);
+
+if(stock<=0){
+
+alert(
+"This product is currently out of stock."
+);
+
+return;
+
+}
+
+const x=cart.find(
+i=>i.id===p["Id"]
+);
+
+if(x){
+
+x.quantity=
+Math.min(
+x.quantity+q,
+stock
+);
+
+x.stock=stock;
+
+}else{
+
+cart.push({
+
+id:p["Id"],
+name:p["Name"],
+price:Number(p["Price"]||0),
+image:p["Image url"]||"",
+stock,
+quantity:Math.min(q,stock)
+
+});
+
+}
+
+saveCart();
+
+openCart();
+
+}
+
+
+function updateCart(){
+
+$("cartCount").textContent=
+cart.reduce(
+(s,i)=>s+Number(i.quantity||0),
+0
+);
+
+renderCart();
+
+}
+
+
+function renderCart(){
+
+const c=$("cartItems");
+
+if(!cart.length){
+
+c.innerHTML=
+'<div class="empty-cart">Your bag is empty.</div>';
+
+$("cartSubtotal").textContent="₹0";
+
+return;
+
+}
+
+let sub=0;
+
+c.innerHTML=cart.map((i,n)=>{
+
+const total=i.price*i.quantity;
+
+sub+=total;
+
+return `
+
+<div class="cart-item">
+
+<img
+src="${escapeHTML(i.image)}"
+alt="${escapeHTML(i.name)}">
+
+<div>
+
+<div class="cart-item-name">
+${escapeHTML(i.name)}
+</div>
+
+<div class="cart-item-price">
+${money(i.price)}
+</div>
+
+<div class="cart-quantity">
+
+<button onclick="changeCartQuantity(${n},-1)">
+−
+</button>
+
+<span>${i.quantity}</span>
+
+<button onclick="changeCartQuantity(${n},1)">
++
+</button>
+
+</div>
+
+<button
+class="remove-item"
+onclick="removeCartItem(${n})">
+Remove
+</button>
+
+</div>
+
+<div class="cart-total-item">
+${money(total)}
+</div>
+
+</div>
+
+`;
+
+}).join("");
+
+$("cartSubtotal").textContent=
+money(sub);
+
+}
+
+
+function changeCartQuantity(n,d){
+
+const i=cart[n];
+
+if(!i)return;
+
+const next=i.quantity+d;
+
+if(next<=0){
+
+cart.splice(n,1);
+
+}else if(next<=Number(i.stock||0)){
+
+i.quantity=next;
+
+}
+
+saveCart();
+
+}
+
+
+function removeCartItem(n){
+
+cart.splice(n,1);
+
+saveCart();
+
+}
+
+
+function openCart(){
+
+$("cartOverlay").classList.add("active");
+
+}
+
+
+$("cartBtn").onclick=openCart;
+
+$("closeCart").onclick=()=>
+$("cartOverlay").classList.remove("active");
+
+
+/* SEARCH */
+
+$("searchBtn").onclick=()=>{
+
+$("searchOverlay").classList.add("active");
+
+setTimeout(
+()=>$("searchInput").focus(),
+100
+);
+
+};
+
+
+$("closeSearch").onclick=()=>
+$("searchOverlay").classList.remove("active");
+
+
+$("searchInput").oninput=e=>{
+
+const q=e.target.value
+.trim()
+.toLowerCase();
+
+const r=products.filter(p=>
+String(p["Name"]||"")
+.toLowerCase()
+.includes(q)
+||
+String(p["Cattogry"]||"")
+.toLowerCase()
+.includes(q)
+);
+
+$("searchResults").innerHTML=
+!q
+?""
+:r.length
+?r.map(p=>`
+
+<div
+class="search-result"
+onclick="openSearchProduct('${escapeHTML(p["Id"])}')">
+
+<strong>
+${escapeHTML(p["Name"])}
+</strong>
+
+<span>
+${money(p["Price"])}
+</span>
+
+</div>
+
+`).join()
+:'<div class="search-result">No products found.</div>';
+
+};
+
+
+function openSearchProduct(id){
+
+$("searchOverlay").classList.remove("active");
+
+openProductById(id);
+
+}
+
+
+/* CATEGORY */
+
+document.querySelectorAll(".category")
+.forEach(b=>{
+
+b.onclick=()=>{
+
+const c=b.dataset.category;
+
+$("categoryStatus").textContent=c;
+
+renderProducts(
+products.filter(
+p=>String(p["Cattogry"]||"")
+.toLowerCase()===
+c.toLowerCase()
+)
+);
+
+$("shop").scrollIntoView({
+behavior:"smooth"
+});
+
+};
+
+});
+
+
+$("shopNowBtn").onclick=()=>{
+
+$("categoryStatus").textContent=
+"All products";
+
+renderProducts(products);
+
+$("shop").scrollIntoView({
+behavior:"smooth"
+});
+
+};
+
+
+/* MOBILE */
+
+$("mobileMenuBtn").onclick=()=>
+$("mobileOverlay").classList.add("active");
+
+$("closeMobile").onclick=()=>
+$("mobileOverlay").classList.remove("active");
+
+document.querySelectorAll(".mobile-link")
+.forEach(a=>
+a.onclick=()=>
+$("mobileOverlay").classList.remove("active")
+);
+
+
+/* AUTH */
+
+$("accountBtn").onclick=async()=>{
+
+const {
+data:{session}
+}=await supabaseClient.auth.getSession();
+
+if(session){
+
+if(confirm("Logout from CIRDRIO?")){
+
+await supabaseClient.auth.signOut();
+
+updateAuthUI();
+
+}
+
+}else{
+
+openAuth("login");
+
+}
+
+};
+
+
+function openAuth(m="login"){
+
+authMode=m;
+
+updateAuthMode();
+
+$("authOverlay").classList.add("active");
+
+}
+
+
+function updateAuthMode(){
+
+const l=authMode==="login";
+
+$("authTitle").textContent=
+l?"Welcome back":"Create your account";
+
+$("authSubtitle").textContent=
+l
+?"Sign in to your CIRDRIO account."
+:"Join CIRDRIO and start your beauty journey.";
+
+$("authSubmit").textContent=
+l?"Sign in":"Create account";
+
+$("authSwitch").textContent=
+l
+?"Create an account"
+:"Already have an account? Sign in";
+
+$("authMessage").textContent="";
+
+}
+
+
+$("authSwitch").onclick=()=>{
+
+authMode=
+authMode==="login"
+?"signup"
+:"login";
+
+updateAuthMode();
+
+};
+
+
+$("closeAuth").onclick=()=>
+$("authOverlay").classList.remove("active");
+
+
+$("authForm").onsubmit=async e=>{
+
+e.preventDefault();
+
+const email=$("authEmail").value.trim();
+const password=$("authPassword").value;
+
+$("authSubmit").disabled=true;
+
+$("authMessage").textContent=
+"Please wait...";
+
+try{
+
+if(authMode==="signup"){
+
+const {error}=await supabaseClient.auth.signUp({
+
+email,
+password,
+
+options:{
+emailRedirectTo:
+"https://cirdriodm.github.io/cirdrio-store/"
+}
+
+});
+
+if(error)throw error;
+
+$("authMessage").textContent=
+"Account created. Check your email to confirm your account.";
+
+}else{
+
+const {error}=
+await supabaseClient.auth.signInWithPassword({
+email,
+password
+});
+
+if(error)throw error;
+
+$("authMessage").textContent=
+"Signed in successfully.";
+
+setTimeout(()=>{
+
+$("authOverlay").classList.remove("active");
+
+updateAuthUI();
+
+},700);
+
+}
+
+}catch(e){
+
+$("authMessage").textContent=
+e.message||"Something went wrong.";
+
+}finally{
+
+$("authSubmit").disabled=false;
+
+}
+
+};
+
+
+async function updateAuthUI(){
+
+const {
+data:{session}
+}=await supabaseClient.auth.getSession();
+
+$("accountBtn").innerHTML=
+session?"●":"♙";
+
+}
+
+
+supabaseClient.auth.onAuthStateChange(
+()=>updateAuthUI()
+);
+
+
+/* CHECKOUT TOTAL */
+
+function getCartTotals(){
+
+const subtotal=
+cart.reduce(
+(s,i)=>s+i.price*i.quantity,
+0
+);
+
+const shipping=0;
+const tax=0;
+const discount=0;
+
+return{
+subtotal,
+shipping,
+tax,
+discount,
+total:
+subtotal+
+shipping+
+tax-
+discount
+};
+
+}
+
+
+function fillCheckoutSummary(){
+
+const t=getCartTotals();
+
+$("checkoutSubtotal").textContent=
+money(t.subtotal);
+
+$("checkoutShipping").textContent=
+money(t.shipping);
+
+$("checkoutTax").textContent=
+money(t.tax);
+
+$("checkoutTotal").textContent=
+money(t.total);
+
+}
+
+
+/* OPEN CHECKOUT */
+
+async function openCheckout(){
+
+if(!cart.length){
+
+alert("Your bag is empty.");
+
+return;
+
+}
+
+const {
+data:{session}
+}=await supabaseClient.auth.getSession();
+
+if(!session){
+
+$("cartOverlay").classList.remove("active");
+
+openAuth("login");
+
+return;
+
+}
+
+$("checkoutMessage").textContent="";
+
+$("checkoutFormView").style.display="block";
+
+$("checkoutSuccess").style.display="none";
+
+fillCheckoutSummary();
+
+if(session.user.email){
+
+$("checkoutEmail").value=
+session.user.email;
+
+}
+
+$("cartOverlay").classList.remove("active");
+
+$("checkoutOverlay").classList.add("active");
+
+}
+
+
+$("checkoutBtn").onclick=
+openCheckout;
+
+
+$("closeCheckout").onclick=()=>
+$("checkoutOverlay").classList.remove("active");
+
+
+$("backToCart").onclick=()=>{
+
+$("checkoutOverlay").classList.remove("active");
+
+openCart();
+
+};
+
+
+/* SECURE ORDER + STOCK DEDUCTION */
+
+$("checkoutForm").onsubmit=async e=>{
+
+e.preventDefault();
+
+if(!cart.length){
+
+$("checkoutMessage").textContent=
+"Your bag is empty.";
+
+return;
+
+}
+
+const {
+data:{session}
+}=await supabaseClient.auth.getSession();
+
+if(!session){
+
+$("checkoutOverlay").classList.remove("active");
+
+openAuth("login");
+
+return;
+
+}
+
+const t=getCartTotals();
+
+$("placeOrderBtn").disabled=true;
+
+$("checkoutMessage").textContent=
+"Placing your order...";
+
+try{
+
+const items=cart.map(i=>({
+
+product_id:i.id,
+quantity:Number(i.quantity)
+
+}));
+
+const {
+data:orderId,
+error
+}=await supabaseClient.rpc(
+"place_order_secure",
+{
+
+p_customer_name:
+$("checkoutName").value.trim(),
+
+p_customer_email:
+$("checkoutEmail").value.trim(),
+
+p_customer_phone:
+$("checkoutPhone").value.trim(),
+
+p_address_line1:
+$("checkoutAddress").value.trim(),
+
+p_address_line2:null,
+
+p_city:
+$("checkoutCity").value.trim(),
+
+p_state:
+$("checkoutState").value.trim(),
+
+p_postal_code:
+$("checkoutPostal").value.trim(),
+
+p_country:"India",
+
+p_subtotal:t.subtotal,
+
+p_discount:t.discount,
+
+p_shipping:t.shipping,
+
+p_tax:t.tax,
+
+p_total:t.total,
+
+p_payment_method:"cod",
+
+p_items:items
+
+}
+);
+
+if(error)throw error;
+
+const shortId=
+String(orderId)
+.slice(0,8)
+.toUpperCase();
+
+cart=[];
+
+saveCart();
+
+$("checkoutFormView").style.display="none";
+
+$("checkoutSuccess").style.display="block";
+
+$("successText").textContent=
+`Order #${shortId} has been placed successfully. Payment method: Cash on Delivery.`;
+
+}catch(e){
+
+console.error(e);
+
+$("checkoutMessage").textContent=
+e.message||
+"Unable to place order. Please try again.";
+
+}finally{
+
+$("placeOrderBtn").disabled=false;
+
+}
+
+};
+
+
+/* CONTINUE SHOPPING */
+
+$("continueShopping").onclick=()=>{
+
+$("checkoutOverlay").classList.remove("active");
+
+$("checkoutSuccess").style.display="none";
+
+$("checkoutFormView").style.display="block";
+
+$("checkoutForm").reset();
+
+$("shop").scrollIntoView({
+behavior:"smooth"
+});
+
+};
+
+
+/* OVERLAYS */
+
+document.querySelectorAll(".overlay")
+.forEach(o=>{
+
+o.onclick=e=>{
+
+if(e.target===o){
+
+o.classList.remove("active");
+
+}
+
+};
+
+});
+
+
+/* START */
+
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
+
+loadProducts();
+
+updateAuthUI();
+
+updateCart();
+
+}
+);
+
 </script>
+
 </body>
 </html>
