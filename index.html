@@ -4300,6 +4300,37 @@ session
 
 }
 
+/* =========================================================
+ACCOUNT BUTTON — EXPLICIT CLICK/TOUCH HANDLER
+========================================================= */
+
+$("accountBtn").addEventListener("click", async ()=>{
+
+try{
+
+const {
+data:{session}
+}=await supabaseClient.auth.getSession();
+
+if(session){
+
+await openAccount();
+
+}else{
+
+openAuth("login");
+
+}
+
+}catch(e){
+
+console.error("Account button error:",e);
+openAuth("login");
+
+}
+
+});
+
 
 /* =========================================================
 PROFILE
