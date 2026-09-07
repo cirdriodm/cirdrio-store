@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Terms & Conditions | CIRDRIO</title>
+<meta name="description" content="CIRDRIO Terms & Conditions governing the use of our website, accounts, orders and services.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --ink:#151515;
+  --muted:#686868;
+  --soft:#f7f6f3;
+  --line:#e7e5e0;
+  --paper:#fff;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{scroll-behavior:smooth}
+
+body{
+  background:var(--soft);
+  color:var(--ink);
+  font-family:"DM Sans",sans-serif;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+.header{
+  position:sticky;
+  top:0;
+  z-index:20;
+  height:74px;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+}
+
+.nav{
+  width:min(1180px,calc(100% - 40px));
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  font-family:"Manrope",sans-serif;
+  font-size:22px;
+  font-weight:800;
+  letter-spacing:.12em;
+}
+
+.back{
+  font-size:14px;
+  font-weight:600;
+  color:#555;
+  transition:.2s ease;
+}
+
+.back:hover{
+  color:#000;
+  transform:translateX(-2px);
+}
+
+.hero{
+  background:#fff;
+  border-bottom:1px solid var(--line);
+  padding:90px 20px 82px;
+}
+
+.hero-inner{
+  width:min(940px,100%);
+  margin:auto;
+}
+
+.eyebrow{
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:#777;
+  margin-bottom:18px;
+}
+
+h1{
+  font-family:"Manrope",sans-serif;
+  font-size:clamp(42px,7vw,76px);
+  line-height:1.02;
+  letter-spacing:-.055em;
+  font-weight:800;
+  max-width:850px;
+}
+
+.hero p{
+  max-width:680px;
+  margin-top:24px;
+  color:var(--muted);
+  font-size:16px;
+}
+
+.updated{
+  display:inline-block;
+  margin-top:25px;
+  padding:9px 14px;
+  border:1px solid var(--line);
+  border-radius:100px;
+  font-size:12px;
+  color:#666;
+  background:#faf9f7;
+}
+
+.layout{
+  width:min(1180px,calc(100% - 40px));
+  margin:55px auto 90px;
+  display:grid;
+  grid-template-columns:250px 1fr;
+  gap:70px;
+  align-items:start;
+}
+
+.toc{
+  position:sticky;
+  top:105px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:24px;
+}
+
+.toc-title{
+  font-family:"Manrope",sans-serif;
+  font-size:12px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  margin-bottom:15px;
+}
+
+.toc a{
+  display:block;
+  color:#777;
+  font-size:13px;
+  padding:7px 0;
+  transition:.2s ease;
+}
+
+.toc a:hover{
+  color:#111;
+  padding-left:4px;
+}
+
+.document{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:clamp(30px,5vw,62px);
+}
+
+.section{
+  scroll-margin-top:105px;
+  padding-bottom:46px;
+  margin-bottom:46px;
+  border-bottom:1px solid var(--line);
+}
+
+.section:last-child{
+  border-bottom:0;
+  margin-bottom:0;
+  padding-bottom:0;
+}
+
+h2{
+  font-family:"Manrope",sans-serif;
+  font-size:clamp(23px,3vw,31px);
+  line-height:1.2;
+  letter-spacing:-.035em;
+  margin-bottom:20px;
+}
+
+h3{
+  font-family:"Manrope",sans-serif;
+  font-size:17px;
+  margin:26px 0 9px;
+}
+
+p{
+  color:#555;
+  font-size:15px;
+  margin-bottom:15px;
+}
+
+ul{
+  padding-left:22px;
+  margin:10px 0 18px;
+}
+
+li{
+  color:#555;
+  font-size:15px;
+  margin:7px 0;
+}
+
+strong{color:#222}
+
+.info{
+  background:#f7f6f3;
+  border:1px solid var(--line);
+  border-radius:15px;
+  padding:20px;
+  margin:20px 0;
+}
+
+.contact{
+  background:#171717;
+  color:#fff;
+  border-radius:18px;
+  padding:27px;
+  margin-top:20px;
+}
+
+.contact p{
+  color:#cfcfcf;
+  margin:5px 0;
+}
+
+.contact a{
+  color:#fff;
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+
+.footer{
+  background:#151515;
+  color:#fff;
+  padding:45px 20px;
+}
+
+.footer-inner{
+  width:min(1180px,100%);
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  gap:30px;
+  align-items:center;
+}
+
+.footer-logo{
+  font-family:"Manrope",sans-serif;
+  font-weight:800;
+  letter-spacing:.12em;
+}
+
+.footer p{
+  color:#999;
+  font-size:12px;
+  margin:0;
+}
+
+@media(max-width:850px){
+  .layout{
+    grid-template-columns:1fr;
+    gap:25px;
+  }
+
+  .toc{
+    position:relative;
+    top:auto;
+  }
+
+  .toc a{
+    display:inline-block;
+    margin-right:15px;
+  }
+}
+
+@media(max-width:560px){
+  .nav{
+    width:calc(100% - 28px);
+  }
+
+  .header{height:66px}
+
+  .logo{font-size:18px}
+
+  .back{font-size:12px}
+
+  .hero{
+    padding:65px 18px 58px;
+  }
+
+  .hero p{font-size:14px}
+
+  .layout{
+    width:calc(100% - 24px);
+    margin:28px auto 55px;
+  }
+
+  .document{
+    padding:27px 21px;
+    border-radius:18px;
+  }
+
+  p,li{font-size:14px}
+
+  .footer-inner{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <nav class="nav">
+    <a href="index.html" class="logo">CIRDRIO</a>
+    <a href="index.html" class="back">← Back to Store</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">CIRDRIO · Legal</div>
+
+    <h1>Clear terms for a better experience.</h1>
+
+    <p>
+      These Terms & Conditions govern your access to and use of the
+      CIRDRIO website, accounts, products, orders and related services.
+    </p>
+
+    <span class="updated">Last updated: September 2026</span>
+  </div>
+</section>
+
+<main class="layout">
+
+<aside class="toc">
+  <div class="toc-title">On this page</div>
+  <a href="#acceptance">Acceptance</a>
+  <a href="#eligibility">Eligibility</a>
+  <a href="#accounts">Accounts</a>
+  <a href="#products">Products</a>
+  <a href="#orders">Orders</a>
+  <a href="#pricing">Pricing & Payment</a>
+  <a href="#shipping">Shipping</a>
+  <a href="#returns">Returns & Refunds</a>
+  <a href="#cancellation">Cancellation</a>
+  <a href="#use">Acceptable Use</a>
+  <a href="#intellectual">Intellectual Property</a>
+  <a href="#liability">Liability</a>
+  <a href="#changes">Changes</a>
+  <a href="#law">Governing Law</a>
+  <a href="#contact">Contact</a>
+</aside>
+
+<article class="document">
+
+<section class="section" id="acceptance">
+<h2>1. Acceptance of These Terms</h2>
+
+<p>
+By accessing or using the CIRDRIO website, you acknowledge that you
+have read, understood and agree to be bound by these Terms &
+Conditions and any policies referenced within them.
+</p>
+
+<p>
+If you do not agree with these terms, please do not use the website
+or place an order through CIRDRIO.
+</p>
+</section>
+
+<section class="section" id="eligibility">
+<h2>2. Eligibility</h2>
+
+<p>
+You may use CIRDRIO's services only where you are legally permitted
+to do so under applicable law.
+</p>
+
+<p>
+By placing an order, you represent that the information you provide
+is accurate and that you have the legal capacity required to enter
+into the transaction.
+</p>
+</section>
+
+<section class="section" id="accounts">
+<h2>3. Customer Accounts</h2>
+
+<p>
+Certain CIRDRIO features may require an account. You are responsible
+for maintaining the confidentiality of your account credentials and
+for activity conducted through your account.
+</p>
+
+<p>
+You agree to provide accurate and current information and to notify
+CIRDRIO if you believe your account has been accessed without
+authorization.
+</p>
+</section>
+
+<section class="section" id="products">
+<h2>4. Products & Product Information</h2>
+
+<p>
+We make reasonable efforts to display product descriptions, images,
+availability and other information accurately.
+</p>
+
+<p>
+Product appearance may vary depending on your device, display
+settings, photography and manufacturing differences.
+</p>
+
+<p>
+Product availability is not guaranteed until an order has been
+successfully accepted by CIRDRIO.
+</p>
+
+<div class="info">
+<strong>Important:</strong>
+Product information is provided for general purchasing purposes and
+does not replace professional medical, dermatological or other
+qualified advice.
+</div>
+</section>
+
+<section class="section" id="orders">
+<h2>5. Orders & Order Acceptance</h2>
+
+<p>
+Submitting an order constitutes a request to purchase the selected
+products. An order may be subject to verification and acceptance by
+CIRDRIO.
+</p>
+
+<p>
+We may cancel or decline an order where reasonably necessary,
+including in cases involving suspected fraud, inaccurate information,
+product unavailability, pricing errors or other operational issues.
+</p>
+
+<p>
+If an order is cancelled after payment has been received, any eligible
+refund will be handled according to the applicable payment and refund
+process.
+</p>
+</section>
+
+<section class="section" id="pricing">
+<h2>6. Pricing & Payment</h2>
+
+<p>
+Prices displayed on the website are shown in the applicable currency
+and may change from time to time.
+</p>
+
+<p>
+The applicable price and charges presented during checkout will apply
+to the order, subject to correction of obvious errors and applicable
+law.
+</p>
+
+<p>
+Payment methods offered by CIRDRIO may change as our services evolve.
+Payment processing may be performed through third-party payment
+providers where applicable.
+</p>
+</section>
+
+<section class="section" id="shipping">
+<h2>7. Shipping & Delivery</h2>
+
+<p>
+Orders are delivered to the address supplied by the customer during
+checkout or through an applicable saved-address feature.
+</p>
+
+<p>
+Delivery estimates are indicative and may be affected by factors
+outside CIRDRIO's reasonable control, including logistics delays,
+weather, public holidays, operational disruptions or incorrect
+customer information.
+</p>
+
+<p>
+Customers are responsible for providing a complete and accurate
+delivery address and reachable contact information.
+</p>
+</section>
+
+<section class="section" id="returns">
+<h2>8. Returns & Refunds</h2>
+
+<p>
+Returns and refunds are subject to CIRDRIO's applicable Returns &
+Refund Policy.
+</p>
+
+<p>
+Eligibility may depend on factors including product condition,
+packaging, order status, time limits and the reason for the request.
+</p>
+
+<p>
+Certain products may be excluded from return where permitted by
+applicable law, particularly where health, hygiene or safety
+considerations apply.
+</p>
+
+<p>
+Nothing in these terms is intended to remove or restrict any
+mandatory consumer right provided by applicable law.
+</p>
+</section>
+
+<section class="section" id="cancellation">
+<h2>9. Order Cancellation</h2>
+
+<p>
+An order may be cancelled by the customer or CIRDRIO where permitted
+by the applicable order status and cancellation policy.
+</p>
+
+<p>
+Once an order has entered processing, shipment or another fulfilment
+stage, cancellation may no longer be possible.
+</p>
+
+<p>
+Any eligible refund resulting from cancellation will be processed
+through the applicable payment method and refund procedure.
+</p>
+</section>
+
+<section class="section" id="use">
+<h2>10. Acceptable Use</h2>
+
+<p>You agree not to:</p>
+
+<ul>
+<li>Use the website for unlawful or fraudulent purposes.</li>
+<li>Attempt to gain unauthorized access to accounts or systems.</li>
+<li>Interfere with website security or functionality.</li>
+<li>Submit false, misleading or fraudulent information.</li>
+<li>Abuse promotions, discounts, checkout or ordering systems.</li>
+<li>Copy, reproduce or exploit website content without authorization.</li>
+<li>Use automated methods to improperly access or collect website data.</li>
+</ul>
+
+<p>
+CIRDRIO may restrict or suspend access where reasonably necessary to
+protect the website, customers, business operations or other users.
+</p>
+</section>
+
+<section class="section" id="intellectual">
+<h2>11. Intellectual Property</h2>
+
+<p>
+The CIRDRIO name, branding, logos, designs, text, graphics, images,
+website interfaces and other original materials are owned by or
+licensed to CIRDRIO unless otherwise stated.
+</p>
+
+<p>
+You may access the website for personal and legitimate purchasing
+purposes. No ownership rights are transferred to you through use of
+the website.
+</p>
+</section>
+
+<section class="section" id="liability">
+<h2>12. Disclaimers & Liability</h2>
+
+<p>
+To the extent permitted by applicable law, CIRDRIO does not guarantee
+that the website will always be uninterrupted, error-free or available
+without delay.
+</p>
+
+<p>
+CIRDRIO will not be responsible for losses arising from events or
+circumstances beyond its reasonable control, subject always to
+mandatory rights and protections under applicable law.
+</p>
+
+<p>
+Nothing in these Terms & Conditions excludes or limits liability that
+cannot legally be excluded or limited.
+</p>
+</section>
+
+<section class="section" id="changes">
+<h2>13. Changes to These Terms</h2>
+
+<p>
+CIRDRIO may update these Terms & Conditions from time to time to
+reflect changes in our services, business practices, technology or
+legal requirements.
+</p>
+
+<p>
+Updated terms will be published on this page with a revised “Last
+updated” date. Continued use of the website after an update may
+constitute acceptance of the revised terms to the extent permitted by
+applicable law.
+</p>
+</section>
+
+<section class="section" id="law">
+<h2>14. Governing Law</h2>
+
+<p>
+These Terms & Conditions are intended to operate subject to the laws
+applicable to CIRDRIO and the transaction concerned.
+</p>
+
+<p>
+Any dispute will be handled in accordance with applicable law and the
+jurisdiction legally applicable to the parties and transaction.
+</p>
+</section>
+
+<section class="section" id="contact">
+<h2>15. Contact CIRDRIO</h2>
+
+<p>
+For questions regarding these Terms & Conditions, orders or our
+services, contact CIRDRIO through the details below.
+</p>
+
+<div class="contact">
+<p><strong style="color:#fff;">CIRDRIO</strong></p>
+<p>Email:
+<a href="mailto:cirdrio.dm@gmail.com">cirdrio.dm@gmail.com</a>
+</p>
+<p>Website: cirdrio.com</p>
+</div>
+
+</section>
+
+</article>
+</main>
+
+<footer class="footer">
+<div class="footer-inner">
+  <div class="footer-logo">CIRDRIO</div>
+  <p>© 2026 CIRDRIO. All rights reserved.</p>
+</div>
+</footer>
+
+</body>
+</html>
