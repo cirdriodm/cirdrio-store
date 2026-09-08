@@ -2167,6 +2167,195 @@ STEP 49 — PREMIUM CHECKOUT EXPERIENCE
 #placeOrderBtn:disabled{opacity:.55;cursor:not-allowed}
 </style>
 <style id="step52-order-history">.order-history-tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:14px 0 18px}.order-history-search{flex:1;min-width:180px;height:44px;border:1px solid #e3ded6;border-radius:14px;padding:0 14px;background:#fff;font:500 13px 'DM Sans',sans-serif;color:#181818;outline:none}.order-history-search:focus{border-color:#8c7a61;box-shadow:0 0 0 3px rgba(140,122,97,.10)}.order-history-filter{height:44px;border:1px solid #e3ded6;border-radius:14px;padding:0 34px 0 13px;background:#fff;font:500 12px 'DM Sans',sans-serif;color:#292929}.order-history-summary{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.order-history-stat{padding:9px 12px;border:1px solid #ebe6de;border-radius:12px;background:#faf8f4;font:600 11px 'DM Sans',sans-serif;color:#57524a}.order-card{transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}.order-card:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(34,29,23,.08);border-color:#d8d0c5}.order-card-actions{display:flex;gap:8px;margin-top:12px}.order-mini-btn{border:1px solid #ddd6cd;background:#fff;border-radius:10px;padding:8px 11px;font:600 10px 'DM Sans',sans-serif;cursor:pointer}.order-mini-btn:hover{background:#f6f2ec}.order-history-empty{padding:28px;border:1px dashed #ddd6cd;border-radius:16px;text-align:center;color:#777;font:500 12px 'DM Sans',sans-serif}@media(max-width:600px){.order-history-tools{align-items:stretch}.order-history-search,.order-history-filter{width:100%;min-width:0}.order-mini-btn{padding:9px 10px}}</style>
+
+<style id="cirdrio-final-ui-polish">
+/* =========================================================
+   CIRDRIO FINAL UI POLISH — PREMIUM / COMFORT / MOBILE
+   ========================================================= */
+:root{
+  --ui-ink:#171717;
+  --ui-ink-soft:#292725;
+  --ui-muted:#716c65;
+  --ui-line:#ded9d1;
+  --ui-line-soft:#ebe7e0;
+  --ui-surface:#fff;
+  --ui-soft:#f7f5f1;
+  --ui-soft-2:#f2efe9;
+  --ui-focus:#9a886e;
+  --ui-shadow:0 10px 26px rgba(30,27,23,.07);
+  --ui-shadow-hover:0 14px 32px rgba(30,27,23,.11);
+}
+
+/* Universal button language */
+button,
+.primary-btn,.secondary-btn,.small-btn,.profile-save,.add-btn,.back-btn,
+.section-link,.order-mini-btn,.wishlist-mini-btn,.notification-readall,
+.account-quickbtn,.address-card-actions button,.form-actions button,
+.checkout-actions button,.cart-actions button,.auth-submit,.switch-auth,
+.quantity-control button,.remove-item,.icon-btn,.close-overlay,.category{
+  font-family:"Manrope","DM Sans",sans-serif;
+  -webkit-tap-highlight-color:transparent;
+}
+
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{
+  outline:2px solid var(--ui-focus);
+  outline-offset:3px;
+}
+
+/* Primary action */
+.primary-btn,.profile-save,.auth-submit,.add-btn{
+  border:1px solid #171717;
+  background:linear-gradient(145deg,#242321 0%,#111 100%);
+  color:#fff;
+  border-radius:13px;
+  box-shadow:0 8px 20px rgba(20,19,17,.13);
+  letter-spacing:1.25px;
+  font-weight:750;
+  transition:transform .2s ease,box-shadow .2s ease,background .2s ease;
+}
+.primary-btn:hover,.profile-save:hover,.auth-submit:hover,.add-btn:hover{
+  background:linear-gradient(145deg,#302e2b 0%,#171717 100%);
+  transform:translateY(-2px);
+  box-shadow:var(--ui-shadow-hover);
+}
+.primary-btn:active,.profile-save:active,.auth-submit:active,.add-btn:active{transform:translateY(0)}
+.primary-btn:disabled{opacity:.48;box-shadow:none;transform:none}
+
+/* Secondary / utility actions: Refresh, Logout, View, Track, Add address, etc. */
+.secondary-btn,.small-btn,.back-btn,.order-mini-btn,.wishlist-mini-btn,
+.notification-readall,.switch-auth,.section-link{
+  border:1px solid var(--ui-line);
+  background:linear-gradient(180deg,#fff 0%,#f6f3ee 100%);
+  color:var(--ui-ink-soft);
+  border-radius:12px;
+  box-shadow:0 4px 12px rgba(30,27,23,.045);
+  font-weight:700;
+  letter-spacing:.85px;
+  transition:transform .2s ease,background .2s ease,border-color .2s ease,box-shadow .2s ease,color .2s ease;
+}
+.secondary-btn:hover,.small-btn:hover,.back-btn:hover,.order-mini-btn:hover,
+.wishlist-mini-btn:hover,.notification-readall:hover,.switch-auth:hover,.section-link:hover{
+  background:linear-gradient(180deg,#fff 0%,#eeebe5 100%);
+  border-color:#c9c2b8;
+  color:#111;
+  transform:translateY(-1px);
+  box-shadow:0 9px 20px rgba(30,27,23,.08);
+}
+
+/* Make action buttons visually distinct without becoming loud */
+.account-actions .small-btn,
+.address-actions .small-btn,
+.order-card-actions .order-mini-btn,
+.cart-actions .secondary-btn,
+.form-actions .secondary-btn{
+  position:relative;
+  overflow:hidden;
+}
+.account-actions .small-btn::before,
+.address-actions .small-btn::before,
+.order-card-actions .order-mini-btn::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(110deg,transparent 20%,rgba(255,255,255,.7) 50%,transparent 80%);
+  transform:translateX(-120%);
+  transition:transform .45s ease;
+  pointer-events:none;
+}
+.account-actions .small-btn:hover::before,
+.address-actions .small-btn:hover::before,
+.order-card-actions .order-mini-btn:hover::before{transform:translateX(120%)}
+
+/* Account quick navigation cards */
+.account-quickbtn{
+  border:1px solid var(--ui-line-soft);
+  background:linear-gradient(145deg,#fff 0%,#f7f4ef 100%);
+  color:#171717;
+  border-radius:16px;
+  box-shadow:0 5px 16px rgba(30,27,23,.045);
+  transition:.22s ease;
+}
+.account-quickbtn:hover{
+  border-color:#cfc8bd;
+  background:linear-gradient(145deg,#fff 0%,#f1ede6 100%);
+  transform:translateY(-2px);
+  box-shadow:var(--ui-shadow);
+}
+.account-quickbtn strong{font-family:"Manrope",sans-serif;font-weight:750;letter-spacing:.15px}
+.account-quickbtn span{font-family:"DM Sans",sans-serif;color:#77716a}
+
+/* Section labels / headings */
+.account-section-title,.section-label,.account-kicker,.search-label,.cart-small,
+.account-welcome-kicker,.notification-kicker,.address-form-subtitle{
+  letter-spacing:2px;
+  color:#858078;
+}
+.account-section-title,.section-label{
+  font-family:"Manrope",sans-serif;
+  font-weight:700;
+}
+
+/* Close / back controls — guaranteed high-visibility target */
+.close-overlay{
+  width:44px!important;
+  height:44px!important;
+  min-width:44px;
+  min-height:44px;
+  border:1px solid #d9d3ca!important;
+  border-radius:50%!important;
+  background:linear-gradient(145deg,#fff,#f0ede7)!important;
+  color:#20201f!important;
+  font-family:Arial,sans-serif!important;
+  font-size:22px!important;
+  font-weight:400!important;
+  line-height:1!important;
+  box-shadow:0 8px 20px rgba(25,23,20,.10)!important;
+  transition:transform .2s ease,background .2s ease,color .2s ease,box-shadow .2s ease!important;
+}
+.close-overlay:hover{
+  background:#171717!important;
+  border-color:#171717!important;
+  color:#fff!important;
+  transform:rotate(4deg) scale(1.03)!important;
+  box-shadow:0 12px 26px rgba(20,20,20,.17)!important;
+}
+.back-btn{min-height:44px;padding:11px 16px}
+
+/* Inputs and selects: softer, premium and easier to tap */
+input,textarea,select{
+  font-family:"DM Sans","Manrope",sans-serif;
+}
+.order-history-search,.order-history-filter{
+  background:linear-gradient(180deg,#fff,#faf8f4);
+  border-color:#ded8cf;
+  box-shadow:0 3px 10px rgba(30,27,23,.025);
+}
+.order-history-search:focus,.order-history-filter:focus{
+  border-color:#9a886e;
+  box-shadow:0 0 0 4px rgba(154,136,110,.10);
+}
+
+/* Status / information chips */
+.order-history-stat,.default-badge,.status{
+  border:1px solid rgba(0,0,0,.045);
+  box-shadow:0 3px 9px rgba(30,27,23,.035);
+  font-family:"DM Sans",sans-serif;
+}
+
+/* Product / address / order cards */
+.order-card,.address-card,.wishlist-hub-card,.account-completion,.account-welcome{
+  box-shadow:0 5px 18px rgba(30,27,23,.045);
+}
+.order-card:hover,.address-card:hover{box-shadow:var(--ui-shadow-hover)}
+
+/* Mobile comfort */
+@media(max-width:600px){
+  .primary-btn,.secondary-btn,.small-btn,.profile-save,.back-btn,.add-btn{min-height:46px}
+  .close-overlay{width:46px!important;height:46px!important;min-width:46px;min-height:46px}
+  .account-actions,.address-actions,.order-card-actions{gap:9px}
+  .account-actions .small-btn,.address-actions .small-btn,.order-mini-btn{min-height:42px}
+}
+</style>
 </head>
 
 <body>
@@ -6891,6 +7080,28 @@ START
 document.addEventListener(
 "DOMContentLoaded",
 ()=>{
+
+/* FINAL UI CLOSE SAFETY: delegated handler keeps overlay close controls reliable on mobile. */
+document.addEventListener("click",function(e){
+  const btn=e.target.closest && e.target.closest(".close-overlay");
+  if(!btn)return;
+  const id=btn.id;
+  const map={
+    closeAccount:"accountOverlay",
+    closeSearch:"searchOverlay",
+    closeCart:"cartOverlay",
+    closeAuth:"authOverlay",
+    closeProfile:"profileOverlay",
+    closeNotifications:"notificationOverlay",
+    closeAddressForm:"addressFormOverlay"
+  };
+  if(map[id] && typeof closeOverlay==="function"){
+    e.preventDefault();
+    e.stopPropagation();
+    closeOverlay(map[id]);
+  }
+},true);
+
 
 loadProducts();
 
