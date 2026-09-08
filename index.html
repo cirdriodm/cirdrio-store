@@ -4384,7 +4384,7 @@ async function submitProductQuestion(productId){
   if(btn)btn.disabled=true;
   if(msg)msg.textContent="Sending your question…";
   try{
-    const {error}=await supabaseClient.from("product_questions").insert({product_id:productId,user_id:user.id,question:text});
+    const {error}=await supabaseClient.from("product_questions").insert({product_id:productId,user_id:user.id,question:text,is_published:false});
     if(error)throw error;
     toast("Question submitted");
     await loadProductQuestions(productId);
@@ -7009,7 +7009,7 @@ $("checkoutSuccess")
 "block";
 
 $("successText").textContent=
-`Order #${shortId} has been placed successfully. Payment method: Cash on Delivery. Your order is now awaiting confirmation. Your order is now awaiting confirmation.`;
+`Order #${shortId} has been placed successfully. Payment method: Cash on Delivery. Your order is now awaiting confirmation.`;
 
 }catch(e){
 
@@ -7048,8 +7048,8 @@ $("checkoutFormView").style.display=
 $("checkoutForm").reset();
 if($("saveCheckoutAddress")) $("saveCheckoutAddress").checked=false;
 
-$("checkoutAddressBox")&&(
-$("checkoutAddressBox").style.display="none"
+$("checkoutSavedAddressBox")&&(
+$("checkoutSavedAddressBox").style.display="none"
 );
 
 $("shop").scrollIntoView({
